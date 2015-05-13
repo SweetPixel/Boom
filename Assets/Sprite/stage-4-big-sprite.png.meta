@@ -1,0 +1,212 @@
+fileFormatVersion: 2
+guid: 856e58160f0f3434ea184de2ca726646
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: stage-4-big-sprite_0
+    21300002: stage-4-big-sprite_1
+    21300004: stage-4-big-sprite_2
+    21300006: stage-4-big-sprite_3
+    21300008: stage-4-big-sprite_4
+    21300010: stage-4-big-sprite_5
+    21300012: stage-4-big-sprite_6
+    21300014: stage-4-big-sprite_7
+    21300016: stage-4-big-sprite_9
+    21300018: stage-4-big-sprite_15
+    21300020: stage-4-big-sprite_22
+    21300022: stage-4-big-sprite_25
+    21300024: stage-4-big-sprite_26
+    21300026: stage-4-big-sprite_27
+    21300028: stage-4-big-sprite_28
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: stage-4-big-sprite_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5522
+        width: 2002
+        height: 2670
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-big-sprite_1
+      rect:
+        serializedVersion: 2
+        x: 4662
+        y: 7710
+        width: 408
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-big-sprite_2
+      rect:
+        serializedVersion: 2
+        x: 6610
+        y: 7502
+        width: 212
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-big-sprite_3
+      rect:
+        serializedVersion: 2
+        x: 2330
+        y: 6330
+        width: 1160
+        height: 904
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-big-sprite_4
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 4978
+        width: 392
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-big-sprite_5
+      rect:
+        serializedVersion: 2
+        x: 2954
+        y: 4862
+        width: 288
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-big-sprite_6
+      rect:
+        serializedVersion: 2
+        x: 4942
+        y: 3794
+        width: 808
+        height: 1732
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-big-sprite_7
+      rect:
+        serializedVersion: 2
+        x: 6598
+        y: 3778
+        width: 852
+        height: 1748
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-big-sprite_9
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 2590
+        width: 352
+        height: 361
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-big-sprite_15
+      rect:
+        serializedVersion: 2
+        x: 1231
+        y: 2224
+        width: 570
+        height: 667
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-big-sprite_22
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 1220
+        width: 439
+        height: 1002
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-big-sprite_25
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 1129
+        width: 576
+        height: 1049
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-big-sprite_26
+      rect:
+        serializedVersion: 2
+        x: 1994
+        y: 178
+        width: 2008
+        height: 964
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-big-sprite_27
+      rect:
+        serializedVersion: 2
+        x: 2378
+        y: 162
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-big-sprite_28
+      rect:
+        serializedVersion: 2
+        x: 2394
+        y: 162
+        width: 60
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

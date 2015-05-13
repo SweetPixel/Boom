@@ -1,0 +1,157 @@
+fileFormatVersion: 2
+guid: f4a06ef305b652b4f96139b4d0c27327
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: back1
+    21300002: cloud_mid
+    21300004: cloud_mid2
+    21300006: bullet
+    21300008: background
+    21300010: trees_backend
+    21300012: trees_front
+    21300014: base_ground
+    21300016: cloud_back2
+    21300018: cloud_front
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: back1
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 1158
+        width: 167
+        height: 153
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cloud_mid
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 1161
+        width: 199
+        height: 176
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cloud_mid2
+      rect:
+        serializedVersion: 2
+        x: 1203
+        y: 1167
+        width: 240
+        height: 170
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bullet
+      rect:
+        serializedVersion: 2
+        x: 2940
+        y: 1202
+        width: 32
+        height: 88
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: background
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1334
+        width: 755
+        height: 1334
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: trees_backend
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 1733
+        width: 741
+        height: 171
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: trees_front
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 1496
+        width: 754
+        height: 368
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: base_ground
+      rect:
+        serializedVersion: 2
+        x: 2245
+        y: 1316
+        width: 755
+        height: 321
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cloud_back2
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 1128
+        width: 206
+        height: 206
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cloud_front
+      rect:
+        serializedVersion: 2
+        x: 1491
+        y: 1093
+        width: 768
+        height: 250
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

@@ -1,0 +1,245 @@
+fileFormatVersion: 2
+guid: 2da91ae3f76f42645bbb7f8d224f9cd1
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: laughing-remod_0
+    21300002: laughing-remod_1
+    21300004: laughing-remod_2
+    21300006: laughing-remod_3
+    21300008: laughing-remod_4
+    21300010: laughing-remod_5
+    21300012: laughing-remod_6
+    21300014: laughing-remod_7
+    21300016: laughing-remod_8
+    21300018: laughing-remod_9
+    21300020: laughing-remod_10
+    21300022: laughing-remod_11
+    21300024: laughing-remod_12
+    21300026: laughing-remod_13
+    21300028: laughing-remod_14
+    21300030: laughing-remod_15
+    21300032: laughing-remod_16
+    21300034: laughing-remod_17
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: laughing-remod_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1520
+        width: 505
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: laughing-remod_1
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 1520
+        width: 505
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: laughing-remod_2
+      rect:
+        serializedVersion: 2
+        x: 1010
+        y: 1520
+        width: 505
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: laughing-remod_3
+      rect:
+        serializedVersion: 2
+        x: 1515
+        y: 1520
+        width: 505
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: laughing-remod_4
+      rect:
+        serializedVersion: 2
+        x: 2020
+        y: 1520
+        width: 505
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: laughing-remod_5
+      rect:
+        serializedVersion: 2
+        x: 2525
+        y: 1520
+        width: 505
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: laughing-remod_6
+      rect:
+        serializedVersion: 2
+        x: 3030
+        y: 1520
+        width: 505
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: laughing-remod_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1040
+        width: 505
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: laughing-remod_8
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 1040
+        width: 505
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: laughing-remod_9
+      rect:
+        serializedVersion: 2
+        x: 1010
+        y: 1040
+        width: 505
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: laughing-remod_10
+      rect:
+        serializedVersion: 2
+        x: 1515
+        y: 1040
+        width: 505
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: laughing-remod_11
+      rect:
+        serializedVersion: 2
+        x: 2020
+        y: 1040
+        width: 505
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: laughing-remod_12
+      rect:
+        serializedVersion: 2
+        x: 2525
+        y: 1040
+        width: 505
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: laughing-remod_13
+      rect:
+        serializedVersion: 2
+        x: 3030
+        y: 1040
+        width: 505
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: laughing-remod_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 560
+        width: 505
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: laughing-remod_15
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 560
+        width: 505
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: laughing-remod_16
+      rect:
+        serializedVersion: 2
+        x: 1010
+        y: 560
+        width: 505
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: laughing-remod_17
+      rect:
+        serializedVersion: 2
+        x: 1515
+        y: 560
+        width: 505
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
