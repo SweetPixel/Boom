@@ -107,8 +107,8 @@ public class StartGame : MonoBehaviour {
 	{
 		render.enabled = true;
 		initiateBird ();
-		Vector2 size = new Vector2(6.0f, 6.0f);
-		this.collider.size = size;
+		//Vector2 size = new Vector2(6.0f, 6.0f);
+		//this.collider.size = size;
 		secondTouch = true;
 	}
 

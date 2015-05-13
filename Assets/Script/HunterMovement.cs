@@ -162,6 +162,8 @@ public class HunterMovement : MonoBehaviour {
 			//setGameOver(true);
 			startButton.transform.position = new Vector2 (8.029126f, 0.14f);
 
+			Application.LoadLevel("ZoomLevel");
+
 			//if(Application.loadedLevel == 0)
 			//{
 				
