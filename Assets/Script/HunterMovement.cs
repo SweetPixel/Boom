@@ -165,31 +165,8 @@ public class HunterMovement : MonoBehaviour {
 
 	void Update () {
 
-		/*if (bulletCounter == 1) {
-			//missOne.renderer.enabled = false;
-			rendererOne.SetBool("isMissed", true);
-		}
-		else if (bulletCounter == 2) {
-			//missTwo.renderer.enabled = false;
-			rendererTwo.SetBool("isMissed", true);
-		}
-		else if (bulletCounter == 3) {
-			//missThree.renderer.enabled = false;
-			rendererThree.SetBool("isMissed", true);
-			lost();
-		}*/
-
-		//if (transform.position.x == 6.35f || transform.position.x == 9.80f) {
-						//Debug.Log ("flip");
-		//				Flip ();
-		//		}
-
 		restartInitiate += Time.deltaTime;
 
-		//if (roundAvailable == false && restartInitiate > 1500) {
-		//	restartInitiate = 0;
-
-		//		}
 
 		if (isRestart && restartInitiate > 3.2) {
 
@@ -252,9 +229,7 @@ public class HunterMovement : MonoBehaviour {
 	{
 
 		score ++;
-		PlayerPrefs.SetInt ("Score", score);
-		if (PlayerPrefs.GetInt ("Score") > PlayerPrefs.GetInt ("HighScore"))
-			PlayerPrefs.SetInt ("HighScore", score);
+
 		if (score < 10) {
 						scoreRenderer.sprite = scoreSprite [score];
 		} else if (score == 10){
@@ -517,6 +492,12 @@ public class HunterMovement : MonoBehaviour {
 
 	public void lost()
 	{
+		int sc = PlayerPrefs.GetInt ("Score");
+		sc = sc + score;
+		PlayerPrefs.SetInt ("Score", sc);
+		PlayerPrefs.SetInt ("MatchScore", score);
+		if (PlayerPrefs.GetInt ("Score") > PlayerPrefs.GetInt ("HighScore"))
+			PlayerPrefs.SetInt ("HighScore", score);
 		roundAvailable = false;
 		gameObject.transform.position = new Vector2(transform.position.x, -1.81f);
 		hunterAnime.SetBool("isLost", true);

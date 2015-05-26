@@ -109,9 +109,11 @@ public class StartGame : MonoBehaviour {
 			hRestart.letStart();
 
 			GameObject[] birds = GameObject.FindGameObjectsWithTag("Bird2D");
+			Debug.Log("Total birds: " + birds.Length);
+
 			if(birds.Length == 2)
 			{
-				StartCoroutine(InitiateBird (1));
+				StartCoroutine(InitiateBird (2));
 			}
 			else if(birds.Length == 1){
 				StartCoroutine(InitiateBird (2));
@@ -142,8 +144,6 @@ public class StartGame : MonoBehaviour {
 	{
 		render.enabled = true;
 		StartCoroutine(InitiateBird (3));
-		//Vector2 size = new Vector2(6.0f, 6.0f);
-		//this.collider.size = size;
 		secondTouch = true;
 	}
 

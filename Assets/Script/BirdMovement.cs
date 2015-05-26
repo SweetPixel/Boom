@@ -34,7 +34,7 @@ public class BirdMovement : MonoBehaviour {
 	public GameObject coin;
 
 	IEnumerator Start () {
-
+		//Flip ();
 		birdLife = 0;
 
 		treeLeft = GameObject.Find ("ObstacleTreeLeft");
@@ -143,7 +143,7 @@ public class BirdMovement : MonoBehaviour {
 		//Vector2 charScale = transform.localScale;
 		//charScale.x *= -1;
 		//transform.localScale = charScale;
-		this.transform.Rotate (0,180,0);
+		gameObject.transform.Rotate (0,180,0);
 		isLeft = !isLeft;
 	}
 
