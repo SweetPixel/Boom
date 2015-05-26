@@ -10,8 +10,8 @@ public class Mover : MonoBehaviour {
 	bool isHit = false;
 	public float birdSpeed = 1.5f;
 
-	public float x1 = 3f;
-	public float x2 = 5.2f;
+	public float x1 = 6.4f;
+	public float x2 = 6.4f;
 	public float y1 = 3.692791f;
 	public float y2 = 2.0f;
 
@@ -33,24 +33,24 @@ public class Mover : MonoBehaviour {
 		Vector3 pointA = transform.position;
 		//float time = 1.5f;
 
-		x1 = 10.2f;
-		x2 = 5.7f;
+		x1 = 9.75f;
+		x2 = 6.4f;
 		y2 = 2.0f;
 		
-		yield return StartCoroutine(MoveObject(transform, new Vector2(4.1f, 2.0f), new Vector2(x1, 2.0f), birdSpeed));
+		yield return StartCoroutine(MoveObject(transform, new Vector2(5.1f, 2.0f), new Vector2(x1, 2.0f), birdSpeed));
 		yield return StartCoroutine(MoveObject(transform, new Vector2(x1, 2.0f), new Vector2(x2, y2), birdSpeed));
 		
 		while (!isHit) {
 			//yield return StartCoroutine(MoveObject(transform, pointA, pointB, 3.0f));
 			//yield return StartCoroutine(MoveObject(transform, pointB, pointA, 3.0f));
 			
-			x1 = Random.Range(5.7f, 10.2f);
+			x1 = Random.Range(6.4f, 9.75f);
 
-			var diff = transform.position.x - x1;
-			if(diff < 0.8)
-			{
-				x1 += 0.8f;
-			}
+			//var diff = transform.position.x - x1;
+			//if(diff < 0.8)
+			//{
+			//	x1 += 0.8f;
+			//}
 
 			y1 = Random.Range(1.2f, 3f);
 			
@@ -113,7 +113,7 @@ public class Mover : MonoBehaviour {
 			//Destroy (gameObject);
 			isHit = true;
 			BirdHit();
-			hm.lost();
+			//hm.lost();
 			//Application.LoadLevel ("SecondLevelInfinite");
 
 		} 

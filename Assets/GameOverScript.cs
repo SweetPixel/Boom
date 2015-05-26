@@ -36,19 +36,42 @@ public class GameOverScript : MonoBehaviour {
 
 		int sc = PlayerPrefs.GetInt ("Score");
 		int Hs = PlayerPrefs.GetInt ("HighScore");
-		if (sc < 1) {
+
+		Debug.Log ("Score: " + sc);
+
+		float score = (float)sc;
+		float percentage = score / 50f * 100;
+
+		Debug.Log ("Percentage: " + percentage);
+
+		if (percentage < 1) {
 			scoreRenderer.sprite = scoreSprite [0];
 				}
-		else if (sc < 10) {
+		else if (percentage < 10) {
 						scoreRenderer.sprite = scoreSprite [sc];
 				} else {
-			int ten = sc/10;
-			int unit = sc%10;
+			int ten = Mathf.FloorToInt(percentage/10f);
+			int unit = Mathf.FloorToInt(percentage%10f);
 
 			scoreRenderer.sprite = scoreSprite [ten];
 			scoreRendererTwo.enabled = true;
 			scoreRendererTwo.sprite = scoreSprite [unit];
-				}
+				} 
+
+		/*if (percentage < 1) {
+			scoreRenderer.sprite = scoreSprite [0];
+		}
+		else if (percentage < 10) {
+			scoreRenderer.sprite = scoreSprite [sc];
+		} else {
+			int ten = percentage/10;
+			int unit = percentage%10;
+			
+			scoreRenderer.sprite = scoreSprite [ten];
+			scoreRendererTwo.enabled = true;
+			scoreRendererTwo.sprite = scoreSprite [unit];
+		} */
+
 		if (Hs < 1) {
 			bestRenderer.sprite = scoreSprite [0];
 		}
