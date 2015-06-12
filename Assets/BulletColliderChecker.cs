@@ -53,6 +53,7 @@ public class BulletColliderChecker : MonoBehaviour {
 		if (col.gameObject.name == "Bullets(Clone)") {
 			//counter++;
 			//hm.setCounter();
+			hm.decrementBirdCount();
 			Destroy(col.gameObject);
 				}
 	}

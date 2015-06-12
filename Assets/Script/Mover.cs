@@ -35,24 +35,15 @@ public class Mover : MonoBehaviour {
 
 		x1 = 9.75f;
 		x2 = 6.4f;
-		y2 = 2.0f;
+		y2 = Random.Range(-0.6f, 0.3f);
 		
-		yield return StartCoroutine(MoveObject(transform, new Vector2(5.1f, 2.0f), new Vector2(x1, 2.0f), birdSpeed));
-		yield return StartCoroutine(MoveObject(transform, new Vector2(x1, 2.0f), new Vector2(x2, y2), birdSpeed));
+		yield return StartCoroutine(MoveObject(transform, new Vector2(5.1f, 0.3f), new Vector2(x1, 0.3f), birdSpeed));
+		yield return StartCoroutine(MoveObject(transform, new Vector2(x1, 0.3f), new Vector2(x2, y2), birdSpeed));
 		
 		while (!isHit) {
-			//yield return StartCoroutine(MoveObject(transform, pointA, pointB, 3.0f));
-			//yield return StartCoroutine(MoveObject(transform, pointB, pointA, 3.0f));
-			
+
 			x1 = Random.Range(6.4f, 9.75f);
-
-			//var diff = transform.position.x - x1;
-			//if(diff < 0.8)
-			//{
-			//	x1 += 0.8f;
-			//}
-
-			y1 = Random.Range(1.2f, 3f);
+			y1 = Random.Range(-0.6f, 0.3f);
 			
 			yield return StartCoroutine(MoveObject(transform, new Vector2(transform.position.x, transform.position.y), new Vector2(x1, y1), birdSpeed)); //3.692791f
 		}

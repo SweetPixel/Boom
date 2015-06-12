@@ -36,13 +36,7 @@ public class StartGame : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		//SpriteRenderer goRender = gameOver.GetComponent<SpriteRenderer> ();
-		//gameOver = GameObject.Find ("GameOver");
-		//gameOver.transform.position = new Vector2 (14f, 0.3494778f);
-
 		render = this.gameObject.GetComponent<SpriteRenderer> ();
-		//Levelrender = levelLabel.GetComponent<SpriteRenderer> ();
-		//Time.timeScale = 0;
 		counter = 0;
 		//Time.timeScale = 0;
 
@@ -102,7 +96,7 @@ public class StartGame : MonoBehaviour {
 			}
 			Destroy(hunt);
 			Destroy(GameObject.Find ("GameOver(Clone)"));
-			GameObject h = (GameObject)Instantiate(hunterPrefab, new Vector3(8.15f, -1.99f, 0.02769041f), Quaternion.identity);
+			GameObject h = (GameObject)Instantiate(hunterPrefab, new Vector3(8.15f, -2.15f, 0.02769041f), Quaternion.identity);
 			gameObject.collider2D.name = "StartButton";
 
 			HunterMovement hRestart = h.GetComponent<HunterMovement> ();
@@ -113,9 +107,11 @@ public class StartGame : MonoBehaviour {
 
 			if(birds.Length == 2)
 			{
-				StartCoroutine(InitiateBird (2));
+				firstWave = true;
+				StartCoroutine(InitiateBird (1));
 			}
 			else if(birds.Length == 1){
+				firstWave = true;
 				StartCoroutine(InitiateBird (2));
 			}
 
@@ -137,6 +133,7 @@ public class StartGame : MonoBehaviour {
 			render.enabled = false;
 			enableObject();
 			counter++;
+			StartCoroutine(InitiateEnemy());
 		}
 	}
 
@@ -192,16 +189,16 @@ public class StartGame : MonoBehaviour {
 	IEnumerator InitiateEnemy()
 	{
 		//yield return new WaitForSeconds(1.5f);
-		while(firstWave)
+		while(true)
 		{
 			for (int i=0;i<1;i++) 
 			{
 				//Vector3 spawnPosition = new Vector3 (Random.Range(-spawnValue.x, spawnValue.x),Random.Range(1.2f, 4f),spawnValue.z);
 				Quaternion spawnRotation = Quaternion.identity;
 				Instantiate (birdEnemy, new Vector2 (4.1f, Random.Range(1.2f, 3f)), spawnRotation);
-				yield return new WaitForSeconds(3f);
+				yield return new WaitForSeconds(0.5f);
 			}
-			firstWave = false;
+			break;
 		}
 	}
 

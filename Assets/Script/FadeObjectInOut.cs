@@ -118,8 +118,12 @@ public class FadeObjectInOut : MonoBehaviour
 				GameObject coin = GameObject.Find ("CoinUp(Clone)");
 				if (coin != null) {
 					Destroy(coin);
-					} 
+					}
 
+				GameObject bullet = GameObject.Find ("BulletIcon(Clone)");
+				if (bullet != null) {
+					Destroy(bullet);
+				}
 
 			}
 		}

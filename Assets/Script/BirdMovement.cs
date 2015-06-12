@@ -49,7 +49,6 @@ public class BirdMovement : MonoBehaviour {
 		anim.SetBool ("isHit", false);
 
 		Vector3 pointA = transform.position;
-		//float time = 1.5f;
 
 		x1 = Random.Range(7.5f, 9.85f);
 		y1 = Random.Range(1.5f, 2.3f);
@@ -123,19 +122,9 @@ public class BirdMovement : MonoBehaviour {
 			birdLife = 0;
 				}
 
-		/*if (isLive && birdLife > 1f) {
-			//hm.setCounter();
-			Destroy(gameObject);
-		} */
-
 		if (transform.position.y < -3.176471f) {
-			//Application.LoadLevel ("SecondLevelInfinite");
-			//StartGame script = new StartGame();
-			//script.enableObject();
 			Destroy(gameObject);
 				}
-
-
 	}
 
 	void Flip()
@@ -163,9 +152,11 @@ public class BirdMovement : MonoBehaviour {
 			co.rigidbody2D.velocity = Vector2.up * 2;
 			isLive = false;
 			birdLife = 0;
-				hm.initiateBird();
-				BirdHit ();
-				Destroy (col.gameObject);
+			hm.initiateCoin();
+			hm.incrementBirdCount();
+			//BirdHit ();
+			Destroy(gameObject);
+			Destroy (col.gameObject);
 				} 
 
 
