@@ -32,9 +32,9 @@ public class specialBirdAmmoMovement : MonoBehaviour {
 		}
 		
 		if (col.gameObject.name == "Bullets(Clone)") {
-			gameObject.collider2D.enabled = false;
+			gameObject.GetComponent<Collider2D>().enabled = false;
 			GameObject co = (GameObject)Instantiate(bullet, new Vector3(gameObject.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-			co.rigidbody2D.velocity = Vector2.up * 2;
+			co.GetComponent<Rigidbody2D>().velocity = Vector2.up * 2;
 			Destroy(col.gameObject);
 			hm.addAmmo();
 			Destroy(gameObject);

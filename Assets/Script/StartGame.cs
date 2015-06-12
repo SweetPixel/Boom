@@ -68,7 +68,7 @@ public class StartGame : MonoBehaviour {
 	IEnumerator waitTime(GameObject gobject)
 	{
 		yield return new WaitForSeconds(1f);
-		gobject.collider2D.name = "RestartButton";
+		gobject.GetComponent<Collider2D>().name = "RestartButton";
 	}
 
 	void OnMouseDown()
@@ -81,12 +81,12 @@ public class StartGame : MonoBehaviour {
 	void OnMouseUp()
 	{
 
-		if (gameObject.collider2D.name == "StartButton") {
+		if (gameObject.GetComponent<Collider2D>().name == "StartButton") {
 						startLevel ();
-			gameObject.collider2D.name = "Taptostart";
+			gameObject.GetComponent<Collider2D>().name = "Taptostart";
 
 				}
-		else if (gameObject.collider2D.name == "RestartButton") {
+		else if (gameObject.GetComponent<Collider2D>().name == "RestartButton") {
 			//startLevel ();
 			gameObject.transform.position = new Vector2 (11f, 11f);
 			GameObject hunt = GameObject.Find("Object");
@@ -97,7 +97,7 @@ public class StartGame : MonoBehaviour {
 			Destroy(hunt);
 			Destroy(GameObject.Find ("GameOver(Clone)"));
 			GameObject h = (GameObject)Instantiate(hunterPrefab, new Vector3(8.15f, -2.15f, 0.02769041f), Quaternion.identity);
-			gameObject.collider2D.name = "StartButton";
+			gameObject.GetComponent<Collider2D>().name = "StartButton";
 
 			HunterMovement hRestart = h.GetComponent<HunterMovement> ();
 			hRestart.letStart();

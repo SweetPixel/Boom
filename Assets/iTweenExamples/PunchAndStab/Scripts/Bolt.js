@@ -23,9 +23,9 @@ function Move(direction:String){
 }
 
 function ApplySlide(xpos:float){
-	var newPixelInset:Rect = guiTexture.pixelInset;
+	var newPixelInset:Rect = GetComponent.<GUITexture>().pixelInset;
 	newPixelInset.x = xpos;
-	guiTexture.pixelInset=newPixelInset;
+	GetComponent.<GUITexture>().pixelInset=newPixelInset;
 }
 
 function ApplySlam(direction:String){

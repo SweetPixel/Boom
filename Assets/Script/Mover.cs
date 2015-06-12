@@ -54,7 +54,7 @@ public class Mover : MonoBehaviour {
 		count += Time.deltaTime;
 
 		if (count > 1f && isHit) {
-			rigidbody2D.velocity = Vector2.up * -5;
+			GetComponent<Rigidbody2D>().velocity = Vector2.up * -5;
 				}
 	}
 

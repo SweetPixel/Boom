@@ -9,7 +9,7 @@ public class ValueToExample : MonoBehaviour {
 	public GUIText scoreDisplay;
 	
 	void Awake(){
-		initialColor = renderer.material.color;
+		initialColor = GetComponent<Renderer>().material.color;
 		initialScale = new Vector3(transform.localScale.x,transform.localScale.y,transform.localScale.z);
 	}
 	
@@ -25,7 +25,7 @@ public class ValueToExample : MonoBehaviour {
 	
 	void OnMouseUp(){
 		//reset:
-		renderer.material.color = initialColor;
+		GetComponent<Renderer>().material.color = initialColor;
 		transform.localScale = initialScale;
 		
 		//visual feedback:

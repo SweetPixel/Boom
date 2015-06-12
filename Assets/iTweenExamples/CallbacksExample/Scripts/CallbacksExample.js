@@ -28,7 +28,7 @@ function tween(){
 	iTween.MoveTo(gameObject,{"y":0,"time":.9,"easetype":"easeInExpo","delay":4,"onstart":"segmentStarted","onstartparams":"Fall started...","onupdate":"segmentUpdated","onupdateparams":"move","oncomplete":"segmentComplete","oncompleteparams":"Fall stopped."});
 	
 	//Notice that since we ae putting shake on the camera we need to tell the callbacks which target contains the method they need to call:
-	iTween.ShakePosition(camera.main.gameObject,{"y":.5,"time":.8,"delay":4.95,"onstart":"segmentStarted","onstartparams":"Shake started...","onstarttarget":gameObject,"onupdate":"segmentUpdated","onupdateparams":"shake","onupdatetarget":gameObject,"oncomplete":"allComplete","oncompletetarget":gameObject});
+	iTween.ShakePosition(GetComponent.<Camera>().main.gameObject,{"y":.5,"time":.8,"delay":4.95,"onstart":"segmentStarted","onstartparams":"Shake started...","onstarttarget":gameObject,"onupdate":"segmentUpdated","onupdateparams":"shake","onupdatetarget":gameObject,"oncomplete":"allComplete","oncompletetarget":gameObject});
 }
 
 function segmentStarted(textToDisplay : String){
@@ -46,7 +46,7 @@ function segmentUpdated(method : String){
 		break;
 		
 		case "shake":
-		Debug.Log("Shake at: " + camera.main.transform.position.y);
+		Debug.Log("Shake at: " + GetComponent.<Camera>().main.transform.position.y);
 		break;
 	}
 }

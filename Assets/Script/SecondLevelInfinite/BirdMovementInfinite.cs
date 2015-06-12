@@ -140,7 +140,7 @@ public class BirdMovementInfinite : MonoBehaviour {
 		anim.SetBool ("isHit", true);
 		anim.SetBool("isLeft", isLeft);
 		//rigidbody.velocity = Vector2.up * -2;
-		rigidbody2D.velocity = Vector2.up * -5;
+		GetComponent<Rigidbody2D>().velocity = Vector2.up * -5;
 	}
 
 

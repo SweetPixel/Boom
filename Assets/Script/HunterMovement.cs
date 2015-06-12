@@ -438,10 +438,10 @@ public class HunterMovement : MonoBehaviour {
 		yield return new WaitForSeconds(0.25f);
 		if (isRight) {
 			GameObject game = (GameObject)Instantiate(bullet, bulletSpawn.transform.position, Quaternion.Euler(0,0,-10f));
-			game.rigidbody2D.AddForce(Quaternion.Euler(0,0,-15f) * Vector2.up * bulletSpeed);
+			game.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,-15f) * Vector2.up * bulletSpeed);
 		} else {
 			GameObject game = (GameObject)Instantiate(bullet, bulletSpawn.transform.position, Quaternion.Euler(0,0,10f));
-			game.rigidbody2D.AddForce(Quaternion.Euler(0,0,15f) * Vector2.up * bulletSpeed);
+			game.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,15f) * Vector2.up * bulletSpeed);
 		}
 		isFired = false;
 		animshoot.SetBool("isFired", isFired);

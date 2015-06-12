@@ -4,7 +4,7 @@ private var gameBoard : GameBoardJS;
 private var isActive : boolean;
 
 function Start(){
-	currentColor=renderer.material.color;
+	currentColor=GetComponent.<Renderer>().material.color;
 	currentPosition=transform.position;
 }
 
@@ -19,7 +19,7 @@ function Deactivate(){
 
 function Activate(){
 	isActive=true;
-	renderer.material.color=Color.red;
+	GetComponent.<Renderer>().material.color=Color.red;
 	SendMessageUpwards("SetTarget",gameObject);	
 	iTween.MoveTo(gameObject,currentPosition,.4);
 }
@@ -27,9 +27,9 @@ function Activate(){
 function OnMouseEnter(){
 	if(!isActive){
 		if(!gameBoard.ballSet){
-			renderer.material.color=Color.yellow;
+			GetComponent.<Renderer>().material.color=Color.yellow;
 		}else{
-			renderer.material.color=Color.green;
+			GetComponent.<Renderer>().material.color=Color.green;
 		}
 		transform.position=new Vector3(currentPosition.x,.5,currentPosition.z);
 	}

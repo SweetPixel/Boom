@@ -13,6 +13,6 @@ public class InfiniteBackground : MonoBehaviour{
 
 	void FixedUpdate (){
 		Vector3 difference=cameraInit - cam.position;
-		renderer.material.mainTextureOffset = difference*scrollSpeed;
+		GetComponent<Renderer>().material.mainTextureOffset = difference*scrollSpeed;
 	}
 }
