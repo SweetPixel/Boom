@@ -111,10 +111,19 @@ public class FadeObjectInOut : MonoBehaviour
 			for (int i = 0; i < rendererObjects.Length; i++)
 			{
 				rendererObjects[i].enabled = false;
-
-				GameObject start = GameObject.Find("StartButton");
+				/*GameObject start = GameObject.Find("StartButton");
 				StartGame script = start.GetComponent<StartGame>();
-				script.enableObject();
+				script.enableObject(); */
+
+				GameObject coin = GameObject.Find ("CoinUp(Clone)");
+				if (coin != null) {
+					Destroy(coin);
+					}
+
+				GameObject bullet = GameObject.Find ("BulletIcon(Clone)");
+				if (bullet != null) {
+					Destroy(bullet);
+				}
 
 			}
 		}

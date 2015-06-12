@@ -4,8 +4,8 @@ using System.Collections;
 public class BirdMovement : MonoBehaviour {
 
 	public Vector3 pointB;
-	public float x1 = 3f;
-	public float x2 = 5.2f;
+	public float x1 = 6.35f;
+	public float x2 = 6.73f;
 	public float y1 = 3.692791f;
 	public float y2 = 3.0f;
 
@@ -27,43 +27,62 @@ public class BirdMovement : MonoBehaviour {
 
 	private GameObject treeLeft;
 
+	float birdLife = 0;
+	private bool isLive = false;
+
+	//public GameObject coinObject;
+	public GameObject coin;
+
 	IEnumerator Start () {
+		//Flip ();
+		birdLife = 0;
 
 		treeLeft = GameObject.Find ("ObstacleTreeLeft");
 
 		hunter = GameObject.Find ("Object");
+		if (hunter == null) {
+			hunter = GameObject.Find ("Object(Clone)");
+				}
 		hm = hunter.GetComponent<HunterMovement> ();
 
 		anim = GetComponent<Animator> ();
 		anim.SetBool ("isHit", false);
 
 		Vector3 pointA = transform.position;
-		//float time = 1.5f;
 
-		x1 = 10.4f;
-		y1 = Random.Range(0.8f, 4f);
+		x1 = Random.Range(7.5f, 9.85f);
+		y1 = Random.Range(1.5f, 2.3f);
 
-		yield return StartCoroutine(MoveObject(transform, new Vector2(4.1f, 2.958249f), new Vector2(x1, 2.958249f), birdSpeed));
-		yield return StartCoroutine(MoveObject(transform, new Vector2(x1, 2.958249f), new Vector2(x2, y2), birdSpeed));
+		y2 = Random.Range(1.5f, 2.3f);
+
+		if (gameObject.transform.position.x == 5.1f) {
+			yield return StartCoroutine(MoveObject(transform, new Vector2(5.1f, 2.3f), new Vector2(x1, 2.3f), birdSpeed));
+			yield return StartCoroutine(MoveObject(transform, new Vector2(x1, 2.3f), new Vector2(x2, y2), birdSpeed));
+				} else {
+			//Flip();
+			yield return StartCoroutine(MoveObject(transform, new Vector2(transform.position.x, transform.position.y), new Vector2(x1, transform.position.y), birdSpeed));
+			yield return StartCoroutine(MoveObject(transform, new Vector2(x1, transform.position.y), new Vector2(x2, y2), birdSpeed));
+				}
 
 		while (!isHit) {
 			//yield return StartCoroutine(MoveObject(transform, pointA, pointB, 3.0f));
 			//yield return StartCoroutine(MoveObject(transform, pointB, pointA, 3.0f));
 
-			x1 = Random.Range(5.65f, 10.2f);
-			y1 = Random.Range(0.8f, 4f);
+			x1 = Random.Range(6.4f, 9.8f);
+			y1 = Random.Range(0.8f, 2.6f);
+
+			/* if(isLive && (faceleft==true))
+			{
+				yield return StartCoroutine(MoveObject(transform, new Vector2(transform.position.x, transform.position.y), new Vector2(9.4f, -2.18f), birdSpeed)); //3.692791f
+			}
+			else if(isLive && (faceleft==false))
+			{
+
+				yield return StartCoroutine(MoveObject(transform, new Vector2(transform.position.x, transform.position.y), new Vector2(6.4f, -2.6f), birdSpeed)); //3.692791f
+			} */
 
 			yield return StartCoroutine(MoveObject(transform, new Vector2(transform.position.x, transform.position.y), new Vector2(x1, y1), birdSpeed)); //3.692791f
 
-			//if(!isHit)
-			//{
-				
-			//	x2 = Random.Range(5.2f, 9.5f);
-			//	y2 = Random.Range(1.5f, 4f);
-
-			//	yield return StartCoroutine(MoveObject(transform, new Vector2(x1, y1), new Vector2(x2, y2), birdSpeed));
-			//	prevX2 = x2;
-			//}
 		}
 	}
 	
@@ -86,26 +105,26 @@ public class BirdMovement : MonoBehaviour {
 			i += Time.deltaTime * rate;
 			if(isHit)
 			{
-				//yield return new WaitForSeconds(0.4f);
 				break;
 			}
 		thisTransform.position = Vector2.Lerp(startPos, endPos, i);
 		yield return null;
 		}
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		if (transform.position.y < -3.176471f) {
-			//Application.LoadLevel ("SecondLevelInfinite");
-			//StartGame script = new StartGame();
-			//script.enableObject();
-			hm.initiateBird();
-			Destroy(gameObject);
+		birdLife += Time.deltaTime;
+		if (birdLife > 5f) {
+			isLive = true;
+			birdLife = 0;
 				}
 
-
+		if (transform.position.y < -3.176471f) {
+			Destroy(gameObject);
+				}
 	}
 
 	void Flip()
@@ -113,14 +132,12 @@ public class BirdMovement : MonoBehaviour {
 		//Vector2 charScale = transform.localScale;
 		//charScale.x *= -1;
 		//transform.localScale = charScale;
-		this.transform.Rotate (0,180,0);
+		gameObject.transform.Rotate (0,180,0);
 		isLeft = !isLeft;
 	}
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		Debug.Log (col.gameObject.name);
-
 		if(col.gameObject.name == "Bird2D-Enemy(Clone)") {
 			return;
 		}
@@ -130,16 +147,16 @@ public class BirdMovement : MonoBehaviour {
 		}
 
 		if (col.gameObject.name == "Bullets(Clone)") {
-						//Destroy(gameObject);
-
-			for(float i=0.5f; i<1f; i+=0.5f)
-			{
-				Camera.main.orthographicSize += i;
-			}
-
-
-						BirdHit ();
-						Destroy (col.gameObject);
+			gameObject.collider2D.enabled = false;
+			GameObject co = (GameObject)Instantiate(coin, new Vector3(gameObject.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+			co.rigidbody2D.velocity = Vector2.up * 2;
+			isLive = false;
+			birdLife = 0;
+			hm.initiateCoin();
+			hm.incrementBirdCount();
+			//BirdHit ();
+			Destroy(gameObject);
+			Destroy (col.gameObject);
 				} 
 
 

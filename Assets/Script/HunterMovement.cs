@@ -17,7 +17,7 @@ public class HunterMovement : MonoBehaviour {
 
 	bool isFired = false;
 
-	bool isRight = true;
+	bool isRight = false;
 	public GameObject shoot;
 	Animator anim;
 	Animator animshoot;
@@ -41,7 +41,6 @@ public class HunterMovement : MonoBehaviour {
 
 	private float restartInitiate;
 
-	public GameObject leftTree;
 	public GameObject bird;
 
 	/*
@@ -53,18 +52,54 @@ public class HunterMovement : MonoBehaviour {
 	SpriteRenderer scoreRenderer;
 	public GameObject ScoreObjectTwo;
 	SpriteRenderer scoreRendererTwo;
+	public GameObject ScoreObjectThree;
+	SpriteRenderer scoreRendererThree;
 	private int scoreCounter = 0;
 
 	public GUIText timeObject;
 
+	/* GameOver object */
 	public GameObject gameOver;
 	public bool isGameOver = false;
 
+	// Start Button
 	private GameObject startButton;
 
-	IEnumerator Start () {
+	/* Bullet Variables */
+	private int b = 10;
+	private int bulletCounter = 9;
+	public GameObject bulletOne;
+	public GameObject bulletTwo;
+	private SpriteRenderer bulletOneRender;
+	private SpriteRenderer bulletTwoRender;
 
-		//gameOver.SetActive (false);
+	/* Bird initiation points */
+	float[] Yaxis = { 2.3f , 1.7f, 1.15f, 0.75f};
+	float[] Xaxis = { 5.1f , 11.3f };
+	public float nextFire;
+	private bool startFiring = false;
+
+	//Special bird condition
+	private int birdCount = 0;
+	public GameObject[] specialBird;
+
+	IEnumerator Start () {
+		/* Bullet Renderers */
+
+		b = 50;
+		bulletCounter = 9;
+
+		bulletOne = GameObject.Find ("BulletSprite");
+		bulletTwo = GameObject.Find ("BulletSpriteTwo");
+
+		bulletOneRender = bulletOne.GetComponent<SpriteRenderer> ();
+		bulletOneRender.sprite = scoreSprite [0];
+
+		bulletTwoRender = bulletTwo.GetComponent<SpriteRenderer> ();
+		bulletTwoRender.sprite = scoreSprite [1];
+		bulletTwoRender.enabled = true;
+
+		/* End of Bullet Renderer */
 
 		startButton = GameObject.Find ("StartButton");
 
@@ -74,33 +109,42 @@ public class HunterMovement : MonoBehaviour {
 
 		hunterSpriteRenderer = gameObject.GetComponent<SpriteRenderer> ();
 
+		/* Score Sprites */
+		ScoreObject = GameObject.Find ("ScoreSprite");
+		ScoreObjectTwo = GameObject.Find ("ScoreSpriteTwo");
+
 		scoreRenderer = ScoreObject.GetComponent<SpriteRenderer> ();
 		scoreRenderer.sprite = scoreSprite [score];
 
 		scoreRendererTwo = ScoreObjectTwo.GetComponent<SpriteRenderer> ();
 		scoreRendererTwo.enabled = false;
 
+		scoreRendererThree = ScoreObjectThree.GetComponent<SpriteRenderer> ();
+		scoreRendererThree.enabled = false;
+
+		/* Bullets Available */
 		roundAvailable = true;
 		restartInitiate = 0;
-		fireCount.text = "6";
-		//renderer =  _bulletCount.GetComponent<SpriteRenderer> ();
-		//renderer.sprite = bulletCount [countIndex];
+
+
 
 		anim = GetComponent<Animator> ();
 
+		/* Flip Function */
 		Flip ();
+
+		/* Start Hunter Movement from the middle */
+		yield return StartCoroutine(MoveObject(transform, new Vector3(8.15f, -2.15f, 0.02769041f), new Vector3(9.80f, -2.15f, 0.02769041f), hunterSpeed));
+
 		Vector3 pointA = transform.position;
 		while (roundAvailable) {
-			//yield return StartCoroutine(MoveObject(transform, pointA, pointB, 3.0f));
-			//yield return StartCoroutine(MoveObject(transform, pointB, pointA, 3.0f));
-			yield return StartCoroutine(MoveObject(transform, new Vector3(5.6f, -1.99f, 0.02769041f), new Vector3(10.5f, -1.99f, 0.02769041f), hunterSpeed));
-			isRight = false;
-			yield return StartCoroutine(MoveObject(transform, new Vector3(10.5f, -1.99f, 0.02769041f), new Vector3(5.6f, -1.99f, 0.02769041f), hunterSpeed));
+			yield return StartCoroutine(MoveObject(transform, new Vector3(9.80f, -2.15f, 0.02769041f), new Vector3(6.35f, -2.15f, 0.02769041f), hunterSpeed));
 			isRight = true;
+			yield return StartCoroutine(MoveObject(transform, new Vector3(6.35f, -2.15f, 0.02769041f), new Vector3(9.80f, -2.15f, 0.02769041f), hunterSpeed));
+			isRight = false;
 		}
 
 		//restartLevel ();
-
 	}
 
 	IEnumerator restartLevel()
@@ -119,9 +163,6 @@ public class HunterMovement : MonoBehaviour {
 			i += Time.deltaTime * rate;
 			if(roundAvailable == false)
 			{
-				//anim.speed = 0;
-				//Application.LoadLevel ("MainScene");
-				//hunterSpriteRenderer.sprite = idle;
 				isRestart = true;
 				restartInitiate = 0;
 				break;
@@ -130,23 +171,11 @@ public class HunterMovement : MonoBehaviour {
 			yield return null; 
 		}
 	}
-	
-	// Use this for initialization
-	//void Start () {
-	//}
 
 	void Update () {
-		if (transform.position.x == 5.6f || transform.position.x == 10.5f) {
-						//Debug.Log ("flip");
-						Flip ();
-				}
 
 		restartInitiate += Time.deltaTime;
 
-		//if (roundAvailable == false && restartInitiate > 1500) {
-		//	restartInitiate = 0;
-
-		//		}
 
 		if (isRestart && restartInitiate > 3.2) {
 
@@ -159,13 +188,38 @@ public class HunterMovement : MonoBehaviour {
 
 			//Application.LoadLevel("SecondLevelInfinite");
 
-			//setGameOver(true);
 			startButton.transform.position = new Vector2 (8.029126f, 0.14f);
 
-			//if(Application.loadedLevel == 0)
-			//{
-				
-			//}
+			//Application.LoadLevel("SecondLevelInfinite");
+				}
+
+		if (birdCount == 5) {
+			int index = Random.Range(0,1);
+			Instantiate (specialBird[index], new Vector2 (5.27f, 2.824509f), Quaternion.identity);
+			birdCount = 0;
+				}
+
+	}
+
+	public void decrementBirdCount()
+	{
+		birdCount = 0;
+	}
+
+	public void incrementBirdCount()
+	{
+		birdCount += 1;
+	}
+
+	void OnCollisionEnter2D(Collision2D col)
+	{
+		if (col.gameObject.name == "Coin(Clone)") {
+			Destroy(col.gameObject);
+			initiateCoin();
+				}
+
+		if (col.gameObject.name == "HunterColliderLeft" ||col.gameObject.name == "HunterColliderRight") {
+			Flip ();
 				}
 
 	}
@@ -192,29 +246,48 @@ public class HunterMovement : MonoBehaviour {
 	public void gotHit()
 	{
 		roundAvailable = false;
-		gameObject.transform.position = new Vector2(transform.position.x, -1.81f);
+		gameObject.transform.position = new Vector2(transform.position.x, -1.9f);
 		hunterAnime.SetBool("isHit", true);
 	}
 
-	public void initiateBird()
+	public void initiateCoin()
 	{
 
+		setScore ();
+
+		int index = Random.Range(0,4);
+		float y = Yaxis[index];
+		float x = 5.1f;
+		if(index == 0 || index == 2)
+		{
+			x = Xaxis[0];
+		}
+		else if(index == 1 || index == 3)
+		{
+			x = Xaxis[1];
+		}
+
+		Instantiate (bird, new Vector2 (x, y), Quaternion.identity);
+	}
+
+	void setScore()
+	{
 		score ++;
-		PlayerPrefs.SetInt ("Score", score);
-		if (PlayerPrefs.GetInt ("Score") > PlayerPrefs.GetInt ("HighScore"))
-			PlayerPrefs.SetInt ("HighScore", score);
-		timeObject.text = ""+score;
+		
 		if (score < 10) {
-						scoreRenderer.sprite = scoreSprite [score];
+			scoreRenderer.sprite = scoreSprite [score];
 		} else if (score == 10){
+			bulletCounter--;
 			scoreRenderer.sprite = scoreSprite [1];
 			scoreRendererTwo.enabled = true;
-				}
+		}
 		else if(score > 10 && score < 20){
 			scoreCounter++;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
 		}
 		else if(score == 20){
+			bulletCounter--;
+			//setMisses();
 			scoreCounter = 2;
 			scoreRenderer.sprite = scoreSprite [scoreCounter];
 			scoreCounter = 0;
@@ -225,6 +298,7 @@ public class HunterMovement : MonoBehaviour {
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
 		}
 		else if(score == 30){
+			//setMisses();
 			scoreCounter = 3;
 			scoreRenderer.sprite = scoreSprite [scoreCounter];
 			scoreCounter = 0;
@@ -294,7 +368,27 @@ public class HunterMovement : MonoBehaviour {
 			scoreCounter++;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
 		}
-		Instantiate (bird, new Vector2 (4.1f, 2.958249f), Quaternion.identity);
+		else if(score == 100){
+			scoreCounter = 1;
+			scoreRenderer.sprite = scoreSprite [scoreCounter];
+			scoreCounter = 0;
+			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			scoreRendererThree.enabled = true;
+			scoreRendererThree.sprite = scoreSprite [scoreCounter];
+		}
+		else if(score > 100 && score <= 999){
+
+			int hundred = score / 100;
+			scoreRenderer.sprite = scoreSprite [hundred];
+
+			int ut = score % 100;
+			int ten = ut / 10;
+			int unit = ut % 10;
+
+			scoreRendererTwo.sprite = scoreSprite [ten];
+			scoreRendererThree.sprite = scoreSprite [unit];
+
+		}
 	}
 
 	void Flip()
@@ -307,21 +401,129 @@ public class HunterMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
-		if (Input.GetKey (KeyCode.Mouse0) && roundAvailable && start) {
+		/* if (Input.GetKey (KeyCode.Mouse0) && roundAvailable && start) 
+		{
 			if(isFired == false)
 			{
-				fc = fc - 1;
-				countIndex++;
-				//renderer.sprite = bulletCount[countIndex];
 
-				fireCount.text = "" + fc;
+				bulletSpriteSetter();
 				isFired = true;
 				animshoot.SetBool("isFired", isFired);
 				//checkBirdPosition();
 				StartCoroutine(Fired());
 			}
+		} */
+
+		GameObject start = GameObject.Find ("StartButton");
+		if (start == null) {
+			startFiring = true;
 				}
-						
+
+		if (Input.GetKey (KeyCode.Mouse0) && Time.time > nextFire && roundAvailable && startFiring) {
+			nextFire = Time.time + 0.5f;
+			if(isFired == false)
+			{
+				bulletSpriteSetter();
+				isFired = true;
+				animshoot.SetBool("isFired", isFired);
+				StartCoroutine(Fired());
+			}
+		}
+
+
+	}
+
+	IEnumerator Fired()
+	{
+		yield return new WaitForSeconds(0.25f);
+		if (isRight) {
+			GameObject game = (GameObject)Instantiate(bullet, bulletSpawn.transform.position, Quaternion.Euler(0,0,-10f));
+			game.rigidbody2D.AddForce(Quaternion.Euler(0,0,-15f) * Vector2.up * bulletSpeed);
+		} else {
+			GameObject game = (GameObject)Instantiate(bullet, bulletSpawn.transform.position, Quaternion.Euler(0,0,10f));
+			game.rigidbody2D.AddForce(Quaternion.Euler(0,0,15f) * Vector2.up * bulletSpeed);
+		}
+		isFired = false;
+		animshoot.SetBool("isFired", isFired);
+		//if (countIndex == 6) {
+		//	Debug.Log("Game Over");
+		//	roundAvailable = false;
+		
+		//}
+	}
+
+	public void addAmmo()
+	{
+		bulletOneRender = bulletOne.GetComponent<SpriteRenderer> ();
+		bulletOneRender.sprite = scoreSprite [0];
+		
+		bulletTwoRender = bulletTwo.GetComponent<SpriteRenderer> ();
+		bulletTwoRender.sprite = scoreSprite [5];
+		bulletTwoRender.enabled = true;
+		b = 50;
+		bulletCounter = 9;
+	}
+
+	public void addCoin()
+	{
+		for (int i=0; i<5; i++) {
+			setScore();
+				}
+	}
+
+	void bulletSpriteSetter()
+	{
+		b = b - 1;
+		if (b > 40) {
+			bulletTwoRender.sprite = scoreSprite[4];
+			bulletOneRender.sprite = scoreSprite[bulletCounter];
+			bulletCounter  = bulletCounter - 1;
+				}
+		else if (b == 40) {
+			bulletTwoRender.sprite = scoreSprite[4];
+			bulletOneRender.sprite = scoreSprite[0];
+			bulletCounter  = 9;
+		}
+		else if (b < 40 && b > 30) {
+			bulletTwoRender.sprite = scoreSprite[3];
+			bulletOneRender.sprite = scoreSprite[bulletCounter];
+			bulletCounter  = bulletCounter - 1;
+		}
+		else if (b == 30) {
+			bulletTwoRender.sprite = scoreSprite[3];
+			bulletOneRender.sprite = scoreSprite[0];
+			bulletCounter  = 9;
+		}
+		else if (b < 30 && b > 20) {
+			bulletTwoRender.sprite = scoreSprite[2];
+			bulletOneRender.sprite = scoreSprite[bulletCounter];
+			bulletCounter  = bulletCounter - 1;
+		}
+		else if (b == 20) {
+			bulletTwoRender.sprite = scoreSprite[2];
+			bulletOneRender.sprite = scoreSprite[0];
+			bulletCounter  = 9;
+		}
+		else if (b < 20 && b > 10) {
+			bulletTwoRender.sprite = scoreSprite[1];
+			bulletOneRender.sprite = scoreSprite[bulletCounter];
+			bulletCounter  = bulletCounter - 1;
+		}
+		else if (b == 10) {
+			bulletTwoRender.sprite = scoreSprite[1];
+			bulletOneRender.sprite = scoreSprite[0];
+			bulletCounter  = 9;
+		}
+		else if (b < 10 && b > 0) {
+			bulletTwoRender.enabled = false;
+			bulletOneRender.sprite = scoreSprite[bulletCounter];
+			bulletCounter  = bulletCounter - 1;
+		}
+		if (b == 0) {
+			bulletOneRender.sprite = scoreSprite[0];
+			bulletCounter = 9;
+			lost();
+		}
 	}
 
 	void checkBirdPosition()
@@ -334,42 +536,30 @@ public class HunterMovement : MonoBehaviour {
 				}
 	}
 
-	IEnumerator Fired()
-	{
-		yield return new WaitForSeconds(0.2f);
-		if (isRight) {
-			GameObject game = (GameObject)Instantiate(bullet, bulletSpawn.transform.position, Quaternion.Euler(0,0,-10f));
-			game.rigidbody2D.AddForce(Quaternion.Euler(0,0,-15f) * Vector2.up * bulletSpeed);
-				} else {
-			GameObject game = (GameObject)Instantiate(bullet, bulletSpawn.transform.position, Quaternion.Euler(0,0,10f));
-			game.rigidbody2D.AddForce(Quaternion.Euler(0,0,15f) * Vector2.up * bulletSpeed);
-				}
-		isFired = false;
-		animshoot.SetBool("isFired", isFired);
-		//if (countIndex == 6) {
-		//	Debug.Log("Game Over");
-		//	roundAvailable = false;
-
-				//}
-	}
-
-	public void lost()
+	/* IEnumerator lost()
 	{
 		roundAvailable = false;
 		gameObject.transform.position = new Vector2(transform.position.x, -1.81f);
 		hunterAnime.SetBool("isLost", true);
-	}
+		yield return new WaitForSeconds (0f);
+	} */
+
+	public void lost()
+	{
+		int sc = PlayerPrefs.GetInt ("Score");
+		sc = sc + score;
+		PlayerPrefs.SetInt ("Score", sc);
+		PlayerPrefs.SetInt ("MatchScore", score);
+		if (PlayerPrefs.GetInt ("Score") > PlayerPrefs.GetInt ("HighScore"))
+			PlayerPrefs.SetInt ("HighScore", score);
+		roundAvailable = false;
+		gameObject.transform.position = new Vector2(transform.position.x, -1.98f);
+		hunterAnime.SetBool("isLost", true);
+	} 
 
 	public void letStart()
 	{
 		start = true;
 	}
-
-	//void Flip()
-	//{
-	//	Vector3 charScale = transform.localScale;
-	//	charScale.x *= -1;
-	//	transform.localScale = charScale;
-	//}
 
 }

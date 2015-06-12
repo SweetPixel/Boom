@@ -1,0 +1,124 @@
+fileFormatVersion: 2
+guid: 0af3471b8cbd60342b5208d54160bdcc
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: stage-4-final-srite_0
+    21300002: stage-4-final-srite_1
+    21300004: stage-4-final-srite_2
+    21300006: stage-4-final-srite_3
+    21300008: stage-4-final-srite_4
+    21300010: stage-4-final-srite_5
+    21300012: stage-4-final-srite_6
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: stage-4-final-srite_0
+      rect:
+        serializedVersion: 2
+        x: 1790
+        y: 3806
+        width: 88
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-final-srite_1
+      rect:
+        serializedVersion: 2
+        x: 2246
+        y: 3030
+        width: 396
+        height: 1066
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-final-srite_2
+      rect:
+        serializedVersion: 2
+        x: 3004
+        y: 2758
+        width: 750
+        height: 1338
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-final-srite_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2758
+        width: 749
+        height: 288
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-final-srite_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1654
+        width: 755
+        height: 912
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-final-srite_5
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 3035
+        width: 749
+        height: 283
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stage-4-final-srite_6
+      rect:
+        serializedVersion: 2
+        x: 2721
+        y: 3033
+        width: 280
+        height: 1063
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

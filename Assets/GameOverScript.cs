@@ -11,13 +11,25 @@ public class GameOverScript : MonoBehaviour {
 
 	SpriteRenderer scoreRenderer;
 	SpriteRenderer scoreRendererTwo;
-	SpriteRenderer bestRenderer;
-	SpriteRenderer bestRendererTwo;
+
+	SpriteRenderer coinOneRender;
+	SpriteRenderer coinTwoRender;
+	SpriteRenderer coinThreeRender;
+	SpriteRenderer coinFourRender;
+	SpriteRenderer coinFiveRender;
+	SpriteRenderer coinSixRender;
+	SpriteRenderer coinSevenRender;
 
 	public GameObject scoreObject;
 	public GameObject scoreObjectTwo;
-	public GameObject bestObject;
-	public GameObject bestObjectTwo;
+
+	public GameObject coinOne;
+	public GameObject coinTwo;
+	public GameObject coinThree;
+	public GameObject coinFour;
+	public GameObject coinFive;
+	public GameObject coinSix;
+	public GameObject coinSeven;
 
 	// Use this for initialization
 	void Start () {
@@ -28,39 +40,87 @@ public class GameOverScript : MonoBehaviour {
 		scoreRendererTwo = scoreObjectTwo.GetComponent<SpriteRenderer> ();
 		scoreRendererTwo.enabled = false;
 
-		bestRenderer = bestObject.GetComponent<SpriteRenderer> ();
-		bestRenderer.sprite = scoreSprite [0];
-		
-		bestRendererTwo = bestObjectTwo.GetComponent<SpriteRenderer> ();
-		bestRendererTwo.enabled = false;
+		coinOneRender = coinOne.GetComponent<SpriteRenderer> ();
+		coinOneRender.sprite = scoreSprite [0];
+
+		coinTwoRender = coinTwo.GetComponent<SpriteRenderer> ();
+		coinTwoRender.sprite = scoreSprite [0];
+
+		coinThreeRender = coinThree.GetComponent<SpriteRenderer> ();
+		coinThreeRender.sprite = scoreSprite [0];
+
+		coinFourRender = coinFour.GetComponent<SpriteRenderer> ();
+		coinFourRender.sprite = scoreSprite [0];
+
+		coinFiveRender = coinFive.GetComponent<SpriteRenderer> ();
+		coinFiveRender.sprite = scoreSprite [0];
+
+		coinSixRender = coinSix.GetComponent<SpriteRenderer> ();
+		coinSixRender.sprite = scoreSprite [0];
+
+		coinSevenRender = coinSeven.GetComponent<SpriteRenderer> ();
+		coinSevenRender.sprite = scoreSprite [0];
 
 		int sc = PlayerPrefs.GetInt ("Score");
 		int Hs = PlayerPrefs.GetInt ("HighScore");
-		if (sc < 1) {
+
+		int matchscore = PlayerPrefs.GetInt ("MatchScore");
+		float score = (float)matchscore;
+		float percentage = score / 50f * 100;
+
+		if (percentage < 1) {
 			scoreRenderer.sprite = scoreSprite [0];
 				}
-		else if (sc < 10) {
+		else if (percentage < 10) {
 						scoreRenderer.sprite = scoreSprite [sc];
 				} else {
-			int ten = sc/10;
-			int unit = sc%10;
+			int ten = Mathf.FloorToInt(percentage/10f);
+			int unit = Mathf.FloorToInt(percentage%10f);
 
 			scoreRenderer.sprite = scoreSprite [ten];
 			scoreRendererTwo.enabled = true;
 			scoreRendererTwo.sprite = scoreSprite [unit];
 				}
-		if (Hs < 1) {
-			bestRenderer.sprite = scoreSprite [0];
+
+		if (sc < 1) {
+			coinOneRender.sprite = scoreSprite [0];
 		}
-		else if (Hs < 10) {
-			bestRenderer.sprite = scoreSprite [Hs];
-		} else {
-			int ten = Hs/10;
-			int unit = Hs%10;
-			
-			bestRenderer.sprite = scoreSprite [ten];
-			bestRendererTwo.enabled = true;
-			bestRendererTwo.sprite = scoreSprite [unit];
+		else if (sc < 10) {
+			coinOneRender.sprite = scoreSprite [sc];
+		} else if (sc >= 10 && sc <= 99) {
+			int ten = Mathf.FloorToInt(sc/10f);
+			int unit = Mathf.FloorToInt(sc%10f);
+
+			coinTwoRender.sprite = scoreSprite [ten];
+			coinOneRender.sprite = scoreSprite [unit];
+		}
+		else if (sc >= 100 && sc <= 999) {
+			int hund = Mathf.FloorToInt(sc/100f);
+
+			int temp = Mathf.FloorToInt(sc%100f);
+
+			int ten = Mathf.FloorToInt(temp/10f);
+			int unit = Mathf.FloorToInt(temp%10f);
+
+			coinThreeRender.sprite = scoreSprite [hund];
+			coinTwoRender.sprite = scoreSprite [ten];
+			coinOneRender.sprite = scoreSprite [unit];
+		}
+		else if (sc >= 1000 && sc <= 9999) {
+
+			int thousand = Mathf.FloorToInt(sc/1000f);
+			int temp = Mathf.FloorToInt(sc%1000f);
+
+			int hund = Mathf.FloorToInt(temp/100f);
+			int tempHun = Mathf.FloorToInt(temp%100f);
+
+			int ten = Mathf.FloorToInt(tempHun/10f);
+			int unit = Mathf.FloorToInt(tempHun%10f);
+
+			coinFourRender.sprite = scoreSprite [thousand];
+			coinThreeRender.sprite = scoreSprite [hund];
+			coinTwoRender.sprite = scoreSprite [ten];
+			coinOneRender.sprite = scoreSprite [unit];
 		}
 
 	}

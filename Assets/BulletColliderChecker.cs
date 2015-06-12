@@ -18,14 +18,14 @@ public class BulletColliderChecker : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		counter  = 0;
+		/*counter  = 0;
 		missOne.transform.renderer.enabled = true;
 		missTwo.transform.renderer.enabled = true;
 		missThree.transform.renderer.enabled = true;
 
 		rendererOne = missOne.GetComponent<Animator> ();
 		rendererTwo = missTwo.GetComponent<Animator> ();
-		rendererThree = missThree.GetComponent<Animator> ();
+		rendererThree = missThree.GetComponent<Animator> (); */
 
 		hm = hunter.GetComponent<HunterMovement> ();
 
@@ -33,7 +33,7 @@ public class BulletColliderChecker : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (counter == 1) {
+		/* if (counter == 1) {
 			//missOne.renderer.enabled = false;
 			rendererOne.SetBool("isMissed", true);
 				}
@@ -45,15 +45,18 @@ public class BulletColliderChecker : MonoBehaviour {
 			//missThree.renderer.enabled = false;
 			rendererThree.SetBool("isMissed", true);
 			hm.lost();
-		}
+		} */
 	}
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		Debug.Log (col.gameObject.name);
 		if (col.gameObject.name == "Bullets(Clone)") {
-			counter++;
+			//counter++;
+			//hm.setCounter();
+			hm.decrementBirdCount();
 			Destroy(col.gameObject);
 				}
 	}
+
+
 }
