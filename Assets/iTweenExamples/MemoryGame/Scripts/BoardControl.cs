@@ -42,14 +42,14 @@ public class BoardControl : MonoBehaviour{
 	}
 	
 	IEnumerator countDown(){
-		audio.pitch=.8f;
-		audio.PlayOneShot(countSound);
+		GetComponent<AudioSource>().pitch=.8f;
+		GetComponent<AudioSource>().PlayOneShot(countSound);
 		levelText.material.color=Color.red;
 		levelText.text="GET READY";
 		yield return new WaitForSeconds(2);
 		
-		audio.pitch=1;
-		audio.PlayOneShot(countSound);
+		GetComponent<AudioSource>().pitch=1;
+		GetComponent<AudioSource>().PlayOneShot(countSound);
 		levelText.material.color=Color.yellow;
 		levelText.text="GET SET";
 		yield return new WaitForSeconds(2);
@@ -83,8 +83,8 @@ public class BoardControl : MonoBehaviour{
 		for (int i = 0; i < level; i++) {
 			int boxId = sequenceArray[i];
 			boxArray[boxId].SendMessage("depress");
-			audio.pitch=Random.Range(.7f,1);
-			audio.PlayOneShot(demoSound);
+			GetComponent<AudioSource>().pitch=Random.Range(.7f,1);
+			GetComponent<AudioSource>().PlayOneShot(demoSound);
 			yield return new WaitForSeconds(delayTime);
 		}
 		wait=false;
@@ -92,8 +92,8 @@ public class BoardControl : MonoBehaviour{
 	
 	void sequenceCheck(int attempt){
 		if(sequenceArray[sequenceAttempt]==attempt){
-			audio.pitch=Random.Range(.7f,1);
-			audio.PlayOneShot(choiceSound);
+			GetComponent<AudioSource>().pitch=Random.Range(.7f,1);
+			GetComponent<AudioSource>().PlayOneShot(choiceSound);
 			sequenceAttempt++;
 		}else{
 			StartCoroutine(gameOver());
@@ -107,8 +107,8 @@ public class BoardControl : MonoBehaviour{
 	IEnumerator success(){		
 		wait=true;
 		yield return new WaitForSeconds(.4f);
-		audio.pitch=Random.Range(.7f,1);
-		audio.PlayOneShot(successSound);
+		GetComponent<AudioSource>().pitch=Random.Range(.7f,1);
+		GetComponent<AudioSource>().PlayOneShot(successSound);
 		flash();
 		yield return new WaitForSeconds(1.2f);
 		addChallenge();
@@ -122,8 +122,8 @@ public class BoardControl : MonoBehaviour{
 	}
 	
 	IEnumerator gameOver(){
-		audio.pitch=.7f;
-		audio.PlayOneShot(failSound);
+		GetComponent<AudioSource>().pitch=.7f;
+		GetComponent<AudioSource>().PlayOneShot(failSound);
 		gamePlaying=false;
 		wait=true;
 		levelText.material.color=Color.red;

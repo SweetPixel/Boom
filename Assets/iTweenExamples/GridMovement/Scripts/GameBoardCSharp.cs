@@ -43,7 +43,7 @@ public class GameBoardCSharp : MonoBehaviour
 				}else{
 					blockColor=Color.white;
 				}
-				newBlock.renderer.material.color=blockColor;
+				newBlock.GetComponent<Renderer>().material.color=blockColor;
 				newBlock.transform.parent=transform;
 			}
 		}

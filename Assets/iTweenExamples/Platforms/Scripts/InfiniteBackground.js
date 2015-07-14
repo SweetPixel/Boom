@@ -9,5 +9,5 @@ function Start (){
 
 function FixedUpdate (){
 	var difference : Vector3=cameraInit - cam.position;
-	renderer.material.mainTextureOffset = difference*scrollSpeed;
+	GetComponent.<Renderer>().material.mainTextureOffset = difference*scrollSpeed;
 }

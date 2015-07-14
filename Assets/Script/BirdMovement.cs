@@ -138,6 +138,9 @@ public class BirdMovement : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
+
+		Debug.Log (col.gameObject.name);
+
 		if(col.gameObject.name == "Bird2D-Enemy(Clone)") {
 			return;
 		}
@@ -146,10 +149,10 @@ public class BirdMovement : MonoBehaviour {
 			return;
 		}
 
-		if (col.gameObject.name == "Bullets(Clone)") {
-			gameObject.collider2D.enabled = false;
+		if (col.gameObject.tag == "Bullet") {
+			gameObject.GetComponent<Collider2D>().enabled = false;
 			GameObject co = (GameObject)Instantiate(coin, new Vector3(gameObject.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-			co.rigidbody2D.velocity = Vector2.up * 2;
+			//co.GetComponent<Rigidbody2D>().velocity = Vector2.up * -2;
 			isLive = false;
 			birdLife = 0;
 			hm.initiateCoin();
@@ -168,7 +171,7 @@ public class BirdMovement : MonoBehaviour {
 		anim.SetBool ("isHit", true);
 		anim.SetBool("isLeft", isLeft);
 		//rigidbody.velocity = Vector2.up * -2;
-		rigidbody2D.velocity = Vector2.up * -5;
+		GetComponent<Rigidbody2D>().velocity = Vector2.up * -5;
 	}
 
 

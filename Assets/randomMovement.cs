@@ -6,7 +6,7 @@ public class randomMovement : MonoBehaviour {
 	public float speed;
 	public GameObject cube;
 	Vector3 newpos;
-	Animator anime;
+	//Animator anime;
 
 	public GameObject coin;
 	float birdLife = 0;
@@ -29,8 +29,8 @@ public class randomMovement : MonoBehaviour {
 		anim = GetComponent<Animator> ();
 		anim.SetBool ("isHit", false);
 
-		anime = gameObject.GetComponent<Animator> ();
-		anime.SetInteger ("movementValue", 0);
+		//anime = gameObject.GetComponent<Animator> ();
+		//anime.SetInteger ("movementValue", 0);
 		newpos.x += 5f;
 		newpos.y = cube.transform.position.y;
 	}
@@ -67,13 +67,13 @@ public class randomMovement : MonoBehaviour {
 		newpos =  this.gameObject.transform.position;
 		int rand = Random.Range (0, 6);
 		if (rand == 0) {
-			anime.SetInteger ("movementValue", 0);
+			//anime.SetInteger ("movementValue", 0);
 			float diff = 10.0f - transform.position.x;
 			float randX = Random.Range (1f, diff);
 
 			newpos.x += randX; //2f;
 		} else if (rand == 1) {
-			anime.SetInteger ("movementValue", 1);
+			//anime.SetInteger ("movementValue", 1);
 			float diff = 10.0f - transform.position.x;
 			float randX = Random.Range (1f, diff);
 
@@ -102,7 +102,7 @@ public class randomMovement : MonoBehaviour {
 			
 		//} 
 		else if (rand == 2) {
-			anime.SetInteger ("movementValue", 2);
+			//anime.SetInteger ("movementValue", 2);
 			float diff = transform.position.x - 5.8f;
 			float randX = Random.Range (1f, diff);
 
@@ -123,14 +123,14 @@ public class randomMovement : MonoBehaviour {
 			//newpos.y += randY; //2f;
 			
 		} else if (rand == 3) {
-			anime.SetInteger ("movementValue", 3);
+			//anime.SetInteger ("movementValue", 3);
 			float diff = transform.position.x - 5.8f;
 			float randX = Random.Range (1f, diff);
 
 			newpos.x -= randX; //2f;
 			
 		} else if (rand == 4) {
-			anime.SetInteger ("movementValue", 4);
+			//anime.SetInteger ("movementValue", 4);
 			float diff = transform.position.x - 5.8f;
 			float randX = Random.Range (1f, diff);
 
@@ -157,7 +157,7 @@ public class randomMovement : MonoBehaviour {
 		//	newpos.y -= randY; //2f;
 			
 		} else if (rand == 5) {
-			anime.SetInteger ("movementValue", 5);
+			//anime.SetInteger ("movementValue", 5);
 			float diff = 10.0f - transform.position.x;
 			float randX = Random.Range (1f, diff);
 
@@ -207,7 +207,7 @@ public class randomMovement : MonoBehaviour {
 		anim.SetBool ("isHit", true);
 		anim.SetBool("isLeft", isLeft);
 		//rigidbody.velocity = Vector2.up * -2;
-		rigidbody2D.velocity = Vector2.up * -8;
+		GetComponent<Rigidbody2D>().velocity = Vector2.up * -8;
 	}
 
 }

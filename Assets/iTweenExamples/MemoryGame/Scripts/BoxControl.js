@@ -11,7 +11,7 @@ function Awake(){
 	go=gameObject;
 	startY = gameObject.transform.position.y;
 	destinationY = startY - depressAmount;
-	startColor=renderer.material.color;
+	startColor=GetComponent.<Renderer>().material.color;
 }
 
 function OnMouseDown () {
@@ -23,7 +23,7 @@ function OnMouseDown () {
 
 function depress(){
 	iTween.Stop(go);
-	renderer.material.color = depressColor;
+	GetComponent.<Renderer>().material.color = depressColor;
 	iTween.ColorTo(go,{"r":startColor.r,"g":startColor.g,"b":startColor.b,"time":travelTime*2,"delay":travelTime});
 	iTween.MoveTo(go, {"y":destinationY,"transition":"easeOutCubic","time":travelTime});
 	iTween.MoveTo(go, {"y":startY,"transition":"easeInCubic","time":travelTime,"delay":travelTime});

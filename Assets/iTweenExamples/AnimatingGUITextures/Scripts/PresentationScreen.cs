@@ -13,7 +13,7 @@ public class PresentationScreen : MonoBehaviour{
 		//Reset (only needed since this example loops):
 		iTweenLogoGT.transform.position=new Vector3(.5f,.5f,.5f);
 		presentsTextGT.transform.position=new Vector3(.5f,.5f,.5f);
-		whiteDiagonalGradient.guiTexture.color=new Color(.5f,.5f,.5f,.5f);
+		whiteDiagonalGradient.GetComponent<GUITexture>().color=new Color(.5f,.5f,.5f,.5f);
 
 
 		//In:

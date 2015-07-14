@@ -13,10 +13,10 @@ function Start () {
 		RightTreeTwo=GameObject.Find("ObstacleTreeRightSecond");
 
 
-		LeftTreeOne.collider2D.enabled=false;
-		LeftTreeTwo.collider2D.enabled=false;
-		RightTreeOne.collider2D.enabled=false;
-		RightTreeTwo.collider2D.enabled=false;
+		LeftTreeOne.GetComponent.<Collider2D>().enabled=false;
+		LeftTreeTwo.GetComponent.<Collider2D>().enabled=false;
+		RightTreeOne.GetComponent.<Collider2D>().enabled=false;
+		RightTreeTwo.GetComponent.<Collider2D>().enabled=false;
 	}
 
 }
@@ -24,44 +24,44 @@ function Start () {
 function OnTriggerEnter2D (col : Collider2D) {
 if(col.gameObject.name=="ObstacleTreeLeft")
 {
-LeftTreeOne.collider2D.enabled=true;
+LeftTreeOne.GetComponent.<Collider2D>().enabled=true;
 }
 
 if(col.gameObject.name=="ObstacleTreeLeftSecond")
 {
-LeftTreeTwo.collider2D.enabled=true;
+LeftTreeTwo.GetComponent.<Collider2D>().enabled=true;
 }
 
 if(col.gameObject.name=="ObstacleTreeRight")
 {
-RightTreeOne.collider2D.enabled=true;
+RightTreeOne.GetComponent.<Collider2D>().enabled=true;
 }
 
 if(col.gameObject.name=="ObstacleTreeRightSecond")
 {
-RightTreeTwo.collider2D.enabled=true;
+RightTreeTwo.GetComponent.<Collider2D>().enabled=true;
 }
 
 }
 function OnTriggerExit2D (col : Collider2D) {
 if(col.gameObject.name=="ObstacleTreeLeft")
 {
-	LeftTreeOne.collider2D.enabled=false;
+	LeftTreeOne.GetComponent.<Collider2D>().enabled=false;
 }
 
 if(col.gameObject.name=="ObstacleTreeLeftSecond")
 {
-	LeftTreeTwo.collider2D.enabled=false;
+	LeftTreeTwo.GetComponent.<Collider2D>().enabled=false;
 }
 
 if(col.gameObject.name=="ObstacleTreeRight")
 {
-	RightTreeOne.collider2D.enabled=false;
+	RightTreeOne.GetComponent.<Collider2D>().enabled=false;
 }
 
 if(col.gameObject.name=="ObstacleTreeRightSecond")
 {
-	RightTreeTwo.collider2D.enabled=false;
+	RightTreeTwo.GetComponent.<Collider2D>().enabled=false;
 }
 
 }

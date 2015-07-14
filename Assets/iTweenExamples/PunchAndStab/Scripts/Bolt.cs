@@ -27,9 +27,9 @@ public class Bolt : MonoBehaviour{
 	}
 	
 	void ApplySlide(float xpos){
-		Rect newPixelInset = guiTexture.pixelInset;
+		Rect newPixelInset = GetComponent<GUITexture>().pixelInset;
 		newPixelInset.x = xpos;
-		guiTexture.pixelInset=newPixelInset;
+		GetComponent<GUITexture>().pixelInset=newPixelInset;
 	}
 	
 	void ApplySlam(string direction){

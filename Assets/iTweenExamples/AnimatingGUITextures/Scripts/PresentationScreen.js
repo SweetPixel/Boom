@@ -9,7 +9,7 @@ function OnEnable(){
 	//Reset (only needed since this example loops):
 	iTweenLogoGT.transform.position=Vector3(.5,.5,.5);
 	presentsTextGT.transform.position=Vector3(.5,.5,.5);
-	whiteDiagonalGradient.guiTexture.color=Color(.5,.5,.5,.5);
+	whiteDiagonalGradient.GetComponent.<GUITexture>().color=Color(.5,.5,.5,.5);
 	
 	//In:
 	iTween.FadeFrom(whiteDiagonalGradient,{"alpha":0,"time":.6,"delay":1});

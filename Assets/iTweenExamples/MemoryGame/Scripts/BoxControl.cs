@@ -16,7 +16,7 @@ public class BoxControl : MonoBehaviour{
 		go=gameObject;
 		startY = gameObject.transform.position.y;
 		destinationY = startY - depressAmount;
-		startColor=renderer.material.color;
+		startColor=GetComponent<Renderer>().material.color;
 	}
 	
 	void OnMouseDown () {
@@ -28,7 +28,7 @@ public class BoxControl : MonoBehaviour{
 	
 	void depress(){
 		iTween.Stop(go);
-		renderer.material.color = depressColor;
+		GetComponent<Renderer>().material.color = depressColor;
 		iTween.ColorTo(go,iTween.Hash("color",startColor,"time",travelTime*2,"delay",travelTime));
 		iTween.MoveTo(go,iTween.Hash("y",destinationY,"transition","easeOutCubic","time",travelTime));
 		iTween.MoveTo(go,iTween.Hash("y",startY,"transition","easeInCubic","time",travelTime,"delay",travelTime));

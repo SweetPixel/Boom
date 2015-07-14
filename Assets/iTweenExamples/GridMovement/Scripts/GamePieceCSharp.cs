@@ -9,7 +9,7 @@ public class GamePieceCSharp : MonoBehaviour
 	bool isActive;
 	
 	void Start(){
-		currentColor=renderer.material.color;
+		currentColor=GetComponent<Renderer>().material.color;
 		currentPosition=transform.position;
 	}
 	
@@ -24,7 +24,7 @@ public class GamePieceCSharp : MonoBehaviour
 	
 	void Activate(){
 		isActive=true;
-		renderer.material.color=Color.red;
+		GetComponent<Renderer>().material.color=Color.red;
 		SendMessageUpwards("SetTarget",gameObject);	
 		iTween.MoveTo(gameObject,currentPosition,.4f);
 	}
@@ -32,9 +32,9 @@ public class GamePieceCSharp : MonoBehaviour
 	void OnMouseEnter(){
 		if(!isActive){
 			if(!gameBoard.ballSet){
-				renderer.material.color=Color.yellow;
+				GetComponent<Renderer>().material.color=Color.yellow;
 			}else{
-				renderer.material.color=Color.green;
+				GetComponent<Renderer>().material.color=Color.green;
 			}
 			transform.position=new Vector3(currentPosition.x,.5f,currentPosition.z);
 		}

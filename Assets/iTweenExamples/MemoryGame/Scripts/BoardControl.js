@@ -36,14 +36,14 @@ function OnGUI () {
 }
 
 function countDown(){
-	audio.pitch=.8;
-	audio.PlayOneShot(countSound);
+	GetComponent.<AudioSource>().pitch=.8;
+	GetComponent.<AudioSource>().PlayOneShot(countSound);
 	levelText.material.color=Color.red;
 	levelText.text="GET READY";
 	yield WaitForSeconds(2);
 	
-	audio.pitch=1;
-	audio.PlayOneShot(countSound);
+	GetComponent.<AudioSource>().pitch=1;
+	GetComponent.<AudioSource>().PlayOneShot(countSound);
 	levelText.material.color=Color.yellow;
 	levelText.text="GET SET";
 	yield WaitForSeconds(2);
@@ -77,8 +77,8 @@ function playSequence(){
 	for(var i:int=0;i<level;i++){
 		var boxId : int = sequenceArray[i];
 		//boxArray[boxId].SendMessage("depress");
-		audio.pitch=Random.Range(.7,1);
-		audio.PlayOneShot(demoSound);
+		GetComponent.<AudioSource>().pitch=Random.Range(.7,1);
+		GetComponent.<AudioSource>().PlayOneShot(demoSound);
 		yield WaitForSeconds(delayTime);
 	}
 	wait=false;
@@ -86,8 +86,8 @@ function playSequence(){
 
 function sequenceCheck(attempt:int){
 	if(sequenceArray[sequenceAttempt]==attempt){
-		audio.pitch=Random.Range(.7,1);
-		audio.PlayOneShot(choiceSound);
+		GetComponent.<AudioSource>().pitch=Random.Range(.7,1);
+		GetComponent.<AudioSource>().PlayOneShot(choiceSound);
 		sequenceAttempt++;
 	}else{
 		gameOver();
@@ -101,8 +101,8 @@ function sequenceCheck(attempt:int){
 function success(){
 	wait=true;
 	yield WaitForSeconds(.4);
-	audio.pitch=Random.Range(.7,1);
-	audio.PlayOneShot(successSound);
+	GetComponent.<AudioSource>().pitch=Random.Range(.7,1);
+	GetComponent.<AudioSource>().PlayOneShot(successSound);
 	flash();
 	yield WaitForSeconds(1.2);
 	addChallenge();
@@ -116,8 +116,8 @@ function flash(){
 }
 
 function gameOver(){
-	audio.pitch=.7;
-	audio.PlayOneShot(failSound);
+	GetComponent.<AudioSource>().pitch=.7;
+	GetComponent.<AudioSource>().PlayOneShot(failSound);
 	gamePlaying=false;
 	wait=true;
 	levelText.material.color=Color.red;

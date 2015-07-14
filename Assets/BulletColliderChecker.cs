@@ -50,7 +50,7 @@ public class BulletColliderChecker : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		if (col.gameObject.name == "Bullets(Clone)") {
+		if (col.gameObject.tag == "Bullet") {
 			//counter++;
 			//hm.setCounter();
 			hm.decrementBirdCount();

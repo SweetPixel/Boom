@@ -2,7 +2,7 @@ public var character : Transform;
 public var arrow : Transform; 
 
 function Start(){
-	Screen.showCursor=false;
+	Cursor.visible=false;
 }
 
 function Update (){

@@ -7,9 +7,39 @@ public class HunterMovement : MonoBehaviour {
 	private float maxX = 3.2f;
 	//bool isRight = true;
 
+	/* Bullet Sprites and variables */
 	public Vector3 pointB;
+	private GameObject bulletpointVariable;
 	public GameObject bulletSpawn;
-	public GameObject bullet;
+	public GameObject bulletSpawn_sniper;
+	public GameObject bulletSpawn_shotgun;
+	public GameObject bulletSpawn_ak47;
+
+	private GameObject bullet;
+	public GameObject bulletNormal;
+	public GameObject bulletSmg;
+	public GameObject bulletShotgun;
+
+	private GameObject bulletIcon;
+	private SpriteRenderer bulletIconRender;
+	public Sprite bulletIcon_smg;
+	public Sprite bulletIcon_shotgun;
+	public Sprite bulletIcon_sniper;
+	public Sprite bulletIcon_rifle;
+
+	/* End of Bullet Sprite and variables */
+
+	/* Coin Icon Combo Sprite and Variables */
+	private GameObject coinIcon;
+	private SpriteRenderer coinIconRender;
+	public Sprite combo2;
+	public Sprite combo3;
+	public Sprite combo4;
+	public Sprite combo5;
+	public Sprite coinNormalIcon;
+	private int comboValue = 0;
+
+	/* End of Coin Icon Combo Sprite and Variables */
 
 	//Speed variable
 	public float bulletSpeed = 1600f;
@@ -60,6 +90,7 @@ public class HunterMovement : MonoBehaviour {
 
 	/* GameOver object */
 	public GameObject gameOver;
+	public GameObject gameOverCanvas;
 	public bool isGameOver = false;
 
 	// Start Button
@@ -78,13 +109,66 @@ public class HunterMovement : MonoBehaviour {
 	float[] Xaxis = { 5.1f , 11.3f };
 	public float nextFire;
 	private bool startFiring = false;
+	private int fireShot = 0;
+
+	//variable to keep track of number of birds killed.
+	private int birdKilled = 0;
 
 	//Special bird condition
 	private int birdCount = 0;
 	public GameObject[] specialBird;
+	public GameObject eagle;
+	private bool isEagleVisible = false;
+	public GameObject birdEnemy;
+	public GameObject sandHillCrane;
+	public GameObject hummingBird;
+
+	private float timeLeft = 0f; 
+	public float totalTime= 3f;
+	private bool isCombo = false;
 
 	IEnumerator Start () {
 		/* Bullet Renderers */
+
+		/*bulletObject = GameObject.Find ("BulletCountDown");
+		coinObject = GameObject.Find ("CoinObject");
+
+		coinObject.SetActive (true);
+		bulletObject.SetActive (true);*/
+
+		bulletIcon = GameObject.Find ("BulletIcon");
+		bulletIconRender = bulletIcon.GetComponent<SpriteRenderer>();
+		anim = GetComponent<Animator> ();
+		
+		int gunIndex = PlayerPrefs.GetInt ("gunIndex");
+		if (gunIndex == 0 || gunIndex == 1) {
+			anim.SetInteger("gunIndex", 1);
+			bulletpointVariable = bulletSpawn;
+			bullet = bulletNormal;
+			bulletIconRender.sprite = bulletIcon_rifle;
+		}
+		else if (gunIndex == 2) {
+			anim.SetInteger("gunIndex", 2);
+			bulletpointVariable = bulletSpawn_ak47;
+			bullet = bulletSmg;
+			bulletIconRender.sprite = bulletIcon_smg;
+		}
+		else if (gunIndex == 3) {
+			anim.SetInteger("gunIndex", 3);
+			bulletpointVariable = bulletSpawn_shotgun;
+			bullet = bulletShotgun;
+			bulletIconRender.sprite = bulletIcon_shotgun;
+		}
+		else if (gunIndex == 4) {
+			anim.SetInteger("gunIndex", 4);
+			bulletpointVariable = bulletSpawn_sniper;
+			bullet = bulletNormal;
+			bulletIconRender.sprite = bulletIcon_sniper;
+		}
+		animshoot=bulletpointVariable.GetComponent<Animator>();
+
+		coinIcon = GameObject.Find("CoinIcon");
+		coinIconRender = coinIcon.GetComponent<SpriteRenderer>();
 
 		b = 50;
 		bulletCounter = 9;
@@ -105,13 +189,12 @@ public class HunterMovement : MonoBehaviour {
 
 		hunterAnime = gameObject.GetComponent<Animator> ();
 
-		animshoot=shoot.GetComponent<Animator>();
-
 		hunterSpriteRenderer = gameObject.GetComponent<SpriteRenderer> ();
 
 		/* Score Sprites */
 		ScoreObject = GameObject.Find ("ScoreSprite");
 		ScoreObjectTwo = GameObject.Find ("ScoreSpriteTwo");
+		ScoreObjectThree = GameObject.Find ("ScoreSpriteThree");
 
 		scoreRenderer = ScoreObject.GetComponent<SpriteRenderer> ();
 		scoreRenderer.sprite = scoreSprite [score];
@@ -125,11 +208,7 @@ public class HunterMovement : MonoBehaviour {
 		/* Bullets Available */
 		roundAvailable = true;
 		restartInitiate = 0;
-
-
-
-		anim = GetComponent<Animator> ();
-
+		
 		/* Flip Function */
 		Flip ();
 
@@ -144,7 +223,8 @@ public class HunterMovement : MonoBehaviour {
 			isRight = false;
 		}
 
-		//restartLevel ();
+		timeLeft = totalTime;
+
 	}
 
 	IEnumerator restartLevel()
@@ -175,40 +255,89 @@ public class HunterMovement : MonoBehaviour {
 	void Update () {
 
 		restartInitiate += Time.deltaTime;
-
-
 		if (isRestart && restartInitiate > 3.2) {
 
 			DestroyAllComponents();
-
 			GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (8.029126f, 1.784778f), Quaternion.identity);
-			//DontDestroyOnLoad(go);
 
 			isRestart = false;
-
-			//Application.LoadLevel("SecondLevelInfinite");
-
-			startButton.transform.position = new Vector2 (8.029126f, 0.14f);
 
 			//Application.LoadLevel("SecondLevelInfinite");
 				}
 
 		if (birdCount == 5) {
-			int index = Random.Range(0,1);
-			Instantiate (specialBird[index], new Vector2 (5.27f, 2.824509f), Quaternion.identity);
+			int index = Random.Range(0,2);
+			Instantiate (specialBird[0], new Vector2 (5.27f, 2.824509f), Quaternion.identity);
 			birdCount = 0;
 				}
 
+		if (isCombo) {
+				timeLeft -= Time.deltaTime;
+				}
+
+		if (birdCount == 3 && isEagleVisible) {
+			Instantiate (eagle, new Vector2 (5.27f, 2.824509f), Quaternion.identity);
+			isEagleVisible = false;
+			birdCount = 0;
+		}
+	}
+
+	public void setEagleVisibility()
+	{
+		isEagleVisible = false;
 	}
 
 	public void decrementBirdCount()
 	{
 		birdCount = 0;
+		coinIconRender.sprite = coinNormalIcon;
+		for(int i = 0; i < comboValue; i++)
+		{
+			setScore();
+		}
 	}
 
 	public void incrementBirdCount()
 	{
 		birdCount += 1;
+		isCombo = true;
+		Debug.Log (timeLeft);
+		if (timeLeft < 0) {
+			timeLeft = totalTime;
+			isCombo = false;
+			isEagleVisible = false;
+			birdCount = 0;
+			coinIconRender.sprite = coinNormalIcon;
+			for(int i = 0; i < comboValue; i++)
+			{
+				setScore();
+			}
+			comboValue = 0;
+		} else {
+			//timeLeft = totalTime;
+			if(birdCount == 2)
+			{
+				coinIconRender.sprite = combo2;
+				comboValue = 2;
+			}
+			else if(birdCount == 3)
+			{
+				coinIconRender.sprite = combo3;
+				comboValue = 3;
+			}
+			else if(birdCount == 4)
+			{
+				coinIconRender.sprite = combo4;
+				comboValue = 4;
+			}
+			else if(birdCount == 5)
+			{
+				coinIconRender.sprite = combo5;
+				comboValue = 5;
+			}
+			isEagleVisible = true;
+		}
+
 	}
 
 	void OnCollisionEnter2D(Collision2D col)
@@ -218,7 +347,7 @@ public class HunterMovement : MonoBehaviour {
 			initiateCoin();
 				}
 
-		if (col.gameObject.name == "HunterColliderLeft" ||col.gameObject.name == "HunterColliderRight") {
+		if (col.gameObject.name == "HunterColliderLeft" || col.gameObject.name == "HunterColliderRight") {
 			Flip ();
 				}
 
@@ -250,11 +379,19 @@ public class HunterMovement : MonoBehaviour {
 		hunterAnime.SetBool("isHit", true);
 	}
 
+	public int getBirdKilled()
+	{
+		return birdKilled;
+	}
+
 	public void initiateCoin()
 	{
-
+		birdKilled++;
 		setScore ();
+	}
 
+	private void initiatePelican()
+	{
 		int index = Random.Range(0,4);
 		float y = Yaxis[index];
 		float x = 5.1f;
@@ -266,24 +403,66 @@ public class HunterMovement : MonoBehaviour {
 		{
 			x = Xaxis[1];
 		}
-
+		
 		Instantiate (bird, new Vector2 (x, y), Quaternion.identity);
 	}
 
-	void setScore()
+	/*
+	 * Set score and initiate the birds with respect to the level.
+	 */
+	public void setScore()
 	{
 		score ++;
-		
-		if (score < 10) {
+
+		if (score <= 5) {
+						scoreRenderer.sprite = scoreSprite [score];
+						initiatePelican ();
+				}
+		else if (score >=6 && score < 10) {
 			scoreRenderer.sprite = scoreSprite [score];
+			GameObject tucan = GameObject.FindGameObjectWithTag("BirdEnemy2D");
+			if(tucan != null)
+			{
+				initiatePelican();
+			}
+			else{
+				StartCoroutine(InitiateEnemy(1));
+			}
 		} else if (score == 10){
 			bulletCounter--;
 			scoreRenderer.sprite = scoreSprite [1];
 			scoreRendererTwo.enabled = true;
+				GameObject tucan = GameObject.FindGameObjectWithTag("BirdEnemy2D");
+				if(tucan != null)
+				{
+					initiatePelican();
+				}
+				else{
+					StartCoroutine(InitiateEnemy(1));
+				}
 		}
 		else if(score > 10 && score < 20){
 			scoreCounter++;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+
+				GameObject shc = GameObject.FindGameObjectWithTag("SandhillCrane");
+				if(shc != null)
+				{
+					GameObject tucan = GameObject.FindGameObjectWithTag("BirdEnemy2D");
+					
+					if(tucan != null)
+					{
+						initiatePelican();
+						initiatePelican();
+					}
+					else{
+						StartCoroutine(InitiateEnemy(1));
+					}
+				}
+				else{
+					Instantiate (sandHillCrane, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
+				}
+
 		}
 		else if(score == 20){
 			bulletCounter--;
@@ -292,10 +471,51 @@ public class HunterMovement : MonoBehaviour {
 			scoreRenderer.sprite = scoreSprite [scoreCounter];
 			scoreCounter = 0;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+
+				GameObject shc = GameObject.FindGameObjectWithTag("SandhillCrane");
+				if(shc != null)
+				{
+					GameObject tucan = GameObject.FindGameObjectWithTag("BirdEnemy2D");
+					
+					if(tucan != null)
+					{
+						initiatePelican();
+						initiatePelican();
+					}
+					else{
+						StartCoroutine(InitiateEnemy(1));
+					}
+				}
+				else{
+					Instantiate (sandHillCrane, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
+				}
+
 		}
 		else if(score > 20 && score < 30){
 			scoreCounter++;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+
+				GameObject shc = GameObject.FindGameObjectWithTag("SandhillCrane");
+				if(shc != null)
+				{
+					GameObject[] tucan = GameObject.FindGameObjectsWithTag("BirdEnemy2D");
+					int x = Random.Range(0,2);
+					if(x == 1)
+					{
+						initiatePelican();
+						initiatePelican();	
+					}
+					else{
+						if(tucan.Length < 2)
+						{
+							StartCoroutine(InitiateEnemy(1));
+						}
+					}
+				}
+				else{
+					Instantiate (sandHillCrane, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
+				}
+
 		}
 		else if(score == 30){
 			//setMisses();
@@ -303,70 +523,189 @@ public class HunterMovement : MonoBehaviour {
 			scoreRenderer.sprite = scoreSprite [scoreCounter];
 			scoreCounter = 0;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+
+				GameObject shc = GameObject.FindGameObjectWithTag("SandhillCrane");
+				if(shc != null)
+				{
+					GameObject[] tucan = GameObject.FindGameObjectsWithTag("BirdEnemy2D");
+					int x = Random.Range(0,2);
+					if(x == 1)
+					{
+						initiatePelican();
+						initiatePelican();
+					}
+					else{
+						if(tucan.Length < 2)
+						{
+							StartCoroutine(InitiateEnemy(1));
+						}
+					}
+				}
+				else{
+					Instantiate (sandHillCrane, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
+				}
+
 		}
 		else if(score > 30 && score < 40){
 			scoreCounter++;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			GameObject hb = GameObject.FindGameObjectWithTag("HummingBird");
+			if(hb != null)
+			{
+				GameObject shc = GameObject.FindGameObjectWithTag("SandhillCrane");
+				if(shc != null)
+				{
+					GameObject[] tucan = GameObject.FindGameObjectsWithTag("BirdEnemy2D");
+					int x = Random.Range(0,2);
+					if(x == 1)
+					{
+						initiatePelican();
+						initiatePelican();
+					}
+					else{
+						if(tucan.Length < 2)
+						{
+							StartCoroutine(InitiateEnemy(1));
+						}
+					}
+				}
+				else{
+					Instantiate (sandHillCrane, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
+				}
+			}
+			else{
+				Instantiate (hummingBird, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
+			}
 		}
 		else if(score == 40){
 			scoreCounter = 4;
 			scoreRenderer.sprite = scoreSprite [scoreCounter];
 			scoreCounter = 0;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			GameObject hb = GameObject.FindGameObjectWithTag("HummingBird");
+			if(hb != null)
+			{
+				GameObject shc = GameObject.FindGameObjectWithTag("SandhillCrane");
+				if(shc != null)
+				{
+					GameObject[] tucan = GameObject.FindGameObjectsWithTag("BirdEnemy2D");
+					int x = Random.Range(0,2);
+					if(x == 1)
+					{
+						initiatePelican();
+						initiatePelican();
+					}
+					else{
+						if(tucan.Length < 2)
+						{
+							StartCoroutine(InitiateEnemy(1));
+						}
+					}
+				}
+				else{
+					Instantiate (sandHillCrane, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
+				}
+			}
+			else{
+				Instantiate (hummingBird, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
+			}
 		}
 		else if(score > 40 && score < 50){
 			scoreCounter++;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+
+			GameObject hb = GameObject.FindGameObjectWithTag("HummingBird");
+			if(hb != null)
+			{
+				GameObject[] shc = GameObject.FindGameObjectsWithTag("SandhillCrane");
+				int x_shc = Random.Range(0,2);
+				if(x_shc == 1)
+				{
+					GameObject[] tucan = GameObject.FindGameObjectsWithTag("BirdEnemy2D");
+					int x = Random.Range(0,2);
+					if(x == 1)
+					{
+						initiatePelican();
+						initiatePelican();
+					}
+					else{
+						if(tucan.Length < 2)
+						{
+							StartCoroutine(InitiateEnemy(1));
+						}
+					}
+				}
+				else{
+					if(shc.Length < 2)
+					{
+						Instantiate (sandHillCrane, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
+					}
+				}
+			}
+			else{
+				Instantiate (hummingBird, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
+			}
+
 		}
 		else if(score == 50){
 			scoreCounter = 5;
 			scoreRenderer.sprite = scoreSprite [scoreCounter];
 			scoreCounter = 0;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			fiftyOnwards();
 		}
 		else if(score > 50 && score < 60){
 			scoreCounter++;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			fiftyOnwards();
 		}
 		else if(score == 60){
 			scoreCounter = 6;
 			scoreRenderer.sprite = scoreSprite [scoreCounter];
 			scoreCounter = 0;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			fiftyOnwards();
 		}
 		else if(score > 60 && score < 70){
 			scoreCounter++;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			fiftyOnwards();
 		}
 		else if(score == 70){
 			scoreCounter = 7;
 			scoreRenderer.sprite = scoreSprite [scoreCounter];
 			scoreCounter = 0;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			fiftyOnwards();
 		}
 		else if(score > 70 && score < 80){
 			scoreCounter++;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			fiftyOnwards();
 		}
 		else if(score == 80){
 			scoreCounter = 8;
 			scoreRenderer.sprite = scoreSprite [scoreCounter];
 			scoreCounter = 0;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			fiftyOnwards();
 		}
 		else if(score > 80 && score < 90){
 			scoreCounter++;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			fiftyOnwards();
 		}
 		else if(score == 90){
 			scoreCounter = 9;
 			scoreRenderer.sprite = scoreSprite [scoreCounter];
 			scoreCounter = 0;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			fiftyOnwards();
 		}
 		else if(score > 90 && score < 100){
 			scoreCounter++;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			fiftyOnwards();
 		}
 		else if(score == 100){
 			scoreCounter = 1;
@@ -375,6 +714,7 @@ public class HunterMovement : MonoBehaviour {
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
 			scoreRendererThree.enabled = true;
 			scoreRendererThree.sprite = scoreSprite [scoreCounter];
+			fiftyOnwards();
 		}
 		else if(score > 100 && score <= 999){
 
@@ -387,7 +727,62 @@ public class HunterMovement : MonoBehaviour {
 
 			scoreRendererTwo.sprite = scoreSprite [ten];
 			scoreRendererThree.sprite = scoreSprite [unit];
+			fiftyOnwards();
+		}
+	}
 
+	private void fiftyOnwards()
+	{
+		GameObject[] hb = GameObject.FindGameObjectsWithTag("HummingBird");
+		int x_hb = Random.Range(0,2);
+		if(x_hb  == 1)
+		{
+			GameObject[] shc = GameObject.FindGameObjectsWithTag("SandhillCrane");
+			int x_shc = Random.Range(0,2);
+			if(x_shc == 1)
+			{
+				GameObject[] tucan = GameObject.FindGameObjectsWithTag("BirdEnemy2D");
+				int x = Random.Range(0,2);
+				if(x == 1)
+				{
+					initiatePelican();
+					initiatePelican();
+				}
+				else{
+					if(tucan.Length < 2)
+					{
+						StartCoroutine(InitiateEnemy(1));
+					}
+				}
+			}
+			else{
+				if(shc.Length < 2)
+				{
+					Instantiate (sandHillCrane, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
+				}
+			}
+		}
+		else{
+			if(hb.Length < 2)
+			{
+				Instantiate (hummingBird, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
+			}
+
+		}
+	}
+
+	IEnumerator InitiateEnemy(int length)
+	{
+		while(true)
+		{
+			for (int i=0;i<length;i++) 
+			{
+				//Vector3 spawnPosition = new Vector3 (Random.Range(-spawnValue.x, spawnValue.x),Random.Range(1.2f, 4f),spawnValue.z);
+				Quaternion spawnRotation = Quaternion.identity;
+				Instantiate (birdEnemy, new Vector2 (4.1f, Random.Range(1.2f, 3f)), spawnRotation);
+				yield return new WaitForSeconds(0.5f);
+			}
+			break;
 		}
 	}
 
@@ -435,21 +830,22 @@ public class HunterMovement : MonoBehaviour {
 
 	IEnumerator Fired()
 	{
+		fireShot++;
 		yield return new WaitForSeconds(0.25f);
 		if (isRight) {
-			GameObject game = (GameObject)Instantiate(bullet, bulletSpawn.transform.position, Quaternion.Euler(0,0,-10f));
-			game.rigidbody2D.AddForce(Quaternion.Euler(0,0,-15f) * Vector2.up * bulletSpeed);
+			GameObject game = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,-10f));
+			game.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,-15f) * Vector2.up * bulletSpeed);
 		} else {
-			GameObject game = (GameObject)Instantiate(bullet, bulletSpawn.transform.position, Quaternion.Euler(0,0,10f));
-			game.rigidbody2D.AddForce(Quaternion.Euler(0,0,15f) * Vector2.up * bulletSpeed);
+			GameObject game = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,10f));
+			game.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,15f) * Vector2.up * bulletSpeed);
 		}
 		isFired = false;
 		animshoot.SetBool("isFired", isFired);
-		//if (countIndex == 6) {
-		//	Debug.Log("Game Over");
-		//	roundAvailable = false;
-		
-		//}
+	}
+
+	public int getFireShotNumber()
+	{
+		return fireShot;
 	}
 
 	public void addAmmo()
@@ -560,6 +956,14 @@ public class HunterMovement : MonoBehaviour {
 	public void letStart()
 	{
 		start = true;
+		//coinObject.SetActive (false);
+		//bulletObject.SetActive (false);
 	}
+
+	/*public void hiddenObjects()
+	{
+		coinObject.SetActive (false);
+		bulletObject.SetActive (false);
+	}*/
 
 }

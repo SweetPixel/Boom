@@ -11,9 +11,6 @@ public class RestartGame : MonoBehaviour {
 	public GameObject hunter;
 	HunterMovement hunterMovement;
 
-	public GameObject bird;
-	BirdMovement birdMovement;
-	public GameObject birdEnemy;
 	
 	bool firstWave = true;
 	
@@ -25,8 +22,6 @@ public class RestartGame : MonoBehaviour {
 	void Start () {
 		hunterMovement = hunter.GetComponent<HunterMovement> ();
 		hunterMovement.letStart();
-		initiateBird ();
-		StartCoroutine (InitiateEnemy ());
 	}
 	
 	// Update is called once per frame
@@ -34,24 +29,36 @@ public class RestartGame : MonoBehaviour {
 		
 	}
 
-	public void initiateBird()
+	void OnMouseUp()
 	{
-		Instantiate (bird, new Vector2 (4.1f, 2.958249f), Quaternion.identity);
-	}
-	
-	IEnumerator InitiateEnemy()
-	{
-		yield return new WaitForSeconds(1.5f);
-		while(firstWave)
+		//GameComponent.transform.position = new Vector2 (6.24f, GameComponent.transform.position.y);
+		
+		//gameObject.transform.position = new Vector2 (11f, 11f);
+		GameObject hunt = GameObject.Find("Object");
+		if(hunt == null)
 		{
-			for (int i=0;i<3;i++) 
-			{
-				//Vector3 spawnPosition = new Vector3 (Random.Range(-spawnValue.x, spawnValue.x),Random.Range(1.2f, 4f),spawnValue.z);
-				Quaternion spawnRotation = Quaternion.identity;
-				Instantiate (birdEnemy, new Vector2 (4.1f, Random.Range(1.2f, 3f)), spawnRotation);
-				yield return new WaitForSeconds(1f);
-			}
-			firstWave = false;
+			hunt = GameObject.Find ("Object(Clone)");
+		}
+		Destroy(hunt);
+		Destroy(GameObject.Find ("GameOver(Clone)"));
+		GameObject h = (GameObject)Instantiate(hunter, new Vector3(8.15f, -2.15f, 0.02769041f), Quaternion.identity);
+		//gameObject.GetComponent<Collider2D>().name = "StartButton";
+		
+		HunterMovement hRestart = h.GetComponent<HunterMovement> ();
+		hRestart.letStart();
+		
+		GameObject[] birds = GameObject.FindGameObjectsWithTag("Bird2D");
+
+		GameObject playhand = GameObject.Find("PlayHand");
+		StartGame sg = playhand.GetComponent<StartGame>();
+		
+		sg.initEmenyBird();
+		if(birds.Length == 2)
+		{
+			sg.initBird(1);
+		}
+		else if(birds.Length == 1){
+			sg.initBird(2);
 		}
 	}
 

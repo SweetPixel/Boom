@@ -7,7 +7,7 @@ public class Puppeteer : MonoBehaviour
 	public Transform arrow; 
 	
 	void Start(){
-		Screen.showCursor=false;
+		Cursor.visible=false;
 	}
 	
 	void Update (){

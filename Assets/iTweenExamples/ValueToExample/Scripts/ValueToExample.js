@@ -5,7 +5,7 @@ var initialScale : Vector3;
 var scoreDisplay : GUIText;
 
 function Awake(){
-	initialColor = 	renderer.material.color;
+	initialColor = 	GetComponent.<Renderer>().material.color;
 	initialScale = Vector3(transform.localScale.x,transform.localScale.y,transform.localScale.z);
 }
 
@@ -21,7 +21,7 @@ function OnMouseDown(){
 
 function OnMouseUp(){
 	//reset:
-	renderer.material.color=initialColor;
+	GetComponent.<Renderer>().material.color=initialColor;
 	transform.localScale=initialScale;
 	
 	//visual feedback:

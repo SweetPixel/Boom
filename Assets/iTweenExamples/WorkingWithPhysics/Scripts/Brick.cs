@@ -7,7 +7,7 @@ public class Brick : MonoBehaviour
 	private Color impactColor = Color.red;
 	
 	void Update (){
-		if(rigidbody.velocity.magnitude>2){
+		if(GetComponent<Rigidbody>().velocity.magnitude>2){
 			iTween.ColorTo(gameObject,impactColor,.3f);
 		}else{
 			iTween.ColorTo(gameObject,stableColor,.3f);

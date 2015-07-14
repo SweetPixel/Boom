@@ -33,6 +33,15 @@ public class StartGame : MonoBehaviour {
 	float[] Yaxis = { 2.3f , 1.7f, 1.15f, 0.75f};
 	float[] Xaxis = { 5.1f , 11.3f };
 
+	//Start variable.
+	public GameObject startCanvas;
+	private bool canvasIsActive = false;
+
+	public GameObject GameComponent;
+
+	//PlayHand variable;
+	private bool isPlayHand = false;
+
 	// Use this for initialization
 	void Start () {
 
@@ -40,9 +49,14 @@ public class StartGame : MonoBehaviour {
 		counter = 0;
 		//Time.timeScale = 0;
 
+		startLevel ();
+
+		//GameComponent.transform.position = new Vector2 (6.24f, GameComponent.transform.position.y);
 
 		hunterMovement = hunter.GetComponent<HunterMovement> ();
 		collider = gameObject.GetComponent<BoxCollider2D> ();
+
+		startCanvas.SetActive (true);
 
 		GameObject go = GameObject.Find ("GameOver(Clone)");
 		if (go == null) {
@@ -53,13 +67,13 @@ public class StartGame : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButton (0) && secondTouch) {
-						hunterMovement.letStart ();
-						//Destroy(gameObject);
+		/*if (Input.GetMouseButton (0) && secondTouch) {
+			hunterMovement.letStart ();
+			startLevel();
 						gameObject.transform.position = new Vector2 (11f, 11f);
 						render.sprite = start;
 			StartCoroutine(waitTime(gameObject));	
-				}
+				} */
 
 
 
@@ -67,8 +81,9 @@ public class StartGame : MonoBehaviour {
 
 	IEnumerator waitTime(GameObject gobject)
 	{
+		//startCanvas.SetActive (false);
 		yield return new WaitForSeconds(1f);
-		gobject.collider2D.name = "RestartButton";
+		//gobject.GetComponent<Collider2D>().name = "RestartButton";
 	}
 
 	void OnMouseDown()
@@ -81,13 +96,31 @@ public class StartGame : MonoBehaviour {
 	void OnMouseUp()
 	{
 
-		if (gameObject.collider2D.name == "StartButton") {
+		if (gameObject.GetComponent<Collider2D>().name == "PlayHand" && isPlayHand) {
 						startLevel ();
-			gameObject.collider2D.name = "Taptostart";
+
+			if(startCanvas.activeSelf && canvasIsActive)
+			{
+				print("StartCanvas is active");
+			}
+			else{
+				//print("StartCanvas is not active");
+				gameObject.GetComponent<Collider2D>().name = "Taptostart";
+				//startCanvas.SetActive (false);
+				
+				hunterMovement.letStart ();
+				startLevel();
+				gameObject.transform.position = new Vector2 (11f, 11f);
+				render.sprite = start;
+				StartCoroutine(waitTime(gameObject));	
+			}
 
 				}
-		else if (gameObject.collider2D.name == "RestartButton") {
+		/*else if (gameObject.GetComponent<Collider2D>().name == "RestartButton") {
 			//startLevel ();
+
+			GameComponent.transform.position = new Vector2 (6.24f, GameComponent.transform.position.y);
+
 			gameObject.transform.position = new Vector2 (11f, 11f);
 			GameObject hunt = GameObject.Find("Object");
 			if(hunt == null)
@@ -97,14 +130,13 @@ public class StartGame : MonoBehaviour {
 			Destroy(hunt);
 			Destroy(GameObject.Find ("GameOver(Clone)"));
 			GameObject h = (GameObject)Instantiate(hunterPrefab, new Vector3(8.15f, -2.15f, 0.02769041f), Quaternion.identity);
-			gameObject.collider2D.name = "StartButton";
+			gameObject.GetComponent<Collider2D>().name = "StartButton";
 
 			HunterMovement hRestart = h.GetComponent<HunterMovement> ();
 			hRestart.letStart();
 
 			GameObject[] birds = GameObject.FindGameObjectsWithTag("Bird2D");
-			Debug.Log("Total birds: " + birds.Length);
-
+			StartCoroutine(InitiateEnemy());
 			if(birds.Length == 2)
 			{
 				firstWave = true;
@@ -114,26 +146,19 @@ public class StartGame : MonoBehaviour {
 				firstWave = true;
 				StartCoroutine(InitiateBird (2));
 			}
+		}*/
 
-		}
 	}
 
 	public void startLevel()
 	{
 		if (counter == 0) {
-			gameObject.transform.localScale = new Vector2 (0.7f, 0.7f);
-			
-			//GameObject clone =(GameObject) Instantiate (levelLabel, levelLabel.transform.position, Quaternion.identity);
-			//clone.transform.position= new Vector2(10f,10f);
-			//clone.renderer.enabled=false;
-			//sclone.renderer.enabled=true;
-			//StartCoroutine(wait());
-
-			render.sprite = tap;
-			render.enabled = false;
+			//gameObject.transform.localScale = new Vector2 (0.7f, 0.7f);
+			//render.sprite = tap;
+			//render.enabled = false;
 			enableObject();
 			counter++;
-			StartCoroutine(InitiateEnemy());
+			//StartCoroutine(InitiateEnemy());
 		}
 	}
 
@@ -141,12 +166,40 @@ public class StartGame : MonoBehaviour {
 	{
 		render.enabled = true;
 		StartCoroutine(InitiateBird (3));
-		secondTouch = true;
+	}
+
+	public void setSecondTouch()
+	{
+		secondTouch = false;
+		canvasIsActive = true;
+		//hunterMovement.hiddenObjects ();
+	}
+
+	public void deactiveCanvas()
+	{
+		canvasIsActive = false;
+		//hunterMovement.hiddenObjects ();
+	}
+
+	public void activatePlayMode()
+	{
+		isPlayHand = true;
+		GameComponent.transform.position = new Vector2 (6.35f, GameComponent.transform.position.y);
+	}
+
+	public void initBird(int length)
+	{
+		firstWave = true;
+		StartCoroutine(InitiateBird (length));
+	}
+
+	public void initEmenyBird()
+	{
+		//StartCoroutine(InitiateEnemy());
 	}
 
 	IEnumerator InitiateBird(int length)
 	{
-		//yield return new WaitForSeconds(1.5f);
 		int prevY = 0;
 
 		while(firstWave)
@@ -181,14 +234,8 @@ public class StartGame : MonoBehaviour {
 		}
 	}
 
-	//public void initiateBird()
-	//{
-	//	Instantiate (bird, new Vector2 (5.1f, 2.958249f), Quaternion.identity);
-	//}
-
 	IEnumerator InitiateEnemy()
 	{
-		//yield return new WaitForSeconds(1.5f);
 		while(true)
 		{
 			for (int i=0;i<1;i++) 

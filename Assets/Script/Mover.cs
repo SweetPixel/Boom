@@ -17,6 +17,7 @@ public class Mover : MonoBehaviour {
 
 	private GameObject hunter;
 	private HunterMovement hm;
+	public GameObject explosion;
 
 	Animator anim;
 	float count = 0;
@@ -24,7 +25,7 @@ public class Mover : MonoBehaviour {
 	IEnumerator Start () {
 		//rigidbody.velocity = transform.right * 2;
 
-		hunter = GameObject.Find ("Object");
+		hunter = GameObject.FindGameObjectWithTag("Player");
 		hm = hunter.GetComponent<HunterMovement> ();
 
 		anim = GetComponent<Animator> ();
@@ -53,9 +54,9 @@ public class Mover : MonoBehaviour {
 	void Update () {
 		count += Time.deltaTime;
 
-		if (count > 1f && isHit) {
-			rigidbody2D.velocity = Vector2.up * -5;
-				}
+	/*	if (count > 1f && isHit) {
+			GetComponent<Rigidbody2D>().velocity = Vector2.up * -5;
+				} */
 	}
 
 	IEnumerator MoveObject (Transform thisTransform, Vector2 startPos, Vector2 endPos, float time) {
@@ -85,8 +86,6 @@ public class Mover : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		Debug.Log (col.gameObject.name);
-
 		if(col.gameObject.name == "Bird2D(Clone)") {
 			return;
 		}
@@ -99,7 +98,7 @@ public class Mover : MonoBehaviour {
 			return;
 		}
 		
-		if (col.gameObject.name == "Bullets(Clone)") {
+		if (col.gameObject.tag == "Bullet") {
 			Destroy(col.gameObject);
 			//Destroy (gameObject);
 			isHit = true;
@@ -117,9 +116,17 @@ public class Mover : MonoBehaviour {
 	private void BirdHit()
 	{
 		isHit = true;
-		anim.SetBool ("isHit", true);
+		//anim.SetBool ("isHit", true);
+
+		GameObject hunter = GameObject.FindGameObjectWithTag ("Player");
+		HunterMovement hm = hunter.GetComponent<HunterMovement> ();
+
+		hm.lost ();
+
+		Instantiate(explosion, new Vector3(explosion.transform.position.x, explosion.transform.position.y, explosion.transform.position.z), Quaternion.identity);
+
 		//rigidbody.velocity = Vector2.up * -2;
-		count = 0;
+		//count = 0;
 	}
 
 	void Flip()
