@@ -94,13 +94,16 @@ public class GameOverScript : MonoBehaviour {
 
 		hunter = GameObject.FindGameObjectWithTag ("Player");
 		hm = hunter.GetComponent<HunterMovement> ();
-		int Hs = PlayerPrefs.GetInt ("HighScore");
+		//int Hs = PlayerPrefs.GetInt ("HighScore");
 
 		calculateAccuracy ();
 		calculateKills ();
 		calculateTotalCoins ();
 		calculateMatchScore ();
 
+		GameObject h = GameObject.FindGameObjectWithTag ("Player");
+		HunterMovement hRestart = h.GetComponent<HunterMovement> ();
+		hRestart.setScoreToZero ();
 	}
 
 	private void calculateAccuracy()
@@ -123,7 +126,7 @@ public class GameOverScript : MonoBehaviour {
 		} else {
 			int ten = Mathf.FloorToInt(percentage/10f);
 			int unit = Mathf.FloorToInt(percentage%10f);
-			
+
 			Acc_digitTenRenderer.sprite = scoreSprite [ten];
 			Acc_digitUnitRenderer.enabled = true;
 			Acc_digitUnitRenderer.sprite = scoreSprite [unit];

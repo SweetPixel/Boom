@@ -84,6 +84,7 @@ public class BirdMovement : MonoBehaviour {
 			yield return StartCoroutine(MoveObject(transform, new Vector2(transform.position.x, transform.position.y), new Vector2(x1, y1), birdSpeed)); //3.692791f
 
 		}
+
 	}
 	
 	IEnumerator MoveObject (Transform thisTransform, Vector2 startPos, Vector2 endPos, float time) {
@@ -156,6 +157,7 @@ public class BirdMovement : MonoBehaviour {
 			isLive = false;
 			birdLife = 0;
 			hm.initiateCoin();
+			hm.setScore(1);
 			hm.incrementBirdCount();
 			//BirdHit ();
 			Destroy(gameObject);

@@ -53,16 +53,12 @@ public class StartGame : MonoBehaviour {
 
 		//GameComponent.transform.position = new Vector2 (6.24f, GameComponent.transform.position.y);
 
+		hunter = GameObject.FindGameObjectWithTag ("Player");
 		hunterMovement = hunter.GetComponent<HunterMovement> ();
 		collider = gameObject.GetComponent<BoxCollider2D> ();
 
+		startCanvas = GameObject.Find ("StartCanvas");
 		startCanvas.SetActive (true);
-
-		GameObject go = GameObject.Find ("GameOver(Clone)");
-		if (go == null) {
-			Destroy(go);
-				}
-
 	}
 	
 	// Update is called once per frame
@@ -105,7 +101,7 @@ public class StartGame : MonoBehaviour {
 			}
 			else{
 				//print("StartCanvas is not active");
-				gameObject.GetComponent<Collider2D>().name = "Taptostart";
+				//gameObject.GetComponent<Collider2D>().name = "Taptostart";
 				//startCanvas.SetActive (false);
 				
 				hunterMovement.letStart ();

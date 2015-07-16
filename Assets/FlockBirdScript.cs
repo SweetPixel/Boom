@@ -44,7 +44,7 @@ public class FlockBirdScript : MonoBehaviour {
 			GameObject co = (GameObject)Instantiate(coin, new Vector3(gameObject.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
 			//co.GetComponent<Rigidbody2D>().velocity = Vector2.up * -2;
 			isLive = false;
-			hm.setScore();
+			hm.setScore(1);
 			//hm.incrementBirdCount();
 			//BirdHit ();
 			Destroy(gameObject);

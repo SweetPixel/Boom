@@ -27,6 +27,7 @@ public class SandhilCraneScript : MonoBehaviour {
 			y1 = Random.Range(0.8f, 2.6f);
 			yield return StartCoroutine(MoveObject(transform, new Vector2(10.8f,y1), new Vector2(5.1f, y1), birdSpeed));
 				}
+
 	}
 	
 	IEnumerator MoveObject (Transform thisTransform, Vector2 startPos, Vector2 endPos, float time) {
@@ -64,7 +65,7 @@ public class SandhilCraneScript : MonoBehaviour {
 			//hm.incrementBirdCount();
 			//BirdHit ();
 			hm.initiateCoin();
-			hm.initiateCoin();
+			hm.setScore (2);
 			hm.incrementBirdCount();
 			Destroy(gameObject);
 			Destroy (col.gameObject);

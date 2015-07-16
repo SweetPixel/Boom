@@ -18,6 +18,7 @@ public class Mover : MonoBehaviour {
 	private GameObject hunter;
 	private HunterMovement hm;
 	public GameObject explosion;
+	public GameObject gameOver;
 
 	Animator anim;
 	float count = 0;
@@ -124,6 +125,8 @@ public class Mover : MonoBehaviour {
 		hm.lost ();
 
 		Instantiate(explosion, new Vector3(explosion.transform.position.x, explosion.transform.position.y, explosion.transform.position.z), Quaternion.identity);
+
+		GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (8.029126f, 1.784778f), Quaternion.identity);
 
 		//rigidbody.velocity = Vector2.up * -2;
 		//count = 0;

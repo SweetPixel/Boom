@@ -149,6 +149,8 @@ public class ButtonClickScript : MonoBehaviour {
 		else if(birds.Length == 1){
 			sg.initBird(2);
 		}
+
+
 	}
 
 	public void activateCanvas()

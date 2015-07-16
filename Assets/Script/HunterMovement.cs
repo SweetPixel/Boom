@@ -78,11 +78,11 @@ public class HunterMovement : MonoBehaviour {
 	*/
 	private int score = 0;
 	public Sprite[] scoreSprite;
-	public GameObject ScoreObject;
+	public GameObject ScoreUnit;
 	SpriteRenderer scoreRenderer;
-	public GameObject ScoreObjectTwo;
+	public GameObject ScoreTen;
 	SpriteRenderer scoreRendererTwo;
-	public GameObject ScoreObjectThree;
+	public GameObject ScoreHundred;
 	SpriteRenderer scoreRendererThree;
 	private int scoreCounter = 0;
 
@@ -124,8 +124,8 @@ public class HunterMovement : MonoBehaviour {
 	public GameObject hummingBird;
 
 	private float timeLeft = 0f; 
-	public float totalTime= 3f;
-	private bool isCombo = false;
+	public float totalTime= 2f;
+	private bool isCombo;
 
 	IEnumerator Start () {
 		/* Bullet Renderers */
@@ -135,6 +135,12 @@ public class HunterMovement : MonoBehaviour {
 
 		coinObject.SetActive (true);
 		bulletObject.SetActive (true);*/
+
+		isCombo = false;
+		score = 0;
+		birdCount = 0;
+		timeLeft = 0f; 
+		totalTime= 2f;
 
 		bulletIcon = GameObject.Find ("BulletIcon");
 		bulletIconRender = bulletIcon.GetComponent<SpriteRenderer>();
@@ -180,7 +186,7 @@ public class HunterMovement : MonoBehaviour {
 		bulletOneRender.sprite = scoreSprite [0];
 
 		bulletTwoRender = bulletTwo.GetComponent<SpriteRenderer> ();
-		bulletTwoRender.sprite = scoreSprite [1];
+		bulletTwoRender.sprite = scoreSprite [5];
 		bulletTwoRender.enabled = true;
 
 		/* End of Bullet Renderer */
@@ -192,18 +198,18 @@ public class HunterMovement : MonoBehaviour {
 		hunterSpriteRenderer = gameObject.GetComponent<SpriteRenderer> ();
 
 		/* Score Sprites */
-		ScoreObject = GameObject.Find ("ScoreSprite");
-		ScoreObjectTwo = GameObject.Find ("ScoreSpriteTwo");
-		ScoreObjectThree = GameObject.Find ("ScoreSpriteThree");
+		ScoreUnit = GameObject.Find ("ScoreSprite");
+		ScoreTen = GameObject.Find ("ScoreSpriteTwo");
+		ScoreHundred = GameObject.Find ("ScoreSpriteThree");
 
-		scoreRenderer = ScoreObject.GetComponent<SpriteRenderer> ();
+		scoreRenderer = ScoreUnit.GetComponent<SpriteRenderer> ();
 		scoreRenderer.sprite = scoreSprite [score];
 
-		scoreRendererTwo = ScoreObjectTwo.GetComponent<SpriteRenderer> ();
-		scoreRendererTwo.enabled = false;
+		scoreRendererTwo = ScoreTen.GetComponent<SpriteRenderer> ();
+		scoreRendererTwo.sprite = scoreSprite [score];
 
-		scoreRendererThree = ScoreObjectThree.GetComponent<SpriteRenderer> ();
-		scoreRendererThree.enabled = false;
+		scoreRendererThree = ScoreHundred.GetComponent<SpriteRenderer> ();
+		scoreRendererThree.sprite = scoreSprite [score];
 
 		/* Bullets Available */
 		roundAvailable = true;
@@ -233,6 +239,7 @@ public class HunterMovement : MonoBehaviour {
 			if(isRestart)
 			yield return new WaitForSeconds(2);
 			Application.LoadLevel ("MainScene");
+
 				}
 	}
 
@@ -243,8 +250,8 @@ public class HunterMovement : MonoBehaviour {
 			i += Time.deltaTime * rate;
 			if(roundAvailable == false)
 			{
-				isRestart = true;
-				restartInitiate = 0;
+				//isRestart = true;
+				//restartInitiate = 0;
 				break;
 			}
 			thisTransform.position = Vector3.Lerp(startPos, endPos, i);
@@ -257,13 +264,13 @@ public class HunterMovement : MonoBehaviour {
 		restartInitiate += Time.deltaTime;
 		if (isRestart && restartInitiate > 3.2) {
 
-			DestroyAllComponents();
+			//DestroyAllComponents();
 			GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (8.029126f, 1.784778f), Quaternion.identity);
 
 			isRestart = false;
 
 			//Application.LoadLevel("SecondLevelInfinite");
-				}
+				} 
 
 		if (birdCount == 5) {
 			int index = Random.Range(0,2);
@@ -273,6 +280,16 @@ public class HunterMovement : MonoBehaviour {
 
 		if (isCombo) {
 				timeLeft -= Time.deltaTime;
+				}
+
+		if (isCombo && timeLeft <= 0 && comboValue >=2) {
+			timeLeft = totalTime;
+			isCombo = false;
+			isEagleVisible = false;
+			birdCount = 0;
+			coinIconRender.sprite = coinNormalIcon;
+			setScore (comboValue);
+			comboValue = 0;
 				}
 
 		if (birdCount == 3 && isEagleVisible) {
@@ -291,27 +308,25 @@ public class HunterMovement : MonoBehaviour {
 	{
 		birdCount = 0;
 		coinIconRender.sprite = coinNormalIcon;
-		for(int i = 0; i < comboValue; i++)
-		{
-			setScore();
-		}
+		setScore (comboValue);
+		comboValue = 0;
 	}
 
 	public void incrementBirdCount()
 	{
 		birdCount += 1;
+		coinIconRender.sprite = coinNormalIcon;
 		isCombo = true;
-		Debug.Log (timeLeft);
 		if (timeLeft < 0) {
 			timeLeft = totalTime;
 			isCombo = false;
 			isEagleVisible = false;
 			birdCount = 0;
 			coinIconRender.sprite = coinNormalIcon;
-			for(int i = 0; i < comboValue; i++)
+			/*for(int i = 0; i < comboValue; i++)
 			{
-				setScore();
-			}
+				score ++;
+			} */
 			comboValue = 0;
 		} else {
 			//timeLeft = totalTime;
@@ -335,9 +350,11 @@ public class HunterMovement : MonoBehaviour {
 				coinIconRender.sprite = combo5;
 				comboValue = 5;
 			}
+			else{
+				coinIconRender.sprite = coinNormalIcon;
+			}
 			isEagleVisible = true;
 		}
-
 	}
 
 	void OnCollisionEnter2D(Collision2D col)
@@ -355,11 +372,6 @@ public class HunterMovement : MonoBehaviour {
 
 	public void DestroyAllComponents()
 	{
-		/*
-		 * Kill the main bird.
-		 */
-		GameObject b = GameObject.Find ("Bird2D(Clone)");
-		Destroy (b);
 
 		/* 
 		 * Kill all the enemies.
@@ -387,7 +399,6 @@ public class HunterMovement : MonoBehaviour {
 	public void initiateCoin()
 	{
 		birdKilled++;
-		setScore ();
 	}
 
 	private void initiatePelican()
@@ -410,16 +421,27 @@ public class HunterMovement : MonoBehaviour {
 	/*
 	 * Set score and initiate the birds with respect to the level.
 	 */
-	public void setScore()
+
+	public void setScoreToZero ()
 	{
-		score ++;
+		score = 0;
+	}
+
+	public void setScore(int value)
+	{
+		score += value;
+		Debug.Log (score);
+
+		if (value == 0) {
+			return;
+				}
 
 		if (score <= 5) {
-						scoreRenderer.sprite = scoreSprite [score];
+			scoreRendererThree.sprite = scoreSprite [score];
 						initiatePelican ();
 				}
 		else if (score >=6 && score < 10) {
-			scoreRenderer.sprite = scoreSprite [score];
+			scoreRendererThree.sprite = scoreSprite [score];
 			GameObject tucan = GameObject.FindGameObjectWithTag("BirdEnemy2D");
 			if(tucan != null)
 			{
@@ -430,8 +452,8 @@ public class HunterMovement : MonoBehaviour {
 			}
 		} else if (score == 10){
 			bulletCounter--;
-			scoreRenderer.sprite = scoreSprite [1];
-			scoreRendererTwo.enabled = true;
+			scoreRendererThree.sprite = scoreSprite [0];
+			scoreRendererTwo.sprite = scoreSprite [1];
 				GameObject tucan = GameObject.FindGameObjectWithTag("BirdEnemy2D");
 				if(tucan != null)
 				{
@@ -442,8 +464,14 @@ public class HunterMovement : MonoBehaviour {
 				}
 		}
 		else if(score > 10 && score < 20){
-			scoreCounter++;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			if(value > 1)
+			{
+				scoreCounter+=value;
+			}
+			else{
+				scoreCounter++;
+			}
+			scoreRendererThree.sprite = scoreSprite [scoreCounter];
 
 				GameObject shc = GameObject.FindGameObjectWithTag("SandhillCrane");
 				if(shc != null)
@@ -452,7 +480,6 @@ public class HunterMovement : MonoBehaviour {
 					
 					if(tucan != null)
 					{
-						initiatePelican();
 						initiatePelican();
 					}
 					else{
@@ -466,11 +493,10 @@ public class HunterMovement : MonoBehaviour {
 		}
 		else if(score == 20){
 			bulletCounter--;
-			//setMisses();
 			scoreCounter = 2;
-			scoreRenderer.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			scoreCounter = 0;
+			scoreRendererThree.sprite = scoreSprite [scoreCounter];
 
 				GameObject shc = GameObject.FindGameObjectWithTag("SandhillCrane");
 				if(shc != null)
@@ -479,7 +505,6 @@ public class HunterMovement : MonoBehaviour {
 					
 					if(tucan != null)
 					{
-						initiatePelican();
 						initiatePelican();
 					}
 					else{
@@ -493,7 +518,7 @@ public class HunterMovement : MonoBehaviour {
 		}
 		else if(score > 20 && score < 30){
 			scoreCounter++;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			scoreRendererThree.sprite = scoreSprite [scoreCounter];
 
 				GameObject shc = GameObject.FindGameObjectWithTag("SandhillCrane");
 				if(shc != null)
@@ -503,7 +528,6 @@ public class HunterMovement : MonoBehaviour {
 					if(x == 1)
 					{
 						initiatePelican();
-						initiatePelican();	
 					}
 					else{
 						if(tucan.Length < 2)
@@ -520,9 +544,9 @@ public class HunterMovement : MonoBehaviour {
 		else if(score == 30){
 			//setMisses();
 			scoreCounter = 3;
-			scoreRenderer.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			scoreCounter = 0;
+			scoreRendererThree.sprite = scoreSprite [scoreCounter];
 
 				GameObject shc = GameObject.FindGameObjectWithTag("SandhillCrane");
 				if(shc != null)
@@ -531,7 +555,6 @@ public class HunterMovement : MonoBehaviour {
 					int x = Random.Range(0,2);
 					if(x == 1)
 					{
-						initiatePelican();
 						initiatePelican();
 					}
 					else{
@@ -548,7 +571,7 @@ public class HunterMovement : MonoBehaviour {
 		}
 		else if(score > 30 && score < 40){
 			scoreCounter++;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			scoreRendererThree.sprite = scoreSprite [scoreCounter];
 			GameObject hb = GameObject.FindGameObjectWithTag("HummingBird");
 			if(hb != null)
 			{
@@ -559,7 +582,6 @@ public class HunterMovement : MonoBehaviour {
 					int x = Random.Range(0,2);
 					if(x == 1)
 					{
-						initiatePelican();
 						initiatePelican();
 					}
 					else{
@@ -579,9 +601,9 @@ public class HunterMovement : MonoBehaviour {
 		}
 		else if(score == 40){
 			scoreCounter = 4;
-			scoreRenderer.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			scoreCounter = 0;
+			scoreRendererThree.sprite = scoreSprite [scoreCounter];
 			GameObject hb = GameObject.FindGameObjectWithTag("HummingBird");
 			if(hb != null)
 			{
@@ -592,7 +614,6 @@ public class HunterMovement : MonoBehaviour {
 					int x = Random.Range(0,2);
 					if(x == 1)
 					{
-						initiatePelican();
 						initiatePelican();
 					}
 					else{
@@ -612,7 +633,7 @@ public class HunterMovement : MonoBehaviour {
 		}
 		else if(score > 40 && score < 50){
 			scoreCounter++;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			scoreRendererThree.sprite = scoreSprite [scoreCounter];
 
 			GameObject hb = GameObject.FindGameObjectWithTag("HummingBird");
 			if(hb != null)
@@ -625,7 +646,6 @@ public class HunterMovement : MonoBehaviour {
 					int x = Random.Range(0,2);
 					if(x == 1)
 					{
-						initiatePelican();
 						initiatePelican();
 					}
 					else{
@@ -649,62 +669,62 @@ public class HunterMovement : MonoBehaviour {
 		}
 		else if(score == 50){
 			scoreCounter = 5;
-			scoreRenderer.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			scoreCounter = 0;
+			scoreRendererThree.sprite = scoreSprite [scoreCounter];
 			fiftyOnwards();
 		}
 		else if(score > 50 && score < 60){
 			scoreCounter++;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			scoreRendererThree.sprite = scoreSprite [scoreCounter];
 			fiftyOnwards();
 		}
 		else if(score == 60){
 			scoreCounter = 6;
-			scoreRenderer.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			scoreCounter = 0;
+			scoreRendererThree.sprite = scoreSprite [scoreCounter];
 			fiftyOnwards();
 		}
 		else if(score > 60 && score < 70){
 			scoreCounter++;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			scoreRendererThree.sprite = scoreSprite [scoreCounter];
 			fiftyOnwards();
 		}
 		else if(score == 70){
 			scoreCounter = 7;
-			scoreRenderer.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			scoreCounter = 0;
+			scoreRendererThree.sprite = scoreSprite [scoreCounter];
 			fiftyOnwards();
 		}
 		else if(score > 70 && score < 80){
 			scoreCounter++;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			scoreRendererThree.sprite = scoreSprite [scoreCounter];
 			fiftyOnwards();
 		}
 		else if(score == 80){
 			scoreCounter = 8;
-			scoreRenderer.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			scoreCounter = 0;
+			scoreRendererThree.sprite = scoreSprite [scoreCounter];
 			fiftyOnwards();
 		}
 		else if(score > 80 && score < 90){
 			scoreCounter++;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			scoreRendererThree.sprite = scoreSprite [scoreCounter];
 			fiftyOnwards();
 		}
 		else if(score == 90){
 			scoreCounter = 9;
-			scoreRenderer.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			scoreCounter = 0;
+			scoreRendererThree.sprite = scoreSprite [scoreCounter];
 			fiftyOnwards();
 		}
 		else if(score > 90 && score < 100){
 			scoreCounter++;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
+			scoreRendererThree.sprite = scoreSprite [scoreCounter];
 			fiftyOnwards();
 		}
 		else if(score == 100){
@@ -712,7 +732,6 @@ public class HunterMovement : MonoBehaviour {
 			scoreRenderer.sprite = scoreSprite [scoreCounter];
 			scoreCounter = 0;
 			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreRendererThree.enabled = true;
 			scoreRendererThree.sprite = scoreSprite [scoreCounter];
 			fiftyOnwards();
 		}
@@ -745,7 +764,6 @@ public class HunterMovement : MonoBehaviour {
 				int x = Random.Range(0,2);
 				if(x == 1)
 				{
-					initiatePelican();
 					initiatePelican();
 				}
 				else{
@@ -862,9 +880,7 @@ public class HunterMovement : MonoBehaviour {
 
 	public void addCoin()
 	{
-		for (int i=0; i<5; i++) {
-			setScore();
-				}
+		setScore (5);
 	}
 
 	void bulletSpriteSetter()
@@ -946,11 +962,11 @@ public class HunterMovement : MonoBehaviour {
 		sc = sc + score;
 		PlayerPrefs.SetInt ("Score", sc);
 		PlayerPrefs.SetInt ("MatchScore", score);
-		if (PlayerPrefs.GetInt ("Score") > PlayerPrefs.GetInt ("HighScore"))
-			PlayerPrefs.SetInt ("HighScore", score);
+		/*if (PlayerPrefs.GetInt ("Score") > PlayerPrefs.GetInt ("HighScore"))
+			PlayerPrefs.SetInt ("HighScore", score); */
 		roundAvailable = false;
-		gameObject.transform.position = new Vector2(transform.position.x, -1.98f);
-		hunterAnime.SetBool("isLost", true);
+		//gameObject.transform.position = new Vector2(transform.position.x, -1.98f);
+		//hunterAnime.SetBool("isLost", true);
 	} 
 
 	public void letStart()
@@ -959,11 +975,5 @@ public class HunterMovement : MonoBehaviour {
 		//coinObject.SetActive (false);
 		//bulletObject.SetActive (false);
 	}
-
-	/*public void hiddenObjects()
-	{
-		coinObject.SetActive (false);
-		bulletObject.SetActive (false);
-	}*/
 
 }

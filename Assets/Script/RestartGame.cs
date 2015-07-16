@@ -10,7 +10,7 @@ public class RestartGame : MonoBehaviour {
 
 	public GameObject hunter;
 	HunterMovement hunterMovement;
-
+	public GameObject playHandPrefab;
 	
 	bool firstWave = true;
 	
@@ -20,8 +20,8 @@ public class RestartGame : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		hunterMovement = hunter.GetComponent<HunterMovement> ();
-		hunterMovement.letStart();
+		/*hunterMovement = hunter.GetComponent<HunterMovement> ();
+		hunterMovement.letStart();*/
 	}
 	
 	// Update is called once per frame
@@ -32,34 +32,54 @@ public class RestartGame : MonoBehaviour {
 	void OnMouseUp()
 	{
 		//GameComponent.transform.position = new Vector2 (6.24f, GameComponent.transform.position.y);
-		
+
+		GameObject explosion = GameObject.FindGameObjectWithTag ("BomberBirdExplosion");
+		Destroy (explosion);
+
 		//gameObject.transform.position = new Vector2 (11f, 11f);
-		GameObject hunt = GameObject.Find("Object");
-		if(hunt == null)
-		{
-			hunt = GameObject.Find ("Object(Clone)");
-		}
+		GameObject hunt = GameObject.FindGameObjectWithTag("Player");
 		Destroy(hunt);
+
 		Destroy(GameObject.Find ("GameOver(Clone)"));
 		GameObject h = (GameObject)Instantiate(hunter, new Vector3(8.15f, -2.15f, 0.02769041f), Quaternion.identity);
 		//gameObject.GetComponent<Collider2D>().name = "StartButton";
 		
 		HunterMovement hRestart = h.GetComponent<HunterMovement> ();
 		hRestart.letStart();
-		
-		GameObject[] birds = GameObject.FindGameObjectsWithTag("Bird2D");
+		//hRestart.setScoreToZero ();
 
-		GameObject playhand = GameObject.Find("PlayHand");
+		GameObject shc = GameObject.FindGameObjectWithTag("SandhillCrane");
+		if (shc != null) {
+			Destroy (shc);
+				}
+
+		GameObject[] be = GameObject.FindGameObjectsWithTag("Bird2D");
+		for (int i=0; i < be.Length; i++) {
+			Destroy(be[i]);
+				}
+
+		GameObject[] birds = GameObject.FindGameObjectsWithTag("BirdEnemy2D");
+		for (int i=0; i < birds.Length; i++) {
+			Destroy(birds[i]);
+		}
+
+		GameObject playhand = GameObject.FindGameObjectWithTag("PlayHand");
+		//Destroy (playhand);
+
+		//GameObject ph = (GameObject)Instantiate(playHandPrefab, new Vector3(11f, 11f, 0.02769041f), Quaternion.identity);
 		StartGame sg = playhand.GetComponent<StartGame>();
-		
-		sg.initEmenyBird();
+		sg.initBird (3);
+
+		/*sg.initEmenyBird();
 		if(birds.Length == 2)
 		{
 			sg.initBird(1);
 		}
 		else if(birds.Length == 1){
 			sg.initBird(2);
-		}
+		}*/
+
+
 	}
 
 }
