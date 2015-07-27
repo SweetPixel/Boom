@@ -126,6 +126,9 @@ public class HunterMovement : MonoBehaviour {
 	private float timeLeft = 0f; 
 	public float totalTime= 2f;
 	private bool isCombo;
+	private int gunIndex = 0;
+	private bool initFlamingo = false;
+	public GameObject sniperTracker;
 
 	IEnumerator Start () {
 		/* Bullet Renderers */
@@ -145,49 +148,84 @@ public class HunterMovement : MonoBehaviour {
 		bulletIcon = GameObject.Find ("BulletIcon");
 		bulletIconRender = bulletIcon.GetComponent<SpriteRenderer>();
 		anim = GetComponent<Animator> ();
-		
-		int gunIndex = PlayerPrefs.GetInt ("gunIndex");
-		if (gunIndex == 0 || gunIndex == 1) {
-			anim.SetInteger("gunIndex", 1);
-			bulletpointVariable = bulletSpawn;
-			bullet = bulletNormal;
-			bulletIconRender.sprite = bulletIcon_rifle;
-		}
-		else if (gunIndex == 2) {
-			anim.SetInteger("gunIndex", 2);
-			bulletpointVariable = bulletSpawn_ak47;
-			bullet = bulletSmg;
-			bulletIconRender.sprite = bulletIcon_smg;
-		}
-		else if (gunIndex == 3) {
-			anim.SetInteger("gunIndex", 3);
-			bulletpointVariable = bulletSpawn_shotgun;
-			bullet = bulletShotgun;
-			bulletIconRender.sprite = bulletIcon_shotgun;
-		}
-		else if (gunIndex == 4) {
-			anim.SetInteger("gunIndex", 4);
-			bulletpointVariable = bulletSpawn_sniper;
-			bullet = bulletNormal;
-			bulletIconRender.sprite = bulletIcon_sniper;
-		}
-		animshoot=bulletpointVariable.GetComponent<Animator>();
-
-		coinIcon = GameObject.Find("CoinIcon");
-		coinIconRender = coinIcon.GetComponent<SpriteRenderer>();
 
 		b = 50;
 		bulletCounter = 9;
-
+		
 		bulletOne = GameObject.Find ("BulletSprite");
 		bulletTwo = GameObject.Find ("BulletSpriteTwo");
 
 		bulletOneRender = bulletOne.GetComponent<SpriteRenderer> ();
 		bulletOneRender.sprite = scoreSprite [0];
-
+		
 		bulletTwoRender = bulletTwo.GetComponent<SpriteRenderer> ();
 		bulletTwoRender.sprite = scoreSprite [5];
 		bulletTwoRender.enabled = true;
+
+		sniperTracker = GameObject.FindGameObjectWithTag ("SniperTracker");
+
+		int gunIndex = PlayerPrefs.GetInt ("gunIndex");
+		if (gunIndex == 0 || gunIndex == 1) {
+			anim.SetInteger("gunIndex", 1);
+			gunIndex = 1;
+			bulletpointVariable = bulletSpawn;
+			bullet = bulletNormal;
+			bulletIconRender.sprite = bulletIcon_rifle;
+			//sniperTracker.SetActive (false);
+			sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
+
+			b = 12;
+			bulletCounter = 2;
+			bulletOneRender.sprite = scoreSprite [2];
+			bulletTwoRender.sprite = scoreSprite [1];
+		}
+		else if (gunIndex == 2) {
+			anim.SetInteger("gunIndex", 2);
+			gunIndex = 2;
+			bulletpointVariable = bulletSpawn_ak47;
+			bullet = bulletSmg;
+			bulletIconRender.sprite = bulletIcon_smg;
+			//sniperTracker.SetActive (false);
+			sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
+
+			b = 24;
+			bulletCounter = 4;
+			bulletOneRender.sprite = scoreSprite [4];
+			bulletTwoRender.sprite = scoreSprite [2];
+
+		}
+		else if (gunIndex == 3) {
+			anim.SetInteger("gunIndex", 3);
+			gunIndex = 3;
+			bulletpointVariable = bulletSpawn_shotgun;
+			bullet = bulletShotgun;
+			bulletIconRender.sprite = bulletIcon_shotgun;
+			//sniperTracker.SetActive (false);
+			sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
+
+			b = 12;
+			bulletCounter = 2;
+			bulletOneRender.sprite = scoreSprite [2];
+			bulletTwoRender.sprite = scoreSprite [1];
+		}
+		else if (gunIndex == 4) {
+			anim.SetInteger("gunIndex", 4);
+			gunIndex = 4;
+			bulletpointVariable = bulletSpawn_sniper;
+			bullet = bulletNormal;
+			bulletIconRender.sprite = bulletIcon_sniper;
+			//sniperTracker.SetActive (true);
+			sniperTracker.GetComponent<SpriteRenderer>().enabled = true;
+
+			b = 12;
+			bulletCounter = 2;
+			bulletOneRender.sprite = scoreSprite [2];
+			bulletTwoRender.sprite = scoreSprite [1];
+		}
+		animshoot=bulletpointVariable.GetComponent<Animator>();
+
+		coinIcon = GameObject.Find("CoinIcon");
+		coinIconRender = coinIcon.GetComponent<SpriteRenderer>();
 
 		/* End of Bullet Renderer */
 
@@ -261,6 +299,27 @@ public class HunterMovement : MonoBehaviour {
 
 	void Update () {
 
+		if(gunIndex == 1)
+		{
+			//sniperTracker.SetActive (false);
+			sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
+		}
+		else if(gunIndex == 2)
+		{
+			//sniperTracker.SetActive (false);
+			sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
+		}
+		else if(gunIndex == 3)
+		{
+			//sniperTracker.SetActive (false);
+			sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
+		}
+		else if(gunIndex == 4)
+		{
+			//sniperTracker.SetActive (true);
+			sniperTracker.GetComponent<SpriteRenderer>().enabled = true;
+		}
+
 		restartInitiate += Time.deltaTime;
 		if (isRestart && restartInitiate > 3.2) {
 
@@ -272,10 +331,11 @@ public class HunterMovement : MonoBehaviour {
 			//Application.LoadLevel("SecondLevelInfinite");
 				} 
 
-		if (birdCount == 5) {
+		if (initFlamingo == true) {
 			int index = Random.Range(0,2);
 			Instantiate (specialBird[0], new Vector2 (5.27f, 2.824509f), Quaternion.identity);
 			birdCount = 0;
+			initFlamingo = false;
 				}
 
 		if (isCombo) {
@@ -399,6 +459,9 @@ public class HunterMovement : MonoBehaviour {
 	public void initiateCoin()
 	{
 		birdKilled++;
+		if (birdKilled % 5 == 0) {
+			initFlamingo = true;
+				}
 	}
 
 	private void initiatePelican()
@@ -435,6 +498,8 @@ public class HunterMovement : MonoBehaviour {
 		if (value == 0) {
 			return;
 				}
+
+
 
 		if (score <= 5) {
 			scoreRendererThree.sprite = scoreSprite [score];
@@ -868,14 +933,38 @@ public class HunterMovement : MonoBehaviour {
 
 	public void addAmmo()
 	{
-		bulletOneRender = bulletOne.GetComponent<SpriteRenderer> ();
-		bulletOneRender.sprite = scoreSprite [0];
-		
-		bulletTwoRender = bulletTwo.GetComponent<SpriteRenderer> ();
-		bulletTwoRender.sprite = scoreSprite [5];
-		bulletTwoRender.enabled = true;
-		b = 50;
-		bulletCounter = 9;
+		if(gunIndex == 1)
+		{
+			bulletOneRender.sprite = scoreSprite [2];
+			bulletTwoRender.sprite = scoreSprite [1];
+			bulletTwoRender.enabled = true;
+			b = 12;
+			bulletCounter = 2;
+		}
+		else if(gunIndex == 2)
+		{
+			bulletOneRender.sprite = scoreSprite [4];
+			bulletTwoRender.sprite = scoreSprite [2];
+			bulletTwoRender.enabled = true;
+			b = 24;
+			bulletCounter = 4;
+		}
+		else if(gunIndex == 3)
+		{
+			bulletOneRender.sprite = scoreSprite [2];
+			bulletTwoRender.sprite = scoreSprite [1];
+			bulletTwoRender.enabled = true;
+			b = 12;
+			bulletCounter = 2;
+		}
+		else if(gunIndex == 4)
+		{
+			bulletOneRender.sprite = scoreSprite [2];
+			bulletTwoRender.sprite = scoreSprite [1];
+			bulletTwoRender.enabled = true;
+			b = 12;
+			bulletCounter = 2;
+		}
 	}
 
 	public void addCoin()
@@ -965,8 +1054,10 @@ public class HunterMovement : MonoBehaviour {
 		/*if (PlayerPrefs.GetInt ("Score") > PlayerPrefs.GetInt ("HighScore"))
 			PlayerPrefs.SetInt ("HighScore", score); */
 		roundAvailable = false;
-		//gameObject.transform.position = new Vector2(transform.position.x, -1.98f);
-		//hunterAnime.SetBool("isLost", true);
+		GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (8.029126f, 1.784778f), Quaternion.identity);
+
+		gameObject.transform.position = new Vector2(transform.position.x, -1.98f);
+		anim.SetBool("isLost", true);
 	} 
 
 	public void letStart()

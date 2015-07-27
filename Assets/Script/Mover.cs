@@ -126,7 +126,11 @@ public class Mover : MonoBehaviour {
 
 		Instantiate(explosion, new Vector3(explosion.transform.position.x, explosion.transform.position.y, explosion.transform.position.z), Quaternion.identity);
 
-		GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (8.029126f, 1.784778f), Quaternion.identity);
+		GameObject gover = GameObject.FindGameObjectWithTag ("GameOver");
+
+		if (gover == null) {
+			GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (8.029126f, 1.784778f), Quaternion.identity);
+				}
 
 		//rigidbody.velocity = Vector2.up * -2;
 		//count = 0;
