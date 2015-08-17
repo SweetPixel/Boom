@@ -235,7 +235,9 @@ public class GameController : MonoBehaviour {
 			isEagleVisible = false;
 			birdCount = 0;
 			setScore (score * comboValue);
-			Instantiate (goldenSpark, new Vector2 (coinIcon.transform.position.x, coinIcon.transform.position.y), Quaternion.identity);
+			if(comboValue > 1){
+				Instantiate (goldenSpark, new Vector2 (coinIcon.transform.position.x, coinIcon.transform.position.y), Quaternion.identity);
+			}
 			StartCoroutine (coinBeat());
 			comboValue = 0;
 			GameObject cc = GameObject.FindGameObjectWithTag("ComboComponents");
@@ -243,6 +245,14 @@ public class GameController : MonoBehaviour {
 			{
 				Destroy(cc);
 			}
+			if(b == 0)
+			{
+				GameObject hunter = GameObject.FindGameObjectWithTag("Player");
+				HunterMovement hm = hunter.GetComponent<HunterMovement>();
+				hm.lost ();
+				GameOver();
+			}
+
 		}
 		
 		if (birdCount == 3 && isEagleVisible) {
@@ -689,12 +699,12 @@ public class GameController : MonoBehaviour {
 		setScore (score * comboValue);
 		comboValue = 0;
 		
-		/*if (b == 0) {
+		if (b == 0) {
 			GameObject hunter = GameObject.FindGameObjectWithTag("Player");
 			HunterMovement hm = hunter.GetComponent<HunterMovement>();
 			hm.lost ();
-			StartCoroutine(gameOVerWithWait());
-		} */
+			GameOver();
+		}
 	}
 
 	public void addCoin()

@@ -5,10 +5,7 @@ using System.Collections;
 public class GameOverScript : MonoBehaviour {
 
 	public Sprite[] scoreSprite;
-	//public Sprite score;
-	//public Sprite scoreTwo;
-	//public Sprite best;
-	//public Sprite bestTwo;
+	public GameObject pauseSmallCanvas;
 
 	//Accuracy variables for gameobject and renderer
 	public Image Acc_digitTen;
@@ -68,6 +65,9 @@ public class GameOverScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		pauseSmallCanvas = GameObject.FindGameObjectWithTag("pauseSmallCanvas");
+		pauseSmallCanvas.SetActive (false);
 
 		GameObject.FindGameObjectWithTag("ButtonCountDown").GetComponent<Animator>().SetBool("isEnd", true);
 		GameObject.FindGameObjectWithTag("CoinObject").GetComponent<Animator>().SetBool("isEnd", true);

@@ -5,6 +5,12 @@ public class GiftViewScript : MonoBehaviour {
 
 	public float TotalTime = 3;
 	private float timeLeft = 0;
+	private GameObject gc;
+
+	void Awake()
+	{
+		gc = GameObject.FindGameObjectWithTag ("GameController");
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +22,7 @@ public class GiftViewScript : MonoBehaviour {
 		timeLeft -= Time.deltaTime;
 
 		if (timeLeft <= 0) {
+			gc.GetComponent<ButtonClickScript>().GameOverVisibility(true);
 			Destroy(gameObject);
 				}
 

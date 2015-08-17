@@ -27,6 +27,7 @@ public class ButtonClickScript : MonoBehaviour {
 	public Image timerIcon;
 	public Image minute;
 	int val = 0;
+	private GameObject gameover;
 
 	// Use this for initialization
 	void Start () {
@@ -47,7 +48,7 @@ public class ButtonClickScript : MonoBehaviour {
 			timeLeft -= Time.deltaTime;
 		}
 
-		if (timeLeft <= 0) {
+		/*if (timeLeft <= 0) {
 			showCanvas = false;
 			//gift.SetActive(false);
 			Destroy(gtemp);
@@ -63,7 +64,7 @@ public class ButtonClickScript : MonoBehaviour {
 			sc = sc + val;
 			PlayerPrefs.SetInt ("Score", sc);
 			//Destroy(gameObject);
-		}
+		}*/
 
 	}
 
@@ -115,7 +116,10 @@ public class ButtonClickScript : MonoBehaviour {
 		}
 
 		if (buttonName == "GiftButton") {
-			showCanvas = true;
+
+			gameover = GameObject.FindGameObjectWithTag("GameOver");
+
+			//showCanvas = true;
 			gtemp = (GameObject)Instantiate (gift, new Vector2 (gift.transform.position.x, gift.transform.position.y), Quaternion.identity);
 			gtemp.SetActive(true);
 
@@ -166,6 +170,7 @@ public class ButtonClickScript : MonoBehaviour {
 
 			GameObject giftButton = GameObject.FindGameObjectWithTag ("GreenStripeButton");
 			giftButton.SetActive(false);
+			GameOverVisibility(false);
 		}
 
 		if (buttonName == "Restart") {
@@ -238,6 +243,11 @@ public class ButtonClickScript : MonoBehaviour {
 			Destroy(gc);
 				}*/
 
+	}
+
+	public void GameOverVisibility(bool x)
+	{
+		gameover.SetActive (x);
 	}
 
 	private void restartLevel()
