@@ -18,11 +18,12 @@ public class FlockMovement : MonoBehaviour {
 		randX = Random.Range (0, 2);
 
 		if (randX == 1) {
-			Flip ();
+			//Flip ();
 			yield return StartCoroutine(MoveObject(transform, new Vector2(13f,0f), new Vector2(3f, 2.85f), birdSpeed));
 			Flip ();
 			yield return StartCoroutine(MoveObject(transform, new Vector2(3f,0f), new Vector2(14f, 2.85f), birdSpeed));
 		} else {
+			Flip ();
 			yield return StartCoroutine(MoveObject(transform, new Vector2(3f,0f), new Vector2(12f, 2.85f), birdSpeed));
 			Flip ();
 			yield return StartCoroutine(MoveObject(transform, new Vector2(13f,0f), new Vector2(1f, 3f), birdSpeed));

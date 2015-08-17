@@ -21,7 +21,10 @@ public class HummingBirdScript : MonoBehaviour {
 	
 	private GameObject hunter;
 	private HunterMovement hm;
-	
+
+	private GameObject gameController;
+	private GameController gc;
+
 	private GameObject treeLeft;
 	
 	float birdLife = 0;
@@ -29,6 +32,8 @@ public class HummingBirdScript : MonoBehaviour {
 	
 	//public GameObject coinObject;
 	public GameObject coin;
+	private bool hunterIdle = false;
+	private float[] pos = { 10.6f , 5.3f };
 	
 	IEnumerator Start () {
 		//Flip ();
@@ -54,7 +59,12 @@ public class HummingBirdScript : MonoBehaviour {
 		while (!isHit) {
 			x1 = Random.Range(6.4f, 9.8f);
 			y1 = Random.Range(0.8f, 2.6f);
-
+			if(hunterIdle)
+			{
+				int index = Random.Range(0,2);
+				x1 = pos[index];
+				birdSpeed = 0.75f;
+			}
 			yield return StartCoroutine(MoveObject(transform, new Vector2(transform.position.x, transform.position.y), new Vector2(x1, y1), birdSpeed)); //3.692791f
 			
 		}
@@ -95,8 +105,18 @@ public class HummingBirdScript : MonoBehaviour {
 			isLive = true;
 			birdLife = 0;
 		}
+
+		if (transform.position.x == 10.6f || transform.position.x == 5.3f) {
+			Destroy(gameObject);
+		}
+
 	}
-	
+
+	public void setHunterIdle()
+	{
+		hunterIdle = true;
+	}
+
 	void Flip()
 	{
 		gameObject.transform.Rotate (0,180,0);
@@ -114,17 +134,19 @@ public class HummingBirdScript : MonoBehaviour {
 		}
 		
 		if (col.gameObject.tag == "Bullet") {
+			Destroy (col.gameObject);
 			gameObject.GetComponent<Collider2D>().enabled = false;
 			GameObject co = (GameObject)Instantiate(coin, new Vector3(gameObject.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
 			//co.GetComponent<Rigidbody2D>().velocity = Vector2.up * -2;
 			isLive = false;
 			birdLife = 0;
-			hm.initiateCoin();
-			hm.initiateCoin();
-			hm.initiateCoin();
-			hm.incrementBirdCount();
+			gameController = GameObject.FindGameObjectWithTag ("GameController");
+			gc = gameController.GetComponent<GameController> ();
+
+			gc.increaseBirdKiled();
+			gc.setScore (3);
+			gc.incrementBirdCount();
 			Destroy(gameObject);
-			Destroy (col.gameObject);
 		} 
 		
 		

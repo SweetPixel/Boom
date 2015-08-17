@@ -7,6 +7,8 @@ public class SpecialBirdCoinMovement : MonoBehaviour {
 	public GameObject coin;
 	public GameObject coinCollector;
 	float radius = 5f;
+	private GameObject gameController;
+	private GameController gc;
 
 	// Use this for initialization
 	void Start () {
@@ -15,6 +17,10 @@ public class SpecialBirdCoinMovement : MonoBehaviour {
 			hunter = GameObject.Find ("Object(Clone)");
 		}
 		hm = hunter.GetComponent<HunterMovement> ();
+
+		gameController = GameObject.FindGameObjectWithTag ("GameController");
+		gc = gameController.GetComponent<GameController> ();
+
 	}
 	
 	// Update is called once per frame
@@ -45,7 +51,7 @@ public class SpecialBirdCoinMovement : MonoBehaviour {
 			//co.transform.position = Vector2.MoveTowards(co.transform.position, coinCollector.transform.position, 50f * Time.deltaTime);
 
 			Destroy(col.gameObject);
-			hm.addCoin();
+			gc.addCoin();
 			Destroy(gameObject);
 		}
 	}

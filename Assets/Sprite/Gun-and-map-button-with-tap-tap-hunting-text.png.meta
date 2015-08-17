@@ -1,12 +1,14 @@
 fileFormatVersion: 2
 guid: 3040ebd73abd4254e8814e88af716863
-timeCreated: 1434525997
+timeCreated: 1439360440
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Gun-button
     21300002: map-button
-    21300004: Title
+    21300004: hunting
+    21300006: tap1
+    21300008: tap2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -72,13 +74,33 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Title
+    - name: hunting
       rect:
         serializedVersion: 2
-        x: 1652
+        x: 1655
         y: 265
-        width: 443
-        height: 221
+        width: 440
+        height: 94
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: tap1
+      rect:
+        serializedVersion: 2
+        x: 1651
+        y: 392
+        width: 198
+        height: 94
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: tap2
+      rect:
+        serializedVersion: 2
+        x: 1900
+        y: 392
+        width: 198
+        height: 95
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

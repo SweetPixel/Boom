@@ -1,5 +1,5 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameOverScript : MonoBehaviour {
@@ -11,52 +11,86 @@ public class GameOverScript : MonoBehaviour {
 	//public Sprite bestTwo;
 
 	//Accuracy variables for gameobject and renderer
-	public GameObject Acc_digitTen;
-	public GameObject Acc_digitUnit;
-	SpriteRenderer Acc_digitTenRenderer;
-	SpriteRenderer Acc_digitUnitRenderer;
+	public Image Acc_digitTen;
+	public Image Acc_digitUnit;
+	/*SpriteRenderer Acc_digitTenRenderer;
+	SpriteRenderer Acc_digitUnitRenderer; */
 
 	//Total Coin variables for gameobject and renderer
-	public GameObject coinOne;
-	public GameObject coinTwo;
-	public GameObject coinThree;
-	public GameObject coinFour;
-	public GameObject coinFive;
+	public Image coinOne;
+	public Image coinTwo;
+	public Image coinThree;
+	public Image coinFour;
+	public Image coinFive;
 	//public GameObject coinSix;
 	//public GameObject coinSeven;
-	SpriteRenderer coinOneRender;
+	/*SpriteRenderer coinOneRender;
 	SpriteRenderer coinTwoRender;
 	SpriteRenderer coinThreeRender;
 	SpriteRenderer coinFourRender;
-	SpriteRenderer coinFiveRender;
+	SpriteRenderer coinFiveRender;*/
 	//SpriteRenderer coinSixRender;
 	//SpriteRenderer coinSevenRender;
 
 	//Kill variables for gameobject and renderer
-	public GameObject kill_digitTen;
-	public GameObject kill_digitUnit;
-	SpriteRenderer kill_digitTenRenderer;
-	SpriteRenderer kill_digitUnitRenderer;
+	public Image kill_digitTen;
+	public Image kill_digitUnit;
+	/*SpriteRenderer kill_digitTenRenderer;
+	SpriteRenderer kill_digitUnitRenderer;*/
 
 	//Match Score
-	public GameObject msUnit;
-	public GameObject msTen;
-	public GameObject msHundred;
-	public GameObject msThousand;
-	public GameObject msTenThousand;
-	SpriteRenderer msUnitRender;
+	public Image msUnit;
+	public Image msTen;
+	public Image msHundred;
+	public Image msThousand;
+	public Image msTenThousand;
+	/*SpriteRenderer msUnitRender;
 	SpriteRenderer msTenRender;
 	SpriteRenderer msHundredRender;
 	SpriteRenderer msThousandRender;
-	SpriteRenderer msTenThousandRender;
+	SpriteRenderer msTenThousandRender;*/
+
+	GameObject gameController;
+	GameController gc;
 
 	GameObject hunter;
 	HunterMovement hm;
 
+	public Image textObject;
+	public Sprite freeGiftIn;
+	public Sprite freeGift;
+	public Image timerIcon;
+	public GameObject giftButton;
+	public Image minute;
+	public Sprite[] numbers;
+
+	private int prevtime = 0;
+
 	// Use this for initialization
 	void Start () {
 
-		Acc_digitTenRenderer = Acc_digitTen.GetComponent<SpriteRenderer> ();
+		GameObject.FindGameObjectWithTag("ButtonCountDown").GetComponent<Animator>().SetBool("isEnd", true);
+		GameObject.FindGameObjectWithTag("CoinObject").GetComponent<Animator>().SetBool("isEnd", true);
+		GameObject.FindGameObjectWithTag("ButtonCountDown").GetComponent<Animator>().SetBool("isStart", false);
+		GameObject.FindGameObjectWithTag("CoinObject").GetComponent<Animator>().SetBool("isStart", false);
+
+		gameController = GameObject.FindGameObjectWithTag ("GameController");
+		gc = gameController.GetComponent<GameController> ();
+		bool status = gc.getGiftTimer ();
+		if (status) {
+			giftButton.SetActive(false);
+			timerIcon.enabled = true;
+			textObject.sprite = freeGiftIn;
+			int timerLeft = int.Parse(gc.giftTimerLeft ());
+			prevtime = timerLeft;
+			minute.sprite = numbers [timerLeft];
+		} else {
+			timerIcon.enabled = false;
+			giftButton.SetActive(true);
+			textObject.sprite = freeGift;
+		}
+
+		/*Acc_digitTenRenderer = Acc_digitTen.GetComponent<SpriteRenderer> ();
 		Acc_digitTenRenderer.sprite = scoreSprite [0];
 		Acc_digitUnitRenderer = Acc_digitUnit.GetComponent<SpriteRenderer> ();
 		Acc_digitUnitRenderer.enabled = false;
@@ -75,13 +109,13 @@ public class GameOverScript : MonoBehaviour {
 		coinFourRender = coinFour.GetComponent<SpriteRenderer> ();
 		coinFourRender.sprite = scoreSprite [0];
 		coinFiveRender = coinFive.GetComponent<SpriteRenderer> ();
-		coinFiveRender.sprite = scoreSprite [0];
+		coinFiveRender.sprite = scoreSprite [0];*/
 		/*coinSixRender = coinSix.GetComponent<SpriteRenderer> ();
 		coinSixRender.sprite = scoreSprite [0];
 		coinSevenRender = coinSeven.GetComponent<SpriteRenderer> ();
 		coinSevenRender.sprite = scoreSprite [0];*/
 
-		msUnitRender = msUnit.GetComponent<SpriteRenderer> ();
+		/*msUnitRender = msUnit.GetComponent<SpriteRenderer> ();
 		msUnitRender.sprite = scoreSprite [0];
 		msTenRender = msTen.GetComponent<SpriteRenderer> ();
 		msTenRender.sprite = scoreSprite [0];
@@ -90,10 +124,10 @@ public class GameOverScript : MonoBehaviour {
 		msThousandRender = msThousand.GetComponent<SpriteRenderer> ();
 		msThousandRender.sprite = scoreSprite [0];
 		msTenThousandRender = msTenThousand.GetComponent<SpriteRenderer> ();
-		msTenThousandRender.sprite = scoreSprite [0];
+		msTenThousandRender.sprite = scoreSprite [0];*/
 
-		hunter = GameObject.FindGameObjectWithTag ("Player");
-		hm = hunter.GetComponent<HunterMovement> ();
+		gameController = GameObject.FindGameObjectWithTag ("GameController");
+		gc = gameController.GetComponent<GameController> ();
 		//int Hs = PlayerPrefs.GetInt ("HighScore");
 
 		calculateAccuracy ();
@@ -101,16 +135,16 @@ public class GameOverScript : MonoBehaviour {
 		calculateTotalCoins ();
 		calculateMatchScore ();
 
-		GameObject h = GameObject.FindGameObjectWithTag ("Player");
-		HunterMovement hRestart = h.GetComponent<HunterMovement> ();
-		hRestart.setScoreToZero ();
+		hunter = GameObject.FindGameObjectWithTag ("Player");
+		hm = hunter.GetComponent<HunterMovement> ();
+		//gc.setScoreToZero ();
 	}
 
 	private void calculateAccuracy()
 	{
 		//Accuracy
-		int birdCount = hm.getBirdKilled (); //(float)matchscore;
-		int shotFired = hm.getFireShotNumber ();
+		int birdCount = gc.getBirdKilled (); //(float)matchscore;
+		int shotFired = gc.getFireShotNumber (); //hm.getFireShotNumber ();
 		float percentage = (float) birdCount / shotFired * 100;
 
 		Debug.Log ("BirdCount: " + birdCount);
@@ -118,40 +152,40 @@ public class GameOverScript : MonoBehaviour {
 		Debug.Log ("Percentage: " + percentage);
 
 		if (percentage < 1) {
-			Acc_digitTenRenderer.sprite = scoreSprite [0];
+			Acc_digitTen.sprite = scoreSprite [0];
 		}
 		else if (percentage > 1 && percentage < 10) {
 			int percent = (int)percentage;
-			Acc_digitTenRenderer.sprite = scoreSprite [percent];
-		} else {
+			Acc_digitTen.sprite = scoreSprite [percent];
+		} else if(percentage < 100) {
 			int ten = Mathf.FloorToInt(percentage/10f);
 			int unit = Mathf.FloorToInt(percentage%10f);
 
-			Acc_digitTenRenderer.sprite = scoreSprite [ten];
-			Acc_digitUnitRenderer.enabled = true;
-			Acc_digitUnitRenderer.sprite = scoreSprite [unit];
+			Acc_digitTen.sprite = scoreSprite [ten];
+			Acc_digitUnit.enabled = true;
+			Acc_digitUnit.sprite = scoreSprite [unit];
 		}
 	}
 
 	private void calculateKills()
 	{
 		//Accuracy
-		int birdCount = hm.getBirdKilled (); //(float)matchscore;
+		int birdCount = gc.getBirdKilled (); //(float)matchscore;
 		
 		if (birdCount < 1) {
-			kill_digitTenRenderer.sprite = scoreSprite [0];
+			kill_digitTen.sprite = scoreSprite [0];
 		}
 		else if (birdCount > 1 && birdCount < 10) {
-			kill_digitTenRenderer.sprite = scoreSprite [birdCount];
+			kill_digitTen.sprite = scoreSprite [birdCount];
 		} else {
 			int ten = Mathf.FloorToInt(birdCount/10f);
 			int unit = Mathf.FloorToInt(birdCount%10f);
 			
-			kill_digitTenRenderer.sprite = scoreSprite [ten];
-			kill_digitUnitRenderer.enabled = true;
-			kill_digitUnitRenderer.sprite = scoreSprite [unit];
+			kill_digitTen.sprite = scoreSprite [ten];
+			kill_digitUnit.enabled = true;
+			kill_digitUnit.sprite = scoreSprite [unit];
 		}
-	}
+	} 
 
 	private void calculateTotalCoins()
 	{
@@ -161,16 +195,16 @@ public class GameOverScript : MonoBehaviour {
 
 		//Total Coin Logic
 		if (sc < 1) {
-			coinOneRender.sprite = scoreSprite [0];
+			coinOne.sprite = scoreSprite [0];
 		}
 		else if (sc < 10) {
-			coinOneRender.sprite = scoreSprite [sc];
+			coinOne.sprite = scoreSprite [sc];
 		} else if (sc >= 10 && sc <= 99) {
 			int ten = Mathf.FloorToInt(sc/10f);
 			int unit = Mathf.FloorToInt(sc%10f);
 			
-			coinTwoRender.sprite = scoreSprite [ten];
-			coinOneRender.sprite = scoreSprite [unit];
+			coinTwo.sprite = scoreSprite [ten];
+			coinOne.sprite = scoreSprite [unit];
 		}
 		else if (sc >= 100 && sc <= 999) {
 			int hund = Mathf.FloorToInt(sc/100f);
@@ -180,9 +214,9 @@ public class GameOverScript : MonoBehaviour {
 			int ten = Mathf.FloorToInt(temp/10f);
 			int unit = Mathf.FloorToInt(temp%10f);
 			
-			coinThreeRender.sprite = scoreSprite [hund];
-			coinTwoRender.sprite = scoreSprite [ten];
-			coinOneRender.sprite = scoreSprite [unit];
+			coinThree.sprite = scoreSprite [hund];
+			coinTwo.sprite = scoreSprite [ten];
+			coinOne.sprite = scoreSprite [unit];
 		}
 		else if (sc >= 1000 && sc <= 9999) {
 			
@@ -195,10 +229,10 @@ public class GameOverScript : MonoBehaviour {
 			int ten = Mathf.FloorToInt(tempHun/10f);
 			int unit = Mathf.FloorToInt(tempHun%10f);
 			
-			coinFourRender.sprite = scoreSprite [thousand];
-			coinThreeRender.sprite = scoreSprite [hund];
-			coinTwoRender.sprite = scoreSprite [ten];
-			coinOneRender.sprite = scoreSprite [unit];
+			coinFour.sprite = scoreSprite [thousand];
+			coinThree.sprite = scoreSprite [hund];
+			coinTwo.sprite = scoreSprite [ten];
+			coinOne.sprite = scoreSprite [unit];
 		}
 		
 		else if (sc >= 10000 && sc <= 99999) {
@@ -215,11 +249,11 @@ public class GameOverScript : MonoBehaviour {
 			int ten = Mathf.FloorToInt(tempHun/10f);
 			int unit = Mathf.FloorToInt(tempHun%10f);
 			
-			coinFiveRender.sprite = scoreSprite [Tenthousand];
-			coinFourRender.sprite = scoreSprite [thousand];
-			coinThreeRender.sprite = scoreSprite [hund];
-			coinTwoRender.sprite = scoreSprite [ten];
-			coinOneRender.sprite = scoreSprite [unit];
+			coinFive.sprite = scoreSprite [Tenthousand];
+			coinFour.sprite = scoreSprite [thousand];
+			coinThree.sprite = scoreSprite [hund];
+			coinTwo.sprite = scoreSprite [ten];
+			coinOne.sprite = scoreSprite [unit];
 		}
 	}
 
@@ -227,20 +261,20 @@ public class GameOverScript : MonoBehaviour {
 	{
 		//Current match score
 		int matchscore = PlayerPrefs.GetInt ("MatchScore");
+		Debug.Log ("Match Score: " + matchscore);
 
 		if (matchscore < 1) {
-			Debug.Log ("Match Score: " + matchscore);
-			msUnitRender.sprite = scoreSprite [0];
+			msUnit.sprite = scoreSprite [0];
 		}
 		else if (matchscore > 1 && matchscore < 10) {
 			Debug.Log ("Match Score: " + matchscore);
-			msUnitRender.sprite = scoreSprite [matchscore];
+			msUnit.sprite = scoreSprite [matchscore];
 		} else if (matchscore >= 10 && matchscore <= 99) {
 			int ten = Mathf.FloorToInt(matchscore/10f);
 			int unit = Mathf.FloorToInt(matchscore%10f);
 			
-			msTenRender.sprite = scoreSprite [ten];
-			msUnitRender.sprite = scoreSprite [unit];
+			msTen.sprite = scoreSprite [ten];
+			msUnit.sprite = scoreSprite [unit];
 		}
 		else if (matchscore >= 100 && matchscore <= 999) {
 			int hund = Mathf.FloorToInt(matchscore/100f);
@@ -250,9 +284,9 @@ public class GameOverScript : MonoBehaviour {
 			int ten = Mathf.FloorToInt(temp/10f);
 			int unit = Mathf.FloorToInt(temp%10f);
 			
-			msHundredRender.sprite = scoreSprite [hund];
-			msTenRender.sprite = scoreSprite [ten];
-			msUnitRender.sprite = scoreSprite [unit];
+			msHundred.sprite = scoreSprite [hund];
+			msTen.sprite = scoreSprite [ten];
+			msUnit.sprite = scoreSprite [unit];
 		}
 		else if (matchscore >= 1000 && matchscore <= 9999) {
 			
@@ -265,10 +299,10 @@ public class GameOverScript : MonoBehaviour {
 			int ten = Mathf.FloorToInt(tempHun/10f);
 			int unit = Mathf.FloorToInt(tempHun%10f);
 			
-			msThousandRender.sprite = scoreSprite [thousand];
-			msHundredRender.sprite = scoreSprite [hund];
-			msTenRender.sprite = scoreSprite [ten];
-			msUnitRender.sprite = scoreSprite [unit];
+			msThousand.sprite = scoreSprite [thousand];
+			msHundred.sprite = scoreSprite [hund];
+			msTen.sprite = scoreSprite [ten];
+			msUnit.sprite = scoreSprite [unit];
 		}
 		
 		else if (matchscore >= 10000 && matchscore <= 99999) {
@@ -285,17 +319,21 @@ public class GameOverScript : MonoBehaviour {
 			int ten = Mathf.FloorToInt(tempHun/10f);
 			int unit = Mathf.FloorToInt(tempHun%10f);
 			
-			msTenThousandRender.sprite = scoreSprite [Tenthousand];
-			msThousandRender.sprite = scoreSprite [thousand];
-			msHundredRender.sprite = scoreSprite [hund];
-			msTenRender.sprite = scoreSprite [ten];
-			msUnitRender.sprite = scoreSprite [unit];
+			msTenThousand.sprite = scoreSprite [Tenthousand];
+			msThousand.sprite = scoreSprite [thousand];
+			msHundred.sprite = scoreSprite [hund];
+			msTen.sprite = scoreSprite [ten];
+			msUnit.sprite = scoreSprite [unit];
 		}
 
 	}
 
 	// Update is called once per frame
 	void Update () {
-	
+		int timerLeft = int.Parse(gc.giftTimerLeft ());
+		if (prevtime != timerLeft) {
+			prevtime = timerLeft;
+			minute.sprite = numbers [timerLeft];
+		}
 	}
 }

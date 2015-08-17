@@ -91,7 +91,6 @@ public class StartGame : MonoBehaviour {
 
 	void OnMouseUp()
 	{
-
 		if (gameObject.GetComponent<Collider2D>().name == "PlayHand" && isPlayHand) {
 						startLevel ();
 
@@ -103,7 +102,9 @@ public class StartGame : MonoBehaviour {
 				//print("StartCanvas is not active");
 				//gameObject.GetComponent<Collider2D>().name = "Taptostart";
 				//startCanvas.SetActive (false);
-				
+
+				hunter = GameObject.FindGameObjectWithTag ("Player");
+				hunterMovement = hunter.GetComponent<HunterMovement> ();
 				hunterMovement.letStart ();
 				startLevel();
 				gameObject.transform.position = new Vector2 (11f, 11f);
@@ -180,7 +181,7 @@ public class StartGame : MonoBehaviour {
 	public void activatePlayMode()
 	{
 		isPlayHand = true;
-		GameComponent.transform.position = new Vector2 (6.35f, GameComponent.transform.position.y);
+		//GameComponent.transform.position = new Vector2 (6.35f, GameComponent.transform.position.y);
 	}
 
 	public void initBird(int length)

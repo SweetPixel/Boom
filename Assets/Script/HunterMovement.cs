@@ -15,29 +15,12 @@ public class HunterMovement : MonoBehaviour {
 	public GameObject bulletSpawn_shotgun;
 	public GameObject bulletSpawn_ak47;
 
-	private GameObject bullet;
+	public GameObject bullet;
 	public GameObject bulletNormal;
 	public GameObject bulletSmg;
-	public GameObject bulletShotgun;
-
-	private GameObject bulletIcon;
-	private SpriteRenderer bulletIconRender;
-	public Sprite bulletIcon_smg;
-	public Sprite bulletIcon_shotgun;
-	public Sprite bulletIcon_sniper;
-	public Sprite bulletIcon_rifle;
+	public GameObject bulletSniper;
 
 	/* End of Bullet Sprite and variables */
-
-	/* Coin Icon Combo Sprite and Variables */
-	private GameObject coinIcon;
-	private SpriteRenderer coinIconRender;
-	public Sprite combo2;
-	public Sprite combo3;
-	public Sprite combo4;
-	public Sprite combo5;
-	public Sprite coinNormalIcon;
-	private int comboValue = 0;
 
 	/* End of Coin Icon Combo Sprite and Variables */
 
@@ -71,20 +54,9 @@ public class HunterMovement : MonoBehaviour {
 
 	private float restartInitiate;
 
-	public GameObject bird;
 
-	/*
-	 *  Score Variables
-	*/
-	private int score = 0;
+
 	public Sprite[] scoreSprite;
-	public GameObject ScoreUnit;
-	SpriteRenderer scoreRenderer;
-	public GameObject ScoreTen;
-	SpriteRenderer scoreRendererTwo;
-	public GameObject ScoreHundred;
-	SpriteRenderer scoreRendererThree;
-	private int scoreCounter = 0;
 
 	public GUIText timeObject;
 
@@ -96,39 +68,27 @@ public class HunterMovement : MonoBehaviour {
 	// Start Button
 	private GameObject startButton;
 
-	/* Bullet Variables */
-	private int b = 10;
-	private int bulletCounter = 9;
-	public GameObject bulletOne;
-	public GameObject bulletTwo;
-	private SpriteRenderer bulletOneRender;
-	private SpriteRenderer bulletTwoRender;
-
-	/* Bird initiation points */
-	float[] Yaxis = { 2.3f , 1.7f, 1.15f, 0.75f};
-	float[] Xaxis = { 5.1f , 11.3f };
 	public float nextFire;
 	private bool startFiring = false;
-	private int fireShot = 0;
 
 	//variable to keep track of number of birds killed.
-	private int birdKilled = 0;
+
 
 	//Special bird condition
-	private int birdCount = 0;
-	public GameObject[] specialBird;
-	public GameObject eagle;
-	private bool isEagleVisible = false;
-	public GameObject birdEnemy;
-	public GameObject sandHillCrane;
-	public GameObject hummingBird;
 
-	private float timeLeft = 0f; 
-	public float totalTime= 2f;
-	private bool isCombo;
+	public GameObject[] specialBird;
+
+	private GameObject gamecontroller;
+	private GameController gc;
+
+
 	private int gunIndex = 0;
-	private bool initFlamingo = false;
+
+
+	private float idleTime;
+	public GameObject glassBreak;
 	public GameObject sniperTracker;
+	public int IdleThreshold = 9;
 
 	IEnumerator Start () {
 		/* Bullet Renderers */
@@ -138,94 +98,64 @@ public class HunterMovement : MonoBehaviour {
 
 		coinObject.SetActive (true);
 		bulletObject.SetActive (true);*/
+		idleTime = 0f;
 
-		isCombo = false;
-		score = 0;
-		birdCount = 0;
-		timeLeft = 0f; 
-		totalTime= 2f;
+		gamecontroller = GameObject.FindGameObjectWithTag ("GameController");
+		gc = gamecontroller.GetComponent<GameController> ();
 
-		bulletIcon = GameObject.Find ("BulletIcon");
-		bulletIconRender = bulletIcon.GetComponent<SpriteRenderer>();
-		anim = GetComponent<Animator> ();
+		anim = gameObject.GetComponent<Animator> ();
 
-		b = 50;
-		bulletCounter = 9;
-		
-		bulletOne = GameObject.Find ("BulletSprite");
-		bulletTwo = GameObject.Find ("BulletSpriteTwo");
 
-		bulletOneRender = bulletOne.GetComponent<SpriteRenderer> ();
-		bulletOneRender.sprite = scoreSprite [0];
-		
-		bulletTwoRender = bulletTwo.GetComponent<SpriteRenderer> ();
-		bulletTwoRender.sprite = scoreSprite [5];
-		bulletTwoRender.enabled = true;
+		//sniperTracker = GameObject.FindGameObjectWithTag ("SniperTracker");
+		sniperTracker.SetActive (false);
 
-		sniperTracker = GameObject.FindGameObjectWithTag ("SniperTracker");
-
-		int gunIndex = PlayerPrefs.GetInt ("gunIndex");
+		gunIndex = PlayerPrefs.GetInt ("gunIndex");
 		if (gunIndex == 0 || gunIndex == 1) {
 			anim.SetInteger("gunIndex", 1);
 			gunIndex = 1;
 			bulletpointVariable = bulletSpawn;
-			bullet = bulletNormal;
-			bulletIconRender.sprite = bulletIcon_rifle;
-			//sniperTracker.SetActive (false);
-			sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
+			//bullet = bulletNormal;
+			//bulletIconRender.sprite = bulletIcon_rifle;
+			gc.setBulletIcon(1);
+			sniperTracker.SetActive (false);
+			//sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
 
-			b = 12;
-			bulletCounter = 2;
-			bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];
 		}
 		else if (gunIndex == 2) {
 			anim.SetInteger("gunIndex", 2);
 			gunIndex = 2;
 			bulletpointVariable = bulletSpawn_ak47;
-			bullet = bulletSmg;
-			bulletIconRender.sprite = bulletIcon_smg;
-			//sniperTracker.SetActive (false);
-			sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
+			//bullet = bulletSmg;
+			//bulletIconRender.sprite = bulletIcon_smg;
+			gc.setBulletIcon(2);
+			sniperTracker.SetActive (false);
+			//sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
 
-			b = 24;
-			bulletCounter = 4;
-			bulletOneRender.sprite = scoreSprite [4];
-			bulletTwoRender.sprite = scoreSprite [2];
 
 		}
 		else if (gunIndex == 3) {
 			anim.SetInteger("gunIndex", 3);
 			gunIndex = 3;
 			bulletpointVariable = bulletSpawn_shotgun;
-			bullet = bulletShotgun;
-			bulletIconRender.sprite = bulletIcon_shotgun;
-			//sniperTracker.SetActive (false);
-			sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
+			//bullet = bulletNormal;
+			//bulletIconRender.sprite = bulletIcon_shotgun;
+			gc.setBulletIcon(3);
+			sniperTracker.SetActive (false);
+			//sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
 
-			b = 12;
-			bulletCounter = 2;
-			bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];
 		}
 		else if (gunIndex == 4) {
 			anim.SetInteger("gunIndex", 4);
 			gunIndex = 4;
 			bulletpointVariable = bulletSpawn_sniper;
-			bullet = bulletNormal;
-			bulletIconRender.sprite = bulletIcon_sniper;
-			//sniperTracker.SetActive (true);
-			sniperTracker.GetComponent<SpriteRenderer>().enabled = true;
+			//bullet = bulletSniper;
+			//bulletIconRender.sprite = bulletIcon_sniper;
+			gc.setBulletIcon(4);
+			sniperTracker.SetActive (true);
+			//sniperTracker.GetComponent<SpriteRenderer>().enabled = true;
 
-			b = 12;
-			bulletCounter = 2;
-			bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];
 		}
 		animshoot=bulletpointVariable.GetComponent<Animator>();
-
-		coinIcon = GameObject.Find("CoinIcon");
-		coinIconRender = coinIcon.GetComponent<SpriteRenderer>();
 
 		/* End of Bullet Renderer */
 
@@ -235,20 +165,6 @@ public class HunterMovement : MonoBehaviour {
 
 		hunterSpriteRenderer = gameObject.GetComponent<SpriteRenderer> ();
 
-		/* Score Sprites */
-		ScoreUnit = GameObject.Find ("ScoreSprite");
-		ScoreTen = GameObject.Find ("ScoreSpriteTwo");
-		ScoreHundred = GameObject.Find ("ScoreSpriteThree");
-
-		scoreRenderer = ScoreUnit.GetComponent<SpriteRenderer> ();
-		scoreRenderer.sprite = scoreSprite [score];
-
-		scoreRendererTwo = ScoreTen.GetComponent<SpriteRenderer> ();
-		scoreRendererTwo.sprite = scoreSprite [score];
-
-		scoreRendererThree = ScoreHundred.GetComponent<SpriteRenderer> ();
-		scoreRendererThree.sprite = scoreSprite [score];
-
 		/* Bullets Available */
 		roundAvailable = true;
 		restartInitiate = 0;
@@ -257,18 +173,15 @@ public class HunterMovement : MonoBehaviour {
 		Flip ();
 
 		/* Start Hunter Movement from the middle */
-		yield return StartCoroutine(MoveObject(transform, new Vector3(8.15f, -2.15f, 0.02769041f), new Vector3(9.80f, -2.15f, 0.02769041f), hunterSpeed));
+		yield return StartCoroutine(MoveObject(transform, new Vector3(8.15f, -1.84f, 0.02769041f), new Vector3(9.80f, -1.84f, 0.02769041f), hunterSpeed));
 
 		Vector3 pointA = transform.position;
 		while (roundAvailable) {
-			yield return StartCoroutine(MoveObject(transform, new Vector3(9.80f, -2.15f, 0.02769041f), new Vector3(6.35f, -2.15f, 0.02769041f), hunterSpeed));
+			yield return StartCoroutine(MoveObject(transform, new Vector3(9.80f, -1.84f, 0.02769041f), new Vector3(6.35f, -1.84f, 0.02769041f), hunterSpeed));
 			isRight = true;
-			yield return StartCoroutine(MoveObject(transform, new Vector3(6.35f, -2.15f, 0.02769041f), new Vector3(9.80f, -2.15f, 0.02769041f), hunterSpeed));
+			yield return StartCoroutine(MoveObject(transform, new Vector3(6.35f, -1.84f, 0.02769041f), new Vector3(9.80f, -1.84f, 0.02769041f), hunterSpeed));
 			isRight = false;
 		}
-
-		timeLeft = totalTime;
-
 	}
 
 	IEnumerator restartLevel()
@@ -320,108 +233,84 @@ public class HunterMovement : MonoBehaviour {
 			sniperTracker.GetComponent<SpriteRenderer>().enabled = true;
 		}
 
+
 		restartInitiate += Time.deltaTime;
-		if (isRestart && restartInitiate > 3.2) {
-
-			//DestroyAllComponents();
-			GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (8.029126f, 1.784778f), Quaternion.identity);
-
+		if (isRestart && restartInitiate > 3.2) 
+		{
+			GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (gameOver.transform.position.x, gameOver.transform.position.y), Quaternion.identity);
 			isRestart = false;
+			start = false;
+		} 
 
-			//Application.LoadLevel("SecondLevelInfinite");
-				} 
+		idleTime += Time.deltaTime;
+		if (idleTime > IdleThreshold && start) 
+		{
+			start = false;
+			GameObject gOver = GameObject.FindGameObjectWithTag("GameOver");
+			if(gOver == null)
+			{
+				StartCoroutine(idleHunterAnimation());
+			}
+		}
+		
+	}
 
-		if (initFlamingo == true) {
-			int index = Random.Range(0,2);
-			Instantiate (specialBird[0], new Vector2 (5.27f, 2.824509f), Quaternion.identity);
-			birdCount = 0;
-			initFlamingo = false;
+	IEnumerator idleHunterAnimation()
+	{
+		while (true) 
+		{
+			GameObject[] birds = GameObject.FindGameObjectsWithTag("Bird2D");
+			foreach(GameObject b in birds)
+			{
+				BirdMovement bm = b.GetComponent<BirdMovement>();
+				bm.setHunterIdle();
+			}
+
+			GameObject[] enemy = GameObject.FindGameObjectsWithTag("BirdEnemy2D");
+			foreach(GameObject b in enemy)
+			{
+				Mover bm = b.GetComponent<Mover>();
+				bm.setHunterIdle();
+			}
+
+			GameObject[] humming = GameObject.FindGameObjectsWithTag("HummingBird");
+			foreach(GameObject b in humming)
+			{
+				HummingBirdScript bm = b.GetComponent<HummingBirdScript>();
+				bm.setHunterIdle();
+			}
+
+			GameObject[] sandhillCrane = GameObject.FindGameObjectsWithTag("SandhillCrane");
+			if(sandhillCrane.Length > 0)
+			{
+				foreach(GameObject b in sandhillCrane)
+				{
+					SandhilCraneScript bm = b.GetComponent<SandhilCraneScript>();
+					bm.setHunterIdle();
 				}
-
-		if (isCombo) {
-				timeLeft -= Time.deltaTime;
-				}
-
-		if (isCombo && timeLeft <= 0 && comboValue >=2) {
-			timeLeft = totalTime;
-			isCombo = false;
-			isEagleVisible = false;
-			birdCount = 0;
-			coinIconRender.sprite = coinNormalIcon;
-			setScore (comboValue);
-			comboValue = 0;
-				}
-
-		if (birdCount == 3 && isEagleVisible) {
-			Instantiate (eagle, new Vector2 (5.27f, 2.824509f), Quaternion.identity);
-			isEagleVisible = false;
-			birdCount = 0;
+			}
+			yield return new WaitForSeconds (1f);
+			sniperTracker.SetActive (false);
+			roundAvailable = false;
+			anim.SetBool ("isIdle", true);
+			yield return new WaitForSeconds (2f);
+			Instantiate (glassBreak, glassBreak.transform.position, Quaternion.identity);
+			yield return new WaitForSeconds (1.5f);
+			lost ();
+			GameObject gcc = GameObject.FindGameObjectWithTag("GameController");
+			GameController gc = gcc.GetComponent<GameController>();
+			gc.GameOver();
+			break;
 		}
 	}
 
-	public void setEagleVisibility()
-	{
-		isEagleVisible = false;
-	}
 
-	public void decrementBirdCount()
-	{
-		birdCount = 0;
-		coinIconRender.sprite = coinNormalIcon;
-		setScore (comboValue);
-		comboValue = 0;
-	}
-
-	public void incrementBirdCount()
-	{
-		birdCount += 1;
-		coinIconRender.sprite = coinNormalIcon;
-		isCombo = true;
-		if (timeLeft < 0) {
-			timeLeft = totalTime;
-			isCombo = false;
-			isEagleVisible = false;
-			birdCount = 0;
-			coinIconRender.sprite = coinNormalIcon;
-			/*for(int i = 0; i < comboValue; i++)
-			{
-				score ++;
-			} */
-			comboValue = 0;
-		} else {
-			//timeLeft = totalTime;
-			if(birdCount == 2)
-			{
-				coinIconRender.sprite = combo2;
-				comboValue = 2;
-			}
-			else if(birdCount == 3)
-			{
-				coinIconRender.sprite = combo3;
-				comboValue = 3;
-			}
-			else if(birdCount == 4)
-			{
-				coinIconRender.sprite = combo4;
-				comboValue = 4;
-			}
-			else if(birdCount == 5)
-			{
-				coinIconRender.sprite = combo5;
-				comboValue = 5;
-			}
-			else{
-				coinIconRender.sprite = coinNormalIcon;
-			}
-			isEagleVisible = true;
-		}
-	}
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
 		if (col.gameObject.name == "Coin(Clone)") {
 			Destroy(col.gameObject);
-			initiateCoin();
+			//initiateCoin();
 				}
 
 		if (col.gameObject.name == "HunterColliderLeft" || col.gameObject.name == "HunterColliderRight") {
@@ -432,7 +321,6 @@ public class HunterMovement : MonoBehaviour {
 
 	public void DestroyAllComponents()
 	{
-
 		/* 
 		 * Kill all the enemies.
 		 */
@@ -451,423 +339,7 @@ public class HunterMovement : MonoBehaviour {
 		hunterAnime.SetBool("isHit", true);
 	}
 
-	public int getBirdKilled()
-	{
-		return birdKilled;
-	}
 
-	public void initiateCoin()
-	{
-		birdKilled++;
-		if (birdKilled % 5 == 0) {
-			initFlamingo = true;
-				}
-	}
-
-	private void initiatePelican()
-	{
-		int index = Random.Range(0,4);
-		float y = Yaxis[index];
-		float x = 5.1f;
-		if(index == 0 || index == 2)
-		{
-			x = Xaxis[0];
-		}
-		else if(index == 1 || index == 3)
-		{
-			x = Xaxis[1];
-		}
-		
-		Instantiate (bird, new Vector2 (x, y), Quaternion.identity);
-	}
-
-	/*
-	 * Set score and initiate the birds with respect to the level.
-	 */
-
-	public void setScoreToZero ()
-	{
-		score = 0;
-	}
-
-	public void setScore(int value)
-	{
-		score += value;
-		Debug.Log (score);
-
-		if (value == 0) {
-			return;
-				}
-
-
-
-		if (score <= 5) {
-			scoreRendererThree.sprite = scoreSprite [score];
-						initiatePelican ();
-				}
-		else if (score >=6 && score < 10) {
-			scoreRendererThree.sprite = scoreSprite [score];
-			GameObject tucan = GameObject.FindGameObjectWithTag("BirdEnemy2D");
-			if(tucan != null)
-			{
-				initiatePelican();
-			}
-			else{
-				StartCoroutine(InitiateEnemy(1));
-			}
-		} else if (score == 10){
-			bulletCounter--;
-			scoreRendererThree.sprite = scoreSprite [0];
-			scoreRendererTwo.sprite = scoreSprite [1];
-				GameObject tucan = GameObject.FindGameObjectWithTag("BirdEnemy2D");
-				if(tucan != null)
-				{
-					initiatePelican();
-				}
-				else{
-					StartCoroutine(InitiateEnemy(1));
-				}
-		}
-		else if(score > 10 && score < 20){
-			if(value > 1)
-			{
-				scoreCounter+=value;
-			}
-			else{
-				scoreCounter++;
-			}
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-
-				GameObject shc = GameObject.FindGameObjectWithTag("SandhillCrane");
-				if(shc != null)
-				{
-					GameObject tucan = GameObject.FindGameObjectWithTag("BirdEnemy2D");
-					
-					if(tucan != null)
-					{
-						initiatePelican();
-					}
-					else{
-						StartCoroutine(InitiateEnemy(1));
-					}
-				}
-				else{
-					Instantiate (sandHillCrane, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
-				}
-
-		}
-		else if(score == 20){
-			bulletCounter--;
-			scoreCounter = 2;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-
-				GameObject shc = GameObject.FindGameObjectWithTag("SandhillCrane");
-				if(shc != null)
-				{
-					GameObject tucan = GameObject.FindGameObjectWithTag("BirdEnemy2D");
-					
-					if(tucan != null)
-					{
-						initiatePelican();
-					}
-					else{
-						StartCoroutine(InitiateEnemy(1));
-					}
-				}
-				else{
-					Instantiate (sandHillCrane, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
-				}
-
-		}
-		else if(score > 20 && score < 30){
-			scoreCounter++;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-
-				GameObject shc = GameObject.FindGameObjectWithTag("SandhillCrane");
-				if(shc != null)
-				{
-					GameObject[] tucan = GameObject.FindGameObjectsWithTag("BirdEnemy2D");
-					int x = Random.Range(0,2);
-					if(x == 1)
-					{
-						initiatePelican();
-					}
-					else{
-						if(tucan.Length < 2)
-						{
-							StartCoroutine(InitiateEnemy(1));
-						}
-					}
-				}
-				else{
-					Instantiate (sandHillCrane, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
-				}
-
-		}
-		else if(score == 30){
-			//setMisses();
-			scoreCounter = 3;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-
-				GameObject shc = GameObject.FindGameObjectWithTag("SandhillCrane");
-				if(shc != null)
-				{
-					GameObject[] tucan = GameObject.FindGameObjectsWithTag("BirdEnemy2D");
-					int x = Random.Range(0,2);
-					if(x == 1)
-					{
-						initiatePelican();
-					}
-					else{
-						if(tucan.Length < 2)
-						{
-							StartCoroutine(InitiateEnemy(1));
-						}
-					}
-				}
-				else{
-					Instantiate (sandHillCrane, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
-				}
-
-		}
-		else if(score > 30 && score < 40){
-			scoreCounter++;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			GameObject hb = GameObject.FindGameObjectWithTag("HummingBird");
-			if(hb != null)
-			{
-				GameObject shc = GameObject.FindGameObjectWithTag("SandhillCrane");
-				if(shc != null)
-				{
-					GameObject[] tucan = GameObject.FindGameObjectsWithTag("BirdEnemy2D");
-					int x = Random.Range(0,2);
-					if(x == 1)
-					{
-						initiatePelican();
-					}
-					else{
-						if(tucan.Length < 2)
-						{
-							StartCoroutine(InitiateEnemy(1));
-						}
-					}
-				}
-				else{
-					Instantiate (sandHillCrane, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
-				}
-			}
-			else{
-				Instantiate (hummingBird, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
-			}
-		}
-		else if(score == 40){
-			scoreCounter = 4;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			GameObject hb = GameObject.FindGameObjectWithTag("HummingBird");
-			if(hb != null)
-			{
-				GameObject shc = GameObject.FindGameObjectWithTag("SandhillCrane");
-				if(shc != null)
-				{
-					GameObject[] tucan = GameObject.FindGameObjectsWithTag("BirdEnemy2D");
-					int x = Random.Range(0,2);
-					if(x == 1)
-					{
-						initiatePelican();
-					}
-					else{
-						if(tucan.Length < 2)
-						{
-							StartCoroutine(InitiateEnemy(1));
-						}
-					}
-				}
-				else{
-					Instantiate (sandHillCrane, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
-				}
-			}
-			else{
-				Instantiate (hummingBird, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
-			}
-		}
-		else if(score > 40 && score < 50){
-			scoreCounter++;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-
-			GameObject hb = GameObject.FindGameObjectWithTag("HummingBird");
-			if(hb != null)
-			{
-				GameObject[] shc = GameObject.FindGameObjectsWithTag("SandhillCrane");
-				int x_shc = Random.Range(0,2);
-				if(x_shc == 1)
-				{
-					GameObject[] tucan = GameObject.FindGameObjectsWithTag("BirdEnemy2D");
-					int x = Random.Range(0,2);
-					if(x == 1)
-					{
-						initiatePelican();
-					}
-					else{
-						if(tucan.Length < 2)
-						{
-							StartCoroutine(InitiateEnemy(1));
-						}
-					}
-				}
-				else{
-					if(shc.Length < 2)
-					{
-						Instantiate (sandHillCrane, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
-					}
-				}
-			}
-			else{
-				Instantiate (hummingBird, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
-			}
-
-		}
-		else if(score == 50){
-			scoreCounter = 5;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			fiftyOnwards();
-		}
-		else if(score > 50 && score < 60){
-			scoreCounter++;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			fiftyOnwards();
-		}
-		else if(score == 60){
-			scoreCounter = 6;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			fiftyOnwards();
-		}
-		else if(score > 60 && score < 70){
-			scoreCounter++;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			fiftyOnwards();
-		}
-		else if(score == 70){
-			scoreCounter = 7;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			fiftyOnwards();
-		}
-		else if(score > 70 && score < 80){
-			scoreCounter++;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			fiftyOnwards();
-		}
-		else if(score == 80){
-			scoreCounter = 8;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			fiftyOnwards();
-		}
-		else if(score > 80 && score < 90){
-			scoreCounter++;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			fiftyOnwards();
-		}
-		else if(score == 90){
-			scoreCounter = 9;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			fiftyOnwards();
-		}
-		else if(score > 90 && score < 100){
-			scoreCounter++;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			fiftyOnwards();
-		}
-		else if(score == 100){
-			scoreCounter = 1;
-			scoreRenderer.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			fiftyOnwards();
-		}
-		else if(score > 100 && score <= 999){
-
-			int hundred = score / 100;
-			scoreRenderer.sprite = scoreSprite [hundred];
-
-			int ut = score % 100;
-			int ten = ut / 10;
-			int unit = ut % 10;
-
-			scoreRendererTwo.sprite = scoreSprite [ten];
-			scoreRendererThree.sprite = scoreSprite [unit];
-			fiftyOnwards();
-		}
-	}
-
-	private void fiftyOnwards()
-	{
-		GameObject[] hb = GameObject.FindGameObjectsWithTag("HummingBird");
-		int x_hb = Random.Range(0,2);
-		if(x_hb  == 1)
-		{
-			GameObject[] shc = GameObject.FindGameObjectsWithTag("SandhillCrane");
-			int x_shc = Random.Range(0,2);
-			if(x_shc == 1)
-			{
-				GameObject[] tucan = GameObject.FindGameObjectsWithTag("BirdEnemy2D");
-				int x = Random.Range(0,2);
-				if(x == 1)
-				{
-					initiatePelican();
-				}
-				else{
-					if(tucan.Length < 2)
-					{
-						StartCoroutine(InitiateEnemy(1));
-					}
-				}
-			}
-			else{
-				if(shc.Length < 2)
-				{
-					Instantiate (sandHillCrane, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
-				}
-			}
-		}
-		else{
-			if(hb.Length < 2)
-			{
-				Instantiate (hummingBird, new Vector2 (5.1f, 1.784778f), Quaternion.identity);
-			}
-
-		}
-	}
-
-	IEnumerator InitiateEnemy(int length)
-	{
-		while(true)
-		{
-			for (int i=0;i<length;i++) 
-			{
-				//Vector3 spawnPosition = new Vector3 (Random.Range(-spawnValue.x, spawnValue.x),Random.Range(1.2f, 4f),spawnValue.z);
-				Quaternion spawnRotation = Quaternion.identity;
-				Instantiate (birdEnemy, new Vector2 (4.1f, Random.Range(1.2f, 3f)), spawnRotation);
-				yield return new WaitForSeconds(0.5f);
-			}
-			break;
-		}
-	}
 
 	void Flip()
 	{
@@ -898,132 +370,99 @@ public class HunterMovement : MonoBehaviour {
 				}
 
 		if (Input.GetKey (KeyCode.Mouse0) && Time.time > nextFire && roundAvailable && startFiring) {
-			nextFire = Time.time + 0.5f;
+			nextFire = Time.time + 0.25f;
 			if(isFired == false)
 			{
-				bulletSpriteSetter();
-				isFired = true;
-				animshoot.SetBool("isFired", isFired);
-				StartCoroutine(Fired());
+				Vector3 clickedPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+				if(clickedPosition.y < 3.0f)
+				{
+					gc.bulletSpriteSetter();
+					isFired = true;
+					animshoot.SetBool("isFired", isFired);
+					StartCoroutine(Fired());
+				}
 			}
+			idleTime = 0f;
 		}
-
 
 	}
 
 	IEnumerator Fired()
 	{
-		fireShot++;
-		yield return new WaitForSeconds(0.25f);
-		if (isRight) {
-			GameObject game = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,-10f));
-			game.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,-15f) * Vector2.up * bulletSpeed);
-		} else {
-			GameObject game = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,10f));
-			game.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,15f) * Vector2.up * bulletSpeed);
+		if (gunIndex == 2) 
+		{
+			//fireShot++;
+			gc.addFireShotNumber();
+			int shotfirecount = 0;
+			while(true)
+			{
+				if (isRight) {
+					GameObject game = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,-10f));
+					game.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,-15f) * Vector2.up * bulletSpeed);
+				} else {
+					GameObject game = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,10f));
+					game.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,15f) * Vector2.up * bulletSpeed);
+				}
+				shotfirecount++;
+				if(shotfirecount == 2)
+				{
+					break;
+				}
+				yield return new WaitForSeconds(0.05f);
+			}
+		} 
+		else if(gunIndex == 3)
+		{
+			//fireShot++;
+			gc.addFireShotNumber();
+			StartCoroutine(shotGunFire());
+			yield return new WaitForSeconds(0.5f);
+		}
+		else if(gunIndex == 1 || gunIndex == 4)
+		{
+			gc.addFireShotNumber(); //fireShot++;
+			yield return new WaitForSeconds(0.25f);
+			if (isRight) {
+				GameObject game = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,-10f));
+				game.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,-15f) * Vector2.up * bulletSpeed);
+			} else {
+				GameObject game = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,10f));
+				game.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,15f) * Vector2.up * bulletSpeed);
+			}
 		}
 		isFired = false;
 		animshoot.SetBool("isFired", isFired);
 	}
 
-	public int getFireShotNumber()
+	IEnumerator shotGunFire()
 	{
-		return fireShot;
-	}
+		if (isRight) {
+			GameObject rightBul = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,0f));
+			rightBul.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,-5f) * Vector2.up * 2950f); 
 
-	public void addAmmo()
-	{
-		if(gunIndex == 1)
-		{
-			bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];
-			bulletTwoRender.enabled = true;
-			b = 12;
-			bulletCounter = 2;
-		}
-		else if(gunIndex == 2)
-		{
-			bulletOneRender.sprite = scoreSprite [4];
-			bulletTwoRender.sprite = scoreSprite [2];
-			bulletTwoRender.enabled = true;
-			b = 24;
-			bulletCounter = 4;
-		}
-		else if(gunIndex == 3)
-		{
-			bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];
-			bulletTwoRender.enabled = true;
-			b = 12;
-			bulletCounter = 2;
-		}
-		else if(gunIndex == 4)
-		{
-			bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];
-			bulletTwoRender.enabled = true;
-			b = 12;
-			bulletCounter = 2;
-		}
-	}
+			yield return new WaitForSeconds (0.01f);
 
-	public void addCoin()
-	{
-		setScore (5);
-	}
+			GameObject midBul = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,-10f));
+			midBul.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,-15f) * Vector2.up * bulletSpeed);
 
-	void bulletSpriteSetter()
-	{
-		b = b - 1;
-		if (b > 40) {
-			bulletTwoRender.sprite = scoreSprite[4];
-			bulletOneRender.sprite = scoreSprite[bulletCounter];
-			bulletCounter  = bulletCounter - 1;
-				}
-		else if (b == 40) {
-			bulletTwoRender.sprite = scoreSprite[4];
-			bulletOneRender.sprite = scoreSprite[0];
-			bulletCounter  = 9;
-		}
-		else if (b < 40 && b > 30) {
-			bulletTwoRender.sprite = scoreSprite[3];
-			bulletOneRender.sprite = scoreSprite[bulletCounter];
-			bulletCounter  = bulletCounter - 1;
-		}
-		else if (b == 30) {
-			bulletTwoRender.sprite = scoreSprite[3];
-			bulletOneRender.sprite = scoreSprite[0];
-			bulletCounter  = 9;
-		}
-		else if (b < 30 && b > 20) {
-			bulletTwoRender.sprite = scoreSprite[2];
-			bulletOneRender.sprite = scoreSprite[bulletCounter];
-			bulletCounter  = bulletCounter - 1;
-		}
-		else if (b == 20) {
-			bulletTwoRender.sprite = scoreSprite[2];
-			bulletOneRender.sprite = scoreSprite[0];
-			bulletCounter  = 9;
-		}
-		else if (b < 20 && b > 10) {
-			bulletTwoRender.sprite = scoreSprite[1];
-			bulletOneRender.sprite = scoreSprite[bulletCounter];
-			bulletCounter  = bulletCounter - 1;
-		}
-		else if (b == 10) {
-			bulletTwoRender.sprite = scoreSprite[1];
-			bulletOneRender.sprite = scoreSprite[0];
-			bulletCounter  = 9;
-		}
-		else if (b < 10 && b > 0) {
-			bulletTwoRender.enabled = false;
-			bulletOneRender.sprite = scoreSprite[bulletCounter];
-			bulletCounter  = bulletCounter - 1;
-		}
-		if (b == 0) {
-			bulletOneRender.sprite = scoreSprite[0];
-			bulletCounter = 9;
-			lost();
+			yield return new WaitForSeconds (0.01f);
+
+			GameObject leftBul = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,-20f));
+			leftBul.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,-25f) * Vector2.up * 2900f);
+			
+		} else {
+			GameObject rightBul = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,0f));
+			rightBul.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,5f) * Vector2.up * 2950f);
+
+			yield return new WaitForSeconds (0.01f);
+
+			GameObject midBul = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,10f));
+			midBul.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,15f) * Vector2.up * bulletSpeed);
+
+			yield return new WaitForSeconds (0.01f);
+
+			GameObject leftBul = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,20f));
+			leftBul.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,25f) * Vector2.up * 2900f);
 		}
 	}
 
@@ -1047,22 +486,28 @@ public class HunterMovement : MonoBehaviour {
 
 	public void lost()
 	{
-		int sc = PlayerPrefs.GetInt ("Score");
-		sc = sc + score;
-		PlayerPrefs.SetInt ("Score", sc);
-		PlayerPrefs.SetInt ("MatchScore", score);
+		//int sc = PlayerPrefs.GetInt ("Score");
+		/////////////////sc = sc + score;
+		//PlayerPrefs.SetInt ("Score", sc);
+		////////////////////PlayerPrefs.SetInt ("MatchScore", score);
 		/*if (PlayerPrefs.GetInt ("Score") > PlayerPrefs.GetInt ("HighScore"))
 			PlayerPrefs.SetInt ("HighScore", score); */
 		roundAvailable = false;
-		GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (8.029126f, 1.784778f), Quaternion.identity);
+		sniperTracker.SetActive (false);
+		//GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (8.029126f, 1.784778f), Quaternion.identity);
 
-		gameObject.transform.position = new Vector2(transform.position.x, -1.98f);
-		anim.SetBool("isLost", true);
+		//gameObject.transform.position = new Vector2(transform.position.x, -1.98f);
 	} 
 
 	public void letStart()
 	{
+		GameObject explosion = GameObject.FindGameObjectWithTag ("BomberBirdExplosion");
+		if (explosion != null) {
+			Destroy (explosion);
+				}
+
 		start = true;
+		idleTime = 0f;
 		//coinObject.SetActive (false);
 		//bulletObject.SetActive (false);
 	}

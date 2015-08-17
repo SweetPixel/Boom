@@ -24,7 +24,6 @@ public class ScrollRectCsharp : MonoBehaviour {
 
 		//Get distance between buttons
 		btnDistance = (int)Mathf.Abs (btn [1].GetComponent<RectTransform> ().anchoredPosition.x - btn [0].GetComponent<RectTransform> ().anchoredPosition.x);
-
 	}
 	
 	// Update is called once per frame
@@ -46,10 +45,18 @@ public class ScrollRectCsharp : MonoBehaviour {
 		if (!dragging) {
 			LerpToButton(minButtonNum * -btnDistance);
 				}
+	}
+
+	void LerpToButton(int position)
+	{
+		float newX = Mathf.Lerp (panel.anchoredPosition.x, position, Time.deltaTime * 10f);
+		Vector2 newPosition = new Vector2 (newX, panel.anchoredPosition.y);
+
+		panel.anchoredPosition = newPosition;
 
 		if (minButtonNum == 0) {
 			PlayerPrefs.SetInt ("gunIndex", 1);
-				}
+		}
 		else if (minButtonNum == 1) {
 			PlayerPrefs.SetInt ("gunIndex", 2);
 		}
@@ -59,14 +66,6 @@ public class ScrollRectCsharp : MonoBehaviour {
 		else if (minButtonNum == 3) {
 			PlayerPrefs.SetInt ("gunIndex", 4);
 		}
-	}
-
-	void LerpToButton(int position)
-	{
-		float newX = Mathf.Lerp (panel.anchoredPosition.x, position, Time.deltaTime * 10f);
-		Vector2 newPosition = new Vector2 (newX, panel.anchoredPosition.y);
-
-		panel.anchoredPosition = newPosition;
 	}
 
 	public void StartDrag()

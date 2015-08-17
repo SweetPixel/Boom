@@ -19,9 +19,12 @@ public class Mover : MonoBehaviour {
 	private HunterMovement hm;
 	public GameObject explosion;
 	public GameObject gameOver;
+	private bool hunterIdle = false;
+	private float[] pos = { 10.6f , 5.3f };
 
 	Animator anim;
 	float count = 0;
+
 	// Use this for initialization
 	IEnumerator Start () {
 		//rigidbody.velocity = transform.right * 2;
@@ -46,7 +49,12 @@ public class Mover : MonoBehaviour {
 
 			x1 = Random.Range(6.4f, 9.75f);
 			y1 = Random.Range(-0.6f, 0.3f);
-			
+			if(hunterIdle)
+			{
+				int index = Random.Range(0,2);
+				x1 = pos[index];
+				birdSpeed = 0.75f;
+			}
 			yield return StartCoroutine(MoveObject(transform, new Vector2(transform.position.x, transform.position.y), new Vector2(x1, y1), birdSpeed)); //3.692791f
 		}
 	}
@@ -58,6 +66,16 @@ public class Mover : MonoBehaviour {
 	/*	if (count > 1f && isHit) {
 			GetComponent<Rigidbody2D>().velocity = Vector2.up * -5;
 				} */
+
+		if (transform.position.x == 10.6f || transform.position.x == 5.3f) {
+			Destroy(gameObject);
+		}
+
+	}
+
+	public void setHunterIdle()
+	{
+		hunterIdle = true;
 	}
 
 	IEnumerator MoveObject (Transform thisTransform, Vector2 startPos, Vector2 endPos, float time) {
@@ -103,7 +121,12 @@ public class Mover : MonoBehaviour {
 			Destroy(col.gameObject);
 			//Destroy (gameObject);
 			isHit = true;
-			BirdHit();
+
+			GameController gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+			if(gc.getBulletNumber() != 0)
+			{
+				BirdHit();
+			}
 			//hm.lost();
 			//Application.LoadLevel ("SecondLevelInfinite");
 
@@ -116,13 +139,16 @@ public class Mover : MonoBehaviour {
 
 	private void BirdHit()
 	{
-		isHit = true;
+		//isHit = true;
 		//anim.SetBool ("isHit", true);
 
 		GameObject hunter = GameObject.FindGameObjectWithTag ("Player");
 		HunterMovement hm = hunter.GetComponent<HunterMovement> ();
-
 		hm.lost ();
+
+		GameObject gcc = GameObject.FindGameObjectWithTag ("GameController");
+		GameController gc = gcc.GetComponent<GameController> ();
+		gc.GameOver ();
 
 		Instantiate(explosion, new Vector3(explosion.transform.position.x, explosion.transform.position.y, explosion.transform.position.z), Quaternion.identity);
 

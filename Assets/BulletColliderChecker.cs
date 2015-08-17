@@ -53,7 +53,9 @@ public class BulletColliderChecker : MonoBehaviour {
 		if (col.gameObject.tag == "Bullet") {
 			//counter++;
 			//hm.setCounter();
-			hm.decrementBirdCount();
+			GameObject gc = GameObject.FindGameObjectWithTag("GameController");
+			GameController gcc = gc.GetComponent<GameController>();
+			gcc.decrementBirdCount();
 			Destroy(col.gameObject);
 				}
 	}

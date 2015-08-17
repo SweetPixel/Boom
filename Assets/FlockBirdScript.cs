@@ -9,10 +9,14 @@ public class FlockBirdScript : MonoBehaviour {
 	bool isLeft = false;
 	private bool isLive = false;
 	public GameObject coin;
+	private GameObject gcc;
+	private GameController gc;
 
 	// Use this for initialization
 	void Start () {
 
+		gcc = GameObject.FindGameObjectWithTag ("GameController");
+		gc = gcc.GetComponent<GameController> ();
 
 		hunter = GameObject.Find ("Object");
 		if (hunter == null) {
@@ -44,8 +48,9 @@ public class FlockBirdScript : MonoBehaviour {
 			GameObject co = (GameObject)Instantiate(coin, new Vector3(gameObject.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
 			//co.GetComponent<Rigidbody2D>().velocity = Vector2.up * -2;
 			isLive = false;
-			hm.setScore(1);
-			//hm.incrementBirdCount();
+			gc.setScore(1);
+			gc.increaseBirdKiled();
+			gc.incrementBirdCount();
 			//BirdHit ();
 			Destroy(gameObject);
 			Destroy (col.gameObject);

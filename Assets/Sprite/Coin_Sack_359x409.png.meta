@@ -1,0 +1,231 @@
+fileFormatVersion: 2
+guid: ae5422f587c3f254b9cf66fde4c2b95a
+timeCreated: 1439536409
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Coin_Sack_359x409_0
+    21300002: Coin_Sack_359x409_1
+    21300004: Coin_Sack_359x409_2
+    21300006: Coin_Sack_359x409_3
+    21300008: Coin_Sack_359x409_4
+    21300010: Coin_Sack_359x409_5
+    21300012: Coin_Sack_359x409_6
+    21300014: Coin_Sack_359x409_7
+    21300016: Coin_Sack_359x409_8
+    21300018: Coin_Sack_359x409_9
+    21300020: Coin_Sack_359x409_10
+    21300022: Coin_Sack_359x409_11
+    21300024: Coin_Sack_359x409_12
+    21300026: Coin_Sack_359x409_13
+    21300028: Coin_Sack_359x409_14
+    21300030: Coin_Sack_359x409_15
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Coin_Sack_359x409_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1227
+        width: 359
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Coin_Sack_359x409_1
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 1227
+        width: 359
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Coin_Sack_359x409_2
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 1227
+        width: 359
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Coin_Sack_359x409_3
+      rect:
+        serializedVersion: 2
+        x: 1077
+        y: 1227
+        width: 359
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Coin_Sack_359x409_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 818
+        width: 359
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Coin_Sack_359x409_5
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 818
+        width: 359
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Coin_Sack_359x409_6
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 818
+        width: 359
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Coin_Sack_359x409_7
+      rect:
+        serializedVersion: 2
+        x: 1077
+        y: 818
+        width: 359
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Coin_Sack_359x409_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 409
+        width: 359
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Coin_Sack_359x409_9
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 409
+        width: 359
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Coin_Sack_359x409_10
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 409
+        width: 359
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Coin_Sack_359x409_11
+      rect:
+        serializedVersion: 2
+        x: 1077
+        y: 409
+        width: 359
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Coin_Sack_359x409_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 359
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Coin_Sack_359x409_13
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 0
+        width: 359
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Coin_Sack_359x409_14
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 0
+        width: 359
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Coin_Sack_359x409_15
+      rect:
+        serializedVersion: 2
+        x: 1077
+        y: 0
+        width: 359
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

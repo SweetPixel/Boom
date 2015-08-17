@@ -11,8 +11,15 @@ public class SandhilCraneScript : MonoBehaviour {
 	public GameObject coin;
 	private GameObject hunter;
 	private HunterMovement hm;
-	
+	private GameObject gameController;
+	private GameController gc;
+	private bool hunterIdle = false;
+	private float[] pos = { 10.8f , 5.1f };
+
 	IEnumerator Start () {
+
+		gameController = GameObject.FindGameObjectWithTag ("GameController");
+		gc = gameController.GetComponent<GameController> ();
 
 		hunter = GameObject.FindGameObjectWithTag ("Player");
 		hm = hunter.GetComponent<HunterMovement> ();
@@ -35,6 +42,10 @@ public class SandhilCraneScript : MonoBehaviour {
 		float rate = 1.0f / time;
 		while (i < 1.0f) {
 			i += Time.deltaTime * rate;
+			if(hunterIdle)
+			{
+				birdSpeed = 0.75f;
+			}
 			thisTransform.position = Vector2.Lerp(startPos, endPos, i);
 			yield return null;
 		}
@@ -46,7 +57,12 @@ public class SandhilCraneScript : MonoBehaviour {
 
 		if (transform.position.x == 10.8f || transform.position.x == 5.1f) {
 			Flip ();
+			if(hunterIdle)
+			{
+				Destroy(gameObject);
+			}
 		}
+
 	}
 
 	void OnCollisionEnter2D(Collision2D col)
@@ -64,12 +80,17 @@ public class SandhilCraneScript : MonoBehaviour {
 			GameObject co = (GameObject)Instantiate(coin, new Vector3(gameObject.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
 			//hm.incrementBirdCount();
 			//BirdHit ();
-			hm.initiateCoin();
-			hm.setScore (2);
-			hm.incrementBirdCount();
+			gc.increaseBirdKiled();
+			gc.setScore (2);
+			gc.incrementBirdCount();
 			Destroy(gameObject);
 			Destroy (col.gameObject);
 		}
+	}
+
+	public void setHunterIdle()
+	{
+		hunterIdle = true;
 	}
 
 	void Flip()
