@@ -5,7 +5,7 @@ using System.Collections;
 public class GameOverScript : MonoBehaviour {
 
 	public Sprite[] scoreSprite;
-	public GameObject pauseSmallCanvas;
+	public GameObject gamecontroller;
 
 	//Accuracy variables for gameobject and renderer
 	public Image Acc_digitTen;
@@ -62,73 +62,44 @@ public class GameOverScript : MonoBehaviour {
 	public Sprite[] numbers;
 
 	private int prevtime = 0;
+	private int counter = 0;
+	private bool startTimer = true;
+	Image label;
 
 	// Use this for initialization
 	void Start () {
 
-		pauseSmallCanvas = GameObject.FindGameObjectWithTag("pauseSmallCanvas");
-		pauseSmallCanvas.SetActive (false);
+		gamecontroller = GameObject.FindGameObjectWithTag("GameController");
+		gamecontroller.GetComponent<ButtonClickScript> ().PauseCanvasVisibility (true);
 
 		GameObject.FindGameObjectWithTag("ButtonCountDown").GetComponent<Animator>().SetBool("isEnd", true);
 		GameObject.FindGameObjectWithTag("CoinObject").GetComponent<Animator>().SetBool("isEnd", true);
 		GameObject.FindGameObjectWithTag("ButtonCountDown").GetComponent<Animator>().SetBool("isStart", false);
 		GameObject.FindGameObjectWithTag("CoinObject").GetComponent<Animator>().SetBool("isStart", false);
 
+		label = GameObject.FindGameObjectWithTag ("FreeGiftIn_Label").GetComponent<Image> ();
 		gameController = GameObject.FindGameObjectWithTag ("GameController");
 		gc = gameController.GetComponent<GameController> ();
 		bool status = gc.getGiftTimer ();
+		Debug.Log (status);
 		if (status) {
 			giftButton.SetActive(false);
 			timerIcon.enabled = true;
-			textObject.sprite = freeGiftIn;
+			//textObject.sprite = freeGiftIn;
+			label.enabled = true;
+			textObject.enabled = false;
 			int timerLeft = int.Parse(gc.giftTimerLeft ());
 			prevtime = timerLeft;
 			minute.sprite = numbers [timerLeft];
 		} else {
 			timerIcon.enabled = false;
 			giftButton.SetActive(true);
-			textObject.sprite = freeGift;
+			label.enabled = false;
+			textObject.enabled = true;
 		}
-
-		/*Acc_digitTenRenderer = Acc_digitTen.GetComponent<SpriteRenderer> ();
-		Acc_digitTenRenderer.sprite = scoreSprite [0];
-		Acc_digitUnitRenderer = Acc_digitUnit.GetComponent<SpriteRenderer> ();
-		Acc_digitUnitRenderer.enabled = false;
-
-		kill_digitTenRenderer = kill_digitTen.GetComponent<SpriteRenderer> ();
-		kill_digitTenRenderer.sprite = scoreSprite [0];
-		kill_digitUnitRenderer = kill_digitUnit.GetComponent<SpriteRenderer> ();
-		kill_digitUnitRenderer.enabled = false;
-
-		coinOneRender = coinOne.GetComponent<SpriteRenderer> ();
-		coinOneRender.sprite = scoreSprite [0];
-		coinTwoRender = coinTwo.GetComponent<SpriteRenderer> ();
-		coinTwoRender.sprite = scoreSprite [0];
-		coinThreeRender = coinThree.GetComponent<SpriteRenderer> ();
-		coinThreeRender.sprite = scoreSprite [0];
-		coinFourRender = coinFour.GetComponent<SpriteRenderer> ();
-		coinFourRender.sprite = scoreSprite [0];
-		coinFiveRender = coinFive.GetComponent<SpriteRenderer> ();
-		coinFiveRender.sprite = scoreSprite [0];*/
-		/*coinSixRender = coinSix.GetComponent<SpriteRenderer> ();
-		coinSixRender.sprite = scoreSprite [0];
-		coinSevenRender = coinSeven.GetComponent<SpriteRenderer> ();
-		coinSevenRender.sprite = scoreSprite [0];*/
-
-		/*msUnitRender = msUnit.GetComponent<SpriteRenderer> ();
-		msUnitRender.sprite = scoreSprite [0];
-		msTenRender = msTen.GetComponent<SpriteRenderer> ();
-		msTenRender.sprite = scoreSprite [0];
-		msHundredRender = msHundred.GetComponent<SpriteRenderer> ();
-		msHundredRender.sprite = scoreSprite [0];
-		msThousandRender = msThousand.GetComponent<SpriteRenderer> ();
-		msThousandRender.sprite = scoreSprite [0];
-		msTenThousandRender = msTenThousand.GetComponent<SpriteRenderer> ();
-		msTenThousandRender.sprite = scoreSprite [0];*/
 
 		gameController = GameObject.FindGameObjectWithTag ("GameController");
 		gc = gameController.GetComponent<GameController> ();
-		//int Hs = PlayerPrefs.GetInt ("HighScore");
 
 		calculateAccuracy ();
 		calculateKills ();
@@ -138,6 +109,7 @@ public class GameOverScript : MonoBehaviour {
 		hunter = GameObject.FindGameObjectWithTag ("Player");
 		hm = hunter.GetComponent<HunterMovement> ();
 		//gc.setScoreToZero ();
+
 	}
 
 	private void calculateAccuracy()
@@ -152,11 +124,11 @@ public class GameOverScript : MonoBehaviour {
 		Debug.Log ("Percentage: " + percentage);
 
 		if (percentage < 1) {
-			Acc_digitTen.sprite = scoreSprite [0];
+			Acc_digitUnit.sprite = scoreSprite [0];
 		}
 		else if (percentage > 1 && percentage < 10) {
 			int percent = (int)percentage;
-			Acc_digitTen.sprite = scoreSprite [percent];
+			Acc_digitUnit.sprite = scoreSprite [percent];
 		} else if(percentage < 100) {
 			int ten = Mathf.FloorToInt(percentage/10f);
 			int unit = Mathf.FloorToInt(percentage%10f);
@@ -171,12 +143,12 @@ public class GameOverScript : MonoBehaviour {
 	{
 		//Accuracy
 		int birdCount = gc.getBirdKilled (); //(float)matchscore;
-		
+
 		if (birdCount < 1) {
-			kill_digitTen.sprite = scoreSprite [0];
+			kill_digitUnit.sprite = scoreSprite [0];
 		}
 		else if (birdCount > 1 && birdCount < 10) {
-			kill_digitTen.sprite = scoreSprite [birdCount];
+			kill_digitUnit.sprite = scoreSprite [birdCount];
 		} else {
 			int ten = Mathf.FloorToInt(birdCount/10f);
 			int unit = Mathf.FloorToInt(birdCount%10f);
@@ -187,7 +159,7 @@ public class GameOverScript : MonoBehaviour {
 		}
 	} 
 
-	private void calculateTotalCoins()
+	public void calculateTotalCoins()
 	{
 		int sc = PlayerPrefs.GetInt ("Score");
 
@@ -330,10 +302,28 @@ public class GameOverScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		int timerLeft = int.Parse(gc.giftTimerLeft ());
-		if (prevtime != timerLeft) {
-			prevtime = timerLeft;
-			minute.sprite = numbers [timerLeft];
+
+		if (startTimer) {
+			int timerLeft = int.Parse(gc.giftTimerLeft ());
+			if (prevtime != timerLeft && timerLeft > 0) {
+				prevtime = timerLeft;
+				minute.sprite = numbers [timerLeft];
+			}
+			if (timerLeft > 0) {
+				giftButton.SetActive(false);
+				timerIcon.enabled = true;
+				//textObject.sprite = freeGiftIn;
+				label.enabled = true;
+				textObject.enabled = false;
+				int t = int.Parse(gc.giftTimerLeft ());
+				prevtime = t;
+				minute.sprite = numbers [t];
+			} else {
+				timerIcon.enabled = false;
+				giftButton.SetActive(true);
+				label.enabled = false;
+				textObject.enabled = true;
+			}
 		}
 	}
 }

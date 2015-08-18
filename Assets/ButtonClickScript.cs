@@ -20,6 +20,7 @@ public class ButtonClickScript : MonoBehaviour {
 	private bool showCanvas = false;
 	
 	public Sprite[] numbers;
+	public Sprite[] score;
 	Image[] images;
 	
 	public Image textObject;
@@ -28,6 +29,19 @@ public class ButtonClickScript : MonoBehaviour {
 	public Image minute;
 	int val = 0;
 	private GameObject gameover;
+
+	private bool isGuncanvasOpen = false;
+	private ScrollRectCsharp sr;
+	public Sprite buy;
+	public Sprite select;
+	private int gunIndex=1;
+	private bool isAvailable = false;
+
+	public int smgValue = 2500;
+	public int shotgunValue = 5000;
+	public int sniperValue = 10000;
+	public GameObject progressBar;
+
 
 	// Use this for initialization
 	void Start () {
@@ -38,47 +52,118 @@ public class ButtonClickScript : MonoBehaviour {
 
 		//pauseCanvas = GameObject.Find ("PauseLargeCanvas");
 		pauseCanvas.SetActive(false);
-		pauseSmallCanvas.SetActive (false);
+		PauseCanvasVisibility(false);
+		sr = GameObject.FindGameObjectWithTag("GameController").GetComponent<ScrollRectCsharp>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 		if (showCanvas) {
 			timeLeft -= Time.deltaTime;
 		}
 
-		/*if (timeLeft <= 0) {
-			showCanvas = false;
-			//gift.SetActive(false);
-			Destroy(gtemp);
-			textObject.sprite = freeGiftIn;
-			timerIcon.enabled = true;
-			minute.sprite = numbers[6];
-			
-			GameObject gcc = GameObject.FindGameObjectWithTag("GameController");
-			GameController gc = gcc.GetComponent<GameController>();
-			gc.resetGiftTimer();
-			timeLeft = TotalTime;
+		if (PlayerPrefs.GetInt ("isGuncanvasOpen") == 1) {
+			float position = sr.panelAnchoredPosition();
 			int sc = PlayerPrefs.GetInt ("Score");
-			sc = sc + val;
-			PlayerPrefs.SetInt ("Score", sc);
-			//Destroy(gameObject);
-		}*/
 
+			//Debug.Log("Position of Panel " + position);
+			if (position <= 100 && position >= -450) {
+				//PlayerPrefs.SetInt ("gunIndex", 1);
+				Debug.Log("gun 1 button");
+				PlayerPrefs.SetInt ("tempGunIndex", 1);
+				//gunIndex = 1;
+				if(GameObject.FindGameObjectWithTag("GunCanvas-PlayButton") != null)
+				{
+					GameObject.FindGameObjectWithTag("GunCanvas-PlayButton").GetComponent<Image>().sprite = select;
+				}
+			}
+			if (position <= -450 && position >= -1000) {
+				//PlayerPrefs.SetInt ("gunIndex", 2);
+				Debug.Log("gun 2 button");
+				//gunIndex = 2;
+				PlayerPrefs.SetInt ("tempGunIndex", 2);
+
+				if(sc > smgValue && PlayerPrefs.GetInt("SmgAvailable") == 0)
+				{
+					isAvailable = false;
+					if(GameObject.FindGameObjectWithTag("GunCanvas-PlayButton") != null){
+						GameObject.FindGameObjectWithTag("GunCanvas-PlayButton").GetComponent<Image>().sprite = buy;}
+				}
+				else{
+					isAvailable = true;
+					if(GameObject.FindGameObjectWithTag("GunCanvas-PlayButton") != null){
+						GameObject.FindGameObjectWithTag("GunCanvas-PlayButton").GetComponent<Image>().sprite = select;}
+				}
+			}
+			if (position <= -1010 && position >= -1500) {
+				//PlayerPrefs.SetInt ("gunIndex", 3);
+				Debug.Log("gun 3 button");
+				//gunIndex = 3;
+				PlayerPrefs.SetInt ("tempGunIndex", 3);
+
+				if(sc > shotgunValue && PlayerPrefs.GetInt("ShotgunAvailable") == 0)
+				{
+					isAvailable = false;
+					if(GameObject.FindGameObjectWithTag("GunCanvas-PlayButton") != null){
+						GameObject.FindGameObjectWithTag("GunCanvas-PlayButton").GetComponent<Image>().sprite = buy;}
+				}
+				else{
+					isAvailable = true;
+					if(GameObject.FindGameObjectWithTag("GunCanvas-PlayButton") != null){
+					GameObject.FindGameObjectWithTag("GunCanvas-PlayButton").GetComponent<Image>().sprite = select;}
+				}
+			}
+			if (position <= -1500 && position >= -2000) {
+				//PlayerPrefs.SetInt ("gunIndex", 4);
+				Debug.Log("gun 4 button");
+				//gunIndex = 4;
+				PlayerPrefs.SetInt ("tempGunIndex", 4);
+
+				if(sc > sniperValue && PlayerPrefs.GetInt("SniperAvailable") == 0)
+				{
+					isAvailable = false;
+					if(GameObject.FindGameObjectWithTag("GunCanvas-PlayButton") != null)
+					{
+						GameObject.FindGameObjectWithTag("GunCanvas-PlayButton").GetComponent<Image>().sprite = buy;}
+				}
+				else{
+					isAvailable = true;
+					if(GameObject.FindGameObjectWithTag("GunCanvas-PlayButton") != null)
+					{
+						GameObject.FindGameObjectWithTag("GunCanvas-PlayButton").GetComponent<Image>().sprite = select;}
+				}
+			}
+		}
+
+	}
+
+	public void PauseCanvasVisibility(bool x)
+	{
+		pauseSmallCanvas.SetActive (x);
 	}
 
 	public void ButtonClick(string buttonName)
 	{
 		playHand = GameObject.FindGameObjectWithTag ("PlayHand");
 		sg = playHand.GetComponent<StartGame> ();
-		if (buttonName == "GunsButton") {
-						guns.SetActive (true);
-		} else if (buttonName == "BackButton") {
+		if (buttonName == "GunsButton") 
+		{
+			HunterMovement hm = GameObject.FindGameObjectWithTag("Player").GetComponent<HunterMovement>();
+			hm.stopStart();
+			sr.reset(PlayerPrefs.GetInt("gunIndex")-1);
+			PlayerPrefs.SetInt ("isGuncanvasOpen", 1);
+			isGuncanvasOpen = true;
+			Debug.Log("GunButton called");
+			guns.SetActive (true);
+		} 
+		else if (buttonName == "BackButton") 
+		{
+			PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
+			isGuncanvasOpen = false;
 			guns.SetActive (false);
 			sg.deactiveCanvas();
-				}
-
+		}
 		if (buttonName == "StartButton") {
 			/**/
 			GameObject.FindGameObjectWithTag("GameTitle").GetComponent<Animator>().SetBool("isDown", true);
@@ -89,6 +174,10 @@ public class ButtonClickScript : MonoBehaviour {
 				}
 
 		if (buttonName == "MapButton") {
+			HunterMovement hm = GameObject.FindGameObjectWithTag("Player").GetComponent<HunterMovement>();
+			hm.stopStart();
+			MapScrollScript sr = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapScrollScript>();
+			sr.reset(0);
 			maps.SetActive (true);
 		}
 
@@ -98,9 +187,80 @@ public class ButtonClickScript : MonoBehaviour {
 		}
 
 		if (buttonName == "Play") {
-			guns.SetActive (false);
-			sg.deactiveCanvas();
-			restartLevel();
+
+			GameObject gunCanvas = GameObject.FindGameObjectWithTag("GunCanvas");
+			Debug.Log(PlayerPrefs.GetInt("SmgAvailable"));
+			Debug.Log("gunIndex: " + gunIndex);
+			isGuncanvasOpen = false;
+			PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
+			Debug.Log(isGuncanvasOpen);
+			if(PlayerPrefs.GetInt ("tempGunIndex") == 1)
+			{
+				gunCanvas.SetActive (false);
+				sg.deactiveCanvas();
+				PlayerPrefs.SetInt ("gunIndex", 1);
+				restartLevel();
+			}
+			else if(PlayerPrefs.GetInt ("tempGunIndex") == 2)
+			{
+				if(isAvailable)
+				{
+					gunCanvas.SetActive (false);
+					sg.deactiveCanvas();
+					PlayerPrefs.SetInt ("gunIndex", 2);
+					restartLevel();
+				}
+				else{
+					int sc = PlayerPrefs.GetInt ("Score");
+					PlayerPrefs.SetInt ("Score", sc - smgValue);
+					PlayerPrefs.SetInt("SmgAvailable", 1);
+
+					gunCanvas.SetActive (false);
+					sg.deactiveCanvas();
+					PlayerPrefs.SetInt ("gunIndex", 2);
+					restartLevel();
+				}
+			} 
+			else if(PlayerPrefs.GetInt ("tempGunIndex") == 3)
+			{
+				if(isAvailable)
+				{
+					gunCanvas.SetActive (false);
+					sg.deactiveCanvas();
+					PlayerPrefs.SetInt ("gunIndex", 3);
+					restartLevel();
+				}
+				else{
+					int sc = PlayerPrefs.GetInt ("Score");
+					PlayerPrefs.SetInt ("Score", sc - shotgunValue);
+					PlayerPrefs.SetInt("ShotgunAvailable", 1);
+
+					gunCanvas.SetActive (false);
+					sg.deactiveCanvas();
+					PlayerPrefs.SetInt ("gunIndex", 3);
+					restartLevel();
+				}
+			} 
+			else if(PlayerPrefs.GetInt ("tempGunIndex") == 4)
+			{
+				if(isAvailable)
+				{
+					gunCanvas.SetActive (false);
+					sg.deactiveCanvas();
+					PlayerPrefs.SetInt ("gunIndex", 4);
+					restartLevel();
+				}
+				else{
+					int sc = PlayerPrefs.GetInt ("Score");
+					PlayerPrefs.SetInt ("Score", sc - sniperValue);
+					PlayerPrefs.SetInt("SniperAvailable", 1);
+
+					gunCanvas.SetActive (false);
+					sg.deactiveCanvas();
+					PlayerPrefs.SetInt ("gunIndex", 4);
+					restartLevel();
+				}
+			} 
 		}
 
 		if (buttonName == "Pause") {
@@ -134,8 +294,8 @@ public class ButtonClickScript : MonoBehaviour {
 				int t = val / 10;
 				int u = val % 10;
 				
-				ten.sprite = numbers [t];
-				unit.sprite = numbers [u];
+				ten.sprite = score [t];
+				unit.sprite = score [u];
 				
 			} else {
 				
@@ -145,9 +305,9 @@ public class ButtonClickScript : MonoBehaviour {
 				int t = ht / 10;
 				int u = ht % 10;
 				
-				hundred.sprite = numbers[h];
-				ten.sprite = numbers [t];
-				unit.sprite = numbers [u];
+				hundred.sprite = score[h];
+				ten.sprite = score [t];
+				unit.sprite = score [u];
 			}
 
 			timerIcon = GameObject.FindGameObjectWithTag ("GreenStripeTimer").GetComponent<Image> ();
@@ -156,7 +316,12 @@ public class ButtonClickScript : MonoBehaviour {
 			minute = GameObject.FindGameObjectWithTag ("GreenStripeMinute").GetComponent<Image> ();
 
 			textObject = GameObject.FindGameObjectWithTag ("GreenStripeLabel").GetComponent<Image> ();
-			textObject.sprite = freeGiftIn;
+			//textObject.sprite = freeGiftIn;
+			textObject.enabled = false;
+
+			Image label = GameObject.FindGameObjectWithTag ("FreeGiftIn_Label").GetComponent<Image> ();
+			label.enabled = true;
+
 			timerIcon.enabled = true;
 			minute.sprite = numbers[6];
 			
@@ -170,7 +335,10 @@ public class ButtonClickScript : MonoBehaviour {
 
 			GameObject giftButton = GameObject.FindGameObjectWithTag ("GreenStripeButton");
 			giftButton.SetActive(false);
-			GameOverVisibility(false);
+			//GameOverVisibility(false);
+
+			GameOverScript go_script = GameObject.FindGameObjectWithTag("GameOver").GetComponent<GameOverScript>();
+			go_script.calculateTotalCoins();
 		}
 
 		if (buttonName == "Restart") {
@@ -189,6 +357,11 @@ public class ButtonClickScript : MonoBehaviour {
 		if (buttonName == "VideoButton") {
 			VideoAds gamecontroller = GameObject.FindGameObjectWithTag("GameController").GetComponent<VideoAds>();
 			gamecontroller.loadAd();
+			int sc = PlayerPrefs.GetInt ("Score");
+			sc = sc + 100;
+			PlayerPrefs.SetInt ("Score", sc);
+			GameOverScript go_script = GameObject.FindGameObjectWithTag("GameOver").GetComponent<GameOverScript>();
+			go_script.calculateTotalCoins();
 		}
 
 		/* if (buttonName == "PlayWithShotgun") {
@@ -247,7 +420,7 @@ public class ButtonClickScript : MonoBehaviour {
 
 	public void GameOverVisibility(bool x)
 	{
-		gameover.SetActive (x);
+		//gameover.SetActive (x);
 	}
 
 	private void restartLevel()
@@ -260,7 +433,17 @@ public class ButtonClickScript : MonoBehaviour {
 		foreach (GameObject b in bullets) {
 			Destroy(b);
 		}
-		
+
+		GameObject[] Flamingo = GameObject.FindGameObjectsWithTag ("Flamingo");
+		foreach (GameObject b in Flamingo) {
+			Destroy(b);
+		}
+
+		GameObject[] eagle = GameObject.FindGameObjectsWithTag ("Eagle");
+		foreach (GameObject b in eagle) {
+			Destroy(b);
+		}
+
 		//Destroy the bomber bird explosion.
 		GameObject[] bbExplosion = GameObject.FindGameObjectsWithTag ("BomberBirdExplosion");
 		if (bbExplosion != null) {
@@ -333,12 +516,14 @@ public class ButtonClickScript : MonoBehaviour {
 		Animator anim = startbutton.GetComponent<Animator> ();
 		//yield return new WaitForSeconds (1f);
 		anim.SetBool ("IsPressed", true);
-		yield return new WaitForSeconds (2.5f);
-		sg.activatePlayMode();
-		startCanvas.SetActive(false);
+		yield return new WaitForSeconds (1.5f);
+		GameObject temp = (GameObject)Instantiate (progressBar, new Vector2 (progressBar.transform.position.x, progressBar.transform.position.y), Quaternion.identity);
+		temp.GetComponent<CircularProgressbar> ().enabled = false;
 		GameObject hand = GameObject.Find("PlayHand");
 		hand.transform.position = new Vector2(8.089996f, 0.15f);
 		pauseSmallCanvas.SetActive (true);
+		sg.activatePlayMode();
+		startCanvas.SetActive(false);
 		anim.SetBool ("IsPressed", false);
 	}
 }

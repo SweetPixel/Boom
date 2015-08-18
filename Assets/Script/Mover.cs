@@ -145,17 +145,26 @@ public class Mover : MonoBehaviour {
 		GameObject hunter = GameObject.FindGameObjectWithTag ("Player");
 		HunterMovement hm = hunter.GetComponent<HunterMovement> ();
 		hm.lost ();
+		hm.stopStart ();
 
 		GameObject gcc = GameObject.FindGameObjectWithTag ("GameController");
 		GameController gc = gcc.GetComponent<GameController> ();
 		gc.GameOver ();
 
+		/*GameObject exp = GameObject.FindGameObjectWithTag ("BomberBirdExplosion");
+		if (exp == null) {
+			Instantiate(explosion, new Vector3(explosion.transform.position.x, explosion.transform.position.y, explosion.transform.position.z), Quaternion.identity);
+				}*/
 		Instantiate(explosion, new Vector3(explosion.transform.position.x, explosion.transform.position.y, explosion.transform.position.z), Quaternion.identity);
 
 		GameObject gover = GameObject.FindGameObjectWithTag ("GameOver");
-
 		if (gover == null) {
 			GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (8.029126f, 1.784778f), Quaternion.identity);
+				}
+
+		GameObject progressbar = GameObject.FindGameObjectWithTag("ProgressBar");
+		if (progressbar != null) {
+			Destroy(progressbar);
 				}
 
 		//rigidbody.velocity = Vector2.up * -2;

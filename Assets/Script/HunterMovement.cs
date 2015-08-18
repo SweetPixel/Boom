@@ -89,6 +89,7 @@ public class HunterMovement : MonoBehaviour {
 	public GameObject glassBreak;
 	public GameObject sniperTracker;
 	public int IdleThreshold = 9;
+	public GameObject progressBar;
 
 	IEnumerator Start () {
 		/* Bullet Renderers */
@@ -294,7 +295,11 @@ public class HunterMovement : MonoBehaviour {
 			roundAvailable = false;
 			anim.SetBool ("isIdle", true);
 			yield return new WaitForSeconds (2f);
-			Instantiate (glassBreak, glassBreak.transform.position, Quaternion.identity);
+			GameObject gameover = GameObject.FindGameObjectWithTag("GameOver");
+			if(gameover == null)
+			{
+				Instantiate (glassBreak, glassBreak.transform.position, Quaternion.identity);
+			}
 			yield return new WaitForSeconds (1.5f);
 			lost ();
 			GameObject gcc = GameObject.FindGameObjectWithTag("GameController");
@@ -381,6 +386,15 @@ public class HunterMovement : MonoBehaviour {
 					animshoot.SetBool("isFired", isFired);
 					StartCoroutine(Fired());
 				}
+			}
+			GameObject progressbar = GameObject.FindGameObjectWithTag("ProgressBar");
+			if(progressbar == null)
+			{
+				Instantiate (progressBar, progressBar.transform.position, Quaternion.identity);
+			}
+			else{
+				Destroy(progressbar);
+				Instantiate (progressBar, progressBar.transform.position, Quaternion.identity);
 			}
 			idleTime = 0f;
 		}
@@ -507,6 +521,19 @@ public class HunterMovement : MonoBehaviour {
 				}
 
 		start = true;
+		idleTime = 0f;
+		//coinObject.SetActive (false);
+		//bulletObject.SetActive (false);
+	}
+
+	public void stopStart()
+	{
+		GameObject explosion = GameObject.FindGameObjectWithTag ("BomberBirdExplosion");
+		if (explosion != null) {
+			Destroy (explosion);
+		}
+		
+		start = false;
 		idleTime = 0f;
 		//coinObject.SetActive (false);
 		//bulletObject.SetActive (false);

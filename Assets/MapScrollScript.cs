@@ -53,6 +53,16 @@ public class MapScrollScript : MonoBehaviour {
 		Vector2 newPosition = new Vector2 (newX, panel.anchoredPosition.y);
 		
 		panel.anchoredPosition = newPosition;
+
+		if (minButtonNum == 0) {
+			PlayerPrefs.SetInt ("mapIndex", 1);
+		}
+		else if (minButtonNum == 1) {
+			PlayerPrefs.SetInt ("mapIndex", 2);
+		}
+		else if (minButtonNum == 2) {
+			PlayerPrefs.SetInt ("mapIndex", 3);
+		}
 	}
 	
 	public void StartDrag()
@@ -63,6 +73,11 @@ public class MapScrollScript : MonoBehaviour {
 	public void EndDrag()
 	{
 		dragging = false;
+	}
+
+	public void reset(int minNum)
+	{
+		LerpToButton(minNum * btnDistance);
 	}
 
 }

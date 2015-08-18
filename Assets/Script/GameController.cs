@@ -189,6 +189,7 @@ public class GameController : MonoBehaviour {
 			bulletTwoRender.sprite = scoreSprite [1];
 		}
 		timeLeft = totalTime;
+
 	}
 
 	void Update()
@@ -234,28 +235,30 @@ public class GameController : MonoBehaviour {
 			isCombo = false;
 			isEagleVisible = false;
 			birdCount = 0;
-			setScore (score * comboValue);
 			if(comboValue > 1){
+				setScore ((score * comboValue)-score);
 				Instantiate (goldenSpark, new Vector2 (coinIcon.transform.position.x, coinIcon.transform.position.y), Quaternion.identity);
+				StartCoroutine (coinBeat());
 			}
-			StartCoroutine (coinBeat());
 			comboValue = 0;
 			GameObject cc = GameObject.FindGameObjectWithTag("ComboComponents");
 			if(cc != null)
 			{
 				Destroy(cc);
 			}
-			if(b == 0)
+
+			GameObject go = GameObject.FindGameObjectWithTag("GameOver");
+
+			if(b == 0 && go == null)
 			{
 				GameObject hunter = GameObject.FindGameObjectWithTag("Player");
 				HunterMovement hm = hunter.GetComponent<HunterMovement>();
 				hm.lost ();
 				GameOver();
 			}
-
 		}
 		
-		if (birdCount == 3 && isEagleVisible) {
+		if (birdCount == 5 && isEagleVisible) {
 			Instantiate (eagle, new Vector2 (5.27f, -0.83f), Quaternion.identity);
 			isEagleVisible = false;
 			//birdCount = 0;
@@ -283,7 +286,7 @@ public class GameController : MonoBehaviour {
 			Time.timeScale = 0.1f;
 				}
 
-		if (isfinish) {
+		 if(isfinish) {
 			StartCoroutine(finishGame());
 			isfinish = false;
 				}
@@ -696,7 +699,9 @@ public class GameController : MonoBehaviour {
 	{
 		birdCount = 0;
 		coinIconRender.sprite = coinNormalIcon;
-		setScore (score * comboValue);
+		if (comboValue > 1) {
+			setScore ((score * comboValue)-score);
+				}
 		comboValue = 0;
 		
 		if (b == 0) {
@@ -740,8 +745,10 @@ public class GameController : MonoBehaviour {
 			Destroy (explosion);
 		}
 
+		fireShot = 0;
 		score = 0;
 		birdKilled = 0;
+		birdCount = 0;
 
 		scoreRenderer.sprite = scoreSprite [score];
 		scoreRendererTwo.sprite = scoreSprite [score];
@@ -1012,7 +1019,12 @@ public class GameController : MonoBehaviour {
 			
 		}
 		//coinAnimator.enabled = false;
-		
+
+		if (b == 0)
+		{
+			isfinish = true;
+		}
+
 	}
 	
 	IEnumerator coinBeat()
@@ -1136,6 +1148,7 @@ public class GameController : MonoBehaviour {
 		else if (b < 30 && b > 20) {
 			bulletTwoRender.sprite = scoreSprite[2];
 			bulletOneRender.sprite = scoreSprite[bulletCounter];
+			bulletCounter  = bulletCounter - 1;
 		}
 		else if (b == 20) {
 			bulletTwoRender.sprite = scoreSprite[2];
@@ -1144,8 +1157,8 @@ public class GameController : MonoBehaviour {
 		}
 		else if (b < 20 && b > 10) {
 			bulletTwoRender.sprite = scoreSprite[1];
-			bulletCounter  = bulletCounter - 1;
 			bulletOneRender.sprite = scoreSprite[bulletCounter];
+			bulletCounter  = bulletCounter - 1;
 		}
 		else if (b == 10) {
 			bulletTwoRender.sprite = scoreSprite[1];
@@ -1160,7 +1173,7 @@ public class GameController : MonoBehaviour {
 		if (b == 0) {
 			bulletOneRender.sprite = scoreSprite[0];
 			bulletCounter = 9;
-			isfinish = true;
+			//isfinish = true;
 		}
 	}
 
