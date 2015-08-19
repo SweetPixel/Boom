@@ -88,7 +88,11 @@ public class ScrollRectCsharp : MonoBehaviour {
 
 	public void reset(int num)
 	{
-		if (num > 4) 
+		float newX = panel.anchoredPosition.x + 1950f;
+		Debug.Log ("Panel X: " + newX);
+		Vector2 newPosition = new Vector2 (newX, panel.anchoredPosition.y);
+		panel.anchoredPosition = newPosition;
+		/*if (num > 4) 
 		{
 			num --;
 		} 
@@ -99,7 +103,7 @@ public class ScrollRectCsharp : MonoBehaviour {
 		float newX = Mathf.Lerp (panel.anchoredPosition.x, panel.anchoredPosition.x - (num * 650f), Time.deltaTime * 10f);
 		Debug.Log ("Panel X: " + newX);
 		Vector2 newPosition = new Vector2 (newX, panel.anchoredPosition.y);
-		panel.anchoredPosition = newPosition;
+		panel.anchoredPosition = newPosition;*/
 	}
 
 	public float panelAnchoredPosition()

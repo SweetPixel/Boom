@@ -753,6 +753,8 @@ public class GameController : MonoBehaviour {
 		scoreRenderer.sprite = scoreSprite [score];
 		scoreRendererTwo.sprite = scoreSprite [score];
 		scoreRendererThree.sprite = scoreSprite [score];
+		scoreRendererFour.sprite = scoreSprite [score];
+
 		bulletTwoRender.enabled = true;
 
 		if (gunIndex == 0 || gunIndex == 1) {
@@ -1166,7 +1168,7 @@ public class GameController : MonoBehaviour {
 			bulletCounter  = 9;
 		}
 		else if (b < 10 && b > 0) {
-			bulletTwoRender.enabled = false;
+			//bulletTwoRender.enabled = false;
 			bulletOneRender.sprite = scoreSprite[bulletCounter];
 			bulletCounter  = bulletCounter - 1;
 		}

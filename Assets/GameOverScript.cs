@@ -137,6 +137,10 @@ public class GameOverScript : MonoBehaviour {
 			Acc_digitUnit.enabled = true;
 			Acc_digitUnit.sprite = scoreSprite [unit];
 		}
+		else if(percentage >= 100) {
+			Acc_digitTen.sprite = scoreSprite [9];
+			Acc_digitUnit.sprite = scoreSprite [9];
+		}
 	}
 
 	private void calculateKills()

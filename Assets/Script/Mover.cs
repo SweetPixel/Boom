@@ -151,11 +151,13 @@ public class Mover : MonoBehaviour {
 		GameController gc = gcc.GetComponent<GameController> ();
 		gc.GameOver ();
 
-		/*GameObject exp = GameObject.FindGameObjectWithTag ("BomberBirdExplosion");
-		if (exp == null) {
+		GameObject exp = GameObject.FindGameObjectWithTag ("BomberBirdExplosion");
+		if (exp != null) {
+						Destroy (exp);
+						Instantiate (explosion, new Vector3 (explosion.transform.position.x, explosion.transform.position.y, explosion.transform.position.z), Quaternion.identity);
+				} else {
 			Instantiate(explosion, new Vector3(explosion.transform.position.x, explosion.transform.position.y, explosion.transform.position.z), Quaternion.identity);
-				}*/
-		Instantiate(explosion, new Vector3(explosion.transform.position.x, explosion.transform.position.y, explosion.transform.position.z), Quaternion.identity);
+				}
 
 		GameObject gover = GameObject.FindGameObjectWithTag ("GameOver");
 		if (gover == null) {

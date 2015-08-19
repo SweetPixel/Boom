@@ -75,9 +75,11 @@ public class MapScrollScript : MonoBehaviour {
 		dragging = false;
 	}
 
-	public void reset(int minNum)
+	public void reset(int num)
 	{
-		LerpToButton(minNum * btnDistance);
+		float newX = panel.anchoredPosition.x + 1300f;
+		Vector2 newPosition = new Vector2 (newX, panel.anchoredPosition.y);
+		panel.anchoredPosition = newPosition;
 	}
 
 }

@@ -13,7 +13,7 @@ public class EagleScript : MonoBehaviour {
 	private bool isHit = false;
 	GameObject gcc;
 	GameController gc;
-
+	GameObject blood;
 
 	// Use this for initialization
 	IEnumerator Start () {
@@ -25,7 +25,8 @@ public class EagleScript : MonoBehaviour {
 		hunter = GameObject.FindGameObjectWithTag ("Player");
 		hm = hunter.GetComponent<HunterMovement> ();
 
-
+		blood = GameObject.FindGameObjectWithTag ("EagleBlood");
+		blood.SetActive (false);
 		//anim = GetComponent<Animator> ();
 		//anim.SetBool ("isHit", false);
 	}
@@ -90,6 +91,7 @@ public class EagleScript : MonoBehaviour {
 			gameObject.transform.Rotate (0,0,0);
 				}
 		Time.timeScale = 0.4f;
+		blood.SetActive (true);
 		yield return new WaitForSeconds (1f);
 		Time.timeScale = 1f;
 		GameObject fl = (GameObject)Instantiate(flock, new Vector3(3f,0f), Quaternion.identity);

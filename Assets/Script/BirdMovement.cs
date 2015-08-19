@@ -117,11 +117,11 @@ public class BirdMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (prevSprite != GetComponent<SpriteRenderer> ().sprite) {
+		/*if (prevSprite != GetComponent<SpriteRenderer> ().sprite) {
 						Destroy (GetComponent<PolygonCollider2D> ());
 						gameObject.AddComponent<PolygonCollider2D> ();
 			prevSprite = GetComponent<SpriteRenderer> ().sprite;
-				}
+				}*/
 
 		birdLife += Time.deltaTime;
 		if (birdLife > 5f) {

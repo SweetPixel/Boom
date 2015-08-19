@@ -30,7 +30,7 @@ public class HunterMovement : MonoBehaviour {
 
 	bool isFired = false;
 
-	bool isRight = false;
+	bool isRight = true;
 	public GameObject shoot;
 	Animator anim;
 	Animator animshoot;
@@ -212,7 +212,6 @@ public class HunterMovement : MonoBehaviour {
 	}
 
 	void Update () {
-
 		if(gunIndex == 1)
 		{
 			//sniperTracker.SetActive (false);
@@ -407,22 +406,29 @@ public class HunterMovement : MonoBehaviour {
 		{
 			//fireShot++;
 			gc.addFireShotNumber();
-			int shotfirecount = 0;
+			int shotfirecount = 1;
 			while(true)
 			{
 				if (isRight) {
 					GameObject game = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,-10f));
 					game.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,-15f) * Vector2.up * bulletSpeed);
+					yield return new WaitForSeconds(0.05f);
+					GameObject ga = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,-10f));
+					ga.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,-15f) * Vector2.up * bulletSpeed);
+
 				} else {
 					GameObject game = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,10f));
 					game.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,15f) * Vector2.up * bulletSpeed);
+					yield return new WaitForSeconds(0.05f);
+					GameObject ga = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,10f));
+					ga.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,15f) * Vector2.up * bulletSpeed);
 				}
 				shotfirecount++;
 				if(shotfirecount == 2)
 				{
 					break;
 				}
-				yield return new WaitForSeconds(0.05f);
+
 			}
 		} 
 		else if(gunIndex == 3)
