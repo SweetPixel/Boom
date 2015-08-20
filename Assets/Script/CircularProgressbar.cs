@@ -12,6 +12,7 @@ public class CircularProgressbar : MonoBehaviour {
 	private bool start=true;
 	public Image counter;
 	int count = 8;
+	public Text num;
 
 	void Start() {
 		circularSilder.fillAmount=1f;   // Initally progress bar is empty
@@ -23,7 +24,8 @@ public class CircularProgressbar : MonoBehaviour {
 			circularSilder.fillAmount -= ((Time.deltaTime / time) + 0.11f);  
 			if(count > -1)
 			{
-				counter.sprite = numbers[count];
+				//counter.sprite = numbers[count];
+				num.text = count.ToString();
 			}
 			count--;
 			start=false;

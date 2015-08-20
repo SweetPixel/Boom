@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class EagleScript : MonoBehaviour {
@@ -13,7 +13,7 @@ public class EagleScript : MonoBehaviour {
 	private bool isHit = false;
 	GameObject gcc;
 	GameController gc;
-	GameObject blood;
+	public GameObject blood;
 
 	// Use this for initialization
 	IEnumerator Start () {

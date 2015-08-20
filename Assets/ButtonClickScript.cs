@@ -84,7 +84,7 @@ public class ButtonClickScript : MonoBehaviour {
 				//gunIndex = 2;
 				PlayerPrefs.SetInt ("tempGunIndex", 2);
 
-				if(sc > smgValue && PlayerPrefs.GetInt("SmgAvailable") == 0)
+				if(sc < smgValue && PlayerPrefs.GetInt("SmgAvailable") == 0)
 				{
 					isAvailable = false;
 					if(GameObject.FindGameObjectWithTag("GunCanvas-PlayButton") != null){
@@ -102,7 +102,7 @@ public class ButtonClickScript : MonoBehaviour {
 				//gunIndex = 3;
 				PlayerPrefs.SetInt ("tempGunIndex", 3);
 
-				if(sc > shotgunValue && PlayerPrefs.GetInt("ShotgunAvailable") == 0)
+				if(sc < shotgunValue && PlayerPrefs.GetInt("ShotgunAvailable") == 0)
 				{
 					isAvailable = false;
 					if(GameObject.FindGameObjectWithTag("GunCanvas-PlayButton") != null){
@@ -189,11 +189,8 @@ public class ButtonClickScript : MonoBehaviour {
 		if (buttonName == "Play") {
 
 			GameObject gunCanvas = GameObject.FindGameObjectWithTag("GunCanvas");
-			Debug.Log(PlayerPrefs.GetInt("SmgAvailable"));
-			Debug.Log("gunIndex: " + gunIndex);
 			isGuncanvasOpen = false;
 			PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
-			Debug.Log(isGuncanvasOpen);
 			if(PlayerPrefs.GetInt ("tempGunIndex") == 1)
 			{
 				gunCanvas.SetActive (false);
@@ -212,13 +209,19 @@ public class ButtonClickScript : MonoBehaviour {
 				}
 				else{
 					int sc = PlayerPrefs.GetInt ("Score");
-					PlayerPrefs.SetInt ("Score", sc - smgValue);
-					PlayerPrefs.SetInt("SmgAvailable", 1);
+					if(sc < smgValue)
+					{
 
-					gunCanvas.SetActive (false);
-					sg.deactiveCanvas();
-					PlayerPrefs.SetInt ("gunIndex", 2);
-					restartLevel();
+					}
+					else{
+						PlayerPrefs.SetInt ("Score", sc - smgValue);
+						PlayerPrefs.SetInt("SmgAvailable", 1);
+						
+						gunCanvas.SetActive (false);
+						sg.deactiveCanvas();
+						PlayerPrefs.SetInt ("gunIndex", 2);
+						restartLevel();
+					}
 				}
 			} 
 			else if(PlayerPrefs.GetInt ("tempGunIndex") == 3)
@@ -232,13 +235,19 @@ public class ButtonClickScript : MonoBehaviour {
 				}
 				else{
 					int sc = PlayerPrefs.GetInt ("Score");
-					PlayerPrefs.SetInt ("Score", sc - shotgunValue);
-					PlayerPrefs.SetInt("ShotgunAvailable", 1);
+					if(sc < shotgunValue)
+					{
 
-					gunCanvas.SetActive (false);
-					sg.deactiveCanvas();
-					PlayerPrefs.SetInt ("gunIndex", 3);
-					restartLevel();
+					}
+					else{
+						PlayerPrefs.SetInt ("Score", sc - shotgunValue);
+						PlayerPrefs.SetInt("ShotgunAvailable", 1);
+						
+						gunCanvas.SetActive (false);
+						sg.deactiveCanvas();
+						PlayerPrefs.SetInt ("gunIndex", 3);
+						restartLevel();
+					}
 				}
 			} 
 			else if(PlayerPrefs.GetInt ("tempGunIndex") == 4)
@@ -252,13 +261,19 @@ public class ButtonClickScript : MonoBehaviour {
 				}
 				else{
 					int sc = PlayerPrefs.GetInt ("Score");
-					PlayerPrefs.SetInt ("Score", sc - sniperValue);
-					PlayerPrefs.SetInt("SniperAvailable", 1);
+					if(sc < sniperValue)
+					{
 
-					gunCanvas.SetActive (false);
-					sg.deactiveCanvas();
-					PlayerPrefs.SetInt ("gunIndex", 4);
-					restartLevel();
+					}
+					else{
+						PlayerPrefs.SetInt ("Score", sc - sniperValue);
+						PlayerPrefs.SetInt("SniperAvailable", 1);
+						
+						gunCanvas.SetActive (false);
+						sg.deactiveCanvas();
+						PlayerPrefs.SetInt ("gunIndex", 4);
+						restartLevel();
+					}
 				}
 			} 
 		}
@@ -346,6 +361,7 @@ public class ButtonClickScript : MonoBehaviour {
 			GameObject.FindGameObjectWithTag("CoinObject").GetComponent<Animator>().SetBool("isStart", true);
 			GameObject.FindGameObjectWithTag("ButtonCountDown").GetComponent<Animator>().SetBool("isEnd", false);
 			GameObject.FindGameObjectWithTag("CoinObject").GetComponent<Animator>().SetBool("isEnd", false);
+			GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().activeCoinCanvas ();
 			sg.deactiveCanvas();
 			restartLevel();
 		}
@@ -355,13 +371,13 @@ public class ButtonClickScript : MonoBehaviour {
 		}
 
 		if (buttonName == "VideoButton") {
-			VideoAds gamecontroller = GameObject.FindGameObjectWithTag("GameController").GetComponent<VideoAds>();
-			gamecontroller.loadAd();
 			int sc = PlayerPrefs.GetInt ("Score");
 			sc = sc + 100;
 			PlayerPrefs.SetInt ("Score", sc);
 			GameOverScript go_script = GameObject.FindGameObjectWithTag("GameOver").GetComponent<GameOverScript>();
 			go_script.calculateTotalCoins();
+			VideoAds gamecontroller = GameObject.FindGameObjectWithTag("GameController").GetComponent<VideoAds>();
+			gamecontroller.loadAd();
 		}
 
 		/* if (buttonName == "PlayWithShotgun") {
@@ -499,15 +515,20 @@ public class ButtonClickScript : MonoBehaviour {
 		GameObject h = (GameObject)Instantiate(hunterPrefab, new Vector3(8.15f, -2.15f, 0.02769041f), Quaternion.identity);
 		//gameObject.GetComponent<Collider2D>().name = "StartButton";
 		
-		HunterMovement hRestart = h.GetComponent<HunterMovement> ();
-		hRestart.letStart();
-
-
+		GameObject hand = GameObject.Find("PlayHand");
+		hand.transform.position = new Vector2(8.089996f, 0.15f);
+		//pauseSmallCanvas.SetActive (true);
+		sg.activatePlayMode();
 	}
 
 	public void activateCanvas()
 	{
 		startCanvas.SetActive(true);
+	}
+
+	public void disablePauseCanvas()
+	{
+		//pauseSmallCanvas.SetActive (false);
 	}
 
 	IEnumerator startanimation() 
@@ -517,6 +538,9 @@ public class ButtonClickScript : MonoBehaviour {
 		//yield return new WaitForSeconds (1f);
 		anim.SetBool ("IsPressed", true);
 		yield return new WaitForSeconds (1.5f);
+
+		GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().activeCoinCanvas ();
+
 		GameObject temp = (GameObject)Instantiate (progressBar, new Vector2 (progressBar.transform.position.x, progressBar.transform.position.y), Quaternion.identity);
 		temp.GetComponent<CircularProgressbar> ().enabled = false;
 		GameObject hand = GameObject.Find("PlayHand");

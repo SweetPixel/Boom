@@ -91,6 +91,8 @@ public class HunterMovement : MonoBehaviour {
 	public int IdleThreshold = 9;
 	public GameObject progressBar;
 
+	private bool isInitial = true;
+
 	IEnumerator Start () {
 		/* Bullet Renderers */
 
@@ -171,7 +173,7 @@ public class HunterMovement : MonoBehaviour {
 		restartInitiate = 0;
 		
 		/* Flip Function */
-		Flip ();
+		//Flip ();
 
 		/* Start Hunter Movement from the middle */
 		yield return StartCoroutine(MoveObject(transform, new Vector3(8.15f, -1.84f, 0.02769041f), new Vector3(9.80f, -1.84f, 0.02769041f), hunterSpeed));
@@ -318,7 +320,7 @@ public class HunterMovement : MonoBehaviour {
 				}
 
 		if (col.gameObject.name == "HunterColliderLeft" || col.gameObject.name == "HunterColliderRight") {
-			Flip ();
+			//Flip ();
 				}
 
 	}
@@ -484,6 +486,11 @@ public class HunterMovement : MonoBehaviour {
 			GameObject leftBul = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,20f));
 			leftBul.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,25f) * Vector2.up * 2900f);
 		}
+	}
+
+	public void setRight(bool x)
+	{
+		isRight = x;
 	}
 
 	void checkBirdPosition()

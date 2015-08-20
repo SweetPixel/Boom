@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameController : MonoBehaviour {
@@ -86,6 +87,11 @@ public class GameController : MonoBehaviour {
 	private bool slowDown = false;
 	private bool isfinish = false;
 
+	public Text coinsCounter;
+	public Canvas CoinCanvas;
+	public Text bCounter;
+	public Canvas BulletCanvas;
+
 	void Start()
 	{
 		score = 0;
@@ -99,7 +105,7 @@ public class GameController : MonoBehaviour {
 		coinIconRender = coinIcon.GetComponent<SpriteRenderer> ();
 		coinAnimator = coinIcon.GetComponent<Animator> ();
 
-		bulletOne = GameObject.Find ("BulletSprite");
+		/*bulletOne = GameObject.Find ("BulletSprite");
 		bulletTwo = GameObject.Find ("BulletSpriteTwo");
 		
 		bulletOneRender = bulletOne.GetComponent<SpriteRenderer> ();
@@ -107,13 +113,15 @@ public class GameController : MonoBehaviour {
 		
 		bulletTwoRender = bulletTwo.GetComponent<SpriteRenderer> ();
 		bulletTwoRender.sprite = scoreSprite [5];
-		bulletTwoRender.enabled = true;
+		bulletTwoRender.enabled = true;*/
 
+		CoinCanvas.enabled = false;
+		BulletCanvas.enabled = false;
 		//bulletIcon = GameObject.Find ("BulletIcon");
 		//bulletIconRender = bulletIcon.GetComponent<SpriteRenderer>();
 
 		/* Score Sprites */
-		ScoreUnit = GameObject.Find ("ScoreSprite");
+		/*ScoreUnit = GameObject.Find ("ScoreSprite");
 		ScoreTen = GameObject.Find ("ScoreSpriteTwo");
 		ScoreHundred = GameObject.Find ("ScoreSpriteThree");
 		
@@ -127,7 +135,7 @@ public class GameController : MonoBehaviour {
 		scoreRendererThree.sprite = scoreSprite [score];
 
 		scoreRendererFour = ScoreThousand.GetComponent<SpriteRenderer> ();
-		scoreRendererFour.sprite = scoreSprite [score];
+		scoreRendererFour.sprite = scoreSprite [score];*/
 
 		bulletRifleIcon.SetActive(false);
 		bulletShotGunIcon.SetActive(false);
@@ -144,9 +152,9 @@ public class GameController : MonoBehaviour {
 			//sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
 			
 			b = 12;
-			bulletCounter = 2;
+			/*bulletCounter = 2;
 			bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];
+			bulletTwoRender.sprite = scoreSprite [1];*/
 		}
 		else if (gunIndex == 2) {
 			gunIndex = 2;
@@ -157,9 +165,9 @@ public class GameController : MonoBehaviour {
 			//sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
 			
 			b = 24;
-			bulletCounter = 4;
+			/*bulletCounter = 4;
 			bulletOneRender.sprite = scoreSprite [4];
-			bulletTwoRender.sprite = scoreSprite [2];
+			bulletTwoRender.sprite = scoreSprite [2];*/
 			
 		}
 		else if (gunIndex == 3) {
@@ -171,9 +179,9 @@ public class GameController : MonoBehaviour {
 			//sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
 			
 			b = 12;
-			bulletCounter = 2;
+			/*bulletCounter = 2;
 			bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];
+			bulletTwoRender.sprite = scoreSprite [1];*/
 		}
 		else if (gunIndex == 4) {
 			gunIndex = 4;
@@ -184,9 +192,9 @@ public class GameController : MonoBehaviour {
 			//sniperTracker.GetComponent<SpriteRenderer>().enabled = true;
 			
 			b = 12;
-			bulletCounter = 2;
+			/*bulletCounter = 2;
 			bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];
+			bulletTwoRender.sprite = scoreSprite [1];*/
 		}
 		timeLeft = totalTime;
 
@@ -201,6 +209,11 @@ public class GameController : MonoBehaviour {
 		if (startTime > 3f) {
 			startCanvas.SetActive(true);
 				} */
+
+		GameObject[] g = GameObject.FindGameObjectsWithTag ("GameOver");
+		if (g.Length > 1) {
+			Destroy(g[0]);
+				}
 
 		if (initFlamingo == true) {
 			int index = Random.Range(0,2);
@@ -750,37 +763,37 @@ public class GameController : MonoBehaviour {
 		birdKilled = 0;
 		birdCount = 0;
 
-		scoreRenderer.sprite = scoreSprite [score];
+		/*scoreRenderer.sprite = scoreSprite [score];
 		scoreRendererTwo.sprite = scoreSprite [score];
 		scoreRendererThree.sprite = scoreSprite [score];
 		scoreRendererFour.sprite = scoreSprite [score];
 
-		bulletTwoRender.enabled = true;
+		bulletTwoRender.enabled = true;*/
 
 		if (gunIndex == 0 || gunIndex == 1) {
 			b = 12;
-			bulletCounter = 2;
+			/*bulletCounter = 2;
 			bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];
+			bulletTwoRender.sprite = scoreSprite [1];*/
 		}
 		else if (gunIndex == 2) {
 			b = 24;
-			bulletCounter = 4;
+			/*bulletCounter = 4;
 			bulletOneRender.sprite = scoreSprite [4];
-			bulletTwoRender.sprite = scoreSprite [2];
+			bulletTwoRender.sprite = scoreSprite [2];*/
 			
 		}
 		else if (gunIndex == 3) {
 			b = 12;
-			bulletCounter = 2;
+			/*bulletCounter = 2;
 			bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];
+			bulletTwoRender.sprite = scoreSprite [1];*/
 		}
 		else if (gunIndex == 4) {
 			b = 12;
-			bulletCounter = 2;
+			/*bulletCounter = 2;
 			bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];
+			bulletTwoRender.sprite = scoreSprite [1];*/
 		}
 	}
 	
@@ -792,8 +805,10 @@ public class GameController : MonoBehaviour {
 		if (value == 0) {
 			return;
 		}
-		
-		if (score <= 5) {
+
+		coinsCounter.text = score.ToString();
+
+		/*if (score <= 5) {
 			scoreRendererThree.sprite = scoreSprite [score];
 		}
 		else if (score >=6 && score < 10) {
@@ -1019,7 +1034,7 @@ public class GameController : MonoBehaviour {
 			scoreRendererTwo.sprite = scoreSprite [ten];
 			scoreRendererThree.sprite = scoreSprite [unit];
 			
-		}
+		} */
 		//coinAnimator.enabled = false;
 
 		if (b == 0)
@@ -1075,6 +1090,27 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	public void disableCoinCanvas()
+	{
+		CoinCanvas.enabled = false;
+		BulletCanvas.enabled = false;
+	}
+
+	public void activeCoinCanvas()
+	{
+		score = 0;
+		coinsCounter.text = score.ToString ();
+		bCounter.text = b.ToString ();
+		CoinCanvas.enabled = true;
+		StartCoroutine (waitAndEnableBulletCanvas ());
+	}
+
+	IEnumerator waitAndEnableBulletCanvas()
+	{
+		yield return new WaitForSeconds (0.5f);
+		BulletCanvas.enabled = true;
+	}
+
 	public void setEagleVisibility()
 	{
 		isEagleVisible = false;
@@ -1085,35 +1121,35 @@ public class GameController : MonoBehaviour {
 		StartCoroutine (BulletIconBeating ());
 		if(gunIndex == 1)
 		{
-			bulletOneRender.sprite = scoreSprite [2];
+			/*bulletOneRender.sprite = scoreSprite [2];
 			bulletTwoRender.sprite = scoreSprite [1];
-			bulletTwoRender.enabled = true;
+			bulletTwoRender.enabled = true;*/
 			b = 12;
-			bulletCounter = 2;
+			//bulletCounter = 2;
 		}
 		else if(gunIndex == 2)
 		{
-			bulletOneRender.sprite = scoreSprite [4];
+			/*bulletOneRender.sprite = scoreSprite [4];
 			bulletTwoRender.sprite = scoreSprite [2];
-			bulletTwoRender.enabled = true;
+			bulletTwoRender.enabled = true;*/
 			b = 24;
-			bulletCounter = 4;
+			//bulletCounter = 4;
 		}
 		else if(gunIndex == 3)
 		{
-			bulletOneRender.sprite = scoreSprite [2];
+			/*bulletOneRender.sprite = scoreSprite [2];
 			bulletTwoRender.sprite = scoreSprite [1];
-			bulletTwoRender.enabled = true;
+			bulletTwoRender.enabled = true;*/
 			b = 12;
-			bulletCounter = 2;
+			//bulletCounter = 2;
 		}
 		else if(gunIndex == 4)
 		{
-			bulletOneRender.sprite = scoreSprite [2];
+			/*bulletOneRender.sprite = scoreSprite [2];
 			bulletTwoRender.sprite = scoreSprite [1];
-			bulletTwoRender.enabled = true;
+			bulletTwoRender.enabled = true;*/
 			b = 12;
-			bulletCounter = 2;
+			//bulletCounter = 2;
 		}
 	}
 
@@ -1127,7 +1163,9 @@ public class GameController : MonoBehaviour {
 	public void bulletSpriteSetter()
 	{
 		b = b - 1;
-		if (b > 40) {
+		bCounter.text = b.ToString ();
+
+		/*if (b > 40) {
 			bulletTwoRender.sprite = scoreSprite[4];
 			bulletOneRender.sprite = scoreSprite[bulletCounter];
 			bulletCounter  = bulletCounter - 1;
@@ -1171,12 +1209,12 @@ public class GameController : MonoBehaviour {
 			//bulletTwoRender.enabled = false;
 			bulletOneRender.sprite = scoreSprite[bulletCounter];
 			bulletCounter  = bulletCounter - 1;
-		}
-		if (b == 0) {
-			bulletOneRender.sprite = scoreSprite[0];
-			bulletCounter = 9;
-			//isfinish = true;
-		}
+		} */
+		/*if (b == 0) {
+			//bulletOneRender.sprite = scoreSprite[0];
+			//bulletCounter = 9;
+			isfinish = true;
+		}*/
 	}
 
 	public int getBulletNumber()
@@ -1198,6 +1236,10 @@ public class GameController : MonoBehaviour {
 		PlayerPrefs.SetInt ("MatchScore", score);
 		/*if (PlayerPrefs.GetInt ("Score") > PlayerPrefs.GetInt ("HighScore"))
 			PlayerPrefs.SetInt ("HighScore", score); */
+
+		GameObject.FindGameObjectWithTag ("Player").GetComponent<HunterFlip> ().enabled = false;
+		GameObject.FindGameObjectWithTag ("GameController").GetComponent<ButtonClickScript> ().disablePauseCanvas ();
+
 		GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (gameOver.transform.position.x, gameOver.transform.position.y), Quaternion.identity);
 		
 		//gameObject.transform.position = new Vector2(transform.position.x, -1.98f);

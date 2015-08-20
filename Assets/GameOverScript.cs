@@ -66,6 +66,11 @@ public class GameOverScript : MonoBehaviour {
 	private bool startTimer = true;
 	Image label;
 
+	public Text matchScore;
+	public Text totalCoin;
+	public Text accuracy;
+	public Text kill;
+
 	// Use this for initialization
 	void Start () {
 
@@ -76,6 +81,8 @@ public class GameOverScript : MonoBehaviour {
 		GameObject.FindGameObjectWithTag("CoinObject").GetComponent<Animator>().SetBool("isEnd", true);
 		GameObject.FindGameObjectWithTag("ButtonCountDown").GetComponent<Animator>().SetBool("isStart", false);
 		GameObject.FindGameObjectWithTag("CoinObject").GetComponent<Animator>().SetBool("isStart", false);
+
+		StartCoroutine (Wait());
 
 		label = GameObject.FindGameObjectWithTag ("FreeGiftIn_Label").GetComponent<Image> ();
 		gameController = GameObject.FindGameObjectWithTag ("GameController");
@@ -93,6 +100,7 @@ public class GameOverScript : MonoBehaviour {
 			minute.sprite = numbers [timerLeft];
 		} else {
 			timerIcon.enabled = false;
+			Debug.Log (giftButton);
 			giftButton.SetActive(true);
 			label.enabled = false;
 			textObject.enabled = true;
@@ -112,6 +120,12 @@ public class GameOverScript : MonoBehaviour {
 
 	}
 
+	IEnumerator Wait()
+	{
+		yield return new WaitForSeconds (1f);
+		GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().disableCoinCanvas ();
+	}
+
 	private void calculateAccuracy()
 	{
 		//Accuracy
@@ -119,11 +133,18 @@ public class GameOverScript : MonoBehaviour {
 		int shotFired = gc.getFireShotNumber (); //hm.getFireShotNumber ();
 		float percentage = (float) birdCount / shotFired * 100;
 
-		Debug.Log ("BirdCount: " + birdCount);
+		/*Debug.Log ("BirdCount: " + birdCount);
 		Debug.Log ("shotFired: " + shotFired);
-		Debug.Log ("Percentage: " + percentage);
+		Debug.Log ("Percentage: " + percentage);*/
 
-		if (percentage < 1) {
+		if((int)percentage >100)
+		{
+			percentage = 100;
+		}
+
+		accuracy.text = ((int)percentage).ToString();
+
+		/*if (percentage < 1) {
 			Acc_digitUnit.sprite = scoreSprite [0];
 		}
 		else if (percentage > 1 && percentage < 10) {
@@ -140,7 +161,7 @@ public class GameOverScript : MonoBehaviour {
 		else if(percentage >= 100) {
 			Acc_digitTen.sprite = scoreSprite [9];
 			Acc_digitUnit.sprite = scoreSprite [9];
-		}
+		}*/
 	}
 
 	private void calculateKills()
@@ -148,7 +169,9 @@ public class GameOverScript : MonoBehaviour {
 		//Accuracy
 		int birdCount = gc.getBirdKilled (); //(float)matchscore;
 
-		if (birdCount < 1) {
+		kill.text = birdCount.ToString ();
+
+		/*if (birdCount < 1) {
 			kill_digitUnit.sprite = scoreSprite [0];
 		}
 		else if (birdCount > 1 && birdCount < 10) {
@@ -160,7 +183,7 @@ public class GameOverScript : MonoBehaviour {
 			kill_digitTen.sprite = scoreSprite [ten];
 			kill_digitUnit.enabled = true;
 			kill_digitUnit.sprite = scoreSprite [unit];
-		}
+		}*/
 	} 
 
 	public void calculateTotalCoins()
@@ -169,8 +192,29 @@ public class GameOverScript : MonoBehaviour {
 
 		Debug.Log ("Total Coins: " + sc);
 
+		if (sc < 10) {
+			totalCoin.text = "0000" +  sc.ToString ();
+				} 
+		else if (sc >= 10 && sc < 100) 
+		{
+			totalCoin.text = "000" + sc.ToString ();
+		}
+		else if (sc >= 100 && sc < 1000) 
+		{
+			totalCoin.text = "00" + sc.ToString ();
+		}
+		else if (sc >= 1000 && sc < 10000) 
+		{
+			totalCoin.text = "0" + sc.ToString ();
+		}
+		else if (sc >= 10000) 
+		{
+			totalCoin.text = sc.ToString ();
+		}
+
+
 		//Total Coin Logic
-		if (sc < 1) {
+		/*if (sc < 1) {
 			coinOne.sprite = scoreSprite [0];
 		}
 		else if (sc < 10) {
@@ -230,7 +274,7 @@ public class GameOverScript : MonoBehaviour {
 			coinThree.sprite = scoreSprite [hund];
 			coinTwo.sprite = scoreSprite [ten];
 			coinOne.sprite = scoreSprite [unit];
-		}
+		}*/
 	}
 
 	private void calculateMatchScore()
@@ -239,7 +283,23 @@ public class GameOverScript : MonoBehaviour {
 		int matchscore = PlayerPrefs.GetInt ("MatchScore");
 		Debug.Log ("Match Score: " + matchscore);
 
-		if (matchscore < 1) {
+		if (matchscore < 10) {
+			matchScore.text = "0000" + matchscore;
+				}
+		else if (matchscore >= 10 && matchscore < 100) {
+			matchScore.text = "000" + matchscore;
+		}
+		else if (matchscore >= 100 && matchscore < 1000) {
+			matchScore.text = "00" + matchscore;
+		}
+		else if (matchscore >= 1000 && matchscore < 10000) {
+			matchScore.text = "0" + matchscore;
+		}
+		else if (matchscore >= 10000) {
+			matchScore.text = matchscore.ToString();
+		}
+		
+		/*if (matchscore < 1) {
 			msUnit.sprite = scoreSprite [0];
 		}
 		else if (matchscore > 1 && matchscore < 10) {
@@ -300,7 +360,12 @@ public class GameOverScript : MonoBehaviour {
 			msHundred.sprite = scoreSprite [hund];
 			msTen.sprite = scoreSprite [ten];
 			msUnit.sprite = scoreSprite [unit];
-		}
+		}*/
+
+	}
+
+	public void UpdateTotalCoins()
+	{
 
 	}
 
@@ -308,12 +373,13 @@ public class GameOverScript : MonoBehaviour {
 	void Update () {
 
 		if (startTimer) {
+			label = GameObject.FindGameObjectWithTag ("FreeGiftIn_Label").GetComponent<Image> ();
 			int timerLeft = int.Parse(gc.giftTimerLeft ());
 			if (prevtime != timerLeft && timerLeft > 0) {
 				prevtime = timerLeft;
 				minute.sprite = numbers [timerLeft];
 			}
-			if (timerLeft > 0) {
+			/*if (timerLeft > 0) {
 				giftButton.SetActive(false);
 				timerIcon.enabled = true;
 				//textObject.sprite = freeGiftIn;
@@ -327,7 +393,7 @@ public class GameOverScript : MonoBehaviour {
 				giftButton.SetActive(true);
 				label.enabled = false;
 				textObject.enabled = true;
-			}
+			}*/
 		}
 	}
 }

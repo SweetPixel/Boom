@@ -111,7 +111,7 @@ public class StartGame : MonoBehaviour {
 				render.sprite = start;
 				StartCoroutine(waitTime(gameObject));	
 			}
-
+			isPlayHand = false;
 				}
 		/*else if (gameObject.GetComponent<Collider2D>().name == "RestartButton") {
 			//startLevel ();
