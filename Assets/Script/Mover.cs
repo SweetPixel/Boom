@@ -161,6 +161,7 @@ public class Mover : MonoBehaviour {
 
 		GameObject gover = GameObject.FindGameObjectWithTag ("GameOver");
 		if (gover == null) {
+			Debug.Log ("EnemyBird GameOver");
 			GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (8.029126f, 1.784778f), Quaternion.identity);
 				}
 

@@ -261,36 +261,7 @@ public class HunterMovement : MonoBehaviour {
 	{
 		while (true) 
 		{
-			GameObject[] birds = GameObject.FindGameObjectsWithTag("Bird2D");
-			foreach(GameObject b in birds)
-			{
-				BirdMovement bm = b.GetComponent<BirdMovement>();
-				bm.setHunterIdle();
-			}
-
-			GameObject[] enemy = GameObject.FindGameObjectsWithTag("BirdEnemy2D");
-			foreach(GameObject b in enemy)
-			{
-				Mover bm = b.GetComponent<Mover>();
-				bm.setHunterIdle();
-			}
-
-			GameObject[] humming = GameObject.FindGameObjectsWithTag("HummingBird");
-			foreach(GameObject b in humming)
-			{
-				HummingBirdScript bm = b.GetComponent<HummingBirdScript>();
-				bm.setHunterIdle();
-			}
-
-			GameObject[] sandhillCrane = GameObject.FindGameObjectsWithTag("SandhillCrane");
-			if(sandhillCrane.Length > 0)
-			{
-				foreach(GameObject b in sandhillCrane)
-				{
-					SandhilCraneScript bm = b.GetComponent<SandhilCraneScript>();
-					bm.setHunterIdle();
-				}
-			}
+			flyAwayBirds();
 			yield return new WaitForSeconds (1f);
 			sniperTracker.SetActive (false);
 			roundAvailable = false;
@@ -310,7 +281,39 @@ public class HunterMovement : MonoBehaviour {
 		}
 	}
 
-
+	public void flyAwayBirds()
+	{
+		GameObject[] birds = GameObject.FindGameObjectsWithTag("Bird2D");
+		foreach(GameObject b in birds)
+		{
+			BirdMovement bm = b.GetComponent<BirdMovement>();
+			bm.setHunterIdle();
+		}
+		
+		GameObject[] enemy = GameObject.FindGameObjectsWithTag("BirdEnemy2D");
+		foreach(GameObject b in enemy)
+		{
+			Mover bm = b.GetComponent<Mover>();
+			bm.setHunterIdle();
+		}
+		
+		GameObject[] humming = GameObject.FindGameObjectsWithTag("HummingBird");
+		foreach(GameObject b in humming)
+		{
+			HummingBirdScript bm = b.GetComponent<HummingBirdScript>();
+			bm.setHunterIdle();
+		}
+		
+		GameObject[] sandhillCrane = GameObject.FindGameObjectsWithTag("SandhillCrane");
+		if(sandhillCrane.Length > 0)
+		{
+			foreach(GameObject b in sandhillCrane)
+			{
+				SandhilCraneScript bm = b.GetComponent<SandhilCraneScript>();
+				bm.setHunterIdle();
+			}
+		}
+	}
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
@@ -344,8 +347,6 @@ public class HunterMovement : MonoBehaviour {
 		gameObject.transform.position = new Vector2(transform.position.x, -1.9f);
 		hunterAnime.SetBool("isHit", true);
 	}
-
-
 
 	void Flip()
 	{
@@ -535,8 +536,6 @@ public class HunterMovement : MonoBehaviour {
 
 		start = true;
 		idleTime = 0f;
-		//coinObject.SetActive (false);
-		//bulletObject.SetActive (false);
 	}
 
 	public void stopStart()

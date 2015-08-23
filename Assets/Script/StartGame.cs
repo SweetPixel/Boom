@@ -190,9 +190,14 @@ public class StartGame : MonoBehaviour {
 		StartCoroutine(InitiateBird (length));
 	}
 
-	public void initEmenyBird()
+	/*public void initEmenyBird()
 	{
 		//StartCoroutine(InitiateEnemy());
+	}*/
+
+	public void initBirdOutside(int length)
+	{
+		StartCoroutine(InitiateBird(length));
 	}
 
 	IEnumerator InitiateBird(int length)

@@ -1,15 +1,12 @@
 fileFormatVersion: 2
-guid: 2c54e9af94197cf4bb09889ce3e4bfe1
-timeCreated: 1439538626
+guid: e24631e1f4a01074bb05362605c29760
+timeCreated: 1440246876
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: flamingo-new-carate-shotgun-png_0
-    21300002: flamingo-new-carate-shotgun-png_1
-    21300004: flamingo-new-carate-shotgun-png_2
-    21300006: flamingo-new-carate-shotgun-png_3
-    21300008: flamingo-new-carate-shotgun-png_4
-    21300010: flamingo-new-carate-shotgun-png_5
+    21300000: Pause_small_new_0
+    21300002: Pause_small_new_1
+    21300004: Pause_small_new_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -33,9 +30,9 @@ TextureImporter:
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -3
-  maxTextureSize: 512
+  maxTextureSize: 256
   textureSettings:
-    filterMode: 2
+    filterMode: -1
     aniso: 16
     mipBias: -1
     wrapMode: 1
@@ -55,63 +52,33 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: flamingo-new-carate-shotgun-png_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
-        width: 132
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: flamingo-new-carate-shotgun-png_1
-      rect:
-        serializedVersion: 2
-        x: 132
-        y: 128
-        width: 132
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: flamingo-new-carate-shotgun-png_2
-      rect:
-        serializedVersion: 2
-        x: 264
-        y: 128
-        width: 132
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: flamingo-new-carate-shotgun-png_3
+    - name: Pause_small_new_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 132
-        height: 128
+        width: 55
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: flamingo-new-carate-shotgun-png_4
+    - name: Pause_small_new_1
       rect:
         serializedVersion: 2
-        x: 132
+        x: 55
         y: 0
-        width: 132
-        height: 128
+        width: 55
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: flamingo-new-carate-shotgun-png_5
+    - name: Pause_small_new_2
       rect:
         serializedVersion: 2
-        x: 264
+        x: 110
         y: 0
-        width: 132
-        height: 128
+        width: 55
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

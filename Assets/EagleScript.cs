@@ -94,8 +94,20 @@ public class EagleScript : MonoBehaviour {
 		blood.SetActive (true);
 		yield return new WaitForSeconds (1f);
 		Time.timeScale = 1f;
+		GameObject.FindGameObjectWithTag ("Player").GetComponent<HunterMovement> ().flyAwayBirds();
+		yield return new WaitForSeconds (0.5f);
 		GameObject fl = (GameObject)Instantiate(flock, new Vector3(3f,0f), Quaternion.identity);
 		Destroy(gameObject);
+	}
+
+	public void disableCombo()
+	{
+		GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().setIsCombo (false);
+	}
+
+	public void activeCombo()
+	{
+		GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().setIsCombo (true);
 	}
 
 }

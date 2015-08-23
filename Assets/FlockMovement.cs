@@ -38,14 +38,12 @@ public class FlockMovement : MonoBehaviour {
 			thisTransform.position = Vector2.Lerp(startPos, endPos, i);
 			yield return null;
 		}
-		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-		
 		if (transform.position.x == 14f || transform.position.x == 1f) {
+			GameObject.FindGameObjectWithTag("PlayHand").GetComponent<StartGame>().initBirdOutside(3);
 			Destroy(gameObject);
 		}
 	}
@@ -53,7 +51,6 @@ public class FlockMovement : MonoBehaviour {
 	void Flip()
 	{
 		gameObject.transform.Rotate (0,180,0);
-		//isLeft = !isLeft;
 	}
 
 }

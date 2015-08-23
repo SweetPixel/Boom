@@ -180,7 +180,11 @@ public class BirdMovement : MonoBehaviour {
 			gc.incrementBirdCount();
 			//BirdHit ();
 			Destroy(gameObject);
-			Destroy(col.gameObject);
+
+			if(PlayerPrefs.GetInt ("gunIndex") != 4)
+			{
+				Destroy(col.gameObject);
+			}
 			/*GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
 			foreach(GameObject b in bullets)
 			{

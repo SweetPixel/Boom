@@ -21,8 +21,6 @@ public class ComboScript : MonoBehaviour {
 		gc = gameController.GetComponent<GameController> ();
 		int comboValue = gc.getComboValue ();
 
-		Debug.Log ("ComboValue from GameController " + comboValue);
-
 		if (comboValue >= 2 && comboValue < 10) 
 		{
 			comboTenRenderer.sprite = comboNumbers[comboValue];

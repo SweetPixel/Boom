@@ -115,8 +115,8 @@ public class GameController : MonoBehaviour {
 		bulletTwoRender.sprite = scoreSprite [5];
 		bulletTwoRender.enabled = true;*/
 
-		CoinCanvas.enabled = false;
-		BulletCanvas.enabled = false;
+		coinsCounter.GetComponent<Text>().enabled = false;
+		bCounter.GetComponent<Text>().enabled = false;
 		//bulletIcon = GameObject.Find ("BulletIcon");
 		//bulletIconRender = bulletIcon.GetComponent<SpriteRenderer>();
 
@@ -267,6 +267,7 @@ public class GameController : MonoBehaviour {
 				GameObject hunter = GameObject.FindGameObjectWithTag("Player");
 				HunterMovement hm = hunter.GetComponent<HunterMovement>();
 				hm.lost ();
+				Debug.Log ("b==0 and go==null GameOver");
 				GameOver();
 			}
 		}
@@ -307,12 +308,18 @@ public class GameController : MonoBehaviour {
 
 	}
 
+	public void setIsCombo(bool x)
+	{
+		isCombo = x;
+	}
+
 	IEnumerator finishGame()
 	{
 		yield return new WaitForSeconds (0f);
 		GameObject hunter = GameObject.FindGameObjectWithTag("Player");
 		HunterMovement hm = hunter.GetComponent<HunterMovement>();
 		hm.lost ();
+		Debug.Log ("finishGame GameOver");
 		GameOver();
 	}
 
@@ -721,6 +728,7 @@ public class GameController : MonoBehaviour {
 			GameObject hunter = GameObject.FindGameObjectWithTag("Player");
 			HunterMovement hm = hunter.GetComponent<HunterMovement>();
 			hm.lost ();
+			Debug.Log ("decrementBirdCount GameOver");
 			GameOver();
 		}
 	}
@@ -795,6 +803,8 @@ public class GameController : MonoBehaviour {
 			bulletOneRender.sprite = scoreSprite [2];
 			bulletTwoRender.sprite = scoreSprite [1];*/
 		}
+
+		bCounter.text = b.ToString ();
 	}
 	
 	public void setScore(int value)
@@ -1039,7 +1049,11 @@ public class GameController : MonoBehaviour {
 
 		if (b == 0)
 		{
-			isfinish = true;
+			//isfinish = true;
+			GameObject hunter = GameObject.FindGameObjectWithTag("Player");
+			HunterMovement hm = hunter.GetComponent<HunterMovement>();
+			hm.lost ();
+			GameOver();
 		}
 
 	}
@@ -1092,8 +1106,8 @@ public class GameController : MonoBehaviour {
 
 	public void disableCoinCanvas()
 	{
-		CoinCanvas.enabled = false;
-		BulletCanvas.enabled = false;
+		CoinCanvas.GetComponent<Canvas>().enabled = false;
+		BulletCanvas.GetComponent<Canvas>().enabled = false;
 	}
 
 	public void activeCoinCanvas()
@@ -1101,14 +1115,14 @@ public class GameController : MonoBehaviour {
 		score = 0;
 		coinsCounter.text = score.ToString ();
 		bCounter.text = b.ToString ();
-		CoinCanvas.enabled = true;
-		StartCoroutine (waitAndEnableBulletCanvas ());
+		//CoinCanvas.GetComponent<Canvas>().enabled = true;
+		//StartCoroutine (waitAndEnableBulletCanvas ());
 	}
 
 	IEnumerator waitAndEnableBulletCanvas()
 	{
 		yield return new WaitForSeconds (0.5f);
-		BulletCanvas.enabled = true;
+		BulletCanvas.GetComponent<Canvas>().enabled = true;
 	}
 
 	public void setEagleVisibility()
@@ -1121,36 +1135,22 @@ public class GameController : MonoBehaviour {
 		StartCoroutine (BulletIconBeating ());
 		if(gunIndex == 1)
 		{
-			/*bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];
-			bulletTwoRender.enabled = true;*/
 			b = 12;
-			//bulletCounter = 2;
 		}
 		else if(gunIndex == 2)
 		{
-			/*bulletOneRender.sprite = scoreSprite [4];
-			bulletTwoRender.sprite = scoreSprite [2];
-			bulletTwoRender.enabled = true;*/
 			b = 24;
-			//bulletCounter = 4;
 		}
 		else if(gunIndex == 3)
 		{
-			/*bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];
-			bulletTwoRender.enabled = true;*/
 			b = 12;
-			//bulletCounter = 2;
 		}
 		else if(gunIndex == 4)
 		{
-			/*bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];
-			bulletTwoRender.enabled = true;*/
 			b = 12;
-			//bulletCounter = 2;
 		}
+
+		bCounter.text = b.ToString ();
 	}
 
 	IEnumerator BulletIconBeating()
@@ -1225,6 +1225,7 @@ public class GameController : MonoBehaviour {
 	private IEnumerator gameOVerWithWait()
 	{
 		yield return new WaitForSeconds (2f);
+		Debug.Log ("gameOVerWithWait GameOver");
 		GameOver();
 	}
 
@@ -1241,9 +1242,8 @@ public class GameController : MonoBehaviour {
 		GameObject.FindGameObjectWithTag ("GameController").GetComponent<ButtonClickScript> ().disablePauseCanvas ();
 
 		GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (gameOver.transform.position.x, gameOver.transform.position.y), Quaternion.identity);
-		
+
 		//gameObject.transform.position = new Vector2(transform.position.x, -1.98f);
-		//anim.SetBool("isLost", true);
 	}
 
 }

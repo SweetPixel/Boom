@@ -36,11 +36,11 @@ public class GameOverScript : MonoBehaviour {
 	SpriteRenderer kill_digitUnitRenderer;*/
 
 	//Match Score
-	public Image msUnit;
+	/*public Image msUnit;
 	public Image msTen;
 	public Image msHundred;
 	public Image msThousand;
-	public Image msTenThousand;
+	public Image msTenThousand;*/
 	/*SpriteRenderer msUnitRender;
 	SpriteRenderer msTenRender;
 	SpriteRenderer msHundredRender;
@@ -66,8 +66,18 @@ public class GameOverScript : MonoBehaviour {
 	private bool startTimer = true;
 	Image label;
 
-	public Text matchScore;
-	public Text totalCoin;
+	public Text msTenThousand;
+	public Text msThousand;
+	public Text msHundred;
+	public Text msTen;
+	public Text msUnit;
+
+	public Text tcTenThousand;
+	public Text tcThousand;
+	public Text tcHundred;
+	public Text tcTen;
+	public Text tcUnit;
+
 	public Text accuracy;
 	public Text kill;
 
@@ -76,11 +86,6 @@ public class GameOverScript : MonoBehaviour {
 
 		gamecontroller = GameObject.FindGameObjectWithTag("GameController");
 		gamecontroller.GetComponent<ButtonClickScript> ().PauseCanvasVisibility (true);
-
-		GameObject.FindGameObjectWithTag("ButtonCountDown").GetComponent<Animator>().SetBool("isEnd", true);
-		GameObject.FindGameObjectWithTag("CoinObject").GetComponent<Animator>().SetBool("isEnd", true);
-		GameObject.FindGameObjectWithTag("ButtonCountDown").GetComponent<Animator>().SetBool("isStart", false);
-		GameObject.FindGameObjectWithTag("CoinObject").GetComponent<Animator>().SetBool("isStart", false);
 
 		StartCoroutine (Wait());
 
@@ -100,7 +105,7 @@ public class GameOverScript : MonoBehaviour {
 			minute.sprite = numbers [timerLeft];
 		} else {
 			timerIcon.enabled = false;
-			Debug.Log (giftButton);
+			Debug.Log (label);
 			giftButton.SetActive(true);
 			label.enabled = false;
 			textObject.enabled = true;
@@ -118,13 +123,24 @@ public class GameOverScript : MonoBehaviour {
 		hm = hunter.GetComponent<HunterMovement> ();
 		//gc.setScoreToZero ();
 
+		GameObject progressbar = GameObject.FindGameObjectWithTag("ProgressBar");
+		if (progressbar != null) {
+			progressbar.SetActive (false);
+				}
+
+
 	}
 
 	IEnumerator Wait()
 	{
-		yield return new WaitForSeconds (1f);
+		GameObject.FindGameObjectWithTag("ButtonCountDown").GetComponent<Animator>().SetBool("isEnd", true);
+		GameObject.FindGameObjectWithTag("CoinObject").GetComponent<Animator>().SetBool("isEnd", true);
+		GameObject.FindGameObjectWithTag("ButtonCountDown").GetComponent<Animator>().SetBool("isStart", false);
+		GameObject.FindGameObjectWithTag("CoinObject").GetComponent<Animator>().SetBool("isStart", false);
+		yield return new WaitForSeconds (0.2f);
 		GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().disableCoinCanvas ();
 	}
+
 
 	private void calculateAccuracy()
 	{
@@ -193,23 +209,77 @@ public class GameOverScript : MonoBehaviour {
 		Debug.Log ("Total Coins: " + sc);
 
 		if (sc < 10) {
-			totalCoin.text = "0000" +  sc.ToString ();
+			tcTenThousand.text = "0";
+			tcThousand.text = "0";
+			tcHundred.text = "0";
+			tcTen.text = "0";
+			tcUnit.text = sc.ToString ();
 				} 
 		else if (sc >= 10 && sc < 100) 
 		{
-			totalCoin.text = "000" + sc.ToString ();
+			tcTenThousand.text = "0";
+			tcThousand.text = "0";
+			tcHundred.text = "0";
+
+			int ten = sc/10;
+			int unit = sc%10;
+
+			tcTen.text = ten.ToString();
+			tcUnit.text = unit.ToString ();
 		}
 		else if (sc >= 100 && sc < 1000) 
 		{
-			totalCoin.text = "00" + sc.ToString ();
+			tcTenThousand.text = "0";
+			tcThousand.text = "0";
+
+			int hundred = sc/100;
+			int temp = sc%100;
+
+			int ten = temp/10;
+			int unit = temp%10;
+
+			tcHundred.text = hundred.ToString();
+			tcTen.text = ten.ToString();
+			tcUnit.text = unit.ToString ();
 		}
 		else if (sc >= 1000 && sc < 10000) 
 		{
-			totalCoin.text = "0" + sc.ToString ();
+			tcTenThousand.text = "0";
+
+			int thousand = sc/1000;
+			int Thtemp = sc%1000;
+			
+			int hundred = Thtemp/100;
+			int temp = Thtemp%100;
+			
+			int ten = temp/10;
+			int unit = temp%10;
+
+			
+			tcThousand.text = thousand.ToString();
+			tcHundred.text = hundred.ToString();
+			tcTen.text = ten.ToString();
+			tcUnit.text = unit.ToString ();
 		}
 		else if (sc >= 10000) 
 		{
-			totalCoin.text = sc.ToString ();
+			int tenThousand = sc/10000;
+			int tenThTemp = sc%10000;
+			
+			int thousand = tenThTemp/1000;
+			int Thtemp = tenThTemp%1000;
+			
+			int hundred = Thtemp/100;
+			int temp = Thtemp%100;
+			
+			int ten = temp/10;
+			int unit = temp%10;
+
+			tcTenThousand.text = tenThousand.ToString();
+			tcThousand.text = thousand.ToString();
+			tcHundred.text = hundred.ToString();
+			tcTen.text = ten.ToString();
+			tcUnit.text = unit.ToString ();
 		}
 
 
@@ -284,19 +354,77 @@ public class GameOverScript : MonoBehaviour {
 		Debug.Log ("Match Score: " + matchscore);
 
 		if (matchscore < 10) {
-			matchScore.text = "0000" + matchscore;
-				}
-		else if (matchscore >= 10 && matchscore < 100) {
-			matchScore.text = "000" + matchscore;
+			msTenThousand.text = "0";
+			msThousand.text = "0";
+			msHundred.text = "0";
+			msTen.text = "0";
+			msUnit.text = matchscore.ToString ();
+		} 
+		else if (matchscore >= 10 && matchscore < 100) 
+		{
+			msTenThousand.text = "0";
+			msThousand.text = "0";
+			msHundred.text = "0";
+			
+			int ten = matchscore/10;
+			int unit = matchscore%10;
+			
+			msTen.text = ten.ToString();
+			msUnit.text = unit.ToString ();
 		}
-		else if (matchscore >= 100 && matchscore < 1000) {
-			matchScore.text = "00" + matchscore;
+		else if (matchscore >= 100 && matchscore < 1000) 
+		{
+			msTenThousand.text = "0";
+			msThousand.text = "0";
+			
+			int hundred = matchscore/100;
+			int temp = matchscore%100;
+			
+			int ten = temp/10;
+			int unit = temp%10;
+			
+			msHundred.text = hundred.ToString();
+			msTen.text = ten.ToString();
+			msUnit.text = unit.ToString ();
 		}
-		else if (matchscore >= 1000 && matchscore < 10000) {
-			matchScore.text = "0" + matchscore;
+		else if (matchscore >= 1000 && matchscore < 10000) 
+		{
+			msTenThousand.text = "0";
+			
+			int thousand = matchscore/1000;
+			int Thtemp = matchscore%1000;
+			
+			int hundred = Thtemp/100;
+			int temp = Thtemp%100;
+			
+			int ten = temp/10;
+			int unit = temp%10;
+			
+			
+			msThousand.text = thousand.ToString();
+			msHundred.text = hundred.ToString();
+			msTen.text = ten.ToString();
+			msUnit.text = unit.ToString ();
 		}
-		else if (matchscore >= 10000) {
-			matchScore.text = matchscore.ToString();
+		else if (matchscore >= 10000) 
+		{
+			int tenThousand = matchscore/10000;
+			int tenThTemp = matchscore%10000;
+			
+			int thousand = tenThTemp/1000;
+			int Thtemp = tenThTemp%1000;
+			
+			int hundred = Thtemp/100;
+			int temp = Thtemp%100;
+			
+			int ten = temp/10;
+			int unit = temp%10;
+			
+			msTenThousand.text = tenThousand.ToString();
+			msThousand.text = thousand.ToString();
+			msHundred.text = hundred.ToString();
+			msTen.text = ten.ToString();
+			msUnit.text = unit.ToString ();
 		}
 		
 		/*if (matchscore < 1) {
