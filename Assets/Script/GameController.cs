@@ -94,6 +94,7 @@ public class GameController : MonoBehaviour {
 
 	void Start()
 	{
+
 		score = 0;
 		birdCount = 0;
 		isCombo = false;
@@ -197,6 +198,7 @@ public class GameController : MonoBehaviour {
 			bulletTwoRender.sprite = scoreSprite [1];*/
 		}
 		timeLeft = totalTime;
+		//GameObject.FindGameObjectWithTag("VideoGiftCanvas").GetComponent<Canvas>().enabled = false;
 
 	}
 
@@ -723,7 +725,7 @@ public class GameController : MonoBehaviour {
 			setScore ((score * comboValue)-score);
 				}
 		comboValue = 0;
-		
+
 		if (b == 0) {
 			GameObject hunter = GameObject.FindGameObjectWithTag("Player");
 			HunterMovement hm = hunter.GetComponent<HunterMovement>();
@@ -1047,11 +1049,13 @@ public class GameController : MonoBehaviour {
 		} */
 		//coinAnimator.enabled = false;
 
-		if (b == 0)
+		GameObject go = GameObject.FindGameObjectWithTag("GameOver");
+		if (b == 0 && go == null)
 		{
 			//isfinish = true;
 			GameObject hunter = GameObject.FindGameObjectWithTag("Player");
 			HunterMovement hm = hunter.GetComponent<HunterMovement>();
+			Debug.Log("Score GameOver");
 			hm.lost ();
 			GameOver();
 		}

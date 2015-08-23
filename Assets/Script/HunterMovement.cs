@@ -216,22 +216,18 @@ public class HunterMovement : MonoBehaviour {
 	void Update () {
 		if(gunIndex == 1)
 		{
-			//sniperTracker.SetActive (false);
 			sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
 		}
 		else if(gunIndex == 2)
 		{
-			//sniperTracker.SetActive (false);
 			sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
 		}
 		else if(gunIndex == 3)
 		{
-			//sniperTracker.SetActive (false);
 			sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
 		}
 		else if(gunIndex == 4)
 		{
-			//sniperTracker.SetActive (true);
 			sniperTracker.GetComponent<SpriteRenderer>().enabled = true;
 		}
 
@@ -323,7 +319,7 @@ public class HunterMovement : MonoBehaviour {
 				}
 
 		if (col.gameObject.name == "HunterColliderLeft" || col.gameObject.name == "HunterColliderRight") {
-			//Flip ();
+			Flip ();
 				}
 
 	}
@@ -522,6 +518,7 @@ public class HunterMovement : MonoBehaviour {
 			PlayerPrefs.SetInt ("HighScore", score); */
 		roundAvailable = false;
 		sniperTracker.SetActive (false);
+		hunterAnime.SetBool("isLost", true);
 		//GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (8.029126f, 1.784778f), Quaternion.identity);
 
 		//gameObject.transform.position = new Vector2(transform.position.x, -1.98f);

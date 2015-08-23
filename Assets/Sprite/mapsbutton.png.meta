@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 7e40581936c02a541bcafb30823d3e20
-timeCreated: 1435738109
+guid: ed8d6e679b7a6d74f9c30f463a7f2e7d
+timeCreated: 1440342235
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: maps-button_0
-    21300002: maps-button_1
-    21300004: maps-button_2
+    21300000: mapsbutton_0
+    21300002: mapsbutton_1
+    21300004: mapsbutton_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,7 +30,7 @@ TextureImporter:
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -3
-  maxTextureSize: 2048
+  maxTextureSize: 1024
   textureSettings:
     filterMode: -1
     aniso: 16
@@ -52,33 +52,33 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: maps-button_0
+    - name: mapsbutton_0
       rect:
         serializedVersion: 2
-        x: 261
-        y: 1323
-        width: 228
-        height: 116
+        x: 0
+        y: 0
+        width: 235
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: maps-button_1
+    - name: mapsbutton_1
       rect:
         serializedVersion: 2
-        x: 1011
-        y: 1323
-        width: 228
-        height: 110
+        x: 235
+        y: 0
+        width: 235
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: maps-button_2
+    - name: mapsbutton_2
       rect:
         serializedVersion: 2
-        x: 1761
-        y: 1323
-        width: 228
-        height: 116
+        x: 470
+        y: 0
+        width: 235
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

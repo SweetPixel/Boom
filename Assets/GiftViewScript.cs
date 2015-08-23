@@ -6,6 +6,8 @@ public class GiftViewScript : MonoBehaviour {
 	public float TotalTime = 3;
 	private float timeLeft = 0;
 	private GameObject gc;
+	private bool isClusterOpen = false;
+	public bool isVideoGift = false;
 
 	void Awake()
 	{
@@ -24,7 +26,14 @@ public class GiftViewScript : MonoBehaviour {
 		if (timeLeft <= 0) {
 			gc.GetComponent<ButtonClickScript>().GameOverVisibility(true);
 			Destroy(gameObject);
+		}
+
+		if (timeLeft <= 4f && !isClusterOpen && isVideoGift) {
+			GameObject.FindGameObjectWithTag("CoinCluster").GetComponent<Animator>().enabled = true;
+			isClusterOpen = true;
 				}
 
+
 	}
+
 }

@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 0dacc753dbbe77149bb29378ddf545a6
-timeCreated: 1435737804
+guid: 89902f4754f68ad43b10605dede80419
+timeCreated: 1440342290
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: gun-button_0
-    21300002: gun-button_1
-    21300004: gun-button_2
+    21300000: gunbutton_0
+    21300002: gunbutton_1
+    21300004: gunbutton_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,7 +30,7 @@ TextureImporter:
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -3
-  maxTextureSize: 2048
+  maxTextureSize: 1024
   textureSettings:
     filterMode: -1
     aniso: 16
@@ -52,33 +52,33 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: gun-button_0
+    - name: gunbutton_0
       rect:
         serializedVersion: 2
-        x: 261
-        y: 1323
-        width: 228
-        height: 116
+        x: 0
+        y: 0
+        width: 235
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: gun-button_1
+    - name: gunbutton_1
       rect:
         serializedVersion: 2
-        x: 1011
-        y: 1323
-        width: 228
-        height: 110
+        x: 235
+        y: 0
+        width: 235
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: gun-button_2
+    - name: gunbutton_2
       rect:
         serializedVersion: 2
-        x: 1761
-        y: 1323
-        width: 228
-        height: 116
+        x: 470
+        y: 0
+        width: 235
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

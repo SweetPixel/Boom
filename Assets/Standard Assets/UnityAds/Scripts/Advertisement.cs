@@ -5,6 +5,13 @@ namespace UnityEngine.Advertisements {
 
   	public static readonly string version = "1.2.1";
 
+		
+	private static Action _handleFinished;
+	private static Action _handleSkipped;
+	private static Action _handleFailed;
+	private static Action _onContinue;
+
+
     public enum DebugLevel {
       None = 0,
       Error = 1,
@@ -66,6 +73,18 @@ namespace UnityEngine.Advertisements {
     static public void Show(string zoneId = null, ShowOptions options = null) {
 #if UNITY_ANDROID || UNITY_IOS
       UnityAds.SharedInstance.Show(zoneId, options);
+			_handleFinished = null;
+			_handleSkipped = null;
+			_handleFailed = null;
+			_onContinue = null;
+
+			if (string.IsNullOrEmpty(zoneId)) zoneId = null;
+			
+			//ShowOptions option = new ShowOptions();
+			//option.resultCallback = HandleShowResult;
+			
+			//Advertisement.Show(zoneId,option);
+
 #else
       if(options != null && options.resultCallback != null) {
         options.resultCallback(ShowResult.Failed);
@@ -115,6 +134,27 @@ namespace UnityEngine.Advertisements {
     static public bool UnityDeveloperInternalTestMode {
       get; set;
     }
+
+	private static void HandleShowResult (ShowResult result)
+		{
+			switch (result)
+			{
+			case ShowResult.Finished:
+				Debug.Log("The ad was successfully shown.");
+				if (!object.ReferenceEquals(_handleFinished,null)) _handleFinished();
+				break;
+			case ShowResult.Skipped:
+				Debug.LogWarning("The ad was skipped before reaching the end.");
+				if (!object.ReferenceEquals(_handleSkipped,null)) _handleSkipped();
+				break;
+			case ShowResult.Failed:
+				Debug.LogError("The ad failed to be shown.");
+				if (!object.ReferenceEquals(_handleFailed,null)) _handleFailed();
+				break;
+			}
+			
+		if (!object.ReferenceEquals(_onContinue,null)) _onContinue();
+	}
 
   }
 
