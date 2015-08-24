@@ -88,7 +88,7 @@ public class HunterMovement : MonoBehaviour {
 	private float idleTime;
 	public GameObject glassBreak;
 	public GameObject sniperTracker;
-	public int IdleThreshold = 9;
+	public int IdleThreshold = 7;
 	public GameObject progressBar;
 
 	private bool isInitial = true;
@@ -181,9 +181,9 @@ public class HunterMovement : MonoBehaviour {
 		Vector3 pointA = transform.position;
 		while (roundAvailable) {
 			yield return StartCoroutine(MoveObject(transform, new Vector3(9.80f, -1.84f, 0.02769041f), new Vector3(6.35f, -1.84f, 0.02769041f), hunterSpeed));
-			isRight = true;
+			//isRight = true;
 			yield return StartCoroutine(MoveObject(transform, new Vector3(6.35f, -1.84f, 0.02769041f), new Vector3(9.80f, -1.84f, 0.02769041f), hunterSpeed));
-			isRight = false;
+			//isRight = false;
 		}
 	}
 
@@ -262,7 +262,7 @@ public class HunterMovement : MonoBehaviour {
 			sniperTracker.SetActive (false);
 			roundAvailable = false;
 			anim.SetBool ("isIdle", true);
-			yield return new WaitForSeconds (2f);
+			yield return new WaitForSeconds (0.2f);
 			GameObject gameover = GameObject.FindGameObjectWithTag("GameOver");
 			if(gameover == null)
 			{
@@ -318,6 +318,10 @@ public class HunterMovement : MonoBehaviour {
 			//initiateCoin();
 				}
 
+		if (col.gameObject.name == "PlayHand") {
+			return;
+				}
+
 		if (col.gameObject.name == "HunterColliderLeft" || col.gameObject.name == "HunterColliderRight") {
 			Flip ();
 				}
@@ -350,6 +354,7 @@ public class HunterMovement : MonoBehaviour {
 	///	charScale.x *= -1;
 		//transform.localScale = charScale;
 		this.transform.Rotate (0,180,0);
+		isRight = !isRight;
 	}
 
 	// Update is called once per frame

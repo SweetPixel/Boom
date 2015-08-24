@@ -82,14 +82,14 @@ public class StartGame : MonoBehaviour {
 		//gobject.GetComponent<Collider2D>().name = "RestartButton";
 	}
 
-	void OnMouseDown()
+	/*void OnMouseDown()
 	{
 		//gameObject.transform.localScale = new Vector2 (0.65f, 0.65f);
 		//Time.timeScale = 1;
 		//gameObject.collider2D.enabled = false;
-	}
+	}*/
 
-	void OnMouseUp()
+	void OnMouseDown()
 	{
 		if (gameObject.GetComponent<Collider2D>().name == "PlayHand" && isPlayHand) {
 						startLevel ();

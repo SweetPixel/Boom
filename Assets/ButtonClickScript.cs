@@ -578,7 +578,7 @@ public class ButtonClickScript : MonoBehaviour {
 		Animator anim = startbutton.GetComponent<Animator> ();
 		//yield return new WaitForSeconds (1f);
 		anim.SetBool ("IsPressed", true);
-		yield return new WaitForSeconds (0.8f);
+		yield return new WaitForSeconds (1f);
 
 		GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().activeCoinCanvas ();
 

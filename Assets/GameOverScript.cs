@@ -53,7 +53,7 @@ public class GameOverScript : MonoBehaviour {
 	GameObject hunter;
 	HunterMovement hm;
 
-	public Image textObject;
+	//public Image textObject;
 	public Sprite freeGiftIn;
 	public Sprite freeGift;
 	public Image timerIcon;
@@ -98,17 +98,21 @@ public class GameOverScript : MonoBehaviour {
 			giftButton.SetActive(false);
 			timerIcon.enabled = true;
 			//textObject.sprite = freeGiftIn;
-			label.enabled = true;
-			textObject.enabled = false;
+			label.sprite = freeGiftIn;
+			label.transform.localScale = new Vector2(1.3f, 1.3f);
+			//textObject.enabled = false;
 			int timerLeft = int.Parse(gc.giftTimerLeft ());
 			prevtime = timerLeft;
 			minute.sprite = numbers [timerLeft];
 		} else {
 			timerIcon.enabled = false;
 			Debug.Log (label);
+
 			giftButton.SetActive(true);
-			label.enabled = false;
-			textObject.enabled = true;
+			label.sprite = freeGift;
+			label.transform.localScale = new Vector2(1.1f, 1.1f);
+			Debug.Log (label.enabled);
+			//textObject.enabled = true;
 		}
 
 		gameController = GameObject.FindGameObjectWithTag ("GameController");
@@ -501,7 +505,7 @@ public class GameOverScript : MonoBehaviour {
 	void Update () {
 
 		if (startTimer) {
-			label = GameObject.FindGameObjectWithTag ("FreeGiftIn_Label").GetComponent<Image> ();
+			//label = GameObject.FindGameObjectWithTag ("FreeGiftIn_Label").GetComponent<Image> ();
 			int timerLeft = int.Parse(gc.giftTimerLeft ());
 			if (prevtime != timerLeft && timerLeft > 0) {
 				prevtime = timerLeft;
