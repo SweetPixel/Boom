@@ -95,6 +95,10 @@ public class GameController : MonoBehaviour {
 	void Start()
 	{
 
+		int sc = PlayerPrefs.GetInt ("Score");
+		GameObject.FindGameObjectWithTag ("TotalScore").GetComponent<Text> ().text = sc.ToString ();
+		//GameObject.Find("TSIcon").transform.position = new Vector2 (GameObject.FindGameObjectWithTag ("TotalScore").transform.position.x - 23, GameObject.FindGameObjectWithTag ("TotalScore").transform.position.y);
+
 		score = 0;
 		birdCount = 0;
 		isCombo = false;

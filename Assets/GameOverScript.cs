@@ -80,6 +80,11 @@ public class GameOverScript : MonoBehaviour {
 
 	public Text accuracy;
 	public Text kill;
+	float percentage = 0f;
+
+	public Sprite goldBadge;
+	public Sprite silverBadge;
+	public Sprite bronzeBadge;
 
 	// Use this for initialization
 	void Start () {
@@ -107,7 +112,6 @@ public class GameOverScript : MonoBehaviour {
 		} else {
 			timerIcon.enabled = false;
 			Debug.Log (label);
-
 			giftButton.SetActive(true);
 			label.sprite = freeGift;
 			label.transform.localScale = new Vector2(1.1f, 1.1f);
@@ -151,7 +155,7 @@ public class GameOverScript : MonoBehaviour {
 		//Accuracy
 		int birdCount = gc.getBirdKilled (); //(float)matchscore;
 		int shotFired = gc.getFireShotNumber (); //hm.getFireShotNumber ();
-		float percentage = (float) birdCount / shotFired * 100;
+		percentage = (float) birdCount / shotFired * 100;
 
 		/*Debug.Log ("BirdCount: " + birdCount);
 		Debug.Log ("shotFired: " + shotFired);
@@ -191,6 +195,18 @@ public class GameOverScript : MonoBehaviour {
 
 		kill.text = birdCount.ToString ();
 
+		if (percentage > 75 && birdCount > 15) 
+		{
+			GameObject.FindGameObjectWithTag("Badge").GetComponent<Image>().sprite = silverBadge;
+		}
+		else if (percentage > 50 && birdCount > 30) 
+		{
+			GameObject.FindGameObjectWithTag("Badge").GetComponent<Image>().sprite = goldBadge;
+		}
+		else if (percentage < 10 && birdCount < 15) 
+		{
+			GameObject.FindGameObjectWithTag("Badge").GetComponent<Image>().sprite = bronzeBadge;
+		}
 		/*if (birdCount < 1) {
 			kill_digitUnit.sprite = scoreSprite [0];
 		}

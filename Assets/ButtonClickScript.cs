@@ -525,7 +525,13 @@ public class ButtonClickScript : MonoBehaviour {
 		if (shc != null) {
 			Destroy (shc);
 		}
-		
+
+		//Destroy any Flock object.
+		GameObject flock = GameObject.FindGameObjectWithTag("Flock");
+		if (flock != null) {
+			Destroy (flock);
+		}
+
 		//Destroy all the pelicans
 		GameObject[] be = GameObject.FindGameObjectsWithTag("Bird2D");
 		for (int i=0; i < be.Length; i++) {
@@ -578,7 +584,7 @@ public class ButtonClickScript : MonoBehaviour {
 		Animator anim = startbutton.GetComponent<Animator> ();
 		//yield return new WaitForSeconds (1f);
 		anim.SetBool ("IsPressed", true);
-		yield return new WaitForSeconds (1f);
+		yield return new WaitForSeconds (0.7f);
 
 		GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().activeCoinCanvas ();
 

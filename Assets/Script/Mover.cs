@@ -159,6 +159,12 @@ public class Mover : MonoBehaviour {
 			Instantiate(explosion, new Vector3(explosion.transform.position.x, explosion.transform.position.y, explosion.transform.position.z), Quaternion.identity);
 				}
 
+		//Destroy any Flock object.
+		GameObject flock = GameObject.FindGameObjectWithTag("Flock");
+		if (flock != null) {
+			Destroy (flock);
+		}
+
 		GameObject gover = GameObject.FindGameObjectWithTag ("GameOver");
 		if (gover == null) {
 			Debug.Log ("EnemyBird GameOver");
