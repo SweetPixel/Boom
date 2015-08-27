@@ -75,6 +75,7 @@ public class EagleScript : MonoBehaviour {
 		
 		if (col.gameObject.tag == "Bullet") {
 			isHit = true;
+			GetComponent<AudioSource>().Play();
 			gameObject.GetComponent<Collider2D>().enabled = false;
 			StartCoroutine(destroy(col.gameObject));
 		}

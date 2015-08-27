@@ -92,6 +92,12 @@ public class HunterMovement : MonoBehaviour {
 	public GameObject progressBar;
 
 	private bool isInitial = true;
+	private bool isFlipped = true;
+
+	public AudioClip rifleAudio;
+	public AudioClip smgAudio;
+	public AudioClip shotgunAudio;
+	public AudioClip sniperAudio;
 
 	IEnumerator Start () {
 		/* Bullet Renderers */
@@ -176,6 +182,8 @@ public class HunterMovement : MonoBehaviour {
 		//Flip ();
 
 		/* Start Hunter Movement from the middle */
+		//yield return StartCoroutine(MoveObject(transform, new Vector3(8.15f, -1.84f, 0.02769041f), new Vector3(9.80f, -1.84f, 0.02769041f), hunterSpeed));
+
 		yield return StartCoroutine(MoveObject(transform, new Vector3(8.15f, -1.84f, 0.02769041f), new Vector3(9.80f, -1.84f, 0.02769041f), hunterSpeed));
 
 		Vector3 pointA = transform.position;
@@ -250,7 +258,11 @@ public class HunterMovement : MonoBehaviour {
 				StartCoroutine(idleHunterAnimation());
 			}
 		}
-		
+
+		/*if (gameObject.transform.position.x < 6.4 || gameObject.transform.position.x > 9.7) {
+			Flip ();
+				}*/
+
 	}
 
 	IEnumerator idleHunterAnimation()
@@ -315,7 +327,6 @@ public class HunterMovement : MonoBehaviour {
 	{
 		if (col.gameObject.name == "Coin(Clone)") {
 			Destroy(col.gameObject);
-			//initiateCoin();
 				}
 
 		if (col.gameObject.name == "PlayHand") {
@@ -355,6 +366,7 @@ public class HunterMovement : MonoBehaviour {
 		//transform.localScale = charScale;
 		this.transform.Rotate (0,180,0);
 		isRight = !isRight;
+		isFlipped = !isFlipped;
 	}
 
 	// Update is called once per frame
@@ -404,11 +416,14 @@ public class HunterMovement : MonoBehaviour {
 
 	}
 
+
 	IEnumerator Fired()
 	{
 		if (gunIndex == 2) 
 		{
 			//fireShot++;
+			GetComponent<AudioSource>().clip = smgAudio;
+			GetComponent<AudioSource>().Play();
 			gc.addFireShotNumber();
 			int shotfirecount = 1;
 			while(true)
@@ -438,12 +453,30 @@ public class HunterMovement : MonoBehaviour {
 		else if(gunIndex == 3)
 		{
 			//fireShot++;
+			GetComponent<AudioSource>().clip = shotgunAudio;
+			GetComponent<AudioSource>().Play();
 			gc.addFireShotNumber();
 			StartCoroutine(shotGunFire());
 			yield return new WaitForSeconds(0.5f);
 		}
-		else if(gunIndex == 1 || gunIndex == 4)
+		else if(gunIndex == 4)
 		{
+			GetComponent<AudioSource>().clip = sniperAudio;
+			GetComponent<AudioSource>().Play();
+			gc.addFireShotNumber(); //fireShot++;
+			yield return new WaitForSeconds(0.25f);
+			if (isRight) {
+				GameObject game = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,-10f));
+				game.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,-15f) * Vector2.up * bulletSpeed);
+			} else {
+				GameObject game = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,10f));
+				game.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,15f) * Vector2.up * bulletSpeed);
+			}
+		}
+		else if(gunIndex == 1)
+		{
+			GetComponent<AudioSource>().clip = rifleAudio;
+			GetComponent<AudioSource>().Play();
 			gc.addFireShotNumber(); //fireShot++;
 			yield return new WaitForSeconds(0.25f);
 			if (isRight) {
@@ -522,6 +555,7 @@ public class HunterMovement : MonoBehaviour {
 		/*if (PlayerPrefs.GetInt ("Score") > PlayerPrefs.GetInt ("HighScore"))
 			PlayerPrefs.SetInt ("HighScore", score); */
 		roundAvailable = false;
+		startFiring = false;
 		sniperTracker.SetActive (false);
 		hunterAnime.SetBool("isLost", true);
 		//GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (8.029126f, 1.784778f), Quaternion.identity);

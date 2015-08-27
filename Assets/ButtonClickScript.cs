@@ -24,10 +24,10 @@ public class ButtonClickScript : MonoBehaviour {
 	public Sprite[] score;
 	Image[] images;
 	
-	public Image textObject;
+	//public Image textObject;
 	public Sprite freeGiftIn;
 	public Image timerIcon;
-	public Image minute;
+	public Text minute;
 	int val = 0;
 	private GameObject gameover;
 
@@ -47,6 +47,8 @@ public class ButtonClickScript : MonoBehaviour {
 	public int sniperValue = 10000;
 	public GameObject progressBar;
 	public Sprite playIcon;
+
+	public AudioClip buttonAudio;
 
 	// Use this for initialization
 	void Start () {
@@ -151,6 +153,8 @@ public class ButtonClickScript : MonoBehaviour {
 
 	public void ButtonClick(string buttonName)
 	{
+		GetComponent<AudioSource>().clip = buttonAudio;
+		GetComponent<AudioSource>().Play();
 		playHand = GameObject.FindGameObjectWithTag ("PlayHand");
 		sg = playHand.GetComponent<StartGame> ();
 		if (buttonName == "GunsButton") 
@@ -337,13 +341,16 @@ public class ButtonClickScript : MonoBehaviour {
 
 			//images = GameObject.Find ("GiftPanel").GetComponentsInChildren<Image> ();
 
-			Image hundred = GameObject.FindGameObjectWithTag ("gc-hundred").GetComponent<Image> ();
+			/*Image hundred = GameObject.FindGameObjectWithTag ("gc-hundred").GetComponent<Image> ();
 			Image ten = GameObject.FindGameObjectWithTag ("gc-ten").GetComponent<Image> ();
-			Image unit = GameObject.FindGameObjectWithTag ("gc-unit").GetComponent<Image> ();
+			Image unit = GameObject.FindGameObjectWithTag ("gc-unit").GetComponent<Image> ();*/
+
+			Text giftText = GameObject.FindGameObjectWithTag ("GiftCoin").GetComponent<Text> ();
 
 			val = Random.Range(50, 100);
-			val = val/10;
-			if (val < 100) {
+			giftText.text = val.ToString();
+			//val = val/10;
+			/*if (val < 100) {
 				int t = val / 10;
 				int u = val % 10;
 				
@@ -361,22 +368,21 @@ public class ButtonClickScript : MonoBehaviour {
 				hundred.sprite = score[h];
 				ten.sprite = score [t];
 				unit.sprite = score [u];
-			}
+			}*/
 
 			timerIcon = GameObject.FindGameObjectWithTag ("GreenStripeTimer").GetComponent<Image> ();
 			timerIcon.enabled = false;
 
-			minute = GameObject.FindGameObjectWithTag ("GreenStripeMinute").GetComponent<Image> ();
+			minute = GameObject.FindGameObjectWithTag ("GreenStripeMinute").GetComponent<Text> ();
 
-			textObject = GameObject.FindGameObjectWithTag ("GreenStripeLabel").GetComponent<Image> ();
-			//textObject.sprite = freeGiftIn;
-			textObject.enabled = false;
+			Text textObject = GameObject.FindGameObjectWithTag ("FreeGiftText").GetComponent<Text> ();
+			textObject.text = "FREE GIFT IN";
 
-			Image label = GameObject.FindGameObjectWithTag ("FreeGiftIn_Label").GetComponent<Image> ();
-			label.enabled = true;
+			/*Image label = GameObject.FindGameObjectWithTag ("FreeGiftIn_Label").GetComponent<Image> ();
+			label.enabled = true;*/
 
 			timerIcon.enabled = true;
-			minute.sprite = numbers[6];
+			minute.text = "6:00";
 			
 			GameObject gcc = GameObject.FindGameObjectWithTag("GameController");
 			GameController gc = gcc.GetComponent<GameController>();

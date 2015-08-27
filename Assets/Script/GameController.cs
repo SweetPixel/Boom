@@ -92,12 +92,17 @@ public class GameController : MonoBehaviour {
 	public Text bCounter;
 	public Canvas BulletCanvas;
 
+	public AudioClip comboMultiAudio;
+	public AudioClip noBulletAudio;
+
 	void Start()
 	{
 
 		int sc = PlayerPrefs.GetInt ("Score");
 		GameObject.FindGameObjectWithTag ("TotalScore").GetComponent<Text> ().text = sc.ToString ();
 		//GameObject.Find("TSIcon").transform.position = new Vector2 (GameObject.FindGameObjectWithTag ("TotalScore").transform.position.x - 23, GameObject.FindGameObjectWithTag ("TotalScore").transform.position.y);
+
+		//Debug.Log ("width: " + cameraHeight * screenAspect);
 
 		score = 0;
 		birdCount = 0;
@@ -256,6 +261,8 @@ public class GameController : MonoBehaviour {
 			birdCount = 0;
 			if(comboValue > 1){
 				setScore ((score * comboValue)-score);
+				GetComponent<AudioSource>().clip = comboMultiAudio;
+				GetComponent<AudioSource>().Play();
 				Instantiate (goldenSpark, new Vector2 (coinIcon.transform.position.x, coinIcon.transform.position.y), Quaternion.identity);
 				StartCoroutine (coinBeat());
 			}
@@ -268,8 +275,10 @@ public class GameController : MonoBehaviour {
 
 			GameObject go = GameObject.FindGameObjectWithTag("GameOver");
 
-			if(b == 0 && go == null)
+			if(b < 1 && go == null)
 			{
+				GetComponent<AudioSource>().clip = noBulletAudio;
+				GetComponent<AudioSource>().Play();
 				GameObject hunter = GameObject.FindGameObjectWithTag("Player");
 				HunterMovement hm = hunter.GetComponent<HunterMovement>();
 				hm.lost ();
@@ -730,7 +739,9 @@ public class GameController : MonoBehaviour {
 				}
 		comboValue = 0;
 
-		if (b == 0) {
+		if (b < 1) {
+			GetComponent<AudioSource>().clip = comboMultiAudio;
+			GetComponent<AudioSource>().Play();
 			GameObject hunter = GameObject.FindGameObjectWithTag("Player");
 			HunterMovement hm = hunter.GetComponent<HunterMovement>();
 			hm.lost ();
@@ -1054,9 +1065,11 @@ public class GameController : MonoBehaviour {
 		//coinAnimator.enabled = false;
 
 		GameObject go = GameObject.FindGameObjectWithTag("GameOver");
-		if (b == 0 && go == null)
+		if (b < 1 && go == null)
 		{
 			//isfinish = true;
+			GetComponent<AudioSource>().clip = comboMultiAudio;
+			GetComponent<AudioSource>().Play();
 			GameObject hunter = GameObject.FindGameObjectWithTag("Player");
 			HunterMovement hm = hunter.GetComponent<HunterMovement>();
 			Debug.Log("Score GameOver");

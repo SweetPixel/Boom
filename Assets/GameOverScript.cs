@@ -58,7 +58,7 @@ public class GameOverScript : MonoBehaviour {
 	public Sprite freeGift;
 	public Image timerIcon;
 	public GameObject giftButton;
-	public Image minute;
+	public Text minute;
 	public Sprite[] numbers;
 
 	private int prevtime = 0;
@@ -86,6 +86,8 @@ public class GameOverScript : MonoBehaviour {
 	public Sprite silverBadge;
 	public Sprite bronzeBadge;
 
+	public Text freeGiftText;
+
 	// Use this for initialization
 	void Start () {
 
@@ -94,7 +96,7 @@ public class GameOverScript : MonoBehaviour {
 
 		StartCoroutine (Wait());
 
-		label = GameObject.FindGameObjectWithTag ("FreeGiftIn_Label").GetComponent<Image> ();
+		//label = GameObject.FindGameObjectWithTag ("FreeGiftIn_Label").GetComponent<Image> ();
 		gameController = GameObject.FindGameObjectWithTag ("GameController");
 		gc = gameController.GetComponent<GameController> ();
 		bool status = gc.getGiftTimer ();
@@ -103,19 +105,20 @@ public class GameOverScript : MonoBehaviour {
 			giftButton.SetActive(false);
 			timerIcon.enabled = true;
 			//textObject.sprite = freeGiftIn;
-			label.sprite = freeGiftIn;
-			label.transform.localScale = new Vector2(1.3f, 1.3f);
+			//label.sprite = freeGiftIn;
+			//label.transform.localScale = new Vector2(1.3f, 1.3f);
+			freeGiftText.text = "FREE GIFT IN";
 			//textObject.enabled = false;
 			int timerLeft = int.Parse(gc.giftTimerLeft ());
 			prevtime = timerLeft;
-			minute.sprite = numbers [timerLeft];
+			minute.text = "6:00"; //numbers [timerLeft];
 		} else {
 			timerIcon.enabled = false;
 			Debug.Log (label);
 			giftButton.SetActive(true);
-			label.sprite = freeGift;
-			label.transform.localScale = new Vector2(1.1f, 1.1f);
-			Debug.Log (label.enabled);
+			freeGiftText.text = "FREE GIFT";
+			//label.sprite = freeGift;
+			//label.transform.localScale = new Vector2(1.1f, 1.1f);
 			//textObject.enabled = true;
 		}
 
@@ -525,7 +528,7 @@ public class GameOverScript : MonoBehaviour {
 			int timerLeft = int.Parse(gc.giftTimerLeft ());
 			if (prevtime != timerLeft && timerLeft > 0) {
 				prevtime = timerLeft;
-				minute.sprite = numbers [timerLeft];
+				minute.text = timerLeft.ToString() + ":00";
 			}
 			/*if (timerLeft > 0) {
 				giftButton.SetActive(false);
