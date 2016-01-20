@@ -15,7 +15,7 @@ public class LumosWizard : ScriptableWizard
 	/// </summary>
 	void OnWizardCreate ()
 	{
-		var prefab = Resources.LoadAssetAtPath(prefabPath, typeof(GameObject));
+		var prefab = AssetDatabase.LoadAssetAtPath(prefabPath, typeof(GameObject));
 		const string undoTitle = "Add Lumos To Scene";
 
 		#if UNITY_3_5

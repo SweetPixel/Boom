@@ -119,7 +119,7 @@ public class LumosInstall : EditorWindow
 	{
 		showError = false;
 		const string undoTitle = "Add Lumos To Scene";
-		var prefab = Resources.LoadAssetAtPath(prefabPath, typeof(GameObject));
+		var prefab = AssetDatabase.LoadAssetAtPath(prefabPath, typeof(GameObject));
 
 		#if UNITY_3_5
 		Undo.RegisterSceneUndo(undoTitle);
