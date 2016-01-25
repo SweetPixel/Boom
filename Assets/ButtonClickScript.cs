@@ -153,8 +153,8 @@ public class ButtonClickScript : MonoBehaviour {
 
 	public void ButtonClick(string buttonName)
 	{
-		GetComponent<AudioSource>().clip = buttonAudio;
-		GetComponent<AudioSource>().Play();
+		//GetComponent<AudioSource>().clip = buttonAudio;
+		//GetComponent<AudioSource>().Play();
 		playHand = GameObject.FindGameObjectWithTag ("PlayHand");
 		sg = playHand.GetComponent<StartGame> ();
 		if (buttonName == "GunsButton") 
