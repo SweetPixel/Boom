@@ -4,8 +4,8 @@ using System.Collections;
 public class BirdMovement : MonoBehaviour {
 
 	public Vector3 pointB;
-	public float x1 = 6.35f;
-	public float x2 = 6.73f;
+	public float x1 = -4f;
+	public float x2 = 4f;
 	public float y1 = 3.692791f;
 	public float y2 = 3.0f;
 
@@ -52,21 +52,21 @@ public class BirdMovement : MonoBehaviour {
 		if (hunter == null) {
 			hunter = GameObject.Find ("Object(Clone)");
 				}
-		hm = hunter.GetComponent<HunterMovement> ();
+		//hm = hunter.GetComponent<HunterMovement> ();
 
 		anim = GetComponent<Animator> ();
 		anim.SetBool ("isHit", false);
 
 		Vector3 pointA = transform.position;
 
-		x1 = Random.Range(7.5f, 9.85f);
-		y1 = Random.Range(1.5f, 2.3f);
+		x1 = Random.Range(-3f, 3f);
+		y1 = Random.Range(4f, 6f);
 
-		y2 = Random.Range(1.5f, 2.3f);
+		y2 = Random.Range(4f, 6f);
 
-		if (gameObject.transform.position.x == 5.1f) {
-			yield return StartCoroutine(MoveObject(transform, new Vector2(5.1f, 2.3f), new Vector2(x1, 2.3f), birdSpeed));
-			yield return StartCoroutine(MoveObject(transform, new Vector2(x1, 2.3f), new Vector2(x2, y2), birdSpeed));
+		if (gameObject.transform.position.x == -4.0f) {
+			yield return StartCoroutine(MoveObject(transform, new Vector2(-4.0f, y1), new Vector2(x1, y1), birdSpeed));
+			yield return StartCoroutine(MoveObject(transform, new Vector2(x1, y1), new Vector2(x2, y2), birdSpeed));
 				} else {
 			//Flip();
 			yield return StartCoroutine(MoveObject(transform, new Vector2(transform.position.x, transform.position.y), new Vector2(x1, transform.position.y), birdSpeed));
@@ -74,8 +74,8 @@ public class BirdMovement : MonoBehaviour {
 				}
 
 		while (!isHit) {
-			x1 = Random.Range(6.4f, 9.8f);
-			y1 = Random.Range(0.8f, 2.6f);
+			x1 = Random.Range(-3f, 3f);
+			y1 = Random.Range(4f, 6f);
 			if(hunterIdle)
 			{
 				int index = Random.Range(0,2);

@@ -12,8 +12,8 @@ public class miniBirdScript : MonoBehaviour {
 	// Use this for initialization
 	IEnumerator Start () {
 		while (true) {
-			y1 = Random.Range(0f, 1.2f);
-			y2 = Random.Range(2.5f, 3.5f);
+			y1 = Random.Range(5f, 7f);
+			y2 = Random.Range(8f, 10f);
 			yield return StartCoroutine(MoveObject(transform, new Vector2(x1, y1), new Vector2(x2, y2), birdSpeed)); //3.692791f
 			
 		}

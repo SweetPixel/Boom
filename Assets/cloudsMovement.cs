@@ -4,6 +4,7 @@ using System.Collections;
 public class cloudsMovement : MonoBehaviour {
 
 	public Vector3 newpos;
+	public float speed = 0.2f;
 
 	// Use this for initialization
 	void Start () {
@@ -15,9 +16,9 @@ public class cloudsMovement : MonoBehaviour {
 	void Update () {
 		//float step = 2f * Time.deltaTime;
 		//transform.position = Vector3.MoveTowards(transform.position, newpos, step);
-		transform.Translate(Vector3.right * -0.2f * Time.deltaTime);
+		transform.Translate(Vector3.right * -speed * Time.deltaTime);
 
-		if (transform.position.x < 5.5f) {
+		if (transform.position.x < -5.5f) {
 			transform.position = newpos;
 				}
 

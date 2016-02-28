@@ -12,8 +12,8 @@ public class Mover : MonoBehaviour {
 
 	public float x1 = 6.4f;
 	public float x2 = 6.4f;
-	public float y1 = 3.692791f;
-	public float y2 = 2.0f;
+	public float y1 = 2.25f;
+	public float y2 = 2.35f;
 
 	private GameObject hunter;
 	private HunterMovement hm;
@@ -40,15 +40,15 @@ public class Mover : MonoBehaviour {
 
 		x1 = 9.75f;
 		x2 = 6.4f;
-		y2 = Random.Range(-0.6f, 0.3f);
+		//y2 = Random.Range(-0.6f, 0.3f);
 		
-		yield return StartCoroutine(MoveObject(transform, new Vector2(5.1f, 0.3f), new Vector2(x1, 0.3f), birdSpeed));
-		yield return StartCoroutine(MoveObject(transform, new Vector2(x1, 0.3f), new Vector2(x2, y2), birdSpeed));
+		yield return StartCoroutine(MoveObject(transform, new Vector2(5.1f, 2.35f), new Vector2(x1, 2.35f), birdSpeed));
+		yield return StartCoroutine(MoveObject(transform, new Vector2(x1, 2.25f), new Vector2(x2, y2), birdSpeed));
 		
 		while (!isHit) {
 
 			x1 = Random.Range(6.4f, 9.75f);
-			y1 = Random.Range(-0.6f, 0.3f);
+			//y1 = Random.Range(-0.6f, 0.3f);
 			if(hunterIdle)
 			{
 				int index = Random.Range(0,2);

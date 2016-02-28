@@ -35,8 +35,8 @@ public class GameController : MonoBehaviour {
 	private int comboValue = 0;
 
 	/* Bird initiation points */
-	float[] Yaxis = { 2.3f , 1.7f, 1.15f, 0.75f};
-	float[] Xaxis = { 5.1f , 11.3f };
+	float[] Yaxis = { 4f , 4.5f, 5.2f,6.5f};
+	float[] Xaxis = { -3.4f , 4f };
 
 	/* Bullet Variables */
 	private int b = 10;
@@ -763,7 +763,8 @@ public class GameController : MonoBehaviour {
 	{
 		int index = Random.Range(0,4);
 		float y = Yaxis[index];
-		float x = 5.1f;
+		Debug.Log (y);
+		float x = 3.0f;
 		if(index == 0 || index == 2)
 		{
 			x = Xaxis[0];

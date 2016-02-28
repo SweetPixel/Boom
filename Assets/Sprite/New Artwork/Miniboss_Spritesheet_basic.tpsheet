@@ -1,0 +1,14 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# http://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:e1b7a423b5dcac6e9512a544e30f12a9:f79243a83e6c8b36482a7bff3a29d40d:09467c09e79d643308b21c0a3cc8905a$
+#
+:format=40000
+:texture=Miniboss_Spritesheet_basic.png
+:size=304x140
+
+Mini_boss_pig0001;1;1;149;138;0.5;0.5
+Mini_boss_pig0002;152;1;149;138;0.5;0.5

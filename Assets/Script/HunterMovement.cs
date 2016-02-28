@@ -184,13 +184,13 @@ public class HunterMovement : MonoBehaviour {
 		/* Start Hunter Movement from the middle */
 		//yield return StartCoroutine(MoveObject(transform, new Vector3(8.15f, -1.84f, 0.02769041f), new Vector3(9.80f, -1.84f, 0.02769041f), hunterSpeed));
 
-		yield return StartCoroutine(MoveObject(transform, new Vector3(8.15f, -1.84f, 0.02769041f), new Vector3(9.80f, -1.84f, 0.02769041f), hunterSpeed));
+		yield return StartCoroutine(MoveObject(transform, new Vector3(0f, -2f, 0.02769041f), new Vector3(9.80f, -2f, 0.02769041f), hunterSpeed));
 
 		Vector3 pointA = transform.position;
 		while (roundAvailable) {
-			yield return StartCoroutine(MoveObject(transform, new Vector3(9.80f, -1.84f, 0.02769041f), new Vector3(6.35f, -1.84f, 0.02769041f), hunterSpeed));
+			yield return StartCoroutine(MoveObject(transform, new Vector3(9.80f, -2f, 0.02769041f), new Vector3(6.35f, -2f, 0.02769041f), hunterSpeed));
 			//isRight = true;
-			yield return StartCoroutine(MoveObject(transform, new Vector3(6.35f, -1.84f, 0.02769041f), new Vector3(9.80f, -1.84f, 0.02769041f), hunterSpeed));
+			yield return StartCoroutine(MoveObject(transform, new Vector3(6.35f, -2f, 0.02769041f), new Vector3(9.80f, -2f, 0.02769041f), hunterSpeed));
 			//isRight = false;
 		}
 	}

@@ -30,8 +30,8 @@ public class StartGame : MonoBehaviour {
 	public GameObject gameOver;
 	public float birdSpawnWait = 3f;
 
-	float[] Yaxis = { 2.3f , 1.7f, 1.15f, 0.75f};
-	float[] Xaxis = { 5.1f , 11.3f };
+	float[] Yaxis = { 4f , 4.5f, 5.2f,6.5f};
+	float[] Xaxis = { -3.4f , 4f };
 
 	//Start variable.
 	public GameObject startCanvas;
