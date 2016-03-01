@@ -1,0 +1,14 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# http://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:22e7f61fd0d23643d0a16e910c4777ca:a9375c3bbbe8112e94cf3d1f44fc8733:ffd8b8894780580129e71c8ca81afb13$
+#
+:format=40000
+:texture=Hummingbird_Spritesheet.png
+:size=196x80
+
+Humming-bird0001;1;2;96;77;0.5;0.5
+Humming-bird0002;99;2;96;77;0.5;0.5

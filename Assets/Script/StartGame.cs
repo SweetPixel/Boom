@@ -31,7 +31,7 @@ public class StartGame : MonoBehaviour {
 	public float birdSpawnWait = 3f;
 
 	float[] Yaxis = { 4f , 4.5f, 5.2f,6.5f};
-	float[] Xaxis = { -3.4f , 4f };
+	float[] Xaxis = { -3.4f , 3.4f };
 
 	//Start variable.
 	public GameObject startCanvas;
@@ -216,7 +216,7 @@ public class StartGame : MonoBehaviour {
 					index = Random.Range(0,4);
 				}
 				float y = Yaxis[index];
-				float x = 5.1f;
+				float x = 3.6f;
 				if(index == 0 || index == 2)
 				{
 					x = Xaxis[0];

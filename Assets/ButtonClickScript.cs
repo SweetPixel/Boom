@@ -419,6 +419,10 @@ public class ButtonClickScript : MonoBehaviour {
 			gamecontroller.loadAd();
 		}
 
+		if (buttonName == "RestartLevel") {
+			Application.LoadLevel("MainScene");
+		}
+
 		/* if (buttonName == "PlayWithShotgun") {
 			PlayerPrefs.SetInt ("gunIndex", 3);
 			guns.SetActive (false);

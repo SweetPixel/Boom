@@ -39,7 +39,8 @@ public class GameController : MonoBehaviour {
 	float[] Xaxis = { -3.4f , 4f };
 
 	/* Bullet Variables */
-	private int b = 10;
+	private int b;
+	public int TotalBullets;
 	private int bulletCounter = 9;
 	public GameObject bulletOne;
 	public GameObject bulletTwo;
@@ -99,34 +100,21 @@ public class GameController : MonoBehaviour {
 	{
 
 		int sc = PlayerPrefs.GetInt ("Score");
-		GameObject.FindGameObjectWithTag ("TotalScore").GetComponent<Text> ().text = sc.ToString ();
-		//GameObject.Find("TSIcon").transform.position = new Vector2 (GameObject.FindGameObjectWithTag ("TotalScore").transform.position.x - 23, GameObject.FindGameObjectWithTag ("TotalScore").transform.position.y);
-
-		//Debug.Log ("width: " + cameraHeight * screenAspect);
 
 		score = 0;
 		birdCount = 0;
 		isCombo = false;
-		b = 50;
 		bulletCounter = 9;
 		timeLeft = 0f; 
 		totalTime= 2f;
+		b = TotalBullets;
 		//startCanvas.SetActive(false);
 		coinIconRender = coinIcon.GetComponent<SpriteRenderer> ();
 		coinAnimator = coinIcon.GetComponent<Animator> ();
 
-		/*bulletOne = GameObject.Find ("BulletSprite");
-		bulletTwo = GameObject.Find ("BulletSpriteTwo");
-		
-		bulletOneRender = bulletOne.GetComponent<SpriteRenderer> ();
-		bulletOneRender.sprite = scoreSprite [0];
-		
-		bulletTwoRender = bulletTwo.GetComponent<SpriteRenderer> ();
-		bulletTwoRender.sprite = scoreSprite [5];
-		bulletTwoRender.enabled = true;*/
-
 		coinsCounter.GetComponent<Text>().enabled = false;
-		bCounter.GetComponent<Text>().enabled = false;
+		bCounter.text = b.ToString ();
+		//bCounter.GetComponent<Text>().enabled = false;
 		//bulletIcon = GameObject.Find ("BulletIcon");
 		//bulletIconRender = bulletIcon.GetComponent<SpriteRenderer>();
 
@@ -152,60 +140,60 @@ public class GameController : MonoBehaviour {
 		bulletSmgIcon.SetActive(false);
 		bulletSniperIcon.SetActive(false);
 
-		gunIndex = PlayerPrefs.GetInt ("gunIndex");
-		if (gunIndex == 0 || gunIndex == 1) {
-			gunIndex = 1;
+		//gunIndex = PlayerPrefs.GetInt ("gunIndex");
+		//if (gunIndex == 0 || gunIndex == 1) {
+		//	gunIndex = 1;
 			//bulletIconRender.sprite = bulletIcon_rifle;
-			bulletRifleIcon.SetActive(true);
-			anime = bulletRifleIcon.GetComponent<Animator>();
+		//	bulletRifleIcon.SetActive(true);
+		//	anime = bulletRifleIcon.GetComponent<Animator>();
 			//sniperTracker.SetActive (false);
 			//sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
 			
-			b = 12;
+		//	b = 12;
 			/*bulletCounter = 2;
 			bulletOneRender.sprite = scoreSprite [2];
 			bulletTwoRender.sprite = scoreSprite [1];*/
-		}
-		else if (gunIndex == 2) {
-			gunIndex = 2;
+		//}
+		//else if (gunIndex == 2) {
+		//	gunIndex = 2;
 			//bulletIconRender.sprite = bulletIcon_smg;
-			bulletShotGunIcon.SetActive(true);
-			anime = bulletShotGunIcon.GetComponent<Animator>();
+		//	bulletShotGunIcon.SetActive(true);
+		//	anime = bulletShotGunIcon.GetComponent<Animator>();
 			//sniperTracker.SetActive (false);
 			//sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
 			
-			b = 24;
+		//	b = 24;
 			/*bulletCounter = 4;
 			bulletOneRender.sprite = scoreSprite [4];
 			bulletTwoRender.sprite = scoreSprite [2];*/
 			
-		}
-		else if (gunIndex == 3) {
-			gunIndex = 3;
+		//}
+		//else if (gunIndex == 3) {
+		//	gunIndex = 3;
 			//bulletIconRender.sprite = bulletIcon_shotgun;
-			bulletSmgIcon.SetActive(true);
-			anime = bulletSmgIcon.GetComponent<Animator>();
+		//	bulletSmgIcon.SetActive(true);
+		//	anime = bulletSmgIcon.GetComponent<Animator>();
 			//sniperTracker.SetActive (false);
 			//sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
 			
-			b = 12;
+		//	b = 12;
 			/*bulletCounter = 2;
 			bulletOneRender.sprite = scoreSprite [2];
 			bulletTwoRender.sprite = scoreSprite [1];*/
-		}
-		else if (gunIndex == 4) {
-			gunIndex = 4;
+		//}
+		//else if (gunIndex == 4) {
+		//	gunIndex = 4;
 			//bulletIconRender.sprite = bulletIcon_sniper;
-			bulletSniperIcon.SetActive(true);
-			anime = bulletSniperIcon.GetComponent<Animator>();
+		//	bulletSniperIcon.SetActive(true);
+		//	anime = bulletSniperIcon.GetComponent<Animator>();
 			//sniperTracker.SetActive (true);
 			//sniperTracker.GetComponent<SpriteRenderer>().enabled = true;
 			
-			b = 12;
+		//	b = 12;
 			/*bulletCounter = 2;
 			bulletOneRender.sprite = scoreSprite [2];
 			bulletTwoRender.sprite = scoreSprite [1];*/
-		}
+		//}
 		timeLeft = totalTime;
 		//GameObject.FindGameObjectWithTag("VideoGiftCanvas").GetComponent<Canvas>().enabled = false;
 
@@ -740,11 +728,11 @@ public class GameController : MonoBehaviour {
 		comboValue = 0;
 
 		if (b < 1) {
-			GetComponent<AudioSource>().clip = comboMultiAudio;
+			/*GetComponent<AudioSource>().clip = comboMultiAudio;
 			GetComponent<AudioSource>().Play();
 			GameObject hunter = GameObject.FindGameObjectWithTag("Player");
 			HunterMovement hm = hunter.GetComponent<HunterMovement>();
-			hm.lost ();
+			hm.lost ();*/
 			Debug.Log ("decrementBirdCount GameOver");
 			GameOver();
 		}
@@ -763,7 +751,6 @@ public class GameController : MonoBehaviour {
 	{
 		int index = Random.Range(0,4);
 		float y = Yaxis[index];
-		Debug.Log (y);
 		float x = 3.0f;
 		if(index == 0 || index == 2)
 		{
@@ -795,32 +782,6 @@ public class GameController : MonoBehaviour {
 		scoreRendererFour.sprite = scoreSprite [score];
 
 		bulletTwoRender.enabled = true;*/
-
-		if (gunIndex == 0 || gunIndex == 1) {
-			b = 12;
-			/*bulletCounter = 2;
-			bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];*/
-		}
-		else if (gunIndex == 2) {
-			b = 24;
-			/*bulletCounter = 4;
-			bulletOneRender.sprite = scoreSprite [4];
-			bulletTwoRender.sprite = scoreSprite [2];*/
-			
-		}
-		else if (gunIndex == 3) {
-			b = 12;
-			/*bulletCounter = 2;
-			bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];*/
-		}
-		else if (gunIndex == 4) {
-			b = 12;
-			/*bulletCounter = 2;
-			bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];*/
-		}
 
 		bCounter.text = b.ToString ();
 	}
@@ -1152,7 +1113,7 @@ public class GameController : MonoBehaviour {
 		isEagleVisible = false;
 	}
 
-	public void addAmmo()
+	/*public void addAmmo()
 	{
 		StartCoroutine (BulletIconBeating ());
 		if(gunIndex == 1)
@@ -1173,13 +1134,31 @@ public class GameController : MonoBehaviour {
 		}
 
 		bCounter.text = b.ToString ();
-	}
+	}*/
 
 	IEnumerator BulletIconBeating()
 	{
 		anime.SetBool ("isBeat", true);
 		yield return new WaitForSeconds (0.3f);
 		anime.SetBool ("isBeat", false);
+	}
+
+	public void setBullet()
+	{
+		b += 10;
+		bulletSpriteSetter();
+	}
+
+	public void ammoDecrement()
+	{
+		b = b - 1;
+		bCounter.text = b.ToString ();
+
+		if(b == 0)
+		{
+			//Gameover Code.
+			GameOver();
+		}
 	}
 
 	public void bulletSpriteSetter()
@@ -1260,8 +1239,8 @@ public class GameController : MonoBehaviour {
 		/*if (PlayerPrefs.GetInt ("Score") > PlayerPrefs.GetInt ("HighScore"))
 			PlayerPrefs.SetInt ("HighScore", score); */
 
-		GameObject.FindGameObjectWithTag ("Player").GetComponent<HunterFlip> ().enabled = false;
-		GameObject.FindGameObjectWithTag ("GameController").GetComponent<ButtonClickScript> ().disablePauseCanvas ();
+		//GameObject.FindGameObjectWithTag ("Player").GetComponent<HunterFlip> ().enabled = false;
+		//GameObject.FindGameObjectWithTag ("GameController").GetComponent<ButtonClickScript> ().disablePauseCanvas ();
 
 		GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (gameOver.transform.position.x, gameOver.transform.position.y), Quaternion.identity);
 

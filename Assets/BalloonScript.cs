@@ -28,6 +28,7 @@ public class BalloonScript : MonoBehaviour {
 
 		
 		if (col.gameObject.tag == "Bullet") {
+			GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().setBullet();
 			Destroy(gameObject);
 			Destroy(col.gameObject);
 		}

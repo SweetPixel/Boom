@@ -1,15 +1,13 @@
 fileFormatVersion: 2
-guid: ca491fb2f9174464d82fa30ca600ef1e
-timeCreated: 1455705313
+guid: 88937f413340f15448e09ef8562455aa
+timeCreated: 1456830631
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: mini-bird_50_18_0
-    21300002: mini-bird_50_18_1
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -29,9 +27,9 @@ TextureImporter:
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -3
-  maxTextureSize: 64
+  maxTextureSize: 256
   textureSettings:
-    filterMode: -1
+    filterMode: 0
     aniso: 16
     mipBias: -1
     wrapMode: 1
@@ -40,7 +38,7 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -51,27 +49,7 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites:
-    - name: mini-bird_50_18_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 25
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: mini-bird_50_18_1
-      rect:
-        serializedVersion: 2
-        x: 25
-        y: 0
-        width: 25
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+    sprites: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

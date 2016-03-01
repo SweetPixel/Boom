@@ -65,7 +65,7 @@ public class specialBirdAmmoMovement : MonoBehaviour {
 			GameObject co = (GameObject)Instantiate(bullet, new Vector3(gameObject.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
 			co.GetComponent<Rigidbody2D>().velocity = Vector2.up * 2;
 			Destroy(col.gameObject);
-			gc.addAmmo();
+			//gc.addAmmo();
 			gc.incrementBirdCount();
 			gc.increaseBirdKiled();
 			Destroy(gameObject);

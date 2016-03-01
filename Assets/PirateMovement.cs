@@ -239,7 +239,7 @@ public class PirateMovement : MonoBehaviour {
 					if (Mathf.Abs (delta.x) > Mathf.Abs (delta.y)) {
 						
 					} else {
-						if (delta.y > 0) {
+						if (delta.y > 0 && isgrounded) {
 							isJumped = true;
 							isgrounded = false;
 							//moveDirection.y = jumpSpeed;
@@ -250,18 +250,18 @@ public class PirateMovement : MonoBehaviour {
 						}
 					}
 				} 
-				if (T.phase == TouchPhase.Ended  &&(( T.position.y<600 && T.position.x>0)||( T.position.x>300 && T.position.y>0))) { 
+				if (T.phase == TouchPhase.Ended) { 
 					SwipeID = -1;
+					if(Time.timeScale == 1){
+						StartCoroutine(Fire());
+					}else{
+						Time.timeScale=1;
+					}
 					//GameObject.Find ("tapToShoot").GetComponent<SpriteRenderer> ().enabled = false;
 					//if(!gameover && landed)
 						
 					//{
-						if(Time.timeScale == 1){
-							clone = (GameObject)Instantiate (bullet, bulletSpawn.transform.position, Quaternion.Euler (0, 0, -25f));
-							clone.GetComponent < Rigidbody2D > ().AddForce (Quaternion.Euler (0, 0, -45f) * Vector2.up * 10000);
-						}else{
-							Time.timeScale=1;
-						}
+						
 					//}
 					//firstshot=true;
 				}
@@ -333,6 +333,7 @@ public class PirateMovement : MonoBehaviour {
 			game.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,shootAngle) * Vector2.up * bulletSpeed);
 			yield return new WaitForSeconds(0.25f);
 		}
+		GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().ammoDecrement();
 	}
 
 	IEnumerator idleHunterAnimation()

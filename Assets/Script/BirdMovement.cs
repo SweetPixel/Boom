@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class BirdMovement : MonoBehaviour {
 
 	public Vector3 pointB;
 	public float x1 = -4f;
-	public float x2 = 4f;
+	public float x2 = 3.0f;
 	public float y1 = 3.692791f;
 	public float y2 = 3.0f;
 
@@ -40,8 +41,11 @@ public class BirdMovement : MonoBehaviour {
 	private bool hunterIdle = false;
 	private float[] pos = { 10.6f , 5.3f };
 
+	public GameObject Helicopter;
+	public GameObject balloon;
+	public GameObject miniBoss;
 	IEnumerator Start () {
-		//Flip ();
+		Flip ();
 		birdLife = 0;
 
 		treeLeft = GameObject.Find ("ObstacleTreeLeft");
@@ -69,6 +73,7 @@ public class BirdMovement : MonoBehaviour {
 			yield return StartCoroutine(MoveObject(transform, new Vector2(x1, y1), new Vector2(x2, y2), birdSpeed));
 				} else {
 			//Flip();
+			Debug.Log("Else is running");
 			yield return StartCoroutine(MoveObject(transform, new Vector2(transform.position.x, transform.position.y), new Vector2(x1, transform.position.y), birdSpeed));
 			yield return StartCoroutine(MoveObject(transform, new Vector2(x1, transform.position.y), new Vector2(x2, y2), birdSpeed));
 				}
@@ -157,6 +162,9 @@ public class BirdMovement : MonoBehaviour {
 	{
 
 		//Debug.Log (col.gameObject.name);
+		if(col.gameObject.name == "Balloon") {
+			return;
+		}
 
 		if(col.gameObject.name == "Bird2D-Enemy(Clone)") {
 			return;
@@ -173,9 +181,32 @@ public class BirdMovement : MonoBehaviour {
 			GameObject co = (GameObject)Instantiate(coin, new Vector3(gameObject.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
 			//co.GetComponent<Rigidbody2D>().velocity = Vector2.up * -2;
 
+			if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount < 1)
+			{
+				GameObject.Find("Foreground").GetComponent<Image>().fillAmount += 0.05f;
+				gc.increaseBirdKiled();
+				Debug.Log(System.Math.Round(GameObject.Find("Foreground").GetComponent<Image>().fillAmount,2));
+				if(System.Math.Round(GameObject.Find("Foreground").GetComponent<Image>().fillAmount,2)%0.25f == 0 && GameObject.Find("Foreground").GetComponent<Image>().fillAmount != 1)
+				{
+					Instantiate(miniBoss, new Vector3(-2.5f, balloon.transform.position.y, balloon.transform.position.z), Quaternion.identity);
+				}
+				else if((System.Math.Round(GameObject.Find("Foreground").GetComponent<Image>().fillAmount,2)+0.1)%0.25f == 0 && GameObject.Find("Foreground").GetComponent<Image>().fillAmount != 1)
+				{
+					Instantiate(balloon, new Vector3(-3.2f, balloon.transform.position.y, balloon.transform.position.z), Quaternion.identity);
+				}
+				else if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount == 1)
+				{
+					GameObject[] birds = GameObject.FindGameObjectsWithTag("Bird2D");
+					foreach(GameObject b in birds)
+					{
+						BirdMovement bm = b.GetComponent<BirdMovement>();
+						bm.setHunterIdle();
+					}
+					Instantiate(Helicopter, new Vector3(-3f, Helicopter.transform.position.y, Helicopter.transform.position.z), Quaternion.identity);
+				}
+			}
 			isLive = false;
 			birdLife = 0;
-			gc.increaseBirdKiled();
 			gc.setScore(1);
 			gc.incrementBirdCount();
 			//BirdHit ();

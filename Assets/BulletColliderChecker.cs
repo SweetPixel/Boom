@@ -13,7 +13,7 @@ public class BulletColliderChecker : MonoBehaviour {
 	private Animator rendererTwo;
 	private Animator rendererThree;
 
-	HunterMovement hm;
+	PirateMovement hm;
 	public GameObject hunter;
 
 	// Use this for initialization
@@ -27,7 +27,7 @@ public class BulletColliderChecker : MonoBehaviour {
 		rendererTwo = missTwo.GetComponent<Animator> ();
 		rendererThree = missThree.GetComponent<Animator> (); */
 
-		hm = hunter.GetComponent<HunterMovement> ();
+		hm = hunter.GetComponent<PirateMovement> ();
 
 	}
 	

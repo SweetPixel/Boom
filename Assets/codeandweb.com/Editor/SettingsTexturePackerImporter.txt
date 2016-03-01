@@ -1,8 +1,23 @@
 version: 2
 importPivots: 1
 tpsheetFileNames:
+- Assets/Sprite/New Artwork/Miniboss_Spritesheet_basic.tpsheet
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
+- Assets/Sprite/New Artwork/Miniboss_Spritesheet.tpsheet
+- Assets/Sprite/New Artwork/Pelican_mESH.tpsheet
+- Assets/Sprite/New Artwork/Hummingbird_Spritesheet.tpsheet
+- Assets/Sprite/New Artwork/Explosion_Spritesheet.tpsheet
 textureFileNames:
+- Assets/Sprite/New Artwork/Miniboss_Spritesheet_basic.png
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.png
+- Assets/Sprite/New Artwork/Miniboss_Spritesheet.png
+- Assets/Sprite/New Artwork/Pelican_mESH.png
+- Assets/Sprite/New Artwork/Hummingbird_Spritesheet.png
+- Assets/Sprite/New Artwork/Explosion_Spritesheet.png
 normalmapFileNames:
+- 
 - Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
+- 
+- 
+- 
+- 

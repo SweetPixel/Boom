@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: eb948ff5e08bd0040b9dbc17886a3511
-timeCreated: 1456312626
+guid: 7ac25af99547ac34d8aae3076d9407dc
+timeCreated: 1456837136
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Sprite_sheet_0
-    21300002: Sprite_sheet_1
-    21300004: Sprite_sheet_2
-    21300006: Sprite_sheet_3
-    21300008: Sprite_sheet_4
-    21300010: Sprite_sheet_5
+    21300000: EXPLOSION0001
+    21300002: EXPLOSION0002
+    21300004: EXPLOSION0003
+    21300006: EXPLOSION0004
+    21300008: EXPLOSION0005
+    21300010: EXPLOSION0006
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -32,11 +32,11 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -3
-  maxTextureSize: 512
+  textureFormat: -1
+  maxTextureSize: 2048
   textureSettings:
-    filterMode: 0
-    aniso: 16
+    filterMode: -1
+    aniso: -1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -56,65 +56,65 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Sprite_sheet_0
+    - name: EXPLOSION0001
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 72
-        height: 108
+        x: 1
+        y: 515
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_sheet_1
+    - name: EXPLOSION0002
       rect:
         serializedVersion: 2
-        x: 72
-        y: 0
-        width: 72
-        height: 108
+        x: 515
+        y: 515
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_sheet_2
+    - name: EXPLOSION0003
       rect:
         serializedVersion: 2
-        x: 144
-        y: 0
-        width: 72
-        height: 108
+        x: 1029
+        y: 515
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_sheet_3
+    - name: EXPLOSION0004
       rect:
         serializedVersion: 2
-        x: 216
-        y: 0
-        width: 72
-        height: 108
+        x: 1
+        y: 1
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_sheet_4
+    - name: EXPLOSION0005
       rect:
         serializedVersion: 2
-        x: 288
-        y: 0
-        width: 72
-        height: 108
+        x: 515
+        y: 1
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_sheet_5
+    - name: EXPLOSION0006
       rect:
         serializedVersion: 2
-        x: 360
-        y: 0
-        width: 72
-        height: 108
+        x: 1029
+        y: 1
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

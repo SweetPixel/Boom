@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: ca491fb2f9174464d82fa30ca600ef1e
-timeCreated: 1455705313
+guid: d4572f22c67dc1146a40615f0906808d
+timeCreated: 1456833304
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: mini-bird_50_18_0
-    21300002: mini-bird_50_18_1
+    21300000: Humming-bird0001
+    21300002: Humming-bird0002
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -28,11 +28,11 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -3
-  maxTextureSize: 64
+  textureFormat: -1
+  maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: 16
+    aniso: -1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -52,25 +52,25 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: mini-bird_50_18_0
+    - name: Humming-bird0001
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 25
-        height: 18
+        x: 1
+        y: 2
+        width: 96
+        height: 77
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: mini-bird_50_18_1
+    - name: Humming-bird0002
       rect:
         serializedVersion: 2
-        x: 25
-        y: 0
-        width: 25
-        height: 18
+        x: 99
+        y: 2
+        width: 96
+        height: 77
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

@@ -10,7 +10,7 @@ public class SandhilCraneScript : MonoBehaviour {
 	public float y1 = 3.692791f;
 	public GameObject coin;
 	private GameObject hunter;
-	private HunterMovement hm;
+	private PirateMovement hm;
 	private GameObject gameController;
 	private GameController gc;
 	private bool hunterIdle = false;
@@ -22,7 +22,7 @@ public class SandhilCraneScript : MonoBehaviour {
 		gc = gameController.GetComponent<GameController> ();
 
 		hunter = GameObject.FindGameObjectWithTag ("Player");
-		hm = hunter.GetComponent<HunterMovement> ();
+		hm = hunter.GetComponent<PirateMovement> ();
 
 		birdLife = 0;
 		
