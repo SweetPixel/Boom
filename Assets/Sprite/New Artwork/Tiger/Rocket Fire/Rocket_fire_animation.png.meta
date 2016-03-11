@@ -1,0 +1,155 @@
+fileFormatVersion: 2
+guid: 37fab1dd2dd8f7d4db1d727d1bb42b5f
+timeCreated: 1457681900
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Rocket Fire0001
+    21300002: Rocket Fire0002
+    21300004: Rocket Fire0003
+    21300006: Rocket Fire0004
+    21300008: Rocket Fire0005
+    21300010: Rocket Fire0006
+    21300012: Rocket Fire0007
+    21300014: Rocket Fire0008
+    21300016: Rocket Fire0009
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Rocket Fire0001
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 253
+        width: 200
+        height: 250
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocket Fire0002
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 253
+        width: 200
+        height: 250
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocket Fire0003
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 253
+        width: 200
+        height: 250
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocket Fire0004
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 253
+        width: 200
+        height: 250
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocket Fire0005
+      rect:
+        serializedVersion: 2
+        x: 809
+        y: 253
+        width: 200
+        height: 250
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocket Fire0006
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 200
+        height: 250
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocket Fire0007
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 1
+        width: 200
+        height: 250
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocket Fire0008
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 1
+        width: 200
+        height: 250
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocket Fire0009
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 1
+        width: 200
+        height: 250
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

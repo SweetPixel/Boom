@@ -1,0 +1,24 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# http://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:26bad5e9d372ec957a6e40c16b3378e3:b6a98e4ad5182b9354ed42e7b9958cde:3d53e3ddcb6b9c2c3fd08c36dfc7b422$
+#
+:format=40000
+:texture=tail spritesheet.png
+:size=336x460
+
+tail_new0002;1;346;110;113;0.5;0.5
+tail_new0003;113;346;110;113;0.5;0.5
+tail_new0004;225;346;110;113;0.5;0.5
+tail_new0005;1;231;110;113;0.5;0.5
+tail_new0006;113;231;110;113;0.5;0.5
+tail_new0007;225;231;110;113;0.5;0.5
+tail_new0008;1;116;110;113;0.5;0.5
+tail_new0009;113;116;110;113;0.5;0.5
+tail_new0010;225;116;110;113;0.5;0.5
+tail_new0011;1;1;110;113;0.5;0.5
+tail_new0012;113;1;110;113;0.5;0.5
+tail_new0013;225;1;110;113;0.5;0.5

@@ -119,15 +119,15 @@ public class Hunter : MonoBehaviour {
 		var leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).x;
 		var rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x;
 
-		yield return StartCoroutine(MoveObject(transform, new Vector3(0f, -2f, 0.02769041f), new Vector3(rightBorder-0.3f, -2f, 0.02769041f), hunterSpeed));
+		yield return StartCoroutine(MoveObject(transform, new Vector3(0f, -2.45f, 0.02769041f), new Vector3(rightBorder-0.3f, -2.45f, 0.02769041f), hunterSpeed));
 		
 		Vector3 pointA = transform.position;
 		while (roundAvailable) {
 			Flip ();
-			yield return StartCoroutine(MoveObject(transform, new Vector3(rightBorder-0.3f, -2f, 0.02769041f), new Vector3(leftBorder+0.3f, -2f, 0.02769041f), hunterSpeed));
+			yield return StartCoroutine(MoveObject(transform, new Vector3(rightBorder-0.3f, -2.45f, 0.02769041f), new Vector3(leftBorder+0.3f, -2.45f, 0.02769041f), hunterSpeed));
 			//isRight = true;
 			Flip ();
-			yield return StartCoroutine(MoveObject(transform, new Vector3(leftBorder+0.3f, -2f, 0.02769041f), new Vector3(rightBorder-0.3f, -2f, 0.02769041f), hunterSpeed));
+			yield return StartCoroutine(MoveObject(transform, new Vector3(leftBorder+0.3f, -2.45f, 0.02769041f), new Vector3(rightBorder-0.3f, -2.45f, 0.02769041f), hunterSpeed));
 			//isRight = false;
 		}
 	}
@@ -321,7 +321,7 @@ public class Hunter : MonoBehaviour {
 					//StartCoroutine(Fired());
 				}
 			}
-			GameObject progressbar = GameObject.FindGameObjectWithTag("ProgressBar");
+			/*GameObject progressbar = GameObject.FindGameObjectWithTag("ProgressBar");
 			if(progressbar == null)
 			{
 				Instantiate (progressBar, progressBar.transform.position, Quaternion.identity);
@@ -329,7 +329,7 @@ public class Hunter : MonoBehaviour {
 			else{
 				Destroy(progressbar);
 				Instantiate (progressBar, progressBar.transform.position, Quaternion.identity);
-			}
+			}*/
 			idleTime = 0f;
 		}
 		

@@ -416,7 +416,7 @@ public class ButtonClickScript : MonoBehaviour {
 
 		if (buttonName == "VideoButton") {
 			VideoAds gamecontroller = GameObject.FindGameObjectWithTag("GameController").GetComponent<VideoAds>();
-			gamecontroller.loadAd();
+			//gamecontroller.loadAd();
 		}
 
 		if (buttonName == "RestartLevel") {

@@ -1,0 +1,18 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# http://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:bc51decf21d67a2663ccba253108e779:7f1025d00a2c5add1a6eb345ac800843:552e7d23e845b7df5d55ce05d52bd3f7$
+#
+:format=40000
+:texture=Rocket_Spritesheet.png
+:size=216x204
+
+rocket0001;1;2;34;201;0.5;0.5
+rocket0002;37;2;34;201;0.5;0.5
+rocket0003;73;2;34;201;0.5;0.5
+rocket0004;109;2;34;201;0.5;0.5
+rocket0005;145;2;34;201;0.5;0.5
+rocket0006;181;2;34;201;0.5;0.5

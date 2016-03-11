@@ -1,0 +1,25 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# http://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:f4ab77a739dc46152b9a035bddb55d59:92df4630a6dec58e961bb3f2f8c4c19b:40259f8faa390e48653f82362263e8d5$
+#
+:format=40000
+:texture=Tiger_laughing spritesheet.png
+:size=828x684
+
+tiger laughing0001;1;457;163;226;0.5;0.5
+tiger laughing0002;166;457;163;226;0.5;0.5
+tiger laughing0003;331;457;163;226;0.5;0.5
+tiger laughing0004;496;457;163;226;0.5;0.5
+tiger laughing0005;661;457;163;226;0.5;0.5
+tiger laughing0006;1;229;163;226;0.5;0.5
+tiger laughing0007;166;229;163;226;0.5;0.5
+tiger laughing0008;331;229;163;226;0.5;0.5
+tiger laughing0009;496;229;163;226;0.5;0.5
+tiger laughing0010;661;229;163;226;0.5;0.5
+tiger laughing0011;1;1;163;226;0.5;0.5
+tiger laughing0012;166;1;163;226;0.5;0.5
+tiger laughing0013;331;1;163;226;0.5;0.5

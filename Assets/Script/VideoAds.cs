@@ -18,7 +18,7 @@ public class VideoAds : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	public void loadAd () {
+	/*public void loadAd () {
 		StartCoroutine (ShowAdWhenReady());
 	}
 	IEnumerator ShowAdWhenReady()
@@ -95,7 +95,7 @@ public class VideoAds : MonoBehaviour {
 				}
 			}
 		});
-	}
+	}*/
 	
 	
 	

@@ -1,0 +1,21 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# http://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:3beead470811d3716673f1e60b36ff1d:2bcca3d1ace46038a749918e14bfbb91:2d8a0fc5817c6a6a5a31bfe92953e7ef$
+#
+:format=40000
+:texture=Rocket_fire_animation.png
+:size=1012x504
+
+Rocket Fire0001;1;253;200;250;0.5;0.5
+Rocket Fire0002;203;253;200;250;0.5;0.5
+Rocket Fire0003;405;253;200;250;0.5;0.5
+Rocket Fire0004;607;253;200;250;0.5;0.5
+Rocket Fire0005;809;253;200;250;0.5;0.5
+Rocket Fire0006;1;1;200;250;0.5;0.5
+Rocket Fire0007;203;1;200;250;0.5;0.5
+Rocket Fire0008;405;1;200;250;0.5;0.5
+Rocket Fire0009;607;1;200;250;0.5;0.5
