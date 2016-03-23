@@ -60,9 +60,7 @@ public class TigerMovement : MonoBehaviour {
 	
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		
-		//Debug.Log (col.gameObject.name);
-		
+		Debug.Log (GameObject.Find ("Foreground").GetComponent<Image> ().fillAmount);
 		if(col.gameObject.tag == "Bullet") {
 			Destroy(col.gameObject);
 			if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount > 0)

@@ -49,6 +49,8 @@ public class ButtonClickScript : MonoBehaviour {
 	public Sprite playIcon;
 
 	public AudioClip buttonAudio;
+	private int direction = 0;
+	private bool isRight = true;
 
 	// Use this for initialization
 	void Start () {
@@ -65,6 +67,14 @@ public class ButtonClickScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (direction == 1) {
+			GameObject.FindGameObjectWithTag("Player").transform.Translate(new Vector2(5f,-1.4f) * Time.deltaTime);
+		}
+
+		if (direction == -1) {
+			GameObject.FindGameObjectWithTag("Player").transform.Translate(new Vector2(5f,-1.4f) * Time.deltaTime);
+		}
 
 		if (showCanvas) {
 			timeLeft -= Time.deltaTime;
@@ -222,11 +232,11 @@ public class ButtonClickScript : MonoBehaviour {
 					int sc = PlayerPrefs.GetInt ("Score");
 					if(sc < smgValue)
 					{
-						DialogManager.Instance.SetLabel("Ok","Cancel","Cancel");
+						/*DialogManager.Instance.SetLabel("Ok","Cancel","Cancel");
 						DialogManager.Instance.ShowSelectDialog("Can't Buy","You dont have many coin to buy AK-47",(bool result) =>{
 							if(result)
 								DialogManager.Instance.DissmissDialog(0);
-						});
+						});*/
 					}
 					else{
 						if(PlayerPrefs.GetInt("SmgAvailable")==0)
@@ -257,11 +267,11 @@ public class ButtonClickScript : MonoBehaviour {
 					int sc = PlayerPrefs.GetInt ("Score");
 					if(sc < shotgunValue)
 					{
-						DialogManager.Instance.SetLabel("Ok","Cancel","Cancel");
+						/*DialogManager.Instance.SetLabel("Ok","Cancel","Cancel");
 						DialogManager.Instance.ShowSelectDialog("Can't Buy","You dont have many coin to buy Shotgun",(bool result) =>{
 							if(result)
 								DialogManager.Instance.DissmissDialog(0);
-						});
+						});*/
 					}
 					else{
 						if(PlayerPrefs.GetInt("ShotgunAvailable")==0)
@@ -293,11 +303,11 @@ public class ButtonClickScript : MonoBehaviour {
 					Debug.Log("SniperValue: " + sniperValue);
 					if(sc < sniperValue)
 					{
-						DialogManager.Instance.SetLabel("Ok","Cancel","Cancel");
+						/*DialogManager.Instance.SetLabel("Ok","Cancel","Cancel");
 						DialogManager.Instance.ShowSelectDialog("Can't Buy","You dont have many coin to buy Sniper",(bool result) =>{
 							if(result)
 								DialogManager.Instance.DissmissDialog(0);
-						});
+						});*/
 					}
 					else{
 						if(PlayerPrefs.GetInt("SniperAvailable")==0)
@@ -421,6 +431,37 @@ public class ButtonClickScript : MonoBehaviour {
 
 		if (buttonName == "RestartLevel") {
 			Application.LoadLevel("MainScene");
+		}
+
+		if (buttonName == "MoveLeft") {
+			if(isRight)
+			{
+				isRight = false;
+				GameObject.FindGameObjectWithTag("Player").GetComponent<PirateMovement>().Flip();
+			}
+			direction = -1;
+		}
+
+		if (buttonName == "MoveRight") {
+			if(!isRight)
+			{
+				isRight = true;
+				GameObject.FindGameObjectWithTag("Player").GetComponent<PirateMovement>().Flip();
+			}
+			direction = 1;
+		}
+
+		if (buttonName == "Still") {
+			direction = 0;
+		}
+
+		if (buttonName == "Fire") {
+			GameObject.FindGameObjectWithTag("Player").GetComponent<PirateMovement>().InitiateFire();
+		}
+
+		if (buttonName == "Jump" && GameObject.FindGameObjectWithTag("Player").GetComponent<PirateMovement>().isgrounded) {
+			GameObject.FindGameObjectWithTag("Player").GetComponent<PirateMovement>().isgrounded = false;
+			GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().AddForce(Vector2.up * 900f);
 		}
 
 		/* if (buttonName == "PlayWithShotgun") {

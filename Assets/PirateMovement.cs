@@ -88,7 +88,7 @@ public class PirateMovement : MonoBehaviour {
 	
 	private bool isInitial = true;
 	private bool isFlipped = true;
-	private bool isgrounded = true;
+	public bool isgrounded = true;
 
 	float leftBorder;
 	float rightBorder;
@@ -100,33 +100,20 @@ public class PirateMovement : MonoBehaviour {
 	public float shootAngle = 22f;
 
 	public float fireRate;
+	public bool spotted = false;
 
 	void Start () {
 
 		moveDirection = new Vector3 (1, 0, Input.GetAxis ("Vertical"));
 		moveDirection = transform.TransformDirection (moveDirection);
 		moveDirection *= 12.0F;
-
-		/* Bullet Renderers */
-		
-		/*bulletObject = GameObject.Find ("BulletCountDown");
-		coinObject = GameObject.Find ("CoinObject");
-
-		coinObject.SetActive (true);
-		bulletObject.SetActive (true);*/
 		idleTime = 0f;
 		
 		gamecontroller = GameObject.FindGameObjectWithTag ("GameController");
 		gc = gamecontroller.GetComponent<GameController> ();
 		
 		anim = gameObject.GetComponent<Animator> ();
-		
-		
-		//sniperTracker = GameObject.FindGameObjectWithTag ("SniperTracker");
-		//sniperTracker.SetActive (false);
-		
-		/* End of Bullet Renderer */
-		
+
 		startButton = GameObject.Find ("StartButton");
 		
 		hunterSpriteRenderer = gameObject.GetComponent<SpriteRenderer> ();
@@ -134,12 +121,6 @@ public class PirateMovement : MonoBehaviour {
 		/* Bullets Available */
 		roundAvailable = true;
 		restartInitiate = 0;
-		
-		/* Flip Function */
-		//Flip ();
-		
-		/* Start Hunter Movement from the middle */
-		//yield return StartCoroutine(MoveObject(transform, new Vector3(8.15f, -1.84f, 0.02769041f), new Vector3(9.80f, -1.84f, 0.02769041f), hunterSpeed));
 
 		string temp = Screen.width.ToString();
 		float width = float.Parse(temp);
@@ -148,17 +129,6 @@ public class PirateMovement : MonoBehaviour {
 		leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).x;
 		rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x;
 
-		//yield return StartCoroutine(MoveObject(transform, new Vector3(0f, transform.position.y, 0.02769041f), new Vector3(rightBorder-0.3f, transform.position.y, 0.02769041f), hunterSpeed));
-		
-		//Vector3 pointA = transform.position;
-		//while (roundAvailable) {
-		//	Flip ();
-		//	yield return StartCoroutine(MoveObject(transform, new Vector3(rightBorder-0.3f, transform.position.y, 0.02769041f), new Vector3(leftBorder+0.3f, transform.position.y, 0.02769041f), hunterSpeed));
-			//isRight = true;
-		//	Flip ();
-		//	yield return StartCoroutine(MoveObject(transform, new Vector3(leftBorder+0.3f, transform.position.y, 0.02769041f), new Vector3(rightBorder-0.3f, transform.position.y, 0.02769041f), hunterSpeed));
-			//isRight = false;
-		//}
 	}
 	
 	IEnumerator restartLevel()
@@ -189,7 +159,7 @@ public class PirateMovement : MonoBehaviour {
 	
 	void Update () {
 
-		currentValue += Time.deltaTime * direction  * hunterSpeed; // or however you are incrementing the position
+		/*currentValue += Time.deltaTime * direction  * hunterSpeed; // or however you are incrementing the position
 		if(currentValue >= rightBorder-0.3f) {
 			direction *= -1;
 			currentValue = rightBorder-0.3f;
@@ -209,54 +179,78 @@ public class PirateMovement : MonoBehaviour {
 				Flip ();
 		}
 
-		moveDirection.x = currentValue;
+		moveDirection.x = currentValue; */
 
-		if (Input.GetKey (KeyCode.Space) && isgrounded) 
+		if (Input.GetKey (KeyCode.K) && isgrounded) 
 		{
-			Debug.Log("Space is pressed");
 			//moveDirection.y = jumpSpeed;
 			isJumped = true;
 			isgrounded = false;
+			GameObject.FindGameObjectWithTag("Player").GetComponent<PirateMovement>().isgrounded = false;
+			GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpSpeed);
 		}
 
-		if(Input.GetKey(KeyCode.A) && 
+		if(Input.GetKey(KeyCode.L) && 
 		   Time.time > nextFire)
 		{
 			nextFire = Time.time + fireRate;
 			StartCoroutine(Fire());
 		}
 
+		if(Input.GetKey(KeyCode.Space) )
+		{
+			Application.LoadLevel("MainScene");
+		}
 
-		foreach (var T in Input.touches) {
-			var P = T.position;
-			if (T.phase == TouchPhase.Began && SwipeID == -1) {
-				SwipeID = T.fingerId;
-				StartPos = P;
-			} else if (T.fingerId == SwipeID) {
-				var delta = P - StartPos;
-				if (T.phase == TouchPhase.Moved && delta.magnitude > minMovement) {
-					SwipeID = -1;
-					if (Mathf.Abs (delta.x) > Mathf.Abs (delta.y)) {
-						
-					} else {
-						if (delta.y > 0 && isgrounded) {
-							isJumped = true;
-							isgrounded = false;
+		if (Input.GetKey (KeyCode.A)) {
+			if(isRight)
+			{
+				//isRight = false;
+				GameObject.FindGameObjectWithTag("Player").GetComponent<PirateMovement>().Flip();
+			}
+			GameObject.FindGameObjectWithTag("Player").transform.Translate(new Vector2(5f,-1.4f) * Time.deltaTime);
+		}
+
+		if (Input.GetKey (KeyCode.S)) {
+			if(!isRight)
+			{
+				//isRight = true;
+				GameObject.FindGameObjectWithTag("Player").GetComponent<PirateMovement>().Flip();
+			}
+			GameObject.FindGameObjectWithTag("Player").transform.Translate(new Vector2(5f,-1.4f) * Time.deltaTime);
+		}
+
+
+		//foreach (var T in Input.touches) {
+		//	var P = T.position;
+		//	if (T.phase == TouchPhase.Began && SwipeID == -1) {
+		//		SwipeID = T.fingerId;
+	//			StartPos = P;
+		//	} else if (T.fingerId == SwipeID) {
+		//		var delta = P - StartPos;
+		//		if (T.phase == TouchPhase.Moved && delta.magnitude > minMovement) {
+		//			SwipeID = -1;
+		//			if (Mathf.Abs (delta.x) > Mathf.Abs (delta.y)) {
+		//				
+		//			} else {
+		//				if (delta.y > 0 && isgrounded) {
+		//					isJumped = true;
+		//					isgrounded = false;
 							//moveDirection.y = jumpSpeed;
 							/*if (PlayerPrefs.GetInt ("Sound") == 0) 
 								{
 									gameObject.GetComponent<AudioSource>().Play();
 								}*/								
-						}
-					}
-				} 
-				if (T.phase == TouchPhase.Ended) { 
-					SwipeID = -1;
-					if(Time.timeScale == 1){
-						StartCoroutine(Fire());
-					}else{
-						Time.timeScale=1;
-					}
+		//				}
+		//			}
+		//		} 
+		//		if (T.phase == TouchPhase.Ended) { 
+		//			SwipeID = -1;
+		//			if(Time.timeScale == 1){
+		//				StartCoroutine(Fire());
+		//			}else{
+		//				Time.timeScale=1;
+		//			}
 					//GameObject.Find ("tapToShoot").GetComponent<SpriteRenderer> ().enabled = false;
 					//if(!gameover && landed)
 						
@@ -264,17 +258,17 @@ public class PirateMovement : MonoBehaviour {
 						
 					//}
 					//firstshot=true;
-				}
-			}
-		}
+		//		}
+		//	}
+		//}
 
-		if(!isJumped)
+		/*if(!isJumped)
 			transform.position = new Vector3(currentValue, transform.position.y, 0);
 		else{
 			//gameObject.transform.position = new Vector3(currentValue, transform.position.y * jumpSpeed * Time.smoothDeltaTime, transform.position.z);
 			gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 200f);
 			isJumped = false;
-		}
+		}*/
 		/*if(isRight)
 		{
 			gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right*10f);
@@ -319,6 +313,11 @@ public class PirateMovement : MonoBehaviour {
 		
 		//moveDirection.y -= gravity * Time.smoothDeltaTime;
 		
+	}
+
+	public void InitiateFire()
+	{
+		StartCoroutine (Fire ());
 	}
 
 	IEnumerator Fire()
@@ -409,6 +408,13 @@ public class PirateMovement : MonoBehaviour {
 			isgrounded = true;
 		}
 
+		if(col.gameObject.tag == "Rocket")
+		{
+			Destroy(gameObject);
+			GameObject gcc = GameObject.FindGameObjectWithTag("GameController");
+			GameController gc = gcc.GetComponent<GameController>();
+			gc.GameOver();
+		}
 		
 	}
 	
@@ -430,8 +436,8 @@ public class PirateMovement : MonoBehaviour {
 		roundAvailable = false;
 		gameObject.transform.position = new Vector2(transform.position.x, -1.9f);
 	}
-	
-	void Flip()
+
+	public void Flip()
 	{
 		//Vector2 charScale = transform.localScale;
 		///	charScale.x *= -1;
@@ -443,19 +449,14 @@ public class PirateMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		/* if (Input.GetKey (KeyCode.Mouse0) && roundAvailable && start) 
-		{
-			if(isFired == false)
-			{
 
-				bulletSpriteSetter();
-				isFired = true;
-				animshoot.SetBool("isFired", isFired);
-				//checkBirdPosition();
-				StartCoroutine(Fired());
-			}
-		} */
-		
+		/*Debug.DrawRay(new Vector2(transform.position.x, transform.position.y-0.1f), Vector2.right, Color.green, 2f);
+		RaycastHit2D hitup = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y-0.1f), Vector2.right, 1 <<LayerMask.NameToLayer("Enemy"), 0f, 2f);
+		if (hitup.collider != null || hitup.collider.gameObject.name == "Mashroom") {
+			Destroy (hitup.collider.gameObject);
+		}*/
+
+
 		GameObject start = GameObject.Find ("StartButton");
 		if (start == null) {
 			startFiring = true;
@@ -488,44 +489,6 @@ public class PirateMovement : MonoBehaviour {
 		
 	}
 	
-	
-	/*IEnumerator Fired()
-	{
-
-	}*/
-	
-	/*IEnumerator shotGunFire()
-	{
-		if (isRight) {
-			GameObject rightBul = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,0f));
-			rightBul.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,-5f) * Vector2.up * 2950f); 
-			
-			yield return new WaitForSeconds (0.01f);
-			
-			GameObject midBul = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,-10f));
-			midBul.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,-15f) * Vector2.up * bulletSpeed);
-			
-			yield return new WaitForSeconds (0.01f);
-			
-			GameObject leftBul = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,-20f));
-			leftBul.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,-25f) * Vector2.up * 2900f);
-			
-		} else {
-			GameObject rightBul = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,0f));
-			rightBul.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,5f) * Vector2.up * 2950f);
-			
-			yield return new WaitForSeconds (0.01f);
-			
-			GameObject midBul = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,10f));
-			midBul.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,15f) * Vector2.up * bulletSpeed);
-			
-			yield return new WaitForSeconds (0.01f);
-			
-			GameObject leftBul = (GameObject)Instantiate(bullet, bulletpointVariable.transform.position, Quaternion.Euler(0,0,20f));
-			leftBul.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,25f) * Vector2.up * 2900f);
-		}
-	}*/
-	
 	public void setRight(bool x)
 	{
 		isRight = x;
@@ -540,29 +503,13 @@ public class PirateMovement : MonoBehaviour {
 			otScript.SetAllCollidersStatus (true);
 		}
 	}
-	
-	/* IEnumerator lost()
-	{
-		roundAvailable = false;
-		gameObject.transform.position = new Vector2(transform.position.x, -1.81f);
-		hunterAnime.SetBool("isLost", true);
-		yield return new WaitForSeconds (0f);
-	} */
-	
+
 	public void lost()
 	{
-		//int sc = PlayerPrefs.GetInt ("Score");
-		/////////////////sc = sc + score;
-		//PlayerPrefs.SetInt ("Score", sc);
-		////////////////////PlayerPrefs.SetInt ("MatchScore", score);
-		/*if (PlayerPrefs.GetInt ("Score") > PlayerPrefs.GetInt ("HighScore"))
-			PlayerPrefs.SetInt ("HighScore", score); */
+
 		roundAvailable = false;
 		startFiring = false;
-		//sniperTracker.SetActive (false);
-		//GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (8.029126f, 1.784778f), Quaternion.identity);
-		
-		//gameObject.transform.position = new Vector2(transform.position.x, -1.98f);
+
 	} 
 	
 	public void letStart()
@@ -585,7 +532,5 @@ public class PirateMovement : MonoBehaviour {
 		
 		start = false;
 		idleTime = 0f;
-		//coinObject.SetActive (false);
-		//bulletObject.SetActive (false);
 	}
 }

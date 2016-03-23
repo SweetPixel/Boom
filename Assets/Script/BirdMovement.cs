@@ -64,23 +64,23 @@ public class BirdMovement : MonoBehaviour {
 		Vector3 pointA = transform.position;
 
 		x1 = Random.Range(-3f, 3f);
-		y1 = Random.Range(4f, 6f);
+		//y1 = Random.Range(4f, 6f);
 
-		y2 = Random.Range(4f, 6f);
+		//y2 = Random.Range(4f, 6f);
 
 		if (gameObject.transform.position.x == -4.0f) {
 			yield return StartCoroutine(MoveObject(transform, new Vector2(-4.0f, y1), new Vector2(x1, y1), birdSpeed));
 			yield return StartCoroutine(MoveObject(transform, new Vector2(x1, y1), new Vector2(x2, y2), birdSpeed));
 				} else {
 			//Flip();
-			Debug.Log("Else is running");
+
 			yield return StartCoroutine(MoveObject(transform, new Vector2(transform.position.x, transform.position.y), new Vector2(x1, transform.position.y), birdSpeed));
 			yield return StartCoroutine(MoveObject(transform, new Vector2(x1, transform.position.y), new Vector2(x2, y2), birdSpeed));
 				}
 
 		while (!isHit) {
 			x1 = Random.Range(-3f, 3f);
-			y1 = Random.Range(4f, 6f);
+			//y1 = Random.Range(4f, 6f);
 			if(hunterIdle)
 			{
 				int index = Random.Range(0,2);
@@ -209,6 +209,7 @@ public class BirdMovement : MonoBehaviour {
 			birdLife = 0;
 			gc.setScore(1);
 			gc.incrementBirdCount();
+			GameObject.FindGameObjectWithTag("PlayHand").GetComponent<StartGame>().initBirdOutside(1);
 			//BirdHit ();
 			Destroy(gameObject);
 			Destroy(col.gameObject);
