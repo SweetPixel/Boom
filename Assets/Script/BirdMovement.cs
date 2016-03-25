@@ -184,33 +184,28 @@ public class BirdMovement : MonoBehaviour {
 			if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount < 1)
 			{
 				GameObject.Find("Foreground").GetComponent<Image>().fillAmount += 0.05f;
-				gc.increaseBirdKiled();
-				Debug.Log(System.Math.Round(GameObject.Find("Foreground").GetComponent<Image>().fillAmount,2));
+				//gc.increaseBirdKiled();
+				//Debug.Log(System.Math.Round(GameObject.Find("Foreground").GetComponent<Image>().fillAmount,2));
 				if(System.Math.Round(GameObject.Find("Foreground").GetComponent<Image>().fillAmount,2)%0.25f == 0 && GameObject.Find("Foreground").GetComponent<Image>().fillAmount != 1)
 				{
 					Instantiate(miniBoss, new Vector3(-2.5f, balloon.transform.position.y, balloon.transform.position.z), Quaternion.identity);
 				}
-				else if((System.Math.Round(GameObject.Find("Foreground").GetComponent<Image>().fillAmount,2)+0.1)%0.25f == 0 && GameObject.Find("Foreground").GetComponent<Image>().fillAmount != 1)
+				/*else if((System.Math.Round(GameObject.Find("Foreground").GetComponent<Image>().fillAmount,2)+0.1)%0.25f == 0 && GameObject.Find("Foreground").GetComponent<Image>().fillAmount != 1)
 				{
 					Instantiate(balloon, new Vector3(-3.2f, balloon.transform.position.y, balloon.transform.position.z), Quaternion.identity);
-				}
+				}*/
 				else if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount == 1)
 				{
-					GameObject[] birds = GameObject.FindGameObjectsWithTag("Bird2D");
-					foreach(GameObject b in birds)
-					{
-						BirdMovement bm = b.GetComponent<BirdMovement>();
-						bm.setHunterIdle();
-					}
-					Instantiate(Helicopter, new Vector3(-3f, Helicopter.transform.position.y, Helicopter.transform.position.z), Quaternion.identity);
+					Instantiate(Helicopter, new Vector3(-6f, Helicopter.transform.position.y, Helicopter.transform.position.z), Quaternion.identity);
 				}
 			}
-			isLive = false;
-			birdLife = 0;
-			gc.setScore(1);
-			gc.incrementBirdCount();
-			GameObject.FindGameObjectWithTag("PlayHand").GetComponent<StartGame>().initBirdOutside(1);
+			//isLive = false;
+			//birdLife = 0;
+			//gc.setScore(1);
+			//gc.incrementBirdCount();
+			//GameObject.FindGameObjectWithTag("PlayHand").GetComponent<StartGame>().initBirdOutside(1);
 			//BirdHit ();
+			GameObject.Find("AirEnemyGenerator").GetComponent<AirEnemyGeneratorScript>().InitEnemy();
 			Destroy(gameObject);
 			Destroy(col.gameObject);
 			/*GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");

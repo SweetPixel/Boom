@@ -12,6 +12,10 @@ public class HopMovement : MonoBehaviour {
 	public float timeOnGround = 2f;
 	public float amplitudeX = 100f;
 	public float amplitudeY = 300f;
+
+	public GameObject carrot;
+	public GameObject spawner;
+
 	
 	void Start()
 	{
@@ -33,12 +37,16 @@ public class HopMovement : MonoBehaviour {
 			//transform.localPosition= transform.localPosition +  new Vector3(-2f,2f,0) * Time.time;
 			if(isgrounded)
 			{
+				Debug.Log("ISGrounded");
 				isgrounded = false;
-				gameObject.GetComponent<Rigidbody2D>().AddForce((Vector2.up * amplitudeY) + (-Vector2.right * amplitudeX));
+				//gameObject.GetComponent<Rigidbody2D>().AddForce((Vector2.up * amplitudeY) + (-Vector2.right * amplitudeX));
+				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-2f, 7f);
 				//yield return new WaitForSeconds(2f);
 			}
 			else if(!isgrounded){
-				yield return new WaitForSeconds(timeOnGround);
+				yield return new WaitForSeconds(timeOnGround/2);
+				Instantiate (carrot, spawner.transform.position, Quaternion.identity);
+				yield return new WaitForSeconds(timeOnGround/2);
 			}
 		}
 
@@ -50,7 +58,6 @@ public class HopMovement : MonoBehaviour {
 		
 		if (col.gameObject.tag == "Platform") {
 			isgrounded = true;
-			Debug.Log("Kangaroo hit is onGround");
 			return;
 		}
 

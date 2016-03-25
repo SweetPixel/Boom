@@ -187,7 +187,7 @@ public class PirateMovement : MonoBehaviour {
 			isJumped = true;
 			isgrounded = false;
 			GameObject.FindGameObjectWithTag("Player").GetComponent<PirateMovement>().isgrounded = false;
-			GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpSpeed);
+			GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpSpeed));
 		}
 
 		if(Input.GetKey(KeyCode.L) && 

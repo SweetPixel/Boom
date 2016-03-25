@@ -1,0 +1,342 @@
+fileFormatVersion: 2
+guid: 43b45666b3516ab48bd1ac3c1e41d2c3
+timeCreated: 1458891688
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: DS---AWAY-Shuffle-Dungeon---Mine_4
+    21300002: DS---AWAY-Shuffle-Dungeon---Mine_5
+    21300004: DS---AWAY-Shuffle-Dungeon---Mine_6
+    21300006: DS---AWAY-Shuffle-Dungeon---Mine_7
+    21300008: DS---AWAY-Shuffle-Dungeon---Mine_8
+    21300010: DS---AWAY-Shuffle-Dungeon---Mine_9
+    21300012: DS---AWAY-Shuffle-Dungeon---Mine_10
+    21300014: DS---AWAY-Shuffle-Dungeon---Mine_11
+    21300016: DS---AWAY-Shuffle-Dungeon---Mine_12
+    21300018: DS---AWAY-Shuffle-Dungeon---Mine_13
+    21300020: DS---AWAY-Shuffle-Dungeon---Mine_14
+    21300022: DS---AWAY-Shuffle-Dungeon---Mine_15
+    21300024: DS---AWAY-Shuffle-Dungeon---Mine_16
+    21300026: DS---AWAY-Shuffle-Dungeon---Mine_17
+    21300028: DS---AWAY-Shuffle-Dungeon---Mine_18
+    21300030: DS---AWAY-Shuffle-Dungeon---Mine_19
+    21300032: DS---AWAY-Shuffle-Dungeon---Mine_20
+    21300034: DS---AWAY-Shuffle-Dungeon---Mine_21
+    21300036: DS---AWAY-Shuffle-Dungeon---Mine_22
+    21300038: DS---AWAY-Shuffle-Dungeon---Mine_23
+    21300040: DS---AWAY-Shuffle-Dungeon---Mine_24
+    21300042: DS---AWAY-Shuffle-Dungeon---Mine_25
+    21300044: DS---AWAY-Shuffle-Dungeon---Mine_26
+    21300046: DS---AWAY-Shuffle-Dungeon---Mine_27
+    21300048: DS---AWAY-Shuffle-Dungeon---Mine_28
+    21300050: DS---AWAY-Shuffle-Dungeon---Mine_0
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 512
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_5
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 320
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_6
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 320
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: .499999911, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_7
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 320
+        width: 76.7999878
+        height: 80
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_8
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 320
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_10
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 240
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_11
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 240
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_12
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 240
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_13
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 240
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_15
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 160
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_16
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 160
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_17
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 160
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_18
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 160
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 80
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_20
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 80
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_21
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 80
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_22
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 80
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_23
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 80
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_25
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 0
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_26
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 0
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_27
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 0
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_28
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 0
+        width: 76.8000031
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---AWAY-Shuffle-Dungeon---Mine_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 424
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

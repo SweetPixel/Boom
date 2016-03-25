@@ -197,7 +197,7 @@ public class StartGame : MonoBehaviour {
 
 	public void initBirdOutside(int length)
 	{
-		StartCoroutine(InitiateBird(length));
+		Instantiate (bird, bird.transform.position, Quaternion.identity);
 	}
 
 	IEnumerator InitiateBird(int length)

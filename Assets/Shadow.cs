@@ -15,5 +15,10 @@ public class Shadow : MonoBehaviour {
 		                                            GameObject.FindGameObjectWithTag ("Player").transform.position.y - 0.5f,
 		                                            GameObject.FindGameObjectWithTag ("Player").transform.position.z);
 		}
+		else{
+			gameObject.transform.position = new Vector3 (GameObject.FindGameObjectWithTag ("Player").transform.position.x,
+			                                             transform.position.y,
+			                                             GameObject.FindGameObjectWithTag ("Player").transform.position.z);
+		}
 	}
 }

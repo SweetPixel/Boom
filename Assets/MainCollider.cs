@@ -28,9 +28,6 @@ public class MainCollider : MonoBehaviour {
 				gc.GameOver();
 				Destroy(col.gameObject);
 			}
-			{
-				Destroy (gameObject.transform.parent.gameObject);
-			}
 		}
 		
 	}

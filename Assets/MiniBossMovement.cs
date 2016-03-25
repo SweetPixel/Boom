@@ -19,18 +19,18 @@ public class MiniBossMovement : MonoBehaviour {
 		y2 = Random.Range(4f, 6f);
 		
 		if (gameObject.transform.position.x == -4.0f) {
-			yield return StartCoroutine(MoveObject(transform, new Vector2(-4.0f, y1), new Vector2(x1, y1), speed));
-			yield return StartCoroutine(MoveObject(transform, new Vector2(x1, y1), new Vector2(x2, y2), speed));
+			yield return StartCoroutine(MoveObject(transform, new Vector2(-4.0f, transform.position.y), new Vector2(x1, transform.position.y), speed));
+			yield return StartCoroutine(MoveObject(transform, new Vector2(x1, transform.position.y), new Vector2(x2,transform.position.y), speed));
 		} else {
 			//Flip();
 			yield return StartCoroutine(MoveObject(transform, new Vector2(transform.position.x, transform.position.y), new Vector2(x1, transform.position.y), speed));
-			yield return StartCoroutine(MoveObject(transform, new Vector2(x1, transform.position.y), new Vector2(x2, y2), speed));
+			yield return StartCoroutine(MoveObject(transform, new Vector2(x1, transform.position.y), new Vector2(x2, transform.position.y), speed));
 		}
 		
 		while (true) {
 			x1 = Random.Range(-3f, 3f);
 			y1 = Random.Range(4f, 6f);
-			yield return StartCoroutine(MoveObject(transform, new Vector2(transform.position.x, transform.position.y), new Vector2(x1, y1), speed)); //3.692791f
+			yield return StartCoroutine(MoveObject(transform, new Vector2(transform.position.x, transform.position.y), new Vector2(x1, transform.position.y), speed)); //3.692791f
 		}
 
 	}

@@ -7,7 +7,7 @@ public class CarrotMovement : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		StartCoroutine(MoveObject(transform, new Vector3(7f, -1.65f, 0f), new Vector3(-8f, -1.65f, 0f), speed));
+		StartCoroutine(MoveObject(transform, transform.position, new Vector3(-8f, -1.65f, 0f), speed));
 	}
 	
 	// Update is called once per frame

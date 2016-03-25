@@ -17,9 +17,24 @@ public class HelicopterMovementAndFire : MonoBehaviour {
 
 	// Use this for initialization
 	IEnumerator Start () {
-		StartCoroutine(InitiateEnemy());
+
+		GameObject[] birds = GameObject.FindGameObjectsWithTag("Bird2D");
+		foreach(GameObject b in birds)
+		{
+			BirdMovement bm = b.GetComponent<BirdMovement>();
+			bm.setHunterIdle();
+		}
+
+		GameObject[] aeroplane = GameObject.FindGameObjectsWithTag("AeroPlane");
+		foreach(GameObject b in aeroplane)
+		{
+			AeroPlaneScript bm = b.GetComponent<AeroPlaneScript>();
+			bm.setMoveAway();
+		}
+
+		StartCoroutine(InitiateBananas());
 		while (true) {
-			x1 = Random.Range(-3f, 3f);
+			x1 = Random.Range(-5f, 5f);
 			yield return StartCoroutine(MoveObject(transform, new Vector2(transform.position.x, transform.position.y), new Vector2(x1, transform.position.y), speed)); //3.692791f
 		}
 	}
@@ -35,7 +50,7 @@ public class HelicopterMovementAndFire : MonoBehaviour {
 		}
 	}
 
-	IEnumerator InitiateEnemy()
+	IEnumerator InitiateBananas()
 	{
 		yield return new WaitForSeconds(0.2f);
 		while(true)

@@ -8,20 +8,47 @@ public class ObstacleGenerator : MonoBehaviour {
 	public GameObject hound;
 	public GameObject sinMovement;
 	public GameObject kangaroo;
+	public GameObject armadilo;
+
 	private int frequency = 10;
+
+
 
 	// Use this for initialization
 	void Start () {
-		StartCoroutine (InitiateCarrot ());
+
+		StartCoroutine (InitiateEnemies ());
+
+		/*StartCoroutine (InitiateCarrot ());
 		StartCoroutine (InitiateMushroom ());
 		StartCoroutine (InitiateHound ());
 		StartCoroutine (InitiateSineWave ());
-		StartCoroutine (InitiateKangaroo ());
+		StartCoroutine (InitiateKangaroo ());*/
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
+	}
+
+	IEnumerator InitiateEnemies()
+	{
+		yield return new WaitForSeconds(Random.Range(2f,5f));
+		while(true)
+		{
+			Instantiate (mushroom, new Vector2(7f, -2.38f), Quaternion.identity);
+			yield return new WaitForSeconds(5f);
+			Instantiate (carrot, new Vector2(8f, -1.65f), Quaternion.identity);
+			yield return new WaitForSeconds(5f);
+			//Instantiate (hound, new Vector2(7f, hound.transform.position.y), Quaternion.identity);
+			//yield return new WaitForSeconds(5f);
+			Instantiate (kangaroo, new Vector2(7f, kangaroo.transform.position.y), Quaternion.identity);
+			yield return new WaitForSeconds(5f);
+			//Instantiate (sinMovement, new Vector2(7f, sinMovement.transform.position.y), Quaternion.identity);
+			//yield return new WaitForSeconds(5f);
+			//Instantiate (armadilo, new Vector2(7f, armadilo.transform.position.y), Quaternion.identity);
+			//yield return new WaitForSeconds(5f);
+		}
 	}
 
 	IEnumerator InitiateMushroom()
@@ -35,6 +62,7 @@ public class ObstacleGenerator : MonoBehaviour {
 				Quaternion spawnRotation = Quaternion.identity;
 				Instantiate (mushroom, new Vector2(7f, -2.38f), Quaternion.identity);
 				yield return new WaitForSeconds(5f);
+
 			}
 		}
 	}

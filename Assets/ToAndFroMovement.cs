@@ -7,7 +7,7 @@ public class ToAndFroMovement : MonoBehaviour {
 	float rightBorder;
 	private bool isFlipped = true;
 	bool isRight = true;
-	public float speed = 5f;
+	public float speed = 2.5f;
 	private bool isHit = false;
 
 	// Use this for initialization
