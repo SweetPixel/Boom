@@ -55,8 +55,8 @@ public class AeroPlaneScript : MonoBehaviour {
 				GameObject.Find("AirEnemyGenerator").GetComponent<AirEnemyGeneratorScript>().InitEnemy();
 				if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount < 1)
 				{
-					GameObject.Find("Foreground").GetComponent<Image>().fillAmount += 0.10f;
-					if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount == 1)
+					GameObject.Find("Foreground").GetComponent<Image>().fillAmount += 0.05f;
+					if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount == 1 && GameObject.FindGameObjectWithTag("Boss") != null)
 					{
 						Instantiate(Helicopter, new Vector3(-6f, Helicopter.transform.position.y, Helicopter.transform.position.z), Quaternion.identity);
 					}

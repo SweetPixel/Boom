@@ -95,6 +95,7 @@ public class GameController : MonoBehaviour {
 
 	public AudioClip comboMultiAudio;
 	public AudioClip noBulletAudio;
+	public GameObject Helicopter;
 
 	void Start()
 	{
@@ -208,6 +209,11 @@ public class GameController : MonoBehaviour {
 		if (startTime > 3f) {
 			startCanvas.SetActive(true);
 				} */
+
+		if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount == 1 && GameObject.FindGameObjectWithTag("Boss") == null)
+		{
+			Instantiate(Helicopter, new Vector3(-6f, Helicopter.transform.position.y, Helicopter.transform.position.z), Quaternion.identity);
+		}
 
 		GameObject[] g = GameObject.FindGameObjectsWithTag ("GameOver");
 		if (g.Length > 1) {

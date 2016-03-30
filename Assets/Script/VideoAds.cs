@@ -10,7 +10,7 @@ public class VideoAds : MonoBehaviour {
 
 	void Start () {
 		#if UNITY_ANDROID
-		Advertisement.Initialize ("62275", true);
+		//Advertisement.Initialize ("62275", true);
 		#endif
 		#if UNITY_IOS
 		//Advertisement.Initialize ("62277", true);

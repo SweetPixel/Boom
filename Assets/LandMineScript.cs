@@ -19,9 +19,9 @@ public class LandMineScript : MonoBehaviour {
 
 		if (col.gameObject.tag == "Bullet") {
 			gameObject.GetComponent<CircleCollider2D>().enabled = false;
-			gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
+			gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
 			gameObject.GetComponent<Animator>().SetBool("isGrounded", true);
-			Destroy(gameObject);
+			Destroy(gameObject,0.2f);
 			Destroy(col.gameObject);
 		}
 
@@ -29,7 +29,7 @@ public class LandMineScript : MonoBehaviour {
 			gameObject.GetComponent<CircleCollider2D>().enabled = false;
 			gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 			gameObject.GetComponent<Animator>().SetBool("isGrounded", true);
-			Destroy(gameObject, 1.5f);
+			Destroy(gameObject, 1f);
 		}
 		
 		if (col.gameObject.tag == "Player") {

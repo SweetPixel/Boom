@@ -7,6 +7,7 @@ public class DropBomb : MonoBehaviour {
 	public float delay = 2f;
 	public GameObject bomb;
 	public GameObject spawn;
+	private bool isFirstLevel = true;
 
 	// Use this for initialization
 	void Start () {
@@ -28,8 +29,13 @@ public class DropBomb : MonoBehaviour {
 				//Vector3 spawnPosition = new Vector3 (Random.Range(-spawnValue.x, spawnValue.x),Random.Range(1.2f, 4f),spawnValue.z);
 				Quaternion spawnRotation = Quaternion.identity;
 				Instantiate (bomb, spawn.transform.position, Quaternion.identity);
-				yield return new WaitForSeconds(Random.Range(0.2f, delay));
-				
+				if(isFirstLevel)
+				{
+					yield return new WaitForSeconds(delay);
+				}
+				else{
+					yield return new WaitForSeconds(Random.Range(0.2f, delay));
+				}
 			}
 		}
 	}

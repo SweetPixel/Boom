@@ -8,8 +8,9 @@ public class AirEnemyGeneratorScript : MonoBehaviour {
 	public float[] Xaxis = { -6f , 6f };
 	public int frequency = 5;
 
-	private bool isInitial = true;
 
+	private bool timeToInitPlane = true;
+	public float delayForInitPlane = 2f;
 	// Use this for initialization
 	void Start () {
 		StartCoroutine(InitiateBird());
@@ -22,27 +23,44 @@ public class AirEnemyGeneratorScript : MonoBehaviour {
 
 	public void InitEnemy()
 	{
-		Quaternion spawnRotation = Quaternion.identity;
-		//Instantiate (bird, new Vector2 (5.1f, 2.958249f), Quaternion.identity);\
-		int objIndex = Random.Range(0,2);
-		if(objIndex == 0)
+		if(GameObject.FindGameObjectWithTag("Boss") == null)
 		{
-			
-			int index = Random.Range(0,2);
-			float x = 3.6f;
-			if(index == 0)
+			Quaternion spawnRotation = Quaternion.identity;
+			//Instantiate (bird, new Vector2 (5.1f, 2.958249f), Quaternion.identity);\
+			int objIndex = Random.Range(0,2);
+			if(objIndex == 1)
 			{
-				x = Xaxis[0];
+				
+				int index = Random.Range(0,2);
+				float x = 3.6f;
+				if(index == 0)
+				{
+					x = Xaxis[0];
+				}
+				else if(index == 1)
+				{
+					x = Xaxis[1];
+				}
+				Instantiate (enemies[objIndex], new Vector2(x,enemies[objIndex].transform.position.y) , Quaternion.identity);
 			}
-			else if(index == 1)
-			{
-				x = Xaxis[1];
+			else{
+				if(timeToInitPlane)
+				{
+					timeToInitPlane = false;
+					StartCoroutine(initPlane());
+				}
+				else{
+					Instantiate (enemies[1], new Vector2(Xaxis[0],enemies[1].transform.position.y) , Quaternion.identity);
+				}
 			}
-			Instantiate (enemies[objIndex], new Vector2(x,enemies[objIndex].transform.position.y) , Quaternion.identity);
 		}
-		else{
-			Instantiate (enemies[objIndex], new Vector2(7f, enemies[objIndex].transform.position.y), Quaternion.identity);
-		}
+	}
+
+	private IEnumerator initPlane()
+	{
+		Instantiate (enemies[0], new Vector2(7f, enemies[1].transform.position.y), Quaternion.identity);
+		yield return new WaitForSeconds(delayForInitPlane);
+		timeToInitPlane = true;
 	}
 
 	IEnumerator InitiateBird()

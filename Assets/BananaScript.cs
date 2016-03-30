@@ -27,15 +27,16 @@ public class BananaScript : MonoBehaviour {
 
 		if(col.gameObject.name == "Platform") {
 			gameObject.GetComponent<SpriteRenderer>().sprite = bananaSmash;
-			StartCoroutine(DestroyObject ());
+			Destroy(gameObject, 0.1f);
 		}
 
-	}
+		if (col.gameObject.tag == "Player") {
+			GameObject gcc = GameObject.FindGameObjectWithTag("GameController");
+			GameController gc = gcc.GetComponent<GameController>();
+			gc.GameOver();
+			Destroy(col.gameObject);
+		}
 
-	IEnumerator DestroyObject()
-	{
-		yield return new WaitForSeconds(0.1f);
-		Destroy(gameObject);
 	}
 
 }

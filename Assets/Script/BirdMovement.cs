@@ -183,7 +183,7 @@ public class BirdMovement : MonoBehaviour {
 
 			if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount < 1)
 			{
-				GameObject.Find("Foreground").GetComponent<Image>().fillAmount += 0.05f;
+				GameObject.Find("Foreground").GetComponent<Image>().fillAmount += 0.025f;
 				//gc.increaseBirdKiled();
 				//Debug.Log(System.Math.Round(GameObject.Find("Foreground").GetComponent<Image>().fillAmount,2));
 				if(System.Math.Round(GameObject.Find("Foreground").GetComponent<Image>().fillAmount,2)%0.25f == 0 && GameObject.Find("Foreground").GetComponent<Image>().fillAmount != 1)
@@ -194,11 +194,15 @@ public class BirdMovement : MonoBehaviour {
 				{
 					Instantiate(balloon, new Vector3(-3.2f, balloon.transform.position.y, balloon.transform.position.z), Quaternion.identity);
 				}*/
-				else if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount == 1)
+				/*else if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount == 1 && GameObject.FindGameObjectWithTag("Boss") != null)
 				{
 					Instantiate(Helicopter, new Vector3(-6f, Helicopter.transform.position.y, Helicopter.transform.position.z), Quaternion.identity);
-				}
+				}*/
 			}
+			/*else if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount == 1 && GameObject.FindGameObjectWithTag("Boss") != null)
+			{
+				Instantiate(Helicopter, new Vector3(-6f, Helicopter.transform.position.y, Helicopter.transform.position.z), Quaternion.identity);
+			}*/
 			//isLive = false;
 			//birdLife = 0;
 			//gc.setScore(1);

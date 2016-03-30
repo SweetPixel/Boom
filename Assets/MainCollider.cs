@@ -21,13 +21,10 @@ public class MainCollider : MonoBehaviour {
 		}
 		
 		if (col.gameObject.tag == "Player") {
-			if(col.gameObject.GetComponent<PirateMovement>().isgrounded == true)
-			{
-				GameObject gcc = GameObject.FindGameObjectWithTag("GameController");
-				GameController gc = gcc.GetComponent<GameController>();
-				gc.GameOver();
-				Destroy(col.gameObject);
-			}
+			GameObject gcc = GameObject.FindGameObjectWithTag("GameController");
+			GameController gc = gcc.GetComponent<GameController>();
+			gc.GameOver();
+			Destroy(col.gameObject);
 		}
 		
 	}

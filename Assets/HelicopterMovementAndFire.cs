@@ -13,6 +13,7 @@ public class HelicopterMovementAndFire : MonoBehaviour {
 	public GameObject Banana;
 	public GameObject bananaspawn;
 	public int frequency = 10;
+	public float delay = 2f;
 
 
 	// Use this for initialization
@@ -25,7 +26,7 @@ public class HelicopterMovementAndFire : MonoBehaviour {
 			bm.setHunterIdle();
 		}
 
-		GameObject[] aeroplane = GameObject.FindGameObjectsWithTag("AeroPlane");
+		GameObject[] aeroplane = GameObject.FindGameObjectsWithTag("Aeroplane");
 		foreach(GameObject b in aeroplane)
 		{
 			AeroPlaneScript bm = b.GetComponent<AeroPlaneScript>();
@@ -60,7 +61,7 @@ public class HelicopterMovementAndFire : MonoBehaviour {
 				//Vector3 spawnPosition = new Vector3 (Random.Range(-spawnValue.x, spawnValue.x),Random.Range(1.2f, 4f),spawnValue.z);
 				Quaternion spawnRotation = Quaternion.identity;
 				Instantiate (Banana, bananaspawn.transform.position, Quaternion.identity);
-				yield return new WaitForSeconds(2f);
+				yield return new WaitForSeconds(delay);
 			}
 		}
 	}
@@ -84,6 +85,7 @@ public class HelicopterMovementAndFire : MonoBehaviour {
 			else if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount == 0)
 			{
 				Destroy(gameObject);
+				Application.LoadLevel("MainScene");
 			}
 		}
 		

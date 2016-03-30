@@ -15,7 +15,8 @@ public class RobotTrigger : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		if(col.gameObject.name == "Pirate")
+		Debug.Log("Pirate y: + " + col.gameObject.transform.position.y + " and kangY: " + gameObject.transform.position.y);
+		if(col.gameObject.name == "Pirate" && col.gameObject.transform.position.y > gameObject.transform.position.y)
 		{
 			Destroy (gameObject.transform.parent.gameObject);
 		}

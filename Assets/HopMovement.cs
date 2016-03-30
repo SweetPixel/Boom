@@ -55,7 +55,12 @@ public class HopMovement : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		
+
+		if (col.gameObject.tag == "Bullet") {
+			Destroy(gameObject);
+			Destroy(col.gameObject);
+		}
+
 		if (col.gameObject.tag == "Platform") {
 			isgrounded = true;
 			return;
@@ -75,7 +80,7 @@ public class HopMovement : MonoBehaviour {
 				Destroy(GameObject.Find("Shadow"));
 				Destroy(col.gameObject);
 			}
-			else {
+			/*else {
 				if(col.gameObject.transform.position.y > gameObject.transform.position.y && col.gameObject.transform.position.y > -1)
 				{
 					Destroy (gameObject);
@@ -88,7 +93,7 @@ public class HopMovement : MonoBehaviour {
 					Destroy(col.gameObject);
 				}
 				//Destroy (gameObject.transform.parent.gameObject);
-			}
+			}*/
 		}
 		
 	}
