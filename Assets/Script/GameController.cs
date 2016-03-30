@@ -96,6 +96,8 @@ public class GameController : MonoBehaviour {
 	public AudioClip comboMultiAudio;
 	public AudioClip noBulletAudio;
 	public GameObject Helicopter;
+	float playedTime;
+	public Text timeDisplay;
 
 	void Start()
 	{
@@ -196,6 +198,7 @@ public class GameController : MonoBehaviour {
 			bulletTwoRender.sprite = scoreSprite [1];*/
 		//}
 		timeLeft = totalTime;
+		playedTime = 0f;
 		//GameObject.FindGameObjectWithTag("VideoGiftCanvas").GetComponent<Canvas>().enabled = false;
 
 	}
@@ -209,6 +212,11 @@ public class GameController : MonoBehaviour {
 		if (startTime > 3f) {
 			startCanvas.SetActive(true);
 				} */
+
+		if (GameObject.FindGameObjectWithTag ("Player") != null) {
+			playedTime += Time.deltaTime;
+			timeDisplay.text = Mathf.RoundToInt(playedTime).ToString();
+		}
 
 		if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount == 1 && GameObject.FindGameObjectWithTag("Boss") == null)
 		{

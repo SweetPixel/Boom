@@ -44,6 +44,9 @@ public class BirdMovement : MonoBehaviour {
 	public GameObject Helicopter;
 	public GameObject balloon;
 	public GameObject miniBoss;
+	public float decreaseRate = 0.015f;
+
+
 	IEnumerator Start () {
 		Flip ();
 		birdLife = 0;
@@ -183,7 +186,7 @@ public class BirdMovement : MonoBehaviour {
 
 			if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount < 1)
 			{
-				GameObject.Find("Foreground").GetComponent<Image>().fillAmount += 0.025f;
+				GameObject.Find("Foreground").GetComponent<Image>().fillAmount += decreaseRate;
 				//gc.increaseBirdKiled();
 				//Debug.Log(System.Math.Round(GameObject.Find("Foreground").GetComponent<Image>().fillAmount,2));
 				if(System.Math.Round(GameObject.Find("Foreground").GetComponent<Image>().fillAmount,2)%0.25f == 0 && GameObject.Find("Foreground").GetComponent<Image>().fillAmount != 1)
@@ -210,6 +213,7 @@ public class BirdMovement : MonoBehaviour {
 			//GameObject.FindGameObjectWithTag("PlayHand").GetComponent<StartGame>().initBirdOutside(1);
 			//BirdHit ();
 			GameObject.Find("AirEnemyGenerator").GetComponent<AirEnemyGeneratorScript>().InitEnemy();
+			GameObject.Find("BirdKill").GetComponent<Text>().text =  (int.Parse(GameObject.Find("BirdKill").GetComponent<Text>().text) + 1).ToString();
 			Destroy(gameObject);
 			Destroy(col.gameObject);
 			/*GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
