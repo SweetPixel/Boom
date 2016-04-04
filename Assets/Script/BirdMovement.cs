@@ -43,7 +43,6 @@ public class BirdMovement : MonoBehaviour {
 
 	public GameObject Helicopter;
 	public GameObject balloon;
-	public GameObject miniBoss;
 	public float decreaseRate = 0.015f;
 
 
@@ -189,10 +188,7 @@ public class BirdMovement : MonoBehaviour {
 				GameObject.Find("Foreground").GetComponent<Image>().fillAmount += decreaseRate;
 				//gc.increaseBirdKiled();
 				//Debug.Log(System.Math.Round(GameObject.Find("Foreground").GetComponent<Image>().fillAmount,2));
-				if(System.Math.Round(GameObject.Find("Foreground").GetComponent<Image>().fillAmount,2)%0.25f == 0 && GameObject.Find("Foreground").GetComponent<Image>().fillAmount != 1)
-				{
-					Instantiate(miniBoss, new Vector3(-2.5f, balloon.transform.position.y, balloon.transform.position.z), Quaternion.identity);
-				}
+
 				/*else if((System.Math.Round(GameObject.Find("Foreground").GetComponent<Image>().fillAmount,2)+0.1)%0.25f == 0 && GameObject.Find("Foreground").GetComponent<Image>().fillAmount != 1)
 				{
 					Instantiate(balloon, new Vector3(-3.2f, balloon.transform.position.y, balloon.transform.position.z), Quaternion.identity);

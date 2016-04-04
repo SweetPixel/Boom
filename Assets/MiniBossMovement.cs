@@ -11,8 +11,16 @@ public class MiniBossMovement : MonoBehaviour {
 	public int threshold = 10;
 	private int count = 0;
 
+	public GameObject trackerRocket;
+	public Transform spawnPosition;
+	public float fireDelay = 1f;
+
 	// Use this for initialization
 	IEnumerator Start () {
+
+		GameObject.Find("Tracker").GetComponent<TrackingScript>().enabled = true;
+		StartCoroutine(Fire());
+
 		x1 = Random.Range(-3f, 3f);
 		y1 = Random.Range(4f, 6f);
 		
@@ -32,6 +40,8 @@ public class MiniBossMovement : MonoBehaviour {
 			y1 = Random.Range(4f, 6f);
 			yield return StartCoroutine(MoveObject(transform, new Vector2(transform.position.x, transform.position.y), new Vector2(x1, transform.position.y), speed)); //3.692791f
 		}
+
+
 
 	}
 
@@ -54,7 +64,16 @@ public class MiniBossMovement : MonoBehaviour {
 		}
 
 	}
-	
+
+	IEnumerator Fire()
+	{
+		while(true)
+		{
+			Instantiate(trackerRocket, spawnPosition.position, Quaternion.identity);
+			yield return new WaitForSeconds(fireDelay);
+		}
+	}
+
 	void OnCollisionEnter2D(Collision2D col)
 	{
 		//Debug.Log (col.gameObject.name);

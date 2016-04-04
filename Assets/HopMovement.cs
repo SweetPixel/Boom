@@ -10,18 +10,33 @@ public class HopMovement : MonoBehaviour {
 	float index;*/
 	private bool isgrounded= true;
 	public float timeOnGround = 2f;
-	public float amplitudeX = 100f;
-	public float amplitudeY = 300f;
+	//public float amplitudeX = 100f;
+	//public float amplitudeY = 300f;
 
 	public GameObject carrot;
 	public GameObject spawner;
+	private float x = -2f;
+	public float xAxis = 2f;
+	public float y=12f;
+	private bool isRight = false;
+	public float fireSpeed = 350f;
+	public float threshold = 2f;
+	private int counter = 0;
 
-	
 	void Start()
 	{
 		//transform.localPosition = new Vector3 (10.0f, gameObject.transform.position.y, 0f);
-		StartCoroutine(hop ());
-
+		if(transform.position.x <= 7f && transform.position.x >= 3f)
+		{
+			x = -xAxis;
+			StartCoroutine(hop ());
+		}
+		else{
+			this.transform.Rotate (0,180,0);
+			x = xAxis;
+			StartCoroutine(hop ());
+		}
+		Destroy (gameObject, 20f);
 	}
 	
 	public void Update(){
@@ -29,6 +44,11 @@ public class HopMovement : MonoBehaviour {
 		//float x = amplitudeX*Mathf.Sin(index * omegaX);
 		//float y = amplitudeY*Mathf.Sin (omegaY*index);
 		//transform.localPosition= transform.localPosition +  new Vector3(-0.1f,0.1f,0);
+	}
+
+	public void setRight()
+	{
+		isRight = true;
 	}
 
 	IEnumerator hop()
@@ -40,12 +60,19 @@ public class HopMovement : MonoBehaviour {
 				Debug.Log("ISGrounded");
 				isgrounded = false;
 				//gameObject.GetComponent<Rigidbody2D>().AddForce((Vector2.up * amplitudeY) + (-Vector2.right * amplitudeX));
-				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-2f, 7f);
+				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(x, y);
 				//yield return new WaitForSeconds(2f);
 			}
 			else if(!isgrounded){
 				yield return new WaitForSeconds(timeOnGround/2);
-				Instantiate (carrot, spawner.transform.position, Quaternion.identity);
+				GameObject fire = (GameObject)Instantiate (carrot, spawner.transform.position, Quaternion.identity);
+				if(isRight)
+				{
+					fire.transform.Rotate (0,180,0);
+					fire.GetComponent<Rigidbody2D>().AddForce(Vector2.right * fireSpeed);
+				}else{
+					fire.GetComponent<Rigidbody2D>().AddForce(-Vector2.right * fireSpeed);
+				}
 				yield return new WaitForSeconds(timeOnGround/2);
 			}
 		}
@@ -57,8 +84,12 @@ public class HopMovement : MonoBehaviour {
 	{
 
 		if (col.gameObject.tag == "Bullet") {
-			Destroy(gameObject);
-			Destroy(col.gameObject);
+			counter++;
+			if(counter==threshold)
+			{
+				Destroy(gameObject);
+				Destroy(col.gameObject);
+			}
 		}
 
 		if (col.gameObject.tag == "Platform") {

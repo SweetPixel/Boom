@@ -95,9 +95,11 @@ public class GameController : MonoBehaviour {
 
 	public AudioClip comboMultiAudio;
 	public AudioClip noBulletAudio;
-	public GameObject Helicopter;
+
+	public GameObject Tiger;
 	float playedTime;
 	public Text timeDisplay;
+	public GameObject miniBoss;
 
 	void Start()
 	{
@@ -220,7 +222,17 @@ public class GameController : MonoBehaviour {
 
 		if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount == 1 && GameObject.FindGameObjectWithTag("Boss") == null)
 		{
-			Instantiate(Helicopter, new Vector3(-6f, Helicopter.transform.position.y, Helicopter.transform.position.z), Quaternion.identity);
+			Instantiate(Tiger, new Vector3(-6f, Tiger.transform.position.y, Tiger.transform.position.z), Quaternion.identity);
+		}
+
+		if(System.Math.Round(GameObject.Find("Foreground").GetComponent<Image>().fillAmount,2)%0.25f == 0 && GameObject.Find("Foreground").GetComponent<Image>().fillAmount != 1
+		   && GameObject.Find("Foreground").GetComponent<Image>().fillAmount != 0)
+		{
+			GameObject[] miniBosses = GameObject.FindGameObjectsWithTag("MiniBoss");
+			if(miniBosses.Length == 0)
+			{
+				Instantiate(miniBoss, new Vector3(-2.5f, miniBoss.transform.position.y, miniBoss.transform.position.z), Quaternion.identity);
+			}
 		}
 
 		GameObject[] g = GameObject.FindGameObjectsWithTag ("GameOver");

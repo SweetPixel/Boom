@@ -3,15 +3,16 @@ using System.Collections;
 
 public class CollisionDetector : MonoBehaviour {
 
-	/*public float speed = 40f;
+	public float speed = 40f;
 
 	// Use this for initialization
 	void Start () {
-		StartCoroutine(MoveObject(transform, new Vector3(7f, -1.65f, 0f), new Vector3(-8f, -1.65f, 0f), speed));
+		//StartCoroutine(MoveObject(transform, new Vector3(7f, -1.65f, 0f), new Vector3(-8f, -1.65f, 0f), speed));
+		Destroy(gameObject, 3f);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	/*void Update () {
 		if (gameObject.transform.position.x < -7f) {
 			Destroy(gameObject);
 		}
@@ -26,5 +27,21 @@ public class CollisionDetector : MonoBehaviour {
 			yield return null; 
 		}
 	}*/
+
+	void OnCollisionEnter2D(Collision2D col)
+	{
+		
+		if (col.gameObject.tag == "Platform") {
+			return;
+		}
+		
+		if (col.gameObject.tag == "Player") {
+			GameObject gcc = GameObject.FindGameObjectWithTag("GameController");
+			GameController gc = gcc.GetComponent<GameController>();
+			gc.GameOver();
+			Destroy(col.gameObject);
+		}
+		
+	}
 
 }
