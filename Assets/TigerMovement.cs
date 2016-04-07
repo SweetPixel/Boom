@@ -13,6 +13,7 @@ public class TigerMovement : MonoBehaviour {
 	public GameObject Rocket;
 	public GameObject RocketSpawn;
 	public int frequency = 10;
+	public float delay= 3f;
 	
 	
 	// Use this for initialization
@@ -48,7 +49,7 @@ public class TigerMovement : MonoBehaviour {
 				Quaternion spawnRotation = Quaternion.identity;
 				Instantiate (Rocket, RocketSpawn.transform.position, Quaternion.identity);
 				gameObject.GetComponent<Animator>().SetBool("isFire", false);
-				yield return new WaitForSeconds(3f);
+				yield return new WaitForSeconds(delay);
 			}
 		}
 	}

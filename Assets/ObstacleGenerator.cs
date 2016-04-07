@@ -10,9 +10,15 @@ public class ObstacleGenerator : MonoBehaviour {
 	public GameObject kangaroo;
 	public GameObject armadilo;
 
-	private int frequency = 10;
+	public int frequency = 10;
+	public float initialDelay = 2f;
+	public float delayBetweenEnemies = 4f;
+	private float delayForKangaroo= 10f;
+	private float previousDelay;
 
+	private float[] Xaxis = { 7f, -8f };
 
+	public GameObject[] enemies;
 
 	// Use this for initialization
 	void Start () {
@@ -33,22 +39,39 @@ public class ObstacleGenerator : MonoBehaviour {
 
 	IEnumerator InitiateEnemies()
 	{
-		yield return new WaitForSeconds(Random.Range(2f,5f));
+		yield return new WaitForSeconds(initialDelay);
 		while(true)
 		{
-			Instantiate (mushroom, new Vector2(7f, -2.38f), Quaternion.identity);
-			yield return new WaitForSeconds(5f);
-			Instantiate (carrot, new Vector2(8f, -1.65f), Quaternion.identity);
-			yield return new WaitForSeconds(5f);
-			//Instantiate (hound, new Vector2(7f, hound.transform.position.y), Quaternion.identity);
-			//yield return new WaitForSeconds(5f);
+			int i = Random.Range(0,2);
+			int index = Random.Range(0, enemies.Length);
+			if(i == 0)
+			{
+				GameObject enemy = (GameObject)Instantiate (enemies[index], new Vector2(7f, enemies[index].transform.position.y), Quaternion.identity);
+			}
+			else{
+				GameObject enemy = (GameObject)Instantiate (enemies[index], new Vector2(-8f, enemies[index].transform.position.y), Quaternion.identity);
+				if(index == 2)
+				{
+					enemy.GetComponent<HopMovement>().setRight();
+				}
+			}
+
+			if(index == 2)
+			{
+				previousDelay = delayBetweenEnemies;
+				delayBetweenEnemies = delayForKangaroo;
+				yield return new WaitForSeconds(delayBetweenEnemies);
+				delayBetweenEnemies = previousDelay;
+			}
+			else{
+				yield return new WaitForSeconds(delayBetweenEnemies);
+			}
+			/*Instantiate (carrot, new Vector2(8f, -1.65f), Quaternion.identity);
+			yield return new WaitForSeconds(delayBetweenEnemies);
 			Instantiate (kangaroo, new Vector2(7f, kangaroo.transform.position.y), Quaternion.identity);
-			yield return new WaitForSeconds(5f);
-			//Instantiate (sinMovement, new Vector2(7f, sinMovement.transform.position.y), Quaternion.identity);
-			//yield return new WaitForSeconds(5f);
-			//Instantiate (armadilo, new Vector2(7f, armadilo.transform.position.y), Quaternion.identity);
-			//yield return new WaitForSeconds(5f);
+			yield return new WaitForSeconds(delayBetweenEnemies);*/
 		}
+
 	}
 
 	IEnumerator InitiateMushroom()

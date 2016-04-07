@@ -14,7 +14,7 @@ public class HelicopterMovementAndFire : MonoBehaviour {
 	public GameObject bananaspawn;
 	public int frequency = 10;
 	public float delay = 2f;
-
+	public float decreaseRate = 0.025f;
 
 	// Use this for initialization
 	IEnumerator Start () {
@@ -80,7 +80,7 @@ public class HelicopterMovementAndFire : MonoBehaviour {
 			Destroy(col.gameObject);
 			if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount > 0)
 			{
-				GameObject.Find("Foreground").GetComponent<Image>().fillAmount -= 0.05f;
+				GameObject.Find("Foreground").GetComponent<Image>().fillAmount -= decreaseRate;
 			}
 			else if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount == 0)
 			{

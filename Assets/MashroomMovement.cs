@@ -9,16 +9,25 @@ public class MashroomMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		StartCoroutine(MoveObject(transform, new Vector3(7f, -1.65f, 0f), new Vector3(-8f, -1.65f, 0f), speed));
+		if(transform.position.x == 7f)
+		{
+			StartCoroutine(MoveObject(transform, new Vector3(7f, -1.65f, 0f), new Vector3(-8f, -1.65f, 0f), speed));
+			Destroy (gameObject, 7f);
+		}
+		else{
+			StartCoroutine(MoveObject(transform, new Vector3(-8f, -1.65f, 0f), new Vector3(7f, -1.65f, 0f), speed));
+			Destroy (gameObject, 7f);
+		}
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
 
-		if (gameObject.transform.position.x < -7f) {
+		/*if (gameObject.transform.position.x < -7f) {
 			Destroy(gameObject);
-		}
+		}*/
 	}
 	
 	IEnumerator MoveObject (Transform thisTransform, Vector3 startPos, Vector3 endPos, float time) {
@@ -31,7 +40,7 @@ public class MashroomMovement : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter2D(Collision2D col)
+	/*void OnCollisionEnter2D(Collision2D col)
 	{
 		
 		if (col.gameObject.tag == "Platform") {
@@ -64,6 +73,6 @@ public class MashroomMovement : MonoBehaviour {
 			}
 		}
 		
-	}
+	}*/
 
 }

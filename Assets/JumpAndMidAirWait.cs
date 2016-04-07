@@ -144,9 +144,9 @@ public class JumpAndMidAirWait : MonoBehaviour {
 
 	IEnumerator jumpAndWait()
 	{
-		StartCoroutine(MoveObject(transform, new Vector3(transform.position.x, transform.position.y, 0.02769041f), new Vector3(transform.position.x-0.5f, transform.position.y+1f, 0.02769041f), 1f));
-		yield return new WaitForSeconds(3f);
-		StartCoroutine(MoveObject(transform, new Vector3(transform.position.x, transform.position.y, 0.02769041f), new Vector3(transform.position.x-0.5f, transform.position.y-1f, 0.02769041f), 1f));
+		StartCoroutine(MoveObject(transform, new Vector3(transform.position.x, transform.position.y, 0.02769041f), new Vector3(transform.position.x-2f, transform.position.y+50f, 0.02769041f), 1f));
+		yield return new WaitForSeconds(10f);
+		StartCoroutine(MoveObject(transform, new Vector3(transform.position.x, transform.position.y, 0.02769041f), new Vector3(transform.position.x-2f, transform.position.y-50f, 0.02769041f), 1f));
 	}
 
 	private IEnumerator Jump(Vector3 direction)

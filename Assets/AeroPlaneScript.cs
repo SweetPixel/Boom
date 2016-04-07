@@ -10,7 +10,7 @@ public class AeroPlaneScript : MonoBehaviour {
 
 	private bool moveAway = false;
 	private float[] pos = { 10.6f , 5.3f };
-
+	public float decreaseRate = 0.05f;
 	// Use this for initialization
 	void Start () {
 	
@@ -55,12 +55,13 @@ public class AeroPlaneScript : MonoBehaviour {
 				GameObject.Find("AirEnemyGenerator").GetComponent<AirEnemyGeneratorScript>().InitEnemy();
 				if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount < 1)
 				{
-					GameObject.Find("Foreground").GetComponent<Image>().fillAmount += 0.05f;
-					if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount == 1 && GameObject.FindGameObjectWithTag("Boss") != null)
+					GameObject.Find("Foreground").GetComponent<Image>().fillAmount += decreaseRate;
+					/*if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount == 1 && GameObject.FindGameObjectWithTag("Boss") != null)
 					{
 						Instantiate(Helicopter, new Vector3(-6f, Helicopter.transform.position.y, Helicopter.transform.position.z), Quaternion.identity);
-					}
+					}*/
 				}
+				GameObject.Find("PlaneDestroy").GetComponent<Text>().text =   (int.Parse(GameObject.Find("PlaneDestroy").GetComponent<Text>().text) + 1).ToString();
 				Destroy(col.gameObject);
 				Destroy(gameObject);
 			}
