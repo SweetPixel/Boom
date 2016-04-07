@@ -23,7 +23,7 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
@@ -48,7 +48,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
@@ -64,8 +64,22 @@ TextureImporter:
         width: 123
         height: 61
       alignment: 9
-      pivot: {x: .495934963, y: .467213124}
+      pivot: {x: 0.49593496, y: 0.46721312}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -53, y: 32.5}
+        - {x: -61, y: 27.5}
+        - {x: -61, y: -1.5}
+        - {x: 4, y: -27.5}
+        - {x: 52, y: -27.5}
+        - {x: 62, y: -18.5}
+        - {x: 62, y: 32.5}
+      - - {x: 23, y: 32.5}
+        - {x: 23, y: 30.5}
+        - {x: 25, y: 28.5}
+        - {x: 27, y: 28.5}
+        - {x: 29, y: 30.5}
+        - {x: 29, y: 32.5}
     - name: Pelican0002
       rect:
         serializedVersion: 2
@@ -74,8 +88,26 @@ TextureImporter:
         width: 124
         height: 63
       alignment: 9
-      pivot: {x: .492063493, y: .5}
+      pivot: {x: 0.4920635, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -45.01587, y: -21.5}
+        - {x: -50.01587, y: -27.5}
+        - {x: -50.01587, y: -31.5}
+        - {x: -2.0158691, y: -31.5}
+        - {x: -2.0158691, y: -30.5}
+        - {x: -6.015869, y: -21.5}
+      - - {x: 52.98413, y: 22.5}
+        - {x: 32.98413, y: 18.5}
+        - {x: -0.01586914, y: 31.5}
+        - {x: -61.01587, y: 31.5}
+        - {x: -61.01587, y: 10.5}
+        - {x: -44.01587, y: -11.5}
+        - {x: 30.98413, y: -28.5}
+        - {x: 36.98413, y: -28.5}
+        - {x: 61.98413, y: -17.5}
+        - {x: 62.98413, y: -15.5}
+        - {x: 62.98413, y: 8.5}
     - name: Pelican0004
       rect:
         serializedVersion: 2
@@ -84,8 +116,34 @@ TextureImporter:
         width: 126
         height: 65
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -54, y: -17.5}
+        - {x: -57, y: -18.5}
+        - {x: -63, y: -29.5}
+        - {x: -63, y: -32.5}
+        - {x: -6, y: -32.5}
+        - {x: -6, y: -27.5}
+        - {x: -11, y: -17.5}
+      - - {x: -5, y: 32.5}
+        - {x: -58, y: 32.5}
+        - {x: -63, y: 29.5}
+        - {x: -63, y: 11.5}
+        - {x: -45, y: -9.5}
+        - {x: -18, y: -19.5}
+        - {x: 24, y: -27.5}
+        - {x: 38, y: -27.5}
+        - {x: 63, y: -16.5}
+        - {x: 63, y: 2.5}
+        - {x: 58, y: 7.5}
+      - - {x: 55, y: 22.5}
+        - {x: 55, y: 16.5}
+        - {x: 59, y: 13.5}
+        - {x: 62, y: 13.5}
+        - {x: 63, y: 14.5}
+        - {x: 63, y: 27.5}
+        - {x: 62, y: 27.5}
     - name: Pelican0005
       rect:
         serializedVersion: 2
@@ -94,8 +152,25 @@ TextureImporter:
         width: 126
         height: 65
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 5, y: 32.5}
+        - {x: -52, y: 32.5}
+        - {x: -63, y: 26.5}
+        - {x: -63, y: 3.5}
+        - {x: -17, y: -32.5}
+        - {x: 28, y: -32.5}
+        - {x: 63, y: -16.5}
+        - {x: 63, y: 2.5}
+        - {x: 58, y: 7.5}
+      - - {x: -63, y: 4.5}
+        - {x: -63, y: -14.5}
+        - {x: -62, y: -15.5}
+        - {x: -57, y: -15.5}
+        - {x: -55, y: -11.5}
+        - {x: -55, y: 1.5}
+        - {x: -61, y: 4.5}
     - name: Pelican0007
       rect:
         serializedVersion: 2
@@ -104,8 +179,38 @@ TextureImporter:
         width: 126
         height: 65
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -52, y: -30.5}
+        - {x: -52, y: -32.5}
+        - {x: 0, y: -32.5}
+        - {x: 0, y: -29.5}
+        - {x: -4, y: -20.5}
+        - {x: -49, y: -20.5}
+      - - {x: 39, y: -31.5}
+        - {x: 39, y: -32.5}
+        - {x: 49, y: -32.5}
+        - {x: 49, y: -31.5}
+        - {x: 45, y: -27.5}
+        - {x: 43, y: -27.5}
+      - - {x: -5, y: 32.5}
+        - {x: -58, y: 32.5}
+        - {x: -63, y: 29.5}
+        - {x: -63, y: 11.5}
+        - {x: -45, y: -9.5}
+        - {x: -18, y: -19.5}
+        - {x: 24, y: -27.5}
+        - {x: 38, y: -27.5}
+        - {x: 63, y: -16.5}
+        - {x: 63, y: 2.5}
+        - {x: 58, y: 7.5}
+      - - {x: 4, y: 32.5}
+        - {x: 5, y: 29.5}
+        - {x: 26, y: 25.5}
+        - {x: 33, y: 25.5}
+        - {x: 37, y: 29.5}
+        - {x: 37, y: 32.5}
     - name: Pelican0009
       rect:
         serializedVersion: 2
@@ -114,8 +219,23 @@ TextureImporter:
         width: 123
         height: 61
       alignment: 9
-      pivot: {x: .495934963, y: .467213124}
+      pivot: {x: 0.49593496, y: 0.46721312}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -61, y: 32.5}
+        - {x: -61, y: 7.5}
+        - {x: -26, y: -27.5}
+        - {x: 37, y: -27.5}
+        - {x: 62, y: -13.5}
+        - {x: 62, y: 13.5}
+        - {x: 59, y: 32.5}
+      - - {x: 26, y: 32.5}
+        - {x: 26, y: 30.5}
+        - {x: 28, y: 28.5}
+        - {x: 30, y: 28.5}
+        - {x: 32, y: 30.5}
+        - {x: 32, y: 32.5}
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

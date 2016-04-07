@@ -221,8 +221,8 @@ public class Hunter : MonoBehaviour {
 		GameObject[] enemy = GameObject.FindGameObjectsWithTag("BirdEnemy2D");
 		foreach(GameObject b in enemy)
 		{
-			Mover bm = b.GetComponent<Mover>();
-			bm.setHunterIdle();
+//			Mover bm = b.GetComponent<Mover>();
+//			bm.setHunterIdle();
 		}
 		
 		GameObject[] humming = GameObject.FindGameObjectsWithTag("HummingBird");

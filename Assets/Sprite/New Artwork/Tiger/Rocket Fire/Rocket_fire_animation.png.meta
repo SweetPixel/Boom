@@ -26,7 +26,7 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
@@ -51,7 +51,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
@@ -67,8 +67,19 @@ TextureImporter:
         width: 200
         height: 250
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 74, y: -81}
+        - {x: 92, y: -43}
+        - {x: 92, y: 80}
+        - {x: 81, y: 117}
+        - {x: -28, y: 117}
+        - {x: -51, y: 98}
+        - {x: -51, y: -53}
+        - {x: -32, y: -90}
+        - {x: -26, y: -96}
+        - {x: 65, y: -96}
     - name: Rocket Fire0002
       rect:
         serializedVersion: 2
@@ -77,8 +88,16 @@ TextureImporter:
         width: 200
         height: 250
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -41, y: 118}
+        - {x: -51, y: 104}
+        - {x: -51, y: -96}
+        - {x: 90, y: -96}
+        - {x: 92, y: -87}
+        - {x: 92, y: 44}
+        - {x: 51, y: 118}
     - name: Rocket Fire0003
       rect:
         serializedVersion: 2
@@ -87,8 +106,16 @@ TextureImporter:
         width: 200
         height: 250
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -33, y: 117}
+        - {x: -53, y: 104}
+        - {x: -53, y: -92}
+        - {x: -51, y: -96}
+        - {x: 92, y: -96}
+        - {x: 92, y: 96}
+        - {x: 82, y: 117}
     - name: Rocket Fire0004
       rect:
         serializedVersion: 2
@@ -97,8 +124,18 @@ TextureImporter:
         width: 200
         height: 250
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -28, y: 117}
+        - {x: -52, y: 98}
+        - {x: -55, y: 83}
+        - {x: -55, y: -95}
+        - {x: -54, y: -96}
+        - {x: 91, y: -96}
+        - {x: 92, y: -94}
+        - {x: 92, y: 96}
+        - {x: 82, y: 117}
     - name: Rocket Fire0005
       rect:
         serializedVersion: 2
@@ -107,8 +144,17 @@ TextureImporter:
         width: 200
         height: 250
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 82, y: 117}
+        - {x: -35, y: 117}
+        - {x: -60, y: 103}
+        - {x: -60, y: -89}
+        - {x: -46, y: -97}
+        - {x: 91, y: -97}
+        - {x: 92, y: -96}
+        - {x: 92, y: 96}
     - name: Rocket Fire0006
       rect:
         serializedVersion: 2
@@ -117,8 +163,31 @@ TextureImporter:
         width: 200
         height: 250
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 74, y: -81}
+        - {x: 92, y: -43}
+        - {x: 92, y: 80}
+        - {x: 81, y: 117}
+        - {x: -28, y: 117}
+        - {x: -52, y: 98}
+        - {x: -58, y: 79}
+        - {x: -58, y: -95}
+        - {x: -57, y: -98}
+        - {x: -6, y: -98}
+        - {x: -2, y: -94}
+        - {x: 6, y: -74}
+        - {x: 36, y: -98}
+        - {x: 64, y: -98}
+      - - {x: -55, y: -75}
+        - {x: -57, y: -77}
+        - {x: -57, y: -79}
+        - {x: -55, y: -81}
+        - {x: -53, y: -81}
+        - {x: -51, y: -79}
+        - {x: -51, y: -77}
+        - {x: -53, y: -75}
     - name: Rocket Fire0007
       rect:
         serializedVersion: 2
@@ -127,8 +196,15 @@ TextureImporter:
         width: 200
         height: 250
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -35, y: 117}
+        - {x: -56, y: 105}
+        - {x: -56, y: -97}
+        - {x: 92, y: -97}
+        - {x: 92, y: 98}
+        - {x: 82, y: 117}
     - name: Rocket Fire0008
       rect:
         serializedVersion: 2
@@ -137,8 +213,61 @@ TextureImporter:
         width: 200
         height: 250
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -59}
+        - {x: -2, y: -60}
+        - {x: -4, y: -60}
+        - {x: 5, y: -57}
+        - {x: 38, y: -91}
+        - {x: 47, y: -100}
+        - {x: 89, y: -100}
+        - {x: 92, y: -94}
+        - {x: 92, y: 96}
+        - {x: 82, y: 117}
+        - {x: -35, y: 117}
+        - {x: -55, y: 106}
+        - {x: -55, y: -26}
+        - {x: -33, y: -34}
+        - {x: -40, y: -51}
+        - {x: -42, y: -51}
+        - {x: -40, y: -49}
+        - {x: -36, y: -41}
+        - {x: -38, y: -35}
+        - {x: -42, y: -33}
+        - {x: -55, y: -44}
+        - {x: -55, y: -65}
+        - {x: -50, y: -90}
+        - {x: -34, y: -100}
+        - {x: -12, y: -100}
+        - {x: -11, y: -99}
+        - {x: 6, y: -78}
+        - {x: 5, y: -60}
+        - {x: 2, y: -59}
+      - - {x: -65, y: -86}
+        - {x: -66, y: -88}
+        - {x: -66, y: -91}
+        - {x: -63, y: -97}
+        - {x: -57, y: -97}
+        - {x: -55, y: -93}
+        - {x: -55, y: -88}
+        - {x: -59, y: -86}
+      - - {x: -34, y: -45}
+        - {x: -38, y: -45}
+        - {x: -38, y: -56}
+        - {x: -31, y: -56}
+        - {x: -30, y: -54}
+        - {x: -30, y: -48}
+        - {x: -31, y: -46}
+      - - {x: -66, y: -47}
+        - {x: -66, y: -51}
+        - {x: -65, y: -53}
+        - {x: -62, y: -54}
+        - {x: -59, y: -53}
+        - {x: -59, y: -49}
+        - {x: -62, y: -45}
+        - {x: -64, y: -45}
     - name: Rocket Fire0009
       rect:
         serializedVersion: 2
@@ -147,8 +276,52 @@ TextureImporter:
         width: 200
         height: 250
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 74, y: -81}
+        - {x: 92, y: -43}
+        - {x: 92, y: 80}
+        - {x: 81, y: 117}
+        - {x: -35, y: 117}
+        - {x: -54, y: 107}
+        - {x: -54, y: -25}
+        - {x: -50, y: -27}
+        - {x: -35, y: -60}
+        - {x: -34, y: -63}
+        - {x: -36, y: -61}
+        - {x: -38, y: -54}
+        - {x: -44, y: -43}
+        - {x: -48, y: -43}
+        - {x: -54, y: -47}
+        - {x: -54, y: -61}
+        - {x: -44, y: -89}
+        - {x: -33, y: -96}
+        - {x: -1, y: -96}
+        - {x: 7, y: -76}
+        - {x: 32, y: -96}
+        - {x: 65, y: -96}
+      - - {x: -53, y: -73}
+        - {x: -51, y: -75}
+        - {x: -48, y: -74}
+        - {x: -48, y: -71}
+        - {x: -50, y: -69}
+        - {x: -53, y: -70}
+      - - {x: -60, y: -51}
+        - {x: -59, y: -54}
+        - {x: -56, y: -54}
+        - {x: -54, y: -52}
+        - {x: -55, y: -49}
+        - {x: -58, y: -49}
+      - - {x: -42, y: -39}
+        - {x: -44, y: -41}
+        - {x: -44, y: -43}
+        - {x: -42, y: -45}
+        - {x: -40, y: -45}
+        - {x: -38, y: -43}
+        - {x: -38, y: -41}
+        - {x: -40, y: -39}
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 
