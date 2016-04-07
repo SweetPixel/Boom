@@ -19,7 +19,7 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
@@ -44,7 +44,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
@@ -60,8 +60,21 @@ TextureImporter:
         width: 149
         height: 138
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 18.5, y: 69}
+        - {x: -34.5, y: 69}
+        - {x: -74.5, y: -5}
+        - {x: -74.5, y: -43}
+        - {x: -62.5, y: -48}
+        - {x: -58.5, y: -50}
+        - {x: -54.5, y: -62}
+        - {x: -50.5, y: -69}
+        - {x: 59.5, y: -69}
+        - {x: 74.5, y: -59}
+        - {x: 74.5, y: -13}
+        - {x: 37.5, y: 59}
     - name: Mini_boss_pig0002
       rect:
         serializedVersion: 2
@@ -70,8 +83,19 @@ TextureImporter:
         width: 149
         height: 138
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 26.5, y: 69}
+        - {x: -45.5, y: 69}
+        - {x: -74.5, y: 20}
+        - {x: -74.5, y: -48}
+        - {x: -60.5, y: -68}
+        - {x: 55.5, y: -68}
+        - {x: 74.5, y: -41}
+        - {x: 74.5, y: -14}
+        - {x: 45.5, y: 64}
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

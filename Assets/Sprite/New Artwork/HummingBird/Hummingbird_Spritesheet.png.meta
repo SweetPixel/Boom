@@ -19,7 +19,7 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
@@ -44,7 +44,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
@@ -60,8 +60,16 @@ TextureImporter:
         width: 96
         height: 77
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -2, y: 38.5}
+        - {x: -48, y: 27.5}
+        - {x: -48, y: 20.5}
+        - {x: 5, y: -38.5}
+        - {x: 38, y: -38.5}
+        - {x: 45, y: -17.5}
+        - {x: 45, y: 38.5}
     - name: Humming-bird0002
       rect:
         serializedVersion: 2
@@ -70,8 +78,19 @@ TextureImporter:
         width: 96
         height: 77
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -33, y: 32.5}
+        - {x: -48, y: 29.5}
+        - {x: -48, y: 15.5}
+        - {x: -45, y: -12.5}
+        - {x: -43, y: -21.5}
+        - {x: -25, y: -38.5}
+        - {x: 23, y: -38.5}
+        - {x: 23, y: 13.5}
+        - {x: -7, y: 32.5}
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

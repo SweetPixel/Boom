@@ -5,34 +5,34 @@ tpsheetFileNames:
 - Assets/Sprite/New Artwork/Tiger/Taill/tail spritesheet.tpsheet
 - Assets/Sprite/New Artwork/Pig/Miniboss_Spritesheet_basic.tpsheet
 - Assets/Sprite/New Artwork/Tiger/Rocket Fire/Rocket_fire_animation.tpsheet
+- Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
 - Assets/Sprite/New Artwork/Explosion/Explosion_Spritesheet.tpsheet
 - Assets/Sprite/New Artwork/Tiger/Jetpack/jetpack_Spritesheet.tpsheet
 - Assets/Sprite/New Artwork/Tiger/Rocket/Rocket_Spritesheet.tpsheet
 - Assets/Sprite/New Artwork/HummingBird/Hummingbird_Spritesheet.tpsheet
 - Assets/Sprite/New Artwork/Tiger/Tiger Laughing/Tiger_laughing spritesheet.tpsheet
 - Assets/Sprite/New Artwork/Pelican/Pelican_mESH.tpsheet
-- Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
 textureFileNames:
 - Assets/Sprite/New Artwork/Pig/Miniboss_Spritesheet.png
 - Assets/Sprite/New Artwork/Tiger/Taill/tail spritesheet.png
 - Assets/Sprite/New Artwork/Pig/Miniboss_Spritesheet_basic.png
 - Assets/Sprite/New Artwork/Tiger/Rocket Fire/Rocket_fire_animation.png
+- Assets/codeandweb.com/Example/SpriteSheet/sprites.png
 - Assets/Sprite/New Artwork/Explosion/Explosion_Spritesheet.png
 - Assets/Sprite/New Artwork/Tiger/Jetpack/jetpack_Spritesheet.png
 - Assets/Sprite/New Artwork/Tiger/Rocket/Rocket_Spritesheet.png
 - Assets/Sprite/New Artwork/HummingBird/Hummingbird_Spritesheet.png
 - Assets/Sprite/New Artwork/Tiger/Tiger Laughing/Tiger_laughing spritesheet.png
 - Assets/Sprite/New Artwork/Pelican/Pelican_mESH.png
-- Assets/codeandweb.com/Example/SpriteSheet/sprites.png
 normalmapFileNames:
 - 
 - 
 - 
 - 
-- 
-- 
-- 
-- 
-- 
-- 
 - Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
+- 
+- 
+- 
+- 
+- 
+- 
