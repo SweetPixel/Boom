@@ -28,7 +28,7 @@ public class PirateMovement : MonoBehaviour {
 	
 	bool isFired = false;
 	
-	bool isRight = true;
+	public bool isRight = true;
 	public GameObject shoot;
 	Animator anim;
 	Animator animshoot;
@@ -181,14 +181,14 @@ public class PirateMovement : MonoBehaviour {
 
 		moveDirection.x = currentValue; */
 
-		if (Input.GetKey (KeyCode.K) && isgrounded) 
+		/*if (Input.GetKey (KeyCode.K) && isgrounded) 
 		{
 			//moveDirection.y = jumpSpeed;
 			isJumped = true;
 			isgrounded = false;
 			GameObject.FindGameObjectWithTag("Player").GetComponent<PirateMovement>().isgrounded = false;
 			GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpSpeed));
-		}
+		}*/
 
 		if(Input.GetKey(KeyCode.L) && 
 		   Time.time > nextFire)
