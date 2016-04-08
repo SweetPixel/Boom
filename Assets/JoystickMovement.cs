@@ -4,6 +4,9 @@ using System.Collections;
 public class JoystickMovement : MonoBehaviour {
 
 	public float speed = 10f;
+	public float airSpeed = 15f;
+	private float speedX = 0f;
+	float h;
 	private float lastX;
 	private bool facingRight = true;
 
@@ -69,11 +72,7 @@ public class JoystickMovement : MonoBehaviour {
 			StartCoroutine(Fire());
 		}
 
-		/*if(grounded)
-		{
-
-		}*/
-		float h = CnControls.CnInputManager.GetAxis("Horizontal");
+		h = CnControls.CnInputManager.GetAxis("Horizontal");
 
 		if(h > 0){
 			transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
@@ -84,7 +83,34 @@ public class JoystickMovement : MonoBehaviour {
 			isRight = false;
 		}
 
-		motion.x = Mathf.Clamp(h * speed, leftBorder, rightBorder);
+		if (Input.GetKey (KeyCode.A)) {
+			if(isRight)
+			{
+				isRight = false;
+				transform.localScale = new Vector3(-1,transform.localScale.y,transform.localScale.z);
+			}
+			h = -0.7f;
+		}
+		
+		if (Input.GetKey (KeyCode.D)) {
+			if(!isRight)
+			{
+				isRight = true;
+				transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
+			}
+			h = 0.7f;
+		}
+
+		if(grounded)
+		{
+			speedX = speed;
+		}
+		if(!grounded)
+		{
+			speedX = airSpeed;
+		}
+
+		motion.x = Mathf.Clamp(h * speedX, leftBorder, rightBorder);
 
 		//if(h!=0 && grounded || h!=0 && !grounded)
 		//	motion.x = Mathf.Clamp(h * speed, leftBorder, rightBorder);
@@ -103,6 +129,12 @@ public class JoystickMovement : MonoBehaviour {
 
 		gameObject.GetComponent<Rigidbody2D>().velocity = motion;
 
+	}
+
+	public void bounce()
+	{
+		motion.y = 4f;
+		h=0;
 	}
 
 	public void InitiateFire()
