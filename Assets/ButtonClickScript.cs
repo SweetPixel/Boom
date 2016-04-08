@@ -459,9 +459,10 @@ public class ButtonClickScript : MonoBehaviour {
 			GameObject.FindGameObjectWithTag("Player").GetComponent<PirateMovement>().InitiateFire();
 		}
 
-		if (buttonName == "Jump" && GameObject.FindGameObjectWithTag("Player").GetComponent<PirateMovement>().isgrounded) {
+		if (buttonName == "Jump" && GameObject.FindGameObjectWithTag("Player").GetComponent<JoystickMovement>().grounded) {
 			GameObject.FindGameObjectWithTag("Player").GetComponent<PirateMovement>().isgrounded = false;
-			GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 700f));
+			//GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 900f));
+			GameObject.FindGameObjectWithTag("Player").GetComponent<JoystickMovement>().activateJump();
 		}
 
 		/* if (buttonName == "PlayWithShotgun") {

@@ -1,0 +1,210 @@
+fileFormatVersion: 2
+guid: 7afaad0650aa08f45b63540b18ea2f67
+timeCreated: 1460025973
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Arcade - Metal Slug - Marco Rossi_0
+    21300002: Arcade - Metal Slug - Marco Rossi_1
+    21300004: Arcade - Metal Slug - Marco Rossi_2
+    21300006: Arcade - Metal Slug - Marco Rossi_3
+    21300008: Arcade - Metal Slug - Marco Rossi_4
+    21300010: Arcade - Metal Slug - Marco Rossi_5
+    21300012: Arcade - Metal Slug - Marco Rossi_6
+    21300014: Arcade - Metal Slug - Marco Rossi_7
+    21300016: Arcade - Metal Slug - Marco Rossi_8
+    21300018: Arcade - Metal Slug - Marco Rossi_9
+    21300020: Arcade - Metal Slug - Marco Rossi_10
+    21300022: Arcade - Metal Slug - Marco Rossi_11
+    21300024: Arcade - Metal Slug - Marco Rossi_12
+    21300026: Arcade - Metal Slug - Marco Rossi_13
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Arcade - Metal Slug - Marco Rossi_0
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 4400
+        width: 34
+        height: 41
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arcade - Metal Slug - Marco Rossi_1
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 3347
+        width: 26
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arcade - Metal Slug - Marco Rossi_2
+      rect:
+        serializedVersion: 2
+        x: 620
+        y: 3347
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arcade - Metal Slug - Marco Rossi_3
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 3347
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arcade - Metal Slug - Marco Rossi_4
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 3347
+        width: 24
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arcade - Metal Slug - Marco Rossi_5
+      rect:
+        serializedVersion: 2
+        x: 553
+        y: 3347
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arcade - Metal Slug - Marco Rossi_6
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 3347
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arcade - Metal Slug - Marco Rossi_7
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 3347
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arcade - Metal Slug - Marco Rossi_8
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 3347
+        width: 21
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arcade - Metal Slug - Marco Rossi_9
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 3347
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arcade - Metal Slug - Marco Rossi_10
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 3347
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arcade - Metal Slug - Marco Rossi_11
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 3347
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arcade - Metal Slug - Marco Rossi_12
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 3347
+        width: 23
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arcade - Metal Slug - Marco Rossi_13
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 3347
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

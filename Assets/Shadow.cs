@@ -11,7 +11,7 @@ public class Shadow : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (GameObject.FindGameObjectWithTag ("Player") != null) {
-			if (GameObject.FindGameObjectWithTag ("Player").GetComponent<PirateMovement> ().isgrounded == true) {
+			if (GameObject.FindGameObjectWithTag ("Player").GetComponent<JoystickMovement> ().grounded == true) {
 				gameObject.transform.position = new Vector3 (GameObject.FindGameObjectWithTag ("Player").transform.position.x,
 				                                             GameObject.FindGameObjectWithTag ("Player").transform.position.y - 0.5f,
 				                                             GameObject.FindGameObjectWithTag ("Player").transform.position.z);
