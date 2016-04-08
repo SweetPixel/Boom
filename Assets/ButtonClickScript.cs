@@ -456,7 +456,7 @@ public class ButtonClickScript : MonoBehaviour {
 		}
 
 		if (buttonName == "Fire") {
-			GameObject.FindGameObjectWithTag("Player").GetComponent<PirateMovement>().InitiateFire();
+			GameObject.FindGameObjectWithTag("Player").GetComponent<JoystickMovement>().InitiateFire();
 		}
 
 		if (buttonName == "Jump" && GameObject.FindGameObjectWithTag("Player").GetComponent<JoystickMovement>().grounded) {

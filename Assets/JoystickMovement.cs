@@ -105,6 +105,11 @@ public class JoystickMovement : MonoBehaviour {
 
 	}
 
+	public void InitiateFire()
+	{
+		StartCoroutine (Fire ());
+	}
+
 	IEnumerator Fire()
 	{
 		if (isRight) {
