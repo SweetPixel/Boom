@@ -9,11 +9,12 @@ public class CarrotMovement : MonoBehaviour {
 	void Start () {
 		if(transform.position.x == 7f)
 		{
+			this.transform.Rotate (0,180,0);
 			StartCoroutine(MoveObject(transform, transform.position, new Vector3(-8f, transform.position.y, 0f), speed));
 			Destroy(gameObject, 5f);
 		}
 		else{
-			this.transform.Rotate (0,180,0);
+			//this.transform.Rotate (0,180,0);
 			StartCoroutine(MoveObject(transform, transform.position, new Vector3(7f, transform.position.y, 0f), speed));
 			Destroy(gameObject, 5f);
 		}

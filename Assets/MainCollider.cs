@@ -15,6 +15,10 @@ public class MainCollider : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
+		if (col.gameObject.tag == "Bullet") {
+			Destroy(gameObject);
+			Destroy(col.gameObject);
+		}
 
 		if (col.gameObject.tag == "Platform") {
 			return;

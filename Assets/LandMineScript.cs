@@ -15,7 +15,7 @@ public class LandMineScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		//Debug.Log(col.gameObject.tag);
+		Debug.Log(col.gameObject.tag);
 
 		if (col.gameObject.tag == "Bullet") {
 			gameObject.GetComponent<CircleCollider2D>().enabled = false;

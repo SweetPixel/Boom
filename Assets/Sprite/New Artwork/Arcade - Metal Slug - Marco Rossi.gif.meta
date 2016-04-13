@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 7afaad0650aa08f45b63540b18ea2f67
-timeCreated: 1460025973
+timeCreated: 1460456250
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -18,6 +18,8 @@ TextureImporter:
     21300022: Arcade - Metal Slug - Marco Rossi_11
     21300024: Arcade - Metal Slug - Marco Rossi_12
     21300026: Arcade - Metal Slug - Marco Rossi_13
+    21300028: Arcade - Metal Slug - Marco Rossi_14
+    21300030: Arcade - Metal Slug - Marco Rossi_15
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -68,9 +70,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 918
-        y: 4400
+        y: 4399
         width: 34
-        height: 41
+        height: 42
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,6 +205,26 @@ TextureImporter:
         height: 17
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arcade - Metal Slug - Marco Rossi_14
+      rect:
+        serializedVersion: 2
+        x: 875
+        y: 4399
+        width: 37
+        height: 42
+      alignment: 9
+      pivot: {x: .506057322, y: .516008675}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Arcade - Metal Slug - Marco Rossi_15
+      rect:
+        serializedVersion: 2
+        x: 1060
+        y: 4229
+        width: 28
+        height: 49
+      alignment: 9
+      pivot: {x: .632210851, y: .430793613}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

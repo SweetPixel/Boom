@@ -1,0 +1,188 @@
+fileFormatVersion: 2
+guid: 181af56ac42cdde47b81d00c0385f7bb
+timeCreated: 1460546212
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_0
+    21300002: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_1
+    21300004: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_2
+    21300006: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_3
+    21300008: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_4
+    21300010: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_5
+    21300012: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_6
+    21300014: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_7
+    21300016: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_8
+    21300018: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_9
+    21300020: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_10
+    21300022: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_11
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 977
+        width: 43
+        height: 45
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_1
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 977
+        width: 43
+        height: 45
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_2
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 977
+        width: 43
+        height: 45
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_3
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 1085
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_4
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 1085
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_5
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 1085
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_6
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 1085
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 1085
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_8
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1038
+        width: 43
+        height: 44
+      alignment: 9
+      pivot: {x: .50000006, y: .485246152}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_9
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 557
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_10
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 557
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_11
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 557
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
