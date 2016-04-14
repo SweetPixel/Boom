@@ -11,14 +11,15 @@ public class PlayerAnimatorManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		float h = CnControls.CnInputManager.GetAxis("Horizontal");
+		float h = Mathf.Abs(CnControls.CnInputManager.GetAxis("Horizontal"));
+		//float v = Mathf.Abs(CnControls.CnInputManager.GetAxis("Vertical"));
 
-		if(h < 0.1 && h > -0.1)
+		if(!GameObject.FindGameObjectWithTag("Player").GetComponent<JoystickMovement>().lookingUp && h != 0f)
 		{
-			gameObject.GetComponent<Animator>().SetBool("isRunning",false);
+			gameObject.GetComponent<Animator>().SetBool("isRunning",true);
 		}
 		else{
-			gameObject.GetComponent<Animator>().SetBool("isRunning",true);
+			gameObject.GetComponent<Animator>().SetBool("isRunning",false);
 		}
 
 	}
