@@ -20,7 +20,7 @@ public class TrackerRocketScript : MonoBehaviour {
 		}
 	}
 
-	/*void OnCollisionEnter2D(Collision2D col)
+	void OnCollisionEnter2D(Collision2D col)
 	{
 		
 		if (col.gameObject.name == "Platform") {
@@ -33,7 +33,7 @@ public class TrackerRocketScript : MonoBehaviour {
 			gc.GameOver();
 			Destroy(col.gameObject);
 		}
-		
-	}*/
+
+	}
 
 }
