@@ -84,6 +84,9 @@ public class JoystickMovement : MonoBehaviour {
 		h = CnControls.CnInputManager.GetAxis("Horizontal");
 		v = CnControls.CnInputManager.GetAxis("Vertical");
 
+		Debug.Log("Horizontal Value: " + h);
+		Debug.Log("Vertical Value: " + v);
+
 		if(v < 0)
 			v = 0;
 
@@ -151,7 +154,7 @@ public class JoystickMovement : MonoBehaviour {
 
 	private void spriteSwap()
 	{
-		if(v >=0 && v < 0.45f)
+		if((v >=0 && v <= 0.3f) && (h >= 0.8 || h <= -0.8f))
 		{
 			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
 			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
@@ -170,7 +173,7 @@ public class JoystickMovement : MonoBehaviour {
 			}
 			lookingUp = false;
 		}
-		else if(v >=0.45 && v < 0.65f)
+		else if((v >0.3 && v < 0.7f) && (h > 0.3f || h < -0.3f))
 		{
 			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[1];
 			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[1]);
@@ -182,7 +185,7 @@ public class JoystickMovement : MonoBehaviour {
 			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.up);
 			lookingUp = false;
 		}
-		else if(v >=0.65f && h <=0.65f)
+		else if((v >=0.65f && h <=0.65f) && (h <= 0.3f && h >= -0.3f))
 		{
 			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[2];
 			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[2]);
