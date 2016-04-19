@@ -92,7 +92,7 @@ public class GameOverScript : MonoBehaviour {
 	void Start () {
 
 		gamecontroller = GameObject.FindGameObjectWithTag("GameController");
-		gamecontroller.GetComponent<ButtonClickScript> ().PauseCanvasVisibility (true);
+		//gamecontroller.GetComponent<ButtonClickScript> ().PauseCanvasVisibility (true);
 
 		StartCoroutine (Wait());
 
@@ -523,7 +523,7 @@ public class GameOverScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (startTimer) {
+		/*if (startTimer) {
 			//label = GameObject.FindGameObjectWithTag ("FreeGiftIn_Label").GetComponent<Image> ();
 			int timerLeft = int.Parse(gc.giftTimerLeft ());
 			if (prevtime != timerLeft && timerLeft > 0) {
@@ -544,7 +544,7 @@ public class GameOverScript : MonoBehaviour {
 				giftButton.SetActive(true);
 				label.enabled = false;
 				textObject.enabled = true;
-			}*/
-		}
+			}
+		}*/
 	}
 }

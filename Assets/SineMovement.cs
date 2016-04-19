@@ -38,7 +38,7 @@ public class SineMovement : MonoBehaviour {
 
 	void Start()
 	{
-		transform.localPosition = new Vector3 (10.0f, gameObject.transform.position.y-1.45f, 0f);
+		transform.localPosition = new Vector3 (10.0f, gameObject.transform.position.y-1.3f, 0f);
 	}
 
 	public void Update(){

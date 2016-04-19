@@ -11,11 +11,11 @@ public class MashroomMovement : MonoBehaviour {
 	void Start () {
 		if(transform.position.x == 7f)
 		{
-			StartCoroutine(MoveObject(transform, new Vector3(7f, -1.65f, 0f), new Vector3(-8f, -1.65f, 0f), speed));
+			StartCoroutine(MoveObject(transform, new Vector3(7f, transform.position.y, 0f), new Vector3(-8f, transform.position.y, 0f), speed));
 			Destroy (gameObject, 7f);
 		}
 		else{
-			StartCoroutine(MoveObject(transform, new Vector3(-8f, -1.65f, 0f), new Vector3(7f, -1.65f, 0f), speed));
+			StartCoroutine(MoveObject(transform, new Vector3(-8f, transform.position.y, 0f), new Vector3(7f, transform.position.y, 0f), speed));
 			Destroy (gameObject, 7f);
 		}
 
