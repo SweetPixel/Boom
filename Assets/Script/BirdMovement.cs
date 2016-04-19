@@ -180,7 +180,7 @@ public class BirdMovement : MonoBehaviour {
 			//particleSystem
 			Instantiate(particleSystem, new Vector3(gameObject.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
 			gameObject.GetComponent<Collider2D>().enabled = false;
-			GameObject co = (GameObject)Instantiate(coin, new Vector3(gameObject.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+			//GameObject co = (GameObject)Instantiate(coin, new Vector3(gameObject.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
 			//co.GetComponent<Rigidbody2D>().velocity = Vector2.up * -2;
 
 			if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount < 1)

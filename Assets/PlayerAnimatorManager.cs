@@ -14,7 +14,9 @@ public class PlayerAnimatorManager : MonoBehaviour {
 		float h = Mathf.Abs(CnControls.CnInputManager.GetAxis("Horizontal"));
 		//float v = Mathf.Abs(CnControls.CnInputManager.GetAxis("Vertical"));
 
-		if(!GameObject.FindGameObjectWithTag("Player").GetComponent<JoystickMovement>().lookingUp && h != 0f)
+		h = Mathf.Abs(h);
+
+		if(!GameObject.FindGameObjectWithTag("Player").GetComponent<JoystickMovement>().lookingUp && (h != 0f && h>0.08f) )
 		{
 			gameObject.GetComponent<Animator>().SetBool("isRunning",true);
 		}

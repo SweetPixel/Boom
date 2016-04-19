@@ -3,9 +3,11 @@ using System.Collections;
 
 public class DestroyByTime : MonoBehaviour {
 
+	public float destroyTime = 3f;
+
 	// Use this for initialization
 	void Start () {
-		Destroy (gameObject, 3f);
+		Destroy (gameObject, destroyTime);
 	}
 	
 	// Update is called once per frame

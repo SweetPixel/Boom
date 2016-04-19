@@ -6,7 +6,7 @@ public class ButtonClickScript : MonoBehaviour {
 
 	public GameObject guns;
 	public GameObject maps;
-	private StartGame sg;
+	//private StartGame sg;
 	private GameObject playHand;
 	public GameObject startCanvas;
 	public GameObject hunterPrefab;
@@ -61,7 +61,7 @@ public class ButtonClickScript : MonoBehaviour {
 
 		//pauseCanvas = GameObject.Find ("PauseLargeCanvas");
 		pauseCanvas.SetActive(false);
-		PauseCanvasVisibility(false);
+		//PauseCanvasVisibility(false);
 		sr = GameObject.FindGameObjectWithTag("GameController").GetComponent<ScrollRectCsharp>();
 	}
 	
@@ -166,7 +166,7 @@ public class ButtonClickScript : MonoBehaviour {
 		//GetComponent<AudioSource>().clip = buttonAudio;
 		//GetComponent<AudioSource>().Play();
 		playHand = GameObject.FindGameObjectWithTag ("PlayHand");
-		sg = playHand.GetComponent<StartGame> ();
+		//sg = playHand.GetComponent<StartGame> ();
 		if (buttonName == "GunsButton") 
 		{
 			HunterMovement hm = GameObject.FindGameObjectWithTag("Player").GetComponent<HunterMovement>();
@@ -181,7 +181,7 @@ public class ButtonClickScript : MonoBehaviour {
 			PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
 			isGuncanvasOpen = false;
 			guns.SetActive (false);
-			sg.deactiveCanvas();
+			//sg.deactiveCanvas();
 		}
 		if (buttonName == "StartButton") {
 			/**/
@@ -202,7 +202,7 @@ public class ButtonClickScript : MonoBehaviour {
 
 		if (buttonName == "BackMapButton") {
 			maps.SetActive (false);
-			sg.deactiveCanvas();
+			//sg.deactiveCanvas();
 		}
 
 		if (buttonName == "Play") {
@@ -213,7 +213,7 @@ public class ButtonClickScript : MonoBehaviour {
 			if(PlayerPrefs.GetInt ("tempGunIndex") == 1)
 			{
 				gunCanvas.SetActive (false);
-				sg.deactiveCanvas();
+				//sg.deactiveCanvas();
 				PlayerPrefs.SetInt ("gunIndex", 1);
 				restartLevel();
 				PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
@@ -223,7 +223,7 @@ public class ButtonClickScript : MonoBehaviour {
 				if(isAvailable)
 				{
 					gunCanvas.SetActive (false);
-					sg.deactiveCanvas();
+					//sg.deactiveCanvas();
 					PlayerPrefs.SetInt ("gunIndex", 2);
 					restartLevel();
 					PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
@@ -246,7 +246,7 @@ public class ButtonClickScript : MonoBehaviour {
 						}
 						
 						gunCanvas.SetActive (false);
-						sg.deactiveCanvas();
+						//sg.deactiveCanvas();
 						PlayerPrefs.SetInt ("gunIndex", 2);
 						restartLevel();
 						PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
@@ -258,7 +258,7 @@ public class ButtonClickScript : MonoBehaviour {
 				if(isAvailable)
 				{
 					gunCanvas.SetActive (false);
-					sg.deactiveCanvas();
+					//sg.deactiveCanvas();
 					PlayerPrefs.SetInt ("gunIndex", 3);
 					restartLevel();
 					PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
@@ -280,7 +280,7 @@ public class ButtonClickScript : MonoBehaviour {
 							PlayerPrefs.SetInt("ShotgunAvailable", 1);
 						}
 						gunCanvas.SetActive (false);
-						sg.deactiveCanvas();
+						//sg.deactiveCanvas();
 						PlayerPrefs.SetInt ("gunIndex", 3);
 						restartLevel();
 						PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
@@ -292,7 +292,7 @@ public class ButtonClickScript : MonoBehaviour {
 				if(isAvailable)
 				{
 					gunCanvas.SetActive (false);
-					sg.deactiveCanvas();
+					//sg.deactiveCanvas();
 					PlayerPrefs.SetInt ("gunIndex", 4);
 					restartLevel();
 					PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
@@ -316,7 +316,7 @@ public class ButtonClickScript : MonoBehaviour {
 							PlayerPrefs.SetInt("SniperAvailable", 1);
 						}
 						gunCanvas.SetActive (false);
-						sg.deactiveCanvas();
+						//sg.deactiveCanvas();
 						PlayerPrefs.SetInt ("gunIndex", 4);
 						restartLevel();
 						PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
@@ -416,7 +416,7 @@ public class ButtonClickScript : MonoBehaviour {
 			GameObject.FindGameObjectWithTag("ButtonCountDown").GetComponent<Animator>().SetBool("isEnd", false);
 			GameObject.FindGameObjectWithTag("CoinObject").GetComponent<Animator>().SetBool("isEnd", false);
 			GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().activeCoinCanvas ();
-			sg.deactiveCanvas();
+			//sg.deactiveCanvas();
 			restartLevel();
 		}
 
@@ -646,7 +646,7 @@ public class ButtonClickScript : MonoBehaviour {
 		hand.transform.position = new Vector2(8.089996f, 0.15f);
 		//pauseSmallCanvas.SetActive (true);
 		pause.GetComponent<Image>().enabled = true;
-		sg.activatePlayMode();
+		//sg.activatePlayMode();
 		startCanvas.SetActive(false);
 		anim.SetBool ("IsPressed", false);
 	}
