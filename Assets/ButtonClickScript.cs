@@ -68,7 +68,7 @@ public class ButtonClickScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (direction == 1) {
+		/*if (direction == 1) {
 			GameObject.FindGameObjectWithTag("Player").transform.Translate(new Vector2(5f,-1.4f) * Time.deltaTime);
 		}
 
@@ -78,80 +78,8 @@ public class ButtonClickScript : MonoBehaviour {
 
 		if (showCanvas) {
 			timeLeft -= Time.deltaTime;
-		}
+		}*/
 
-		if (PlayerPrefs.GetInt ("isGuncanvasOpen") == 1) {
-			float position = sr.panelAnchoredPosition();
-			int sc = PlayerPrefs.GetInt ("Score");
-
-			//Debug.Log("Position of Panel " + position);
-			if (position <= 100 && position >= -450) {
-				//PlayerPrefs.SetInt ("gunIndex", 1);
-				Debug.Log("gun 1 button");
-				PlayerPrefs.SetInt ("tempGunIndex", 1);
-				//gunIndex = 1;
-				if(GameObject.FindGameObjectWithTag("GunCanvas-PlayButton") != null)
-				{
-					GameObject.FindGameObjectWithTag("GunCanvas-PlayButton").GetComponent<Image>().sprite = select;
-				}
-			}
-			if (position <= -450 && position >= -1000) {
-				//PlayerPrefs.SetInt ("gunIndex", 2);
-				Debug.Log("gun 2 button");
-				//gunIndex = 2;
-				PlayerPrefs.SetInt ("tempGunIndex", 2);
-
-				if(sc < smgValue && PlayerPrefs.GetInt("SmgAvailable") == 0)
-				{
-					isAvailable = false;
-					if(GameObject.FindGameObjectWithTag("GunCanvas-PlayButton") != null){
-						GameObject.FindGameObjectWithTag("GunCanvas-PlayButton").GetComponent<Image>().sprite = buyTwoThousand;}
-				}
-				else{
-					isAvailable = true;
-					if(GameObject.FindGameObjectWithTag("GunCanvas-PlayButton") != null){
-						GameObject.FindGameObjectWithTag("GunCanvas-PlayButton").GetComponent<Image>().sprite = select;}
-				}
-			}
-			if (position <= -1010 && position >= -1500) {
-				//PlayerPrefs.SetInt ("gunIndex", 3);
-				Debug.Log("gun 3 button");
-				//gunIndex = 3;
-				PlayerPrefs.SetInt ("tempGunIndex", 3);
-
-				if(sc < shotgunValue && PlayerPrefs.GetInt("ShotgunAvailable") == 0)
-				{
-					isAvailable = false;
-					if(GameObject.FindGameObjectWithTag("GunCanvas-PlayButton") != null){
-						GameObject.FindGameObjectWithTag("GunCanvas-PlayButton").GetComponent<Image>().sprite = buyThousand;}
-				}
-				else{
-					isAvailable = true;
-					if(GameObject.FindGameObjectWithTag("GunCanvas-PlayButton") != null){
-					GameObject.FindGameObjectWithTag("GunCanvas-PlayButton").GetComponent<Image>().sprite = select;}
-				}
-			}
-			if (position <= -1500 && position >= -2000) {
-				//PlayerPrefs.SetInt ("gunIndex", 4);
-				Debug.Log("gun 4 button");
-				//gunIndex = 4;
-				PlayerPrefs.SetInt ("tempGunIndex", 4);
-
-				if(sc < sniperValue && PlayerPrefs.GetInt("SniperAvailable") == 0)
-				{
-					isAvailable = false;
-					if(GameObject.FindGameObjectWithTag("GunCanvas-PlayButton") != null)
-					{
-						GameObject.FindGameObjectWithTag("GunCanvas-PlayButton").GetComponent<Image>().sprite = buyFiveThousand;}
-				}
-				else{
-					isAvailable = true;
-					if(GameObject.FindGameObjectWithTag("GunCanvas-PlayButton") != null)
-					{
-						GameObject.FindGameObjectWithTag("GunCanvas-PlayButton").GetComponent<Image>().sprite = select;}
-				}
-			}
-		}
 
 	}
 
@@ -316,7 +244,6 @@ public class ButtonClickScript : MonoBehaviour {
 							PlayerPrefs.SetInt("SniperAvailable", 1);
 						}
 						gunCanvas.SetActive (false);
-						//sg.deactiveCanvas();
 						PlayerPrefs.SetInt ("gunIndex", 4);
 						restartLevel();
 						PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
@@ -329,56 +256,26 @@ public class ButtonClickScript : MonoBehaviour {
 			Time.timeScale = 0;
 			pauseCanvas.SetActive(true);
 			pauseSmallCanvas.SetActive (false);
-			//pause.GetComponent<Image>().enabled = false;
 		}
 
 		if (buttonName == "Resume") {
-			//StartCoroutine(ResumeGame());
 			Time.timeScale = 1;
 			pauseCanvas.SetActive(false);
 			pauseSmallCanvas.SetActive (true);
 
-			//pause.GetComponent<Image>().enabled = true;
 		}
 
 		if (buttonName == "GiftButton") {
 
 			gameover = GameObject.FindGameObjectWithTag("GameOver");
-
-			//showCanvas = true;
 			gtemp = (GameObject)Instantiate (gift, new Vector2 (gift.transform.position.x, gift.transform.position.y), Quaternion.identity);
 			gtemp.SetActive(true);
 
-			//images = GameObject.Find ("GiftPanel").GetComponentsInChildren<Image> ();
-
-			/*Image hundred = GameObject.FindGameObjectWithTag ("gc-hundred").GetComponent<Image> ();
-			Image ten = GameObject.FindGameObjectWithTag ("gc-ten").GetComponent<Image> ();
-			Image unit = GameObject.FindGameObjectWithTag ("gc-unit").GetComponent<Image> ();*/
 
 			Text giftText = GameObject.FindGameObjectWithTag ("GiftCoin").GetComponent<Text> ();
 
 			val = Random.Range(50, 100);
 			giftText.text = val.ToString();
-			//val = val/10;
-			/*if (val < 100) {
-				int t = val / 10;
-				int u = val % 10;
-				
-				ten.sprite = score [t];
-				unit.sprite = score [u];
-				
-			} else {
-				
-				int h = val / 100;
-				int ht = val % 100;
-				
-				int t = ht / 10;
-				int u = ht % 10;
-				
-				hundred.sprite = score[h];
-				ten.sprite = score [t];
-				unit.sprite = score [u];
-			}*/
 
 			timerIcon = GameObject.FindGameObjectWithTag ("GreenStripeTimer").GetComponent<Image> ();
 			timerIcon.enabled = false;
@@ -465,64 +362,10 @@ public class ButtonClickScript : MonoBehaviour {
 			GameObject.FindGameObjectWithTag("Player").GetComponent<JoystickMovement>().activateJump();
 		}
 
-		/* if (buttonName == "PlayWithShotgun") {
-			PlayerPrefs.SetInt ("gunIndex", 3);
-			guns.SetActive (false);
-			sg.deactiveCanvas();
-			restartLevel();
-		}
 
-		if (buttonName == "PlayWithSniper") {
-			PlayerPrefs.SetInt ("gunIndex", 4);
-			guns.SetActive (false);
-			sg.deactiveCanvas();
-			restartLevel();
-		}*/
-
-		/*if (buttonName == "RestartButton") {
-			gameObject.transform.position = new Vector2 (11f, 11f);
-			GameObject hunt = GameObject.Find("Object");
-			if(hunt == null)
-			{
-				hunt = GameObject.Find ("Object(Clone)");
-			}
-			Destroy(hunt);
-			Destroy(GameObject.Find ("GameOverCanvas(Clone)"));
-			GameObject h = (GameObject)Instantiate(hunterPrefab, new Vector3(8.15f, -2.15f, 0.02769041f), Quaternion.identity);
-			
-			HunterMovement hRestart = h.GetComponent<HunterMovement> ();
-			hRestart.letStart();
-			
-			GameObject[] birds = GameObject.FindGameObjectsWithTag("Bird2D");
-
-			GameObject playhand = GameObject.Find("PlayHand");
-			StartGame sg = playHand.GetComponent<StartGame>();
-
-			sg.initEmenyBird();
-			if(birds.Length == 2)
-			{
-				sg.initBird(1);
-			}
-			else if(birds.Length == 1){
-				sg.initBird(2);
-			}
-		}
-
-
-		if (buttonName == "MenuButton") {
-			startCanvas.SetActive(true);
-			guns.SetActive (false);
-			sg.deactiveCanvas();
-			GameObject gc = GameObject.Find("GameOverCanvas(Clone)");
-			Destroy(gc);
-				}*/
 
 	}
 
-	/*IEnumerator ResumeGame()
-	{
-
-	}*/
 
 	public void GameOverVisibility(bool x)
 	{

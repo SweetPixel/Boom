@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class BirdMovement : MonoBehaviour {
@@ -35,7 +36,7 @@ public class BirdMovement : MonoBehaviour {
 
 	//public GameObject coinObject;
 	public GameObject coin;
-	public GameObject particleSystem;
+	//public GameObject particleSystem;
 
 	public Sprite prevSprite;
 	private bool hunterIdle = false;
@@ -46,7 +47,9 @@ public class BirdMovement : MonoBehaviour {
 	public float decreaseRate = 0.015f;
 
 
+
 	IEnumerator Start () {
+
 		Flip ();
 		birdLife = 0;
 
@@ -178,7 +181,13 @@ public class BirdMovement : MonoBehaviour {
 
 		if (col.gameObject.tag == "Bullet") {
 			//particleSystem
-			Instantiate(particleSystem, new Vector3(gameObject.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+			//Instantiate(particleSystem, new Vector3(gameObject.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+
+			GameObject obj = ParticleObjectPooledScript.current.GetPooledObject();
+			obj.transform.position = gameObject.transform.position;
+			obj.transform.rotation = Quaternion.identity;
+			obj.SetActive(true);
+
 			gameObject.GetComponent<Collider2D>().enabled = false;
 			//GameObject co = (GameObject)Instantiate(coin, new Vector3(gameObject.transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
 			//co.GetComponent<Rigidbody2D>().velocity = Vector2.up * -2;
@@ -211,7 +220,8 @@ public class BirdMovement : MonoBehaviour {
 			GameObject.Find("AirEnemyGenerator").GetComponent<AirEnemyGeneratorScript>().InitEnemy();
 			GameObject.Find("BirdKill").GetComponent<Text>().text =  (int.Parse(GameObject.Find("BirdKill").GetComponent<Text>().text) + 1).ToString();
 			Destroy(gameObject);
-			Destroy(col.gameObject);
+			//Destroy(col.gameObject);
+			col.gameObject.SetActive(false);
 			/*GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
 			foreach(GameObject b in bullets)
 			{

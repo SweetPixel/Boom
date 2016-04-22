@@ -3,26 +3,17 @@ using System.Collections;
 
 public class LandMineScript : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		Debug.Log(col.gameObject.tag);
+		//Debug.Log(col.gameObject.tag);
 
 		if (col.gameObject.tag == "Bullet") {
 			gameObject.GetComponent<CircleCollider2D>().enabled = false;
 			gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
 			gameObject.GetComponent<Animator>().SetBool("isGrounded", true);
 			Destroy(gameObject,0.2f);
-			Destroy(col.gameObject);
+			col.gameObject.SetActive(false);
+			//Destroy(col.gameObject);
 		}
 
 		if (col.gameObject.tag == "Platform") {

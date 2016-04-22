@@ -10,7 +10,7 @@ TextureImporter:
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -20,7 +20,7 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
@@ -32,7 +32,7 @@ TextureImporter:
   textureFormat: -3
   maxTextureSize: 1024
   textureSettings:
-    filterMode: -1
+    filterMode: 0
     aniso: 16
     mipBias: -1
     wrapMode: 1
@@ -40,11 +40,12 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
+  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
@@ -62,6 +63,14 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -80, y: 60}
+        - {x: -88, y: 49}
+        - {x: -88, y: -46}
+        - {x: -79, y: -56}
+        - {x: 80, y: -56}
+        - {x: 87, y: -52}
+        - {x: 87, y: 60}
     - name: menu-button_1
       rect:
         serializedVersion: 2
@@ -72,6 +81,13 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -82, y: 52}
+        - {x: -88, y: 47}
+        - {x: -88, y: -56}
+        - {x: 87, y: -56}
+        - {x: 87, y: 48}
+        - {x: 82, y: 52}
     - name: menu-button_2
       rect:
         serializedVersion: 2
@@ -82,6 +98,15 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -80, y: 60}
+        - {x: -88, y: 49}
+        - {x: -88, y: -46}
+        - {x: -79, y: -56}
+        - {x: 80, y: -56}
+        - {x: 87, y: -52}
+        - {x: 87, y: 60}
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

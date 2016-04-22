@@ -100,7 +100,6 @@ public class GameOverScript : MonoBehaviour {
 		gameController = GameObject.FindGameObjectWithTag ("GameController");
 		gc = gameController.GetComponent<GameController> ();
 		bool status = gc.getGiftTimer ();
-		Debug.Log (status);
 		if (status) {
 			giftButton.SetActive(false);
 			timerIcon.enabled = true;
@@ -114,12 +113,8 @@ public class GameOverScript : MonoBehaviour {
 			minute.text = "6:00"; //numbers [timerLeft];
 		} else {
 			timerIcon.enabled = false;
-			Debug.Log (label);
 			giftButton.SetActive(true);
 			freeGiftText.text = "FREE GIFT";
-			//label.sprite = freeGift;
-			//label.transform.localScale = new Vector2(1.1f, 1.1f);
-			//textObject.enabled = true;
 		}
 
 		gameController = GameObject.FindGameObjectWithTag ("GameController");
@@ -144,12 +139,12 @@ public class GameOverScript : MonoBehaviour {
 
 	IEnumerator Wait()
 	{
-		GameObject.FindGameObjectWithTag("ButtonCountDown").GetComponent<Animator>().SetBool("isEnd", true);
-		GameObject.FindGameObjectWithTag("CoinObject").GetComponent<Animator>().SetBool("isEnd", true);
-		GameObject.FindGameObjectWithTag("ButtonCountDown").GetComponent<Animator>().SetBool("isStart", false);
-		GameObject.FindGameObjectWithTag("CoinObject").GetComponent<Animator>().SetBool("isStart", false);
+		//GameObject.FindGameObjectWithTag("ButtonCountDown").GetComponent<Animator>().SetBool("isEnd", true);
+		//GameObject.FindGameObjectWithTag("CoinObject").GetComponent<Animator>().SetBool("isEnd", true);
+		//GameObject.FindGameObjectWithTag("ButtonCountDown").GetComponent<Animator>().SetBool("isStart", false);
+		//GameObject.FindGameObjectWithTag("CoinObject").GetComponent<Animator>().SetBool("isStart", false);
 		yield return new WaitForSeconds (0.2f);
-		GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().disableCoinCanvas ();
+		//GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().disableCoinCanvas ();
 	}
 
 
@@ -229,8 +224,6 @@ public class GameOverScript : MonoBehaviour {
 	{
 		int sc = PlayerPrefs.GetInt ("Score");
 
-		Debug.Log ("Total Coins: " + sc);
-
 		if (sc < 10) {
 			tcTenThousand.text = "0";
 			tcThousand.text = "0";
@@ -304,77 +297,12 @@ public class GameOverScript : MonoBehaviour {
 			tcTen.text = ten.ToString();
 			tcUnit.text = unit.ToString ();
 		}
-
-
-		//Total Coin Logic
-		/*if (sc < 1) {
-			coinOne.sprite = scoreSprite [0];
-		}
-		else if (sc < 10) {
-			coinOne.sprite = scoreSprite [sc];
-		} else if (sc >= 10 && sc <= 99) {
-			int ten = Mathf.FloorToInt(sc/10f);
-			int unit = Mathf.FloorToInt(sc%10f);
-			
-			coinTwo.sprite = scoreSprite [ten];
-			coinOne.sprite = scoreSprite [unit];
-		}
-		else if (sc >= 100 && sc <= 999) {
-			int hund = Mathf.FloorToInt(sc/100f);
-			
-			int temp = Mathf.FloorToInt(sc%100f);
-			
-			int ten = Mathf.FloorToInt(temp/10f);
-			int unit = Mathf.FloorToInt(temp%10f);
-			
-			coinThree.sprite = scoreSprite [hund];
-			coinTwo.sprite = scoreSprite [ten];
-			coinOne.sprite = scoreSprite [unit];
-		}
-		else if (sc >= 1000 && sc <= 9999) {
-			
-			int thousand = Mathf.FloorToInt(sc/1000f);
-			int temp = Mathf.FloorToInt(sc%1000f);
-			
-			int hund = Mathf.FloorToInt(temp/100f);
-			int tempHun = Mathf.FloorToInt(temp%100f);
-			
-			int ten = Mathf.FloorToInt(tempHun/10f);
-			int unit = Mathf.FloorToInt(tempHun%10f);
-			
-			coinFour.sprite = scoreSprite [thousand];
-			coinThree.sprite = scoreSprite [hund];
-			coinTwo.sprite = scoreSprite [ten];
-			coinOne.sprite = scoreSprite [unit];
-		}
-		
-		else if (sc >= 10000 && sc <= 99999) {
-			
-			int Tenthousand = Mathf.FloorToInt(sc/10000f);
-			int TTtemp = Mathf.FloorToInt(sc%10000f);
-			
-			int thousand = Mathf.FloorToInt(TTtemp/1000f);
-			int temp = Mathf.FloorToInt(TTtemp%1000f);
-			
-			int hund = Mathf.FloorToInt(temp/100f);
-			int tempHun = Mathf.FloorToInt(temp%100f);
-			
-			int ten = Mathf.FloorToInt(tempHun/10f);
-			int unit = Mathf.FloorToInt(tempHun%10f);
-			
-			coinFive.sprite = scoreSprite [Tenthousand];
-			coinFour.sprite = scoreSprite [thousand];
-			coinThree.sprite = scoreSprite [hund];
-			coinTwo.sprite = scoreSprite [ten];
-			coinOne.sprite = scoreSprite [unit];
-		}*/
 	}
 
 	private void calculateMatchScore()
 	{
 		//Current match score
 		int matchscore = PlayerPrefs.GetInt ("MatchScore");
-		Debug.Log ("Match Score: " + matchscore);
 
 		if (matchscore < 10) {
 			msTenThousand.text = "0";

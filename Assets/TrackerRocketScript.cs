@@ -10,7 +10,10 @@ public class TrackerRocketScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//screenPos  = Camera.main.WorldToScreenPoint (target.position);
-		target = GameObject.FindGameObjectWithTag("Player").transform;
+		if(GameObject.FindGameObjectWithTag("Player") != null)
+		{
+			target = GameObject.FindGameObjectWithTag("Player").transform;
+		}
 	}
 	
 	// Update is called once per frame
@@ -32,6 +35,12 @@ public class TrackerRocketScript : MonoBehaviour {
 			GameController gc = gcc.GetComponent<GameController>();
 			gc.GameOver();
 			Destroy(col.gameObject);
+		}
+
+		if (col.gameObject.tag == "Bullet") {
+			Destroy(gameObject);
+			col.gameObject.SetActive(false);
+			//Destroy(col.gameObject);
 		}
 
 	}

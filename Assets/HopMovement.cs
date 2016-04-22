@@ -88,7 +88,8 @@ public class HopMovement : MonoBehaviour {
 			if(counter==threshold)
 			{
 				Destroy(gameObject);
-				Destroy(col.gameObject);
+				//Destroy(col.gameObject);
+				col.gameObject.SetActive(false);
 			}
 		}
 
@@ -109,7 +110,8 @@ public class HopMovement : MonoBehaviour {
 				GameController gc = gcc.GetComponent<GameController>();
 				gc.GameOver();
 				Destroy(GameObject.Find("Shadow"));
-				Destroy(col.gameObject);
+				//Destroy(col.gameObject);
+				col.gameObject.SetActive(false);
 			}
 			/*else {
 				if(col.gameObject.transform.position.y > gameObject.transform.position.y && col.gameObject.transform.position.y > -1)
