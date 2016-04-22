@@ -54,13 +54,23 @@ public class PlayerFireScript : MonoBehaviour {
 
 	IEnumerator Fire()
 	{
+		GameObject game = BulletObjectPooledScript.current.GetPooledObject();
+
 		if (gameObject.GetComponent<JoystickMovement>().isRight) {
-			GameObject game = (GameObject)Instantiate(bullet, bulletSpawn.transform.position, Quaternion.Euler(0,0,-bulletAngle));
+			//GameObject game = (GameObject)Instantiate(bullet, bulletSpawn.transform.position, Quaternion.Euler(0,0,-bulletAngle));
+
+			game.transform.position = bulletSpawn.transform.position;
+			game.transform.rotation = Quaternion.Euler(0,0,-bulletAngle);
+			game.SetActive(true);
 			game.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,-shootAngle) * bulletDirectionForce * bulletSpeed);
 			yield return new WaitForSeconds(0.25f);
 			
 		} else {
-			GameObject game = (GameObject)Instantiate(bullet, bulletSpawn.transform.position, Quaternion.Euler(0,0,bulletAngle));
+			//GameObject game = (GameObject)Instantiate(bullet, bulletSpawn.transform.position, Quaternion.Euler(0,0,bulletAngle));
+
+			game.transform.position = bulletSpawn.transform.position;
+			game.transform.rotation = Quaternion.Euler(0,0,bulletAngle);
+			game.SetActive(true);
 			game.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0,0,shootAngle) * bulletDirectionForce * bulletSpeed);
 			yield return new WaitForSeconds(0.25f);
 		}

@@ -1,0 +1,18 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# http://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:8e929367c5eb0fb0529456e2d228e78e:db4be7af58ec7a667bff848c041bd7d5:28262653f85e18079842a1d703b6559a$
+#
+:format=40000
+:texture=Toucan_Spritesheet.png
+:size=872x64
+
+Toucan0000;1;4;143;59;0.5;0.5
+Toucan0002;146;4;143;59;0.5;0.5
+Toucan0004;291;4;143;59;0.5;0.5
+Toucan0005;436;4;143;59;0.5;0.5
+Toucan0007;581;4;143;59;0.5;0.5
+Toucan0009;726;4;143;59;0.5;0.5

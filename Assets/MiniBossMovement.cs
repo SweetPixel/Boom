@@ -84,7 +84,8 @@ public class MiniBossMovement : MonoBehaviour {
 		
 		if (col.gameObject.tag == "Bullet") {
 			count++;
-			Destroy(col.gameObject);
+			//Destroy(col.gameObject);
+			col.gameObject.SetActive(false);
 		}
 	}
 

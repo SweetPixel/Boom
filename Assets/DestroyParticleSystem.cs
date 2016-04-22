@@ -3,7 +3,24 @@ using System.Collections;
 
 public class DestroyParticleSystem : MonoBehaviour {
 
-	private float time = 0;
+	public float thresholdTime = 0.1f;
+
+	void OnEnable()
+	{
+		Invoke("Destroy", thresholdTime);
+	}
+
+	void Destroy()
+	{
+		gameObject.SetActive(false);
+	}
+
+	void OnDisable()
+	{
+		CancelInvoke();
+	}
+
+	/*private float time = 0;
 	public float thresholdTime = 0.1f;
 
 	// Use this for initialization
@@ -18,5 +35,5 @@ public class DestroyParticleSystem : MonoBehaviour {
 			//Debug.Log("Destroy Particle System");
 			Destroy(gameObject);
 				}
-	}
+	}*/
 }

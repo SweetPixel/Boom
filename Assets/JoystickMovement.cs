@@ -58,37 +58,8 @@ public class JoystickMovement : MonoBehaviour {
 
 		grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
 
-		if(grounded)
-		{
-
-		}
-
-		/*if(Input.GetKey(KeyCode.K) && !isJump)
-		{
-			//gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(gameObject.GetComponent<Rigidbody2D>().velocity.x, this.transform.up.y * jumpSpeed));
-			motion.y = jumpSpeed;
-			isJump = true;
-			/*if(transform.position.y >= 0f)
-			{
-				isJump = true;
-			}
-		}*/
-
-		/*if(Input.GetKey(KeyCode.L) && 
-		   Time.time > nextFire)
-		{
-			nextFire = Time.time + fireRate;
-			StartCoroutine(Fire());
-		}*/
-
 		h = CnControls.CnInputManager.GetAxis("Horizontal");
 		v = CnControls.CnInputManager.GetAxis("Vertical");
-
-		Debug.Log("Horizontal Value: " + h);
-		Debug.Log("Vertical Value: " + v);
-
-		if(v < 0)
-			v = 0;
 
 		if(h > 0){
 			transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
@@ -154,12 +125,12 @@ public class JoystickMovement : MonoBehaviour {
 
 	private void spriteSwap()
 	{
-		if((v >=0 && v <= 0.1f) && (h >= 0.8 || h <= -0.8f))
+		if((v >= -1 && v <= 0.1f))
 		{
 			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
 			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
 			//bulletAngle = -90f;
-			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(-90f);
+			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(90f);
 			//shootAngle = 0f;
 			gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
 			if(isRight)

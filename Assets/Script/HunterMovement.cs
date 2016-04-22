@@ -308,8 +308,8 @@ public class HunterMovement : MonoBehaviour {
 		GameObject[] humming = GameObject.FindGameObjectsWithTag("HummingBird");
 		foreach(GameObject b in humming)
 		{
-			HummingBirdScript bm = b.GetComponent<HummingBirdScript>();
-			bm.setHunterIdle();
+			/*HummingBirdScript bm = b.GetComponent<HummingBirdScript>();
+			bm.setHunterIdle();*/
 		}
 		
 		GameObject[] sandhillCrane = GameObject.FindGameObjectsWithTag("SandhillCrane");

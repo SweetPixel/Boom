@@ -42,6 +42,10 @@ public class AirEnemyGeneratorScript : MonoBehaviour {
 					x = Xaxis[1];
 				}
 				Instantiate (enemies[objIndex], new Vector2(x,enemies[objIndex].transform.position.y) , Quaternion.identity);
+				/*GameObject bird = AeroPlanePooledScript.current.GetPooledObject();
+				bird.transform.position = new Vector2(x,enemies[objIndex].transform.position.y);
+				bird.transform.rotation = Quaternion.identity;
+				bird.SetActive(true);*/
 			}
 			else{
 				if(timeToInitPlane)
@@ -51,6 +55,10 @@ public class AirEnemyGeneratorScript : MonoBehaviour {
 				}
 				else{
 					Instantiate (enemies[1], new Vector2(Xaxis[0],enemies[1].transform.position.y) , Quaternion.identity);
+					/*GameObject bird = AeroPlanePooledScript.current.GetPooledObject();
+					bird.transform.position = new Vector2(Xaxis[0],enemies[objIndex].transform.position.y);
+					bird.transform.rotation = Quaternion.identity;
+					bird.SetActive(true);*/
 				}
 			}
 		}
@@ -59,6 +67,10 @@ public class AirEnemyGeneratorScript : MonoBehaviour {
 	private IEnumerator initPlane()
 	{
 		Instantiate (enemies[0], new Vector2(7f, enemies[1].transform.position.y), Quaternion.identity);
+		/*GameObject plane = AeroPlanePooledScript.current.GetPooledObject();
+		plane.transform.position = new Vector2(7f, plane.transform.position.y);
+		plane.transform.rotation = Quaternion.identity;
+		plane.SetActive(true);*/
 		yield return new WaitForSeconds(delayForInitPlane);
 		timeToInitPlane = true;
 	}
@@ -81,6 +93,10 @@ public class AirEnemyGeneratorScript : MonoBehaviour {
 				x = Xaxis[1];
 			}
 			Instantiate (enemies[1], new Vector2(x,enemies[objIndex].transform.position.y) , Quaternion.identity);
+			/*GameObject bird = BirdPooledScript.current.GetPooledObject();
+			bird.transform.position = new Vector2(x,enemies[objIndex].transform.position.y);
+			bird.transform.rotation = Quaternion.identity;
+			bird.SetActive(true);*/
 			yield return new WaitForSeconds(delay);
 		}
 	}

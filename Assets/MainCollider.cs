@@ -17,7 +17,8 @@ public class MainCollider : MonoBehaviour {
 	{
 		if (col.gameObject.tag == "Bullet") {
 			Destroy(gameObject);
-			Destroy(col.gameObject);
+			//Destroy(col.gameObject);
+			col.gameObject.SetActive(false);
 		}
 
 		if (col.gameObject.tag == "Platform") {

@@ -62,11 +62,14 @@ public class AeroPlaneScript : MonoBehaviour {
 					}*/
 				}
 				GameObject.Find("PlaneDestroy").GetComponent<Text>().text =   (int.Parse(GameObject.Find("PlaneDestroy").GetComponent<Text>().text) + 1).ToString();
-				Destroy(col.gameObject);
+				//Destroy(col.gameObject);
+				col.gameObject.SetActive(false);
 				Destroy(gameObject);
+				//gameObject.SetActive(false);
 			}
 			else{
-				Destroy(col.gameObject);
+				//Destroy(col.gameObject);
+				col.gameObject.SetActive(false);
 			}
 		}
 		

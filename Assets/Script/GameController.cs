@@ -103,7 +103,6 @@ public class GameController : MonoBehaviour {
 
 	void Start()
 	{
-
 		int sc = PlayerPrefs.GetInt ("Score");
 
 		score = 0;
@@ -113,108 +112,24 @@ public class GameController : MonoBehaviour {
 		timeLeft = 0f; 
 		totalTime= 2f;
 		b = TotalBullets;
-		//startCanvas.SetActive(false);
 		coinIconRender = coinIcon.GetComponent<SpriteRenderer> ();
 		coinAnimator = coinIcon.GetComponent<Animator> ();
 
 		coinsCounter.GetComponent<Text>().enabled = false;
 		bCounter.text = b.ToString ();
-		//bCounter.GetComponent<Text>().enabled = false;
-		//bulletIcon = GameObject.Find ("BulletIcon");
-		//bulletIconRender = bulletIcon.GetComponent<SpriteRenderer>();
-
-		/* Score Sprites */
-		/*ScoreUnit = GameObject.Find ("ScoreSprite");
-		ScoreTen = GameObject.Find ("ScoreSpriteTwo");
-		ScoreHundred = GameObject.Find ("ScoreSpriteThree");
-		
-		scoreRenderer = ScoreUnit.GetComponent<SpriteRenderer> ();
-		scoreRenderer.sprite = scoreSprite [score];
-		
-		scoreRendererTwo = ScoreTen.GetComponent<SpriteRenderer> ();
-		scoreRendererTwo.sprite = scoreSprite [score];
-		
-		scoreRendererThree = ScoreHundred.GetComponent<SpriteRenderer> ();
-		scoreRendererThree.sprite = scoreSprite [score];
-
-		scoreRendererFour = ScoreThousand.GetComponent<SpriteRenderer> ();
-		scoreRendererFour.sprite = scoreSprite [score];*/
-
 		bulletRifleIcon.SetActive(false);
 		bulletShotGunIcon.SetActive(false);
 		bulletSmgIcon.SetActive(false);
 		bulletSniperIcon.SetActive(false);
 
-		//gunIndex = PlayerPrefs.GetInt ("gunIndex");
-		//if (gunIndex == 0 || gunIndex == 1) {
-		//	gunIndex = 1;
-			//bulletIconRender.sprite = bulletIcon_rifle;
-		//	bulletRifleIcon.SetActive(true);
-		//	anime = bulletRifleIcon.GetComponent<Animator>();
-			//sniperTracker.SetActive (false);
-			//sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
-			
-		//	b = 12;
-			/*bulletCounter = 2;
-			bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];*/
-		//}
-		//else if (gunIndex == 2) {
-		//	gunIndex = 2;
-			//bulletIconRender.sprite = bulletIcon_smg;
-		//	bulletShotGunIcon.SetActive(true);
-		//	anime = bulletShotGunIcon.GetComponent<Animator>();
-			//sniperTracker.SetActive (false);
-			//sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
-			
-		//	b = 24;
-			/*bulletCounter = 4;
-			bulletOneRender.sprite = scoreSprite [4];
-			bulletTwoRender.sprite = scoreSprite [2];*/
-			
-		//}
-		//else if (gunIndex == 3) {
-		//	gunIndex = 3;
-			//bulletIconRender.sprite = bulletIcon_shotgun;
-		//	bulletSmgIcon.SetActive(true);
-		//	anime = bulletSmgIcon.GetComponent<Animator>();
-			//sniperTracker.SetActive (false);
-			//sniperTracker.GetComponent<SpriteRenderer>().enabled = false;
-			
-		//	b = 12;
-			/*bulletCounter = 2;
-			bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];*/
-		//}
-		//else if (gunIndex == 4) {
-		//	gunIndex = 4;
-			//bulletIconRender.sprite = bulletIcon_sniper;
-		//	bulletSniperIcon.SetActive(true);
-		//	anime = bulletSniperIcon.GetComponent<Animator>();
-			//sniperTracker.SetActive (true);
-			//sniperTracker.GetComponent<SpriteRenderer>().enabled = true;
-			
-		//	b = 12;
-			/*bulletCounter = 2;
-			bulletOneRender.sprite = scoreSprite [2];
-			bulletTwoRender.sprite = scoreSprite [1];*/
-		//}
 		timeLeft = totalTime;
 		playedTime = 0f;
-		//GameObject.FindGameObjectWithTag("VideoGiftCanvas").GetComponent<Canvas>().enabled = false;
 
 	}
 
+
 	void Update()
 	{
-		/*if (startDelay) {
-			startTime += Time.deltaTime;
-				}
-
-		if (startTime > 3f) {
-			startCanvas.SetActive(true);
-				} */
-
 		if (GameObject.FindGameObjectWithTag ("Player") != null) {
 			playedTime += Time.deltaTime;
 			timeDisplay.text = Mathf.RoundToInt(playedTime).ToString();
@@ -234,122 +149,11 @@ public class GameController : MonoBehaviour {
 				Instantiate(miniBoss, new Vector3(-2.5f, miniBoss.transform.position.y, miniBoss.transform.position.z), Quaternion.identity);
 			}
 		}
-
-		GameObject[] g = GameObject.FindGameObjectsWithTag ("GameOver");
-		if (g.Length > 1) {
-			Destroy(g[0]);
-				}
-
-		if (initFlamingo == true) {
-			int index = Random.Range(0,2);
-			GameObject flamingo = (GameObject)Instantiate (specialBird, new Vector2 (5.27f, 2.824509f), Quaternion.identity);
-			if (gunIndex == 1) 
-			{
-				flamingo.GetComponent<Animator>().SetInteger("gunIndex", gunIndex);
-			}
-			else if (gunIndex == 2) 
-			{
-				flamingo.GetComponent<Animator>().SetInteger("gunIndex", gunIndex);
-			}
-			else if (gunIndex == 3) 
-			{
-				flamingo.GetComponent<Animator>().SetInteger("gunIndex", gunIndex);
-			}
-			else if (gunIndex == 4) 
-			{
-				flamingo.GetComponent<Animator>().SetInteger("gunIndex", gunIndex);
-			}
-			//birdCount = 0;
-			initFlamingo = false;
-		}
-		
-		if (isCombo) {
-			//timeLeft = totalTime;
-			timeLeft -= Time.deltaTime;
-		}
-		
-		if (isCombo && timeLeft <= 0) {
-			timeLeft = totalTime;
-			isCombo = false;
-			isEagleVisible = false;
-			birdCount = 0;
-			if(comboValue > 1){
-				setScore ((score * comboValue)-score);
-				GetComponent<AudioSource>().clip = comboMultiAudio;
-				GetComponent<AudioSource>().Play();
-				Instantiate (goldenSpark, new Vector2 (coinIcon.transform.position.x, coinIcon.transform.position.y), Quaternion.identity);
-				StartCoroutine (coinBeat());
-			}
-			comboValue = 0;
-			GameObject cc = GameObject.FindGameObjectWithTag("ComboComponents");
-			if(cc != null)
-			{
-				Destroy(cc);
-			}
-
-			GameObject go = GameObject.FindGameObjectWithTag("GameOver");
-
-			if(b < 1 && go == null)
-			{
-				GetComponent<AudioSource>().clip = noBulletAudio;
-				GetComponent<AudioSource>().Play();
-				GameObject hunter = GameObject.FindGameObjectWithTag("Player");
-				HunterMovement hm = hunter.GetComponent<HunterMovement>();
-				hm.lost ();
-				Debug.Log ("b==0 and go==null GameOver");
-				GameOver();
-			}
-		}
-		
-		if (birdCount == 5 && isEagleVisible) {
-			Instantiate (eagle, new Vector2 (5.27f, -0.83f), Quaternion.identity);
-			isEagleVisible = false;
-			//birdCount = 0;
-		}
-
-		if (timeLeft <= 0) {
-			timeLeft = totalTime;
-			isCombo = false;
-			isEagleVisible = false;
-			birdCount = 0;
-			comboValue = 0;
-		}
-
-		if (startgiftTimer) {
-			giftTimeLeft -= Time.deltaTime;
-				}
-
-		if (giftTimeLeft <= 0) 
-		{
-			startgiftTimer = false;
-			giftTimeLeft = 360;
-		}
-
-		if (slowDown) {
-			Time.timeScale = 0.1f;
-				}
-
-		 if(isfinish) {
-			StartCoroutine(finishGame());
-			isfinish = false;
-				}
-
-
 	}
 
 	public void setIsCombo(bool x)
 	{
 		isCombo = x;
-	}
-
-	IEnumerator finishGame()
-	{
-		yield return new WaitForSeconds (0f);
-		GameObject hunter = GameObject.FindGameObjectWithTag("Player");
-		HunterMovement hm = hunter.GetComponent<HunterMovement>();
-		hm.lost ();
-		Debug.Log ("finishGame GameOver");
-		GameOver();
 	}
 
 	public void slowMotion()
@@ -381,21 +185,10 @@ public class GameController : MonoBehaviour {
 	public void incrementBirdCount()
 	{
 		birdCount += 1;
-		/*if (isCombo) {
-			timeLeft = totalTime;
-				} */
 
 		isCombo = true;
-		timeLeft = totalTime;
-		/*if (timeLeft < 0) {
-			timeLeft = totalTime;
-			isCombo = false;
-			isEagleVisible = false;
-			birdCount = 0;
-			comboValue = 0;
-		} else */ 
+		timeLeft = totalTime; 
 		if (timeLeft > 0) {
-			//timeLeft = totalTime;
 			if(birdCount >= 2 && birdCount <= 99)
 			{
 				comboValue = birdCount;
@@ -418,14 +211,6 @@ public class GameController : MonoBehaviour {
 		{
 			isEagleVisible = true;
 		}
-		/*(if (b == 0) {
-			GameObject hunter = GameObject.FindGameObjectWithTag("Player");
-			Animator anime = hunter.GetComponent<Animator>();
-			anime.SetBool("isLost", true);
-			HunterMovement hm = hunter.GetComponent<HunterMovement>();
-			hm.lost ();
-			GameOver();
-		}*/
 		
 	}
 
@@ -754,11 +539,6 @@ public class GameController : MonoBehaviour {
 		comboValue = 0;
 
 		if (b < 1) {
-			/*GetComponent<AudioSource>().clip = comboMultiAudio;
-			GetComponent<AudioSource>().Play();
-			GameObject hunter = GameObject.FindGameObjectWithTag("Player");
-			HunterMovement hm = hunter.GetComponent<HunterMovement>();
-			hm.lost ();*/
 			Debug.Log ("decrementBirdCount GameOver");
 			GameOver();
 		}
@@ -802,13 +582,6 @@ public class GameController : MonoBehaviour {
 		birdKilled = 0;
 		birdCount = 0;
 
-		/*scoreRenderer.sprite = scoreSprite [score];
-		scoreRendererTwo.sprite = scoreSprite [score];
-		scoreRendererThree.sprite = scoreSprite [score];
-		scoreRendererFour.sprite = scoreSprite [score];
-
-		bulletTwoRender.enabled = true;*/
-
 		bCounter.text = b.ToString ();
 	}
 	
@@ -822,235 +595,6 @@ public class GameController : MonoBehaviour {
 		}
 
 		coinsCounter.text = score.ToString();
-
-		/*if (score <= 5) {
-			scoreRendererThree.sprite = scoreSprite [score];
-		}
-		else if (score >=6 && score < 10) {
-			scoreRendererThree.sprite = scoreSprite [score];
-
-		} else if (score == 10){
-			bulletCounter--;
-			scoreRendererThree.sprite = scoreSprite [0];
-			scoreRendererTwo.sprite = scoreSprite [1];
-
-		}
-		else if(score > 10 && score < 20){
-			if(value > 1)
-			{
-				scoreCounter = score % 10;
-			}
-			else{
-				scoreCounter++;
-			}
-
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			scoreRendererTwo.sprite = scoreSprite [1];
-
-		}
-		else if(score == 20){
-			bulletCounter--;
-			scoreCounter = 2;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			
-
-		}
-		else if(score > 20 && score < 30){
-			if(value > 1)
-			{
-				scoreCounter = score % 10;
-			}
-			else{
-				scoreCounter++;
-			}
-
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			scoreRendererTwo.sprite = scoreSprite [2];
-			
-
-		}
-		else if(score == 30){
-			//setMisses();
-			scoreCounter = 3;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			
-
-		}
-		else if(score > 30 && score < 40){
-			if(value > 1)
-			{
-				scoreCounter = score % 10;
-			}
-			else{
-				scoreCounter++;
-			}
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			scoreRendererTwo.sprite = scoreSprite [3];
-
-
-		}
-		else if(score == 40){
-			scoreCounter = 4;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-
-		}
-		else if(score > 40 && score < 50){
-			if(value > 1)
-			{
-				scoreCounter = score % 10;
-			}
-			else{
-				scoreCounter++;
-			}
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			scoreRendererTwo.sprite = scoreSprite [4];
-			
-
-		}
-		else if(score == 50){
-			scoreCounter = 5;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-
-		}
-		else if(score > 50 && score < 60){
-			if(value > 1)
-			{
-				scoreCounter = score % 10;
-			}
-			else{
-				scoreCounter++;
-			}
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			scoreRendererTwo.sprite = scoreSprite [5];
-
-
-		}
-		else if(score == 60){
-			scoreCounter = 6;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-
-		}
-		else if(score > 60 && score < 70){
-			if(value > 1)
-			{
-				scoreCounter = score % 10;
-			}
-			else{
-				scoreCounter++;
-			}
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			scoreRendererTwo.sprite = scoreSprite [6];
-
-
-		}
-		else if(score == 70){
-			scoreCounter = 7;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-
-		}
-		else if(score > 70 && score < 80){
-			if(value > 1)
-			{
-				scoreCounter = score % 10;
-			}
-			else{
-				scoreCounter++;
-			}
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			scoreRendererTwo.sprite = scoreSprite [7];
-
-
-		}
-		else if(score == 80){
-			scoreCounter = 8;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-
-		}
-		else if(score > 80 && score < 90){
-			if(value > 1)
-			{
-				scoreCounter = score % 10;
-			}
-			else{
-				scoreCounter++;
-			}
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			scoreRendererTwo.sprite = scoreSprite [8];
-
-
-		}
-		else if(score == 90){
-			scoreCounter = 9;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-
-		}
-		else if(score > 90 && score < 100){
-			if(value > 1)
-			{
-				scoreCounter = score % 10;
-			}
-			else{
-				scoreCounter++;
-			}
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-			scoreRendererTwo.sprite = scoreSprite [9];
-
-		}
-		else if(score == 100){
-			scoreCounter = 1;
-			scoreRenderer.sprite = scoreSprite [scoreCounter];
-			scoreCounter = 0;
-			scoreRendererTwo.sprite = scoreSprite [scoreCounter];
-			scoreRendererThree.sprite = scoreSprite [scoreCounter];
-
-		}
-		else if(score > 100 && score <= 999){
-			
-			int hundred = score / 100;
-			scoreRenderer.sprite = scoreSprite [hundred];
-			
-			int ut = score % 100;
-			int ten = ut / 10;
-			int unit = ut % 10;
-			
-			scoreRendererTwo.sprite = scoreSprite [ten];
-			scoreRendererThree.sprite = scoreSprite [unit];
-
-		}
-		else if(score >= 1000 && score <= 9999){
-
-			int thousand = score/1000;
-			scoreRendererFour.sprite = scoreSprite [thousand];
-
-			int tempThousand = score % 1000;
-			int hundred = tempThousand / 100;
-			scoreRenderer.sprite = scoreSprite [hundred];
-			
-			int ut = tempThousand % 100;
-			int ten = ut / 10;
-			int unit = ut % 10;
-			
-			scoreRendererTwo.sprite = scoreSprite [ten];
-			scoreRendererThree.sprite = scoreSprite [unit];
-			
-		} */
-		//coinAnimator.enabled = false;
 
 		GameObject go = GameObject.FindGameObjectWithTag("GameOver");
 		if (b < 1 && go == null)
@@ -1139,29 +683,6 @@ public class GameController : MonoBehaviour {
 		isEagleVisible = false;
 	}
 
-	/*public void addAmmo()
-	{
-		StartCoroutine (BulletIconBeating ());
-		if(gunIndex == 1)
-		{
-			b = 12;
-		}
-		else if(gunIndex == 2)
-		{
-			b = 24;
-		}
-		else if(gunIndex == 3)
-		{
-			b = 12;
-		}
-		else if(gunIndex == 4)
-		{
-			b = 12;
-		}
-
-		bCounter.text = b.ToString ();
-	}*/
-
 	IEnumerator BulletIconBeating()
 	{
 		anime.SetBool ("isBeat", true);
@@ -1191,57 +712,6 @@ public class GameController : MonoBehaviour {
 	{
 		b = b - 1;
 		bCounter.text = b.ToString ();
-
-		/*if (b > 40) {
-			bulletTwoRender.sprite = scoreSprite[4];
-			bulletOneRender.sprite = scoreSprite[bulletCounter];
-			bulletCounter  = bulletCounter - 1;
-		}
-		else if (b == 40) {
-			bulletTwoRender.sprite = scoreSprite[4];
-			bulletOneRender.sprite = scoreSprite[0];
-			bulletCounter  = 9;
-		}
-		else if (b < 40 && b > 30) {
-			bulletTwoRender.sprite = scoreSprite[3];
-			bulletOneRender.sprite = scoreSprite[bulletCounter];
-			bulletCounter  = bulletCounter - 1;
-		}
-		else if (b == 30) {
-			bulletTwoRender.sprite = scoreSprite[3];
-			bulletOneRender.sprite = scoreSprite[0];
-			bulletCounter  = 9;
-		}
-		else if (b < 30 && b > 20) {
-			bulletTwoRender.sprite = scoreSprite[2];
-			bulletOneRender.sprite = scoreSprite[bulletCounter];
-			bulletCounter  = bulletCounter - 1;
-		}
-		else if (b == 20) {
-			bulletTwoRender.sprite = scoreSprite[2];
-			bulletOneRender.sprite = scoreSprite[0];
-			bulletCounter  = 9;
-		}
-		else if (b < 20 && b > 10) {
-			bulletTwoRender.sprite = scoreSprite[1];
-			bulletOneRender.sprite = scoreSprite[bulletCounter];
-			bulletCounter  = bulletCounter - 1;
-		}
-		else if (b == 10) {
-			bulletTwoRender.sprite = scoreSprite[1];
-			bulletOneRender.sprite = scoreSprite[0];
-			bulletCounter  = 9;
-		}
-		else if (b < 10 && b > 0) {
-			//bulletTwoRender.enabled = false;
-			bulletOneRender.sprite = scoreSprite[bulletCounter];
-			bulletCounter  = bulletCounter - 1;
-		} */
-		/*if (b == 0) {
-			//bulletOneRender.sprite = scoreSprite[0];
-			//bulletCounter = 9;
-			isfinish = true;
-		}*/
 	}
 
 	public int getBulletNumber()
@@ -1262,15 +732,8 @@ public class GameController : MonoBehaviour {
 		sc = sc + score;
 		PlayerPrefs.SetInt ("Score", sc);
 		PlayerPrefs.SetInt ("MatchScore", score);
-		/*if (PlayerPrefs.GetInt ("Score") > PlayerPrefs.GetInt ("HighScore"))
-			PlayerPrefs.SetInt ("HighScore", score); */
-
-		//GameObject.FindGameObjectWithTag ("Player").GetComponent<HunterFlip> ().enabled = false;
-		//GameObject.FindGameObjectWithTag ("GameController").GetComponent<ButtonClickScript> ().disablePauseCanvas ();
 
 		GameObject go = (GameObject)Instantiate (gameOver, new Vector2 (gameOver.transform.position.x, gameOver.transform.position.y), Quaternion.identity);
-
-		//gameObject.transform.position = new Vector2(transform.position.x, -1.98f);
 	}
 
 }
