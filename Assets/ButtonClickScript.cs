@@ -135,121 +135,7 @@ public class ButtonClickScript : MonoBehaviour {
 
 		if (buttonName == "Play") {
 
-			//PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
-			GameObject gunCanvas = GameObject.FindGameObjectWithTag("GunCanvas");
-			isGuncanvasOpen = false;
-			if(PlayerPrefs.GetInt ("tempGunIndex") == 1)
-			{
-				gunCanvas.SetActive (false);
-				//sg.deactiveCanvas();
-				PlayerPrefs.SetInt ("gunIndex", 1);
-				restartLevel();
-				PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
-			}
-			else if(PlayerPrefs.GetInt ("tempGunIndex") == 2)
-			{
-				if(isAvailable)
-				{
-					gunCanvas.SetActive (false);
-					//sg.deactiveCanvas();
-					PlayerPrefs.SetInt ("gunIndex", 2);
-					restartLevel();
-					PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
-				}
-				else{
-					int sc = PlayerPrefs.GetInt ("Score");
-					if(sc < smgValue)
-					{
-						/*DialogManager.Instance.SetLabel("Ok","Cancel","Cancel");
-						DialogManager.Instance.ShowSelectDialog("Can't Buy","You dont have many coin to buy AK-47",(bool result) =>{
-							if(result)
-								DialogManager.Instance.DissmissDialog(0);
-						});*/
-					}
-					else{
-						if(PlayerPrefs.GetInt("SmgAvailable")==0)
-						{
-							PlayerPrefs.SetInt ("Score", sc - smgValue);
-							PlayerPrefs.SetInt("SmgAvailable", 1);
-						}
-						
-						gunCanvas.SetActive (false);
-						//sg.deactiveCanvas();
-						PlayerPrefs.SetInt ("gunIndex", 2);
-						restartLevel();
-						PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
-					}
-				}
-			} 
-			else if(PlayerPrefs.GetInt ("tempGunIndex") == 3)
-			{
-				if(isAvailable)
-				{
-					gunCanvas.SetActive (false);
-					//sg.deactiveCanvas();
-					PlayerPrefs.SetInt ("gunIndex", 3);
-					restartLevel();
-					PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
-				}
-				else{
-					int sc = PlayerPrefs.GetInt ("Score");
-					if(sc < shotgunValue)
-					{
-						/*DialogManager.Instance.SetLabel("Ok","Cancel","Cancel");
-						DialogManager.Instance.ShowSelectDialog("Can't Buy","You dont have many coin to buy Shotgun",(bool result) =>{
-							if(result)
-								DialogManager.Instance.DissmissDialog(0);
-						});*/
-					}
-					else{
-						if(PlayerPrefs.GetInt("ShotgunAvailable")==0)
-						{
-							PlayerPrefs.SetInt ("Score", sc - shotgunValue);
-							PlayerPrefs.SetInt("ShotgunAvailable", 1);
-						}
-						gunCanvas.SetActive (false);
-						//sg.deactiveCanvas();
-						PlayerPrefs.SetInt ("gunIndex", 3);
-						restartLevel();
-						PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
-					}
-				}
-			} 
-			else if(PlayerPrefs.GetInt ("tempGunIndex") == 4)
-			{
-				if(isAvailable)
-				{
-					gunCanvas.SetActive (false);
-					//sg.deactiveCanvas();
-					PlayerPrefs.SetInt ("gunIndex", 4);
-					restartLevel();
-					PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
-				}
-				else{
-					int sc = PlayerPrefs.GetInt ("Score");
-					Debug.Log("Total Coin: " + sc);
-					Debug.Log("SniperValue: " + sniperValue);
-					if(sc < sniperValue)
-					{
-						/*DialogManager.Instance.SetLabel("Ok","Cancel","Cancel");
-						DialogManager.Instance.ShowSelectDialog("Can't Buy","You dont have many coin to buy Sniper",(bool result) =>{
-							if(result)
-								DialogManager.Instance.DissmissDialog(0);
-						});*/
-					}
-					else{
-						if(PlayerPrefs.GetInt("SniperAvailable")==0)
-						{
-							PlayerPrefs.SetInt ("Score", sc - sniperValue);
-							PlayerPrefs.SetInt("SniperAvailable", 1);
-						}
-						gunCanvas.SetActive (false);
-						PlayerPrefs.SetInt ("gunIndex", 4);
-						restartLevel();
-						PlayerPrefs.SetInt ("isGuncanvasOpen", 0);
-					}
-				}
-			} 
+
 		}
 
 		if (buttonName == "Pause") {
@@ -331,25 +217,51 @@ public class ButtonClickScript : MonoBehaviour {
 		}
 
 		if (buttonName == "MoveLeft") {
-			if(isRight)
+
+			GameObject.FindGameObjectWithTag("Player").GetComponent<JoystickMovement>().buttonClick("left");
+
+			/*if(isRight)
 			{
 				isRight = false;
 				GameObject.FindGameObjectWithTag("Player").GetComponent<PirateMovement>().Flip();
 			}
-			direction = -1;
+			direction = -1;*/
 		}
 
 		if (buttonName == "MoveRight") {
-			if(!isRight)
+
+			if(GameObject.FindGameObjectWithTag("Player") != null)
+			{
+			GameObject.FindGameObjectWithTag("Player").GetComponent<JoystickMovement>().buttonClick("right");
+			}
+			/*if(!isRight)
 			{
 				isRight = true;
 				GameObject.FindGameObjectWithTag("Player").GetComponent<PirateMovement>().Flip();
 			}
-			direction = 1;
+			direction = 1;*/
+		}
+
+		if (buttonName == "SeeUp") {
+
+			if(GameObject.FindGameObjectWithTag("Player") != null)
+			{
+			GameObject.FindGameObjectWithTag("Player").GetComponent<JoystickMovement>().buttonClick("up");
+			}
+			/*if(!isRight)
+			{
+				isRight = true;
+				GameObject.FindGameObjectWithTag("Player").GetComponent<PirateMovement>().Flip();
+			}
+			direction = 1;*/
 		}
 
 		if (buttonName == "Still") {
-			direction = 0;
+			//direction = 0;
+			if(GameObject.FindGameObjectWithTag("Player") != null)
+			{
+			GameObject.FindGameObjectWithTag("Player").GetComponent<JoystickMovement>().standStill();
+			}
 		}
 
 		if (buttonName == "Fire") {

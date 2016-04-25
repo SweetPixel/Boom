@@ -2,15 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class AeroPlanePooledScript : MonoBehaviour {
+public class LandMinePooledScript : MonoBehaviour {
 
-	public static AeroPlanePooledScript current;
+	public static LandMinePooledScript current;
 
 	List<GameObject> pooledBullets;
 	public int pooledAmount = 10;
 	public bool willGrow = true;
 
-	public GameObject Plane;
+	public GameObject Landmine;
 
 
 	void Awake()
@@ -23,7 +23,7 @@ public class AeroPlanePooledScript : MonoBehaviour {
 
 		for(int i =0; i < pooledAmount; i++)
 		{
-			GameObject obj = (GameObject)Instantiate(Plane);
+			GameObject obj = (GameObject)Instantiate(Landmine);
 			obj.SetActive(false);
 			pooledBullets.Add(obj);
 		}
@@ -41,7 +41,7 @@ public class AeroPlanePooledScript : MonoBehaviour {
 
 		if(willGrow)
 		{
-			GameObject obj = (GameObject)Instantiate(Plane);
+			GameObject obj = (GameObject)Instantiate(Landmine);
 			obj.SetActive(false);
 			pooledBullets.Add(obj);
 		}
