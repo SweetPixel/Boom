@@ -38,6 +38,8 @@ public class JoystickMovement : MonoBehaviour {
 	private Vector2 bulletDirectionForce;
 	public bool lookingUp = false;
 
+	private string button = "";
+
 	// Use this for initialization
 	void Start () {
 		motion = Vector2.zero;
@@ -46,12 +48,21 @@ public class JoystickMovement : MonoBehaviour {
 		leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).x;
 		rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x;
 
+		GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
+		gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
+		//bulletAngle = -90f;
+		gameObject.GetComponent<PlayerFireScript>().setBulletAngle(90f);
+		//shootAngle = 0f;
+		gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
+		gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.right);
+		lookingUp = false;
+
 	}
 
-	void Update()
+	/*void Update()
 	{
 		spriteSwap();
-	}
+	}*/
 
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -70,7 +81,7 @@ public class JoystickMovement : MonoBehaviour {
 			isRight = false;
 		}
 
-		if (Input.GetKey (KeyCode.A)) {
+		if (Input.GetKey (KeyCode.A) || button.Equals("left")) {
 			if(isRight)
 			{
 				isRight = false;
@@ -79,7 +90,7 @@ public class JoystickMovement : MonoBehaviour {
 			h = -0.7f;
 		}
 		
-		if (Input.GetKey (KeyCode.D)) {
+		if (Input.GetKey (KeyCode.D) || button.Equals("right")) {
 			if(!isRight)
 			{
 				isRight = true;
@@ -123,9 +134,54 @@ public class JoystickMovement : MonoBehaviour {
 
 	}
 
+	public void buttonClick(string name)
+	{
+		button = name;
+		GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[2];
+		if(button.Equals("up"))
+		{
+			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[2];
+			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[2]);
+			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(0f);
+			//shootAngle = 0f;
+			gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
+			//bulletDirectionForce = Vector2.up;
+			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.up);
+			lookingUp = true;
+		}
+		else if(button.Equals("left"))
+		{
+			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
+			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
+			//bulletAngle = -90f;
+			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(90f);
+			//shootAngle = 0f;
+			gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
+			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(-Vector2.right);
+			lookingUp = false;
+		}
+		else if(button.Equals("right") )
+		{
+			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
+			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
+			//bulletAngle = -90f;
+			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(90f);
+			//shootAngle = 0f;
+			gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
+			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.right);
+			lookingUp = false;
+		}
+	}
+
+	public void standStill()
+	{
+		button = "";
+		h = 0f;
+	}
+
 	private void spriteSwap()
 	{
-		if((v >= -1 && v <= 0.1f))
+		if((v >= -1 && v <= 0.1f) || (button.Equals("left") && button.Equals("right") ))
 		{
 			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
 			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
@@ -156,7 +212,7 @@ public class JoystickMovement : MonoBehaviour {
 			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.up);
 			lookingUp = false;
 		}
-		else if((v >=0.8f && h <=0.65f) && (h <= 0.3f && h >= -0.3f))
+		else if((v >=0.8f && h <=0.65f) || (button.Equals("up") ))
 		{
 			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[2];
 			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[2]);

@@ -11,7 +11,8 @@ public class LandMineScript : MonoBehaviour {
 			gameObject.GetComponent<CircleCollider2D>().enabled = false;
 			gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
 			gameObject.GetComponent<Animator>().SetBool("isGrounded", true);
-			Destroy(gameObject,0.2f);
+			//Destroy(gameObject,0.2f);
+			gameObject.SetActive(false);
 			col.gameObject.SetActive(false);
 			//Destroy(col.gameObject);
 		}

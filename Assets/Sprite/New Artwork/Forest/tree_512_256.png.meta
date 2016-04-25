@@ -19,7 +19,7 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
@@ -28,7 +28,7 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: -1
   maxTextureSize: 512
   textureSettings:
     filterMode: 0
@@ -44,7 +44,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
@@ -62,6 +62,19 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 102, y: -19}
+        - {x: 102, y: 34}
+        - {x: 59, y: 111}
+        - {x: 11, y: 124}
+        - {x: -72, y: 124}
+        - {x: -102, y: 95}
+        - {x: -102, y: -68}
+        - {x: -85, y: -123}
+        - {x: 70, y: -123}
+        - {x: 74, y: -122}
+        - {x: 76, y: -115}
+        - {x: 73, y: -114}
     - name: tree_512_256_1
       rect:
         serializedVersion: 2
@@ -72,6 +85,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 91, y: 100}
+        - {x: 55, y: 121}
+        - {x: -92, y: 121}
+        - {x: -92, y: -121}
+        - {x: 68, y: -121}
+        - {x: 70, y: -118}
+        - {x: 76, y: -103}
+        - {x: 91, y: -22}
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 
