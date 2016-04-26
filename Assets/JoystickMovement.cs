@@ -59,10 +59,10 @@ public class JoystickMovement : MonoBehaviour {
 
 	}
 
-	/*void Update()
+	void Update()
 	{
 		spriteSwap();
-	}*/
+	}
 
 	// Update is called once per frame
 	void FixedUpdate () {
