@@ -5,8 +5,8 @@ public class JoystickMovement : MonoBehaviour {
 
 	public float speed = 10f;
 	public float airSpeed = 15f;
-	private float speedX = 0f;
-	float h;
+	public float speedX = 0f;
+	public float h;
 	float v;
 	private float lastX;
 	private bool facingRight = true;
@@ -125,10 +125,10 @@ public class JoystickMovement : MonoBehaviour {
 			motion.y -= gravity * Time.deltaTime;
 		}
 
-		if(v >=0.8f)
+		/*if(v >=0.8f)
 		{
 			motion.x = 0f;
-		}
+		}*/
 
 		gameObject.GetComponent<Rigidbody2D>().velocity = motion;
 
@@ -253,6 +253,10 @@ public class JoystickMovement : MonoBehaviour {
 
 	public void activateJump()
 	{
+		if(speed < 13)
+		{
+			speed+=3;
+		}
 		isJump = true;
 	}
 
