@@ -108,8 +108,6 @@ public class JoystickMovement : MonoBehaviour {
 			speedX = airSpeed;
 		}
 
-		motion.x = Mathf.Clamp(h * speedX, leftBorder, rightBorder);
-
 		//if(h!=0 && grounded || h!=0 && !grounded)
 		//	motion.x = Mathf.Clamp(h * speed, leftBorder, rightBorder);
 
@@ -119,6 +117,7 @@ public class JoystickMovement : MonoBehaviour {
 			isJump = false;
 		}
 
+		motion.x = Mathf.Clamp(h * speedX, leftBorder, rightBorder);
 
 		if(!grounded)
 		{
@@ -137,20 +136,50 @@ public class JoystickMovement : MonoBehaviour {
 	public void buttonClick(string name)
 	{
 		button = name;
-		GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[2];
+
+
+
 		if(button.Equals("up"))
 		{
-			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[2];
-			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[2]);
-			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(0f);
-			//shootAngle = 0f;
-			gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
-			//bulletDirectionForce = Vector2.up;
-			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.up);
-			lookingUp = true;
+			lookingUp = !lookingUp;
+
+			if(lookingUp)
+			{
+				GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[2];
+				gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[2]);
+				gameObject.GetComponent<PlayerFireScript>().setBulletAngle(0f);
+				//shootAngle = 0f;
+				gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
+				//bulletDirectionForce = Vector2.up;
+				gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.up);
+			}
+			else{
+				if(isRight)
+				{
+					GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
+					gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
+					//bulletAngle = -90f;
+					gameObject.GetComponent<PlayerFireScript>().setBulletAngle(90f);
+					//shootAngle = 0f;
+					gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
+					gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.right);
+				}
+				else{
+					GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
+					gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
+					//bulletAngle = -90f;
+					gameObject.GetComponent<PlayerFireScript>().setBulletAngle(90f);
+					//shootAngle = 0f;
+					gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
+					gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(-Vector2.right);
+				}
+			}
+
 		}
 		else if(button.Equals("left"))
 		{
+			if(!lookingUp)
+			{
 			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
 			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
 			//bulletAngle = -90f;
@@ -158,10 +187,12 @@ public class JoystickMovement : MonoBehaviour {
 			//shootAngle = 0f;
 			gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
 			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(-Vector2.right);
-			lookingUp = false;
+			}
 		}
 		else if(button.Equals("right") )
 		{
+			if(!lookingUp)
+			{
 			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
 			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
 			//bulletAngle = -90f;
@@ -169,7 +200,8 @@ public class JoystickMovement : MonoBehaviour {
 			//shootAngle = 0f;
 			gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
 			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.right);
-			lookingUp = false;
+			}
+			//lookingUp = false;
 		}
 	}
 

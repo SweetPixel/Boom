@@ -57,7 +57,6 @@ public class HopMovement : MonoBehaviour {
 			//transform.localPosition= transform.localPosition +  new Vector3(-2f,2f,0) * Time.time;
 			if(isgrounded)
 			{
-				Debug.Log("ISGrounded");
 				isgrounded = false;
 				//gameObject.GetComponent<Rigidbody2D>().AddForce((Vector2.up * amplitudeY) + (-Vector2.right * amplitudeX));
 				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(x, y);

@@ -21,7 +21,8 @@ public class LandMineScript : MonoBehaviour {
 			gameObject.GetComponent<CircleCollider2D>().enabled = false;
 			gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 			gameObject.GetComponent<Animator>().SetBool("isGrounded", true);
-			Destroy(gameObject, 1f);
+			//Destroy(gameObject, 1f);
+			gameObject.SetActive(false);
 		}
 		
 		if (col.gameObject.tag == "Player") {
