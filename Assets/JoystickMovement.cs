@@ -38,8 +38,6 @@ public class JoystickMovement : MonoBehaviour {
 	private Vector2 bulletDirectionForce;
 	public bool lookingUp = false;
 
-	public Transform body;
-
 	private string button = "";
 
 	// Use this for initialization
@@ -50,23 +48,21 @@ public class JoystickMovement : MonoBehaviour {
 		leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).x;
 		rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x;
 
-		/*GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
+		GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
 		gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
 		//bulletAngle = -90f;
 		gameObject.GetComponent<PlayerFireScript>().setBulletAngle(90f);
 		//shootAngle = 0f;
 		gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
 		gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.right);
-		lookingUp = false;*/
-
-		body = GameObject.Find("Astronaut").transform;
+		lookingUp = false;
 
 	}
 
-	/*void Update()
+	void Update()
 	{
 		spriteSwap();
-	}*/
+	}
 
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -77,11 +73,11 @@ public class JoystickMovement : MonoBehaviour {
 		v = CnControls.CnInputManager.GetAxis("Vertical");
 
 		if(h > 0){
-			body.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
+			transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
 			isRight = true;
 		}
 		else if (h < 0){
-			body.localScale = new Vector3(-1,transform.localScale.y,transform.localScale.z);
+			transform.localScale = new Vector3(-1,transform.localScale.y,transform.localScale.z);
 			isRight = false;
 		}
 
@@ -89,7 +85,7 @@ public class JoystickMovement : MonoBehaviour {
 			if(isRight)
 			{
 				isRight = false;
-				body.localScale = new Vector3(-1,transform.localScale.y,transform.localScale.z);
+				transform.localScale = new Vector3(-1,transform.localScale.y,transform.localScale.z);
 			}
 			h = -0.7f;
 		}
@@ -98,7 +94,7 @@ public class JoystickMovement : MonoBehaviour {
 			if(!isRight)
 			{
 				isRight = true;
-				body.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
+				transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
 			}
 			h = 0.7f;
 		}
@@ -289,9 +285,9 @@ public class JoystickMovement : MonoBehaviour {
 
 	public void activateJump()
 	{
-		if(speed != 12)
+		if(speed < 13)
 		{
-			speed = 12;
+			speed+=3;
 		}
 		isJump = true;
 	}
