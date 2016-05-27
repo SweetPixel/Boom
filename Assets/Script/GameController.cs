@@ -137,7 +137,7 @@ public class GameController : MonoBehaviour {
 
 		if(GameObject.Find("Foreground").GetComponent<Image>().fillAmount == 1 && GameObject.FindGameObjectWithTag("Boss") == null)
 		{
-			Instantiate(Tiger, new Vector3(-6f, Tiger.transform.position.y, Tiger.transform.position.z), Quaternion.identity);
+			Instantiate(Tiger, new Vector3(0f, Tiger.transform.position.y, Tiger.transform.position.z), Quaternion.identity);
 		}
 
 		if(System.Math.Round(GameObject.Find("Foreground").GetComponent<Image>().fillAmount,2)%0.25f == 0 && GameObject.Find("Foreground").GetComponent<Image>().fillAmount != 1

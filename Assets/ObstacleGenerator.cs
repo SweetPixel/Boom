@@ -42,21 +42,22 @@ public class ObstacleGenerator : MonoBehaviour {
 		yield return new WaitForSeconds(initialDelay);
 		while(true)
 		{
-			int i = Random.Range(0,2);
+			GameObject enemy = (GameObject)Instantiate (enemies[1], new Vector2(8f, enemies[1].transform.position.y), Quaternion.identity);
+			/*int i = Random.Range(0,2);
 			int index = Random.Range(0, enemies.Length);
 			if(i == 0)
 			{
-				GameObject enemy = (GameObject)Instantiate (enemies[index], new Vector2(7f, enemies[index].transform.position.y), Quaternion.identity);
+				GameObject enemy = (GameObject)Instantiate (enemies[index], new Vector2(8f, enemies[index].transform.position.y), Quaternion.identity);
 			}
 			else{
 				GameObject enemy = (GameObject)Instantiate (enemies[index], new Vector2(-8f, enemies[index].transform.position.y), Quaternion.identity);
-				if(index == 2)
+				/*if(index == 2)
 				{
 					enemy.GetComponent<HopMovement>().setRight();
 				}
-			}
+			}*/
 
-			if(index == 2)
+			/*if(index == 2)
 			{
 				previousDelay = delayBetweenEnemies;
 				delayBetweenEnemies = delayForKangaroo;
@@ -65,7 +66,8 @@ public class ObstacleGenerator : MonoBehaviour {
 			}
 			else{
 				yield return new WaitForSeconds(delayBetweenEnemies);
-			}
+			}*/
+			yield return new WaitForSeconds(delayBetweenEnemies);
 			/*Instantiate (carrot, new Vector2(8f, -1.65f), Quaternion.identity);
 			yield return new WaitForSeconds(delayBetweenEnemies);
 			Instantiate (kangaroo, new Vector2(7f, kangaroo.transform.position.y), Quaternion.identity);

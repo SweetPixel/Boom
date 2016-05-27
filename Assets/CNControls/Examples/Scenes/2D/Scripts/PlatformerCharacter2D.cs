@@ -39,7 +39,7 @@ namespace UnityStandardAssets.Copy._2D
                 if (colliders[i].gameObject != gameObject)
                     m_Grounded = true;
             }
-            m_Anim.SetBool("Ground", m_Grounded);
+            //m_Anim.SetBool("Ground", m_Grounded);
         }
 
 
@@ -49,7 +49,7 @@ namespace UnityStandardAssets.Copy._2D
             if (m_Grounded || m_AirControl)
             {
                 // The Speed animator parameter is set to the absolute value of the horizontal input.
-                m_Anim.SetFloat("Speed", Mathf.Abs(move));
+                //m_Anim.SetFloat("Speed", Mathf.Abs(move));
 
                 // Move the character
                 m_Rigidbody2D.velocity = new Vector2(move*m_MaxSpeed, m_Rigidbody2D.velocity.y);
@@ -72,7 +72,7 @@ namespace UnityStandardAssets.Copy._2D
             {
                 // Add a vertical force to the player.
                 m_Grounded = false;
-                m_Anim.SetBool("Ground", false);
+                //m_Anim.SetBool("Ground", false);
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
             }
         }

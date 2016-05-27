@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class MiniBossMovement : MonoBehaviour {
+public class MoveandDrop : MonoBehaviour {
 
 	public float speed = 0.02f;
 	public float x1 = -4f;
@@ -19,8 +19,9 @@ public class MiniBossMovement : MonoBehaviour {
 	private float leftBorder;
 	private float rightBorder;
 
-	public bool usePooledObjects = false;
 	public float increaseRate = 0f;
+
+	public GameObject[] enemies;
 
 	// Use this for initialization
 	IEnumerator Start () {
@@ -32,9 +33,9 @@ public class MiniBossMovement : MonoBehaviour {
 
 		x1 = Random.Range(leftBorder, rightBorder);
 		y1 = Random.Range(4f, 6f);
-		
+
 		y2 = Random.Range(4f, 6f);
-		
+
 		if (gameObject.transform.position.x == -4.0f) {
 			yield return StartCoroutine(MoveObject(transform, new Vector2(-4.0f, transform.position.y), new Vector2(x1, transform.position.y), speed));
 			yield return StartCoroutine(MoveObject(transform, new Vector2(x1, transform.position.y), new Vector2(x2,transform.position.y), speed));
@@ -43,7 +44,7 @@ public class MiniBossMovement : MonoBehaviour {
 			yield return StartCoroutine(MoveObject(transform, new Vector2(transform.position.x, transform.position.y), new Vector2(x1, transform.position.y), speed));
 			yield return StartCoroutine(MoveObject(transform, new Vector2(x1, transform.position.y), new Vector2(x2, transform.position.y), speed));
 		}
-		
+
 		while (true) {
 			x1 = Random.Range(leftBorder, rightBorder);
 			y1 = Random.Range(4f, 6f);
@@ -61,14 +62,6 @@ public class MiniBossMovement : MonoBehaviour {
 			i += Time.deltaTime * rate;
 			thisTransform.position = Vector2.Lerp(startPos, endPos, i);
 			yield return null;
-		}
-		
-	}
-
-	// Update is called once per frame
-	void Update () {
-		if (gameObject.GetComponentInChildren<Image> ().fillAmount <= 0.2f) {
-			Destroy (gameObject);
 		}
 
 	}
@@ -88,12 +81,27 @@ public class MiniBossMovement : MonoBehaviour {
 		if(col.gameObject.tag == "Bird2D") {
 			return;
 		}
-		
-		
+
+
 		if (col.gameObject.tag == "Bullet") {
 			gameObject.GetComponentInChildren<Image> ().fillAmount -=  0.1f * col.gameObject.GetComponent<DamageScript> ().Damage;
 			col.gameObject.SetActive(false);
 		}
+	}
+
+	// Update is called once per frame
+	void Update () {
+		if (gameObject.GetComponentInChildren<Image> ().fillAmount <= 0.2f) {
+			GameObject.Find ("Foreground").GetComponent<Image> ().fillAmount += increaseRate;
+			GameObject[] miniboss = GameObject.FindGameObjectsWithTag ("MiniBoss");
+			if (miniboss.Length == 0) {
+				GameObject enemy = (GameObject)Instantiate (enemies [0], new Vector2(8f, enemies [0].transform.position.y), Quaternion.identity);
+			} else {
+				GameObject enemy = (GameObject)Instantiate (enemies [1], new Vector2(8f, enemies [1].transform.position.y), Quaternion.identity);
+			}
+			Destroy (gameObject);
+		}
+
 	}
 
 }

@@ -23,9 +23,17 @@ public class HopMovement : MonoBehaviour {
 	public float threshold = 2f;
 	private int counter = 0;
 
+	private bool canHop = true;
+	private float leftBorder;
+	private float rightBorder;
+
+
 	void Start()
 	{
-		//transform.localPosition = new Vector3 (10.0f, gameObject.transform.position.y, 0f);
+		var dist = (transform.position - Camera.main.transform.position).z;
+		leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).x;
+		rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x;
+
 		if(transform.position.x <= 7f && transform.position.x >= 3f)
 		{
 			x = -xAxis;
@@ -40,10 +48,7 @@ public class HopMovement : MonoBehaviour {
 	}
 	
 	public void Update(){
-		//index += Time.smoothDeltaTime;
-		//float x = amplitudeX*Mathf.Sin(index * omegaX);
-		//float y = amplitudeY*Mathf.Sin (omegaY*index);
-		//transform.localPosition= transform.localPosition +  new Vector3(-0.1f,0.1f,0);
+		
 	}
 
 	public void setRight()

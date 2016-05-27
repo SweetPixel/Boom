@@ -40,6 +40,8 @@ public class JoystickMovement : MonoBehaviour {
 
 	private string button = "";
 
+	CharacterController controller;
+
 	// Use this for initialization
 	void Start () {
 		motion = Vector2.zero;
@@ -57,79 +59,137 @@ public class JoystickMovement : MonoBehaviour {
 		gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.right);
 		lookingUp = false;
 
+		controller = gameObject.GetComponent<CharacterController> ();
+
 	}
 
-	void Update()
+	/*void Update()
 	{
-		spriteSwap();
-	}
+		
+	}*/
 
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 
-		grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+		#if UNITY_IOS
+		spriteSwap();
+		#endif
 
-		h = CnControls.CnInputManager.GetAxis("Horizontal");
-		v = CnControls.CnInputManager.GetAxis("Vertical");
+		float h = Input.GetAxis("Horizontal");
+		float v = Input.GetAxis("Vertical");
 
-		if(h > 0){
+		//grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+
+		//h = CnControls.CnInputManager.GetAxis("Horizontal");
+		//v = CnControls.CnInputManager.GetAxis("Vertical");
+
+		/*if(h > 0){
 			transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
 			isRight = true;
 		}
 		else if (h < 0){
 			transform.localScale = new Vector3(-1,transform.localScale.y,transform.localScale.z);
 			isRight = false;
-		}
+		}*/
 
-		if (Input.GetKey (KeyCode.A) || button.Equals("left")) {
+		if (Input.GetKey (KeyCode.LeftArrow) || h < 0) {
 			if(isRight)
 			{
-				isRight = false;
-				transform.localScale = new Vector3(-1,transform.localScale.y,transform.localScale.z);
+				//isRight = false;
+				//transform.localScale = new Vector3(-1,transform.localScale.y,transform.localScale.z);
+
+				GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
+				gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
+				//bulletAngle = -90f;
+				gameObject.GetComponent<PlayerFireScript>().setBulletAngle(-90f);
+				//shootAngle = 0f;
+				gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
+				gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(-Vector2.right);
+				lookingUp = false;
+
 			}
-			h = -0.7f;
+			//h = -0.7f;
 		}
 		
-		if (Input.GetKey (KeyCode.D) || button.Equals("right")) {
-			if(!isRight)
-			{
-				isRight = true;
-				transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
-			}
-			h = 0.7f;
+		if (Input.GetKey (KeyCode.RightArrow) || h>0) {
+			Debug.Log ("D is pressed");
+			//isRight = true;
+			//transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
+
+			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
+			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
+			//bulletAngle = -90f;
+			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(90f);
+			//shootAngle = 0f;
+			gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
+			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.right);
+			lookingUp = false;
+			//h = 0.7f;
 		}
 
-		if(grounded)
+		if (Input.GetKey (KeyCode.UpArrow) || v>0) {
+			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[2];
+			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[2]);
+			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(0f);
+			gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
+			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.up);
+			lookingUp = true;
+		}
+
+		if ((Input.GetKey (KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftArrow)) || (v>0 && h<0))
+		{
+			transform.localScale = new Vector3(-1,transform.localScale.y,transform.localScale.z);
+			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[1];
+			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[1]);
+			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(-22f);
+			gameObject.GetComponent<PlayerFireScript>().setShootAngle(-40f);
+			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.up);
+			lookingUp = false;
+		}
+
+		if ((Input.GetKey (KeyCode.UpArrow) && Input.GetKey(KeyCode.RightArrow)) || (v>0 && h>0))
+		{
+			transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
+			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[1];
+			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[1]);
+			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(22f);
+			gameObject.GetComponent<PlayerFireScript>().setShootAngle(40f);
+			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.up);
+			lookingUp = false;
+		}
+
+		/*if(grounded)
 		{
 			speedX = speed;
 		}
 		if(!grounded)
 		{
 			speedX = airSpeed;
-		}
+		}*/
 
 		//if(h!=0 && grounded || h!=0 && !grounded)
 		//	motion.x = Mathf.Clamp(h * speed, leftBorder, rightBorder);
 
-		if(isJump || Input.GetKey(KeyCode.K) &&  grounded)
+		/*if(isJump || Input.GetKey(KeyCode.K) &&  grounded)
 		{
 			motion.y = jumpSpeed;
 			isJump = false;
 		}
 
-		motion.x = Mathf.Clamp(h * speedX, leftBorder, rightBorder);
+		motion.x = Mathf.Clamp(h * speedX / Time.fixedDeltaTime, leftBorder, rightBorder);
 
 		if(!grounded)
 		{
 			motion.y -= gravity * Time.deltaTime;
-		}
+		}*/
 
 		/*if(v >=0.8f)
 		{
 			motion.x = 0f;
 		}*/
 
-		gameObject.GetComponent<Rigidbody2D>().velocity = motion;
+		//gameObject.GetComponent<Rigidbody2D> ().velocity = motion;
+
 
 	}
 
@@ -244,7 +304,7 @@ public class JoystickMovement : MonoBehaviour {
 			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.up);
 			lookingUp = false;
 		}
-		else if((v >=0.8f && h <=0.65f) || (button.Equals("up") ))
+		else if((v >=0.8f && h <=0.65f) || button.Equals("up"))
 		{
 			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[2];
 			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[2]);
