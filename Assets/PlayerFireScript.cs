@@ -20,7 +20,7 @@ public class PlayerFireScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKey(KeyCode.L) && 
+		if((Input.GetAxis("Fire") !=0 || Input.GetKey(KeyCode.JoystickButton0)) && 
 		   Time.time > nextFire)
 		{
 			nextFire = Time.time + fireRate;

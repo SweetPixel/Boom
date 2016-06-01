@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 181af56ac42cdde47b81d00c0385f7bb
-timeCreated: 1460546212
+timeCreated: 1464087931
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -16,6 +16,7 @@ TextureImporter:
     21300018: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_9
     21300020: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_10
     21300022: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_11
+    21300024: stillSolid
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -29,7 +30,7 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
@@ -54,7 +55,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
@@ -70,8 +71,21 @@ TextureImporter:
         width: 43
         height: 45
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -18.5, y: 16.5}
+        - {x: -21.5, y: 15.5}
+        - {x: -21.5, y: -4.5}
+        - {x: -3.5, y: -5.5}
+        - {x: -0.5, y: -5.5}
+        - {x: -2.5, y: -5.5}
+        - {x: -6.5, y: -8.5}
+        - {x: -14.5, y: -19.5}
+        - {x: -15.5, y: -22.5}
+        - {x: 21.5, y: -22.5}
+        - {x: 21.5, y: 12.5}
+        - {x: 19.5, y: 16.5}
     - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_1
       rect:
         serializedVersion: 2
@@ -80,8 +94,15 @@ TextureImporter:
         width: 43
         height: 45
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -20.5, y: 22.5}
+        - {x: -20.5, y: -14.5}
+        - {x: -18.5, y: -22.5}
+        - {x: 21.5, y: -22.5}
+        - {x: 21.5, y: 17.5}
+        - {x: 5.5, y: 22.5}
     - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_2
       rect:
         serializedVersion: 2
@@ -90,8 +111,14 @@ TextureImporter:
         width: 43
         height: 45
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -20.5, y: 22.5}
+        - {x: -20.5, y: -22.5}
+        - {x: 21.5, y: -22.5}
+        - {x: 21.5, y: 15.5}
+        - {x: -1.5, y: 22.5}
     - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_3
       rect:
         serializedVersion: 2
@@ -100,8 +127,17 @@ TextureImporter:
         width: 43
         height: 43
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -21.5, y: 11.5}
+        - {x: -21.5, y: -14.5}
+        - {x: -14.5, y: -21.5}
+        - {x: 16.5, y: -21.5}
+        - {x: 21.5, y: -12.5}
+        - {x: 21.5, y: 21.5}
+        - {x: -3.5, y: 21.5}
+        - {x: -11.5, y: 18.5}
     - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_4
       rect:
         serializedVersion: 2
@@ -110,8 +146,16 @@ TextureImporter:
         width: 43
         height: 43
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -14.5, y: 21.5}
+        - {x: -21.5, y: 13.5}
+        - {x: -21.5, y: -6.5}
+        - {x: -10.5, y: -21.5}
+        - {x: 14.5, y: -21.5}
+        - {x: 21.5, y: -0.5}
+        - {x: 21.5, y: 21.5}
     - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_5
       rect:
         serializedVersion: 2
@@ -120,8 +164,16 @@ TextureImporter:
         width: 43
         height: 43
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -17.5, y: 21.5}
+        - {x: -21.5, y: 13.5}
+        - {x: -21.5, y: -6.5}
+        - {x: -8.5, y: -21.5}
+        - {x: 19.5, y: -21.5}
+        - {x: 21.5, y: -16.5}
+        - {x: 21.5, y: 21.5}
     - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_6
       rect:
         serializedVersion: 2
@@ -130,8 +182,16 @@ TextureImporter:
         width: 43
         height: 43
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -1.5, y: 21.5}
+        - {x: -21.5, y: 10.5}
+        - {x: -21.5, y: 1.5}
+        - {x: -3.5, y: -18.5}
+        - {x: 12.5, y: -18.5}
+        - {x: 21.5, y: -5.5}
+        - {x: 21.5, y: 21.5}
     - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_7
       rect:
         serializedVersion: 2
@@ -140,8 +200,18 @@ TextureImporter:
         width: 43
         height: 43
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0.5, y: 21.5}
+        - {x: -14.5, y: 16.5}
+        - {x: -21.5, y: 12.5}
+        - {x: -21.5, y: -2.5}
+        - {x: -9.5, y: -17.5}
+        - {x: 13.5, y: -17.5}
+        - {x: 21.5, y: -1.5}
+        - {x: 21.5, y: 20.5}
+        - {x: 20.5, y: 21.5}
     - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_8
       rect:
         serializedVersion: 2
@@ -150,8 +220,16 @@ TextureImporter:
         width: 43
         height: 44
       alignment: 9
-      pivot: {x: .50000006, y: .485246152}
+      pivot: {x: 0.50000006, y: 0.48524615}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -0.5000019, y: 22.64917}
+        - {x: -21.500002, y: 11.64917}
+        - {x: -21.500002, y: -2.35083}
+        - {x: -9.500002, y: -21.35083}
+        - {x: 14.499998, y: -21.35083}
+        - {x: 21.499998, y: -8.35083}
+        - {x: 21.499998, y: 22.64917}
     - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_9
       rect:
         serializedVersion: 2
@@ -160,8 +238,9 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
     - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_10
       rect:
         serializedVersion: 2
@@ -170,8 +249,9 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
     - name: DS---Metal-Slug-7-Metal-Slug-XX---Rebel-Soldier-Bazooka_11
       rect:
         serializedVersion: 2
@@ -180,8 +260,28 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stillSolid
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 1038
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -19, y: 22}
+        - {x: -22, y: 18}
+        - {x: -22, y: -3}
+        - {x: -6, y: -22}
+        - {x: 19, y: -22}
+        - {x: 22, y: -14}
+        - {x: 22, y: 22}
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

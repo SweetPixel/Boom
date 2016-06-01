@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class TrackerRocketScript : MonoBehaviour {
 
@@ -31,10 +32,14 @@ public class TrackerRocketScript : MonoBehaviour {
 		}
 		
 		if (col.gameObject.tag == "Player") {
-			GameObject gcc = GameObject.FindGameObjectWithTag("GameController");
-			GameController gc = gcc.GetComponent<GameController>();
-			gc.GameOver();
-			Destroy(col.gameObject);
+			Destroy (gameObject);
+			col.gameObject.GetComponentInChildren<Image> ().fillAmount -= (gameObject.GetComponent<DamageScript> ().Damage * 1f) / 100f;
+			if (col.gameObject.GetComponentInChildren<Image> ().fillAmount <= 0.2f) {
+				GameObject gcc = GameObject.FindGameObjectWithTag("GameController");
+				GameController gc = gcc.GetComponent<GameController>();
+				gc.GameOver();
+				Destroy (col.gameObject);
+			}
 		}
 
 		if (col.gameObject.tag == "Bullet") {

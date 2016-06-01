@@ -39,6 +39,13 @@ public class JoystickMovement : MonoBehaviour {
 	public bool lookingUp = false;
 
 	private string button = "";
+	public float moveForce = 35f;
+	private bool jump=false;
+	public float jumpForce = 50f;
+	public float maxHeight = -1f;
+	public float maxSpeed = 8f;
+	CharacterController controller;
+	private bool stopJumping = false;
 
 	// Use this for initialization
 	void Start () {
@@ -57,51 +64,113 @@ public class JoystickMovement : MonoBehaviour {
 		gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.right);
 		lookingUp = false;
 
+		controller = gameObject.GetComponent<CharacterController> ();
+
 	}
 
-	void Update()
+	/*void Update()
 	{
-		spriteSwap();
-	}
+		
+	}*/
 
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
+
+		#if UNITY_IOS
+		spriteSwap();
+		#endif
+
+		float h = Input.GetAxis("Horizontal");
+		float v = Input.GetAxis("Vertical");
 
 		grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
 
-		h = CnControls.CnInputManager.GetAxis("Horizontal");
-		v = CnControls.CnInputManager.GetAxis("Vertical");
-
-		if(h > 0){
-			transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
-			isRight = true;
+		if (grounded) {
+			jump = true;
 		}
+
+		//h = Input.GetAxis("Horizontal");
+		//v = CnControls.CnInputManager.GetAxis("Vertical");
+
+		/*if(h > 0){
+			//transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
+			//isRight = true;
+		/*}
 		else if (h < 0){
 			transform.localScale = new Vector3(-1,transform.localScale.y,transform.localScale.z);
 			isRight = false;
-		}
+		}*/
 
-		if (Input.GetKey (KeyCode.A) || button.Equals("left")) {
+		if (Input.GetKey (KeyCode.LeftArrow) || h < 0) {
 			if(isRight)
 			{
-				isRight = false;
+				//isRight = false;
 				transform.localScale = new Vector3(-1,transform.localScale.y,transform.localScale.z);
+
+				GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
+				gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
+				//bulletAngle = -90f;
+				gameObject.GetComponent<PlayerFireScript>().setBulletAngle(-90f);
+				//shootAngle = 0f;
+				gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
+				gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(-Vector2.right);
+				lookingUp = false;
+
 			}
-			h = -0.7f;
+			//h = -0.7f;
 		}
 		
-		if (Input.GetKey (KeyCode.D) || button.Equals("right")) {
-			if(!isRight)
-			{
-				isRight = true;
-				transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
-			}
-			h = 0.7f;
+		if (Input.GetKey (KeyCode.RightArrow) || h>0) {
+			Debug.Log ("D is pressed");
+			//isRight = true;
+			transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
+
+			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
+			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
+			//bulletAngle = -90f;
+			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(90f);
+			//shootAngle = 0f;
+			gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
+			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.right);
+			lookingUp = false;
+			//h = 0.7f;
+		}
+
+		if (Input.GetKey (KeyCode.UpArrow) || v>0) {
+			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[2];
+			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[2]);
+			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(0f);
+			gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
+			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.up);
+			lookingUp = true;
+		}
+
+		if ((Input.GetKey (KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftArrow)) || (v>0 && h<0))
+		{
+			transform.localScale = new Vector3(-1,transform.localScale.y,transform.localScale.z);
+			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[1];
+			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[1]);
+			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(-22f);
+			gameObject.GetComponent<PlayerFireScript>().setShootAngle(-45f);
+			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.up);
+			lookingUp = false;
+		}
+
+		if ((Input.GetKey (KeyCode.UpArrow) && Input.GetKey(KeyCode.RightArrow)) || (v>0 && h>0))
+		{
+			transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
+			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[1];
+			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[1]);
+			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(22f);
+			gameObject.GetComponent<PlayerFireScript>().setShootAngle(45f);
+			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.up);
+			lookingUp = false;
 		}
 
 		if(grounded)
 		{
 			speedX = speed;
+			isJump = true;
 		}
 		if(!grounded)
 		{
@@ -109,15 +178,45 @@ public class JoystickMovement : MonoBehaviour {
 		}
 
 		//if(h!=0 && grounded || h!=0 && !grounded)
-		//	motion.x = Mathf.Clamp(h * speed, leftBorder, rightBorder);
 
-		if(isJump || Input.GetKey(KeyCode.K) &&  grounded)
+		/*if(isJump && Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown (KeyCode.JoystickButton1) &&  grounded)
 		{
-			motion.y = jumpSpeed;
-			isJump = false;
+			//motion.y = jumpSpeed;
+			GetComponent<Rigidbody2D> ().AddForce (jumpForce * Vector2.up);
 		}
 
-		motion.x = Mathf.Clamp(h * speedX, leftBorder, rightBorder);
+		if(isJump && (Input.GetKey(KeyCode.K) || Input.GetKey (KeyCode.JoystickButton1)) &&  grounded)
+		{
+			if (gameObject.transform.position.y < maxHeight) {
+				GetComponent<Rigidbody2D> ().AddForce (jumpForce * Vector2.up);
+			}
+		}
+
+		if(Input.GetKeyUp(KeyCode.K) || Input.GetKeyUp (KeyCode.JoystickButton1))
+		{
+			isJump = false;
+		}*/
+
+		if ((Input.GetKeyDown (KeyCode.JoystickButton1) || Input.GetKeyDown (KeyCode.F)) && grounded) {
+			motion.y = jumpSpeed;
+			stopJumping = true;
+		}
+
+		if ((Input.GetKey (KeyCode.JoystickButton1) || Input.GetKey (KeyCode.F)) && GetComponent<Rigidbody2D>().velocity.y < maxSpeed && isJump && stopJumping) {
+			if (gameObject.transform.position.y < maxHeight)
+				motion.y = jumpSpeed;
+			else {
+				isJump = false;
+				stopJumping = false;
+			}
+		}
+
+		if (Input.GetKeyUp (KeyCode.JoystickButton1) || Input.GetKeyUp (KeyCode.F)) {
+			isJump = false;
+			stopJumping = true;
+		}
+
+		motion.x = h * speedX;
 
 		if(!grounded)
 		{
@@ -129,7 +228,22 @@ public class JoystickMovement : MonoBehaviour {
 			motion.x = 0f;
 		}*/
 
-		gameObject.GetComponent<Rigidbody2D>().velocity = motion;
+		gameObject.GetComponent<Rigidbody2D> ().velocity = motion;
+
+		/*if ((Input.GetKeyDown (KeyCode.JoystickButton1) || Input.GetKeyDown (KeyCode.Space)) && grounded) {
+			GetComponent<Rigidbody2D>().AddForce(jumpForce * Vector2.up);
+		}
+
+		if ((Input.GetKey (KeyCode.JoystickButton1) || Input.GetKey (KeyCode.Space)) && GetComponent<Rigidbody2D>().velocity.y < maxSpeed && jump) {
+			if (gameObject.transform.position.y < maxHeight)
+				GetComponent<Rigidbody2D> ().AddForce (jumpForce * Vector2.up);
+			else
+				jump = false;
+		}
+
+		if (Input.GetKeyUp (KeyCode.JoystickButton1) || Input.GetKeyUp (KeyCode.Space)) {
+			jump = false;
+		}*/
 
 	}
 
@@ -244,7 +358,7 @@ public class JoystickMovement : MonoBehaviour {
 			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.up);
 			lookingUp = false;
 		}
-		else if((v >=0.8f && h <=0.65f) || (button.Equals("up") ))
+		else if((v >=0.8f && h <=0.65f) || button.Equals("up"))
 		{
 			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[2];
 			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[2]);

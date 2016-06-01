@@ -1,18 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class SpinAndAttack : MonoBehaviour {
 
 	public float speed = 2f;
 	public float movementSpeed = 1f;
 	private bool isRight = true;
-
+	float leftBorder;
+	float rightBorder;
 
 	// Use this for initialization
 	void Start () {
-		if(transform.position.x == 7f)
+
+		var dist = (transform.position - Camera.main.transform.position).z;
+		leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).x;
+		rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x;
+
+		if(transform.position.x <= 0f)
 		{
-			StartCoroutine(MoveObject(transform, new Vector3(7f, transform.position.y, 0f), new Vector3(5.5f, transform.position.y, 0f), 1.5f));
+			StartCoroutine(MoveObject(transform, transform.position, new Vector3(leftBorder, transform.position.y, 0f), speed));
 			StartCoroutine(speedup());
 			Destroy(gameObject, 5f);
 			isRight = true;
@@ -20,7 +27,7 @@ public class SpinAndAttack : MonoBehaviour {
 		else{
 			//this.transform.Rotate (0,180,0);
 			//StartCoroutine(MoveObject(transform, transform.position, new Vector3(7f, transform.position.y, 0f), speed));
-			StartCoroutine(MoveObject(transform, transform.position, new Vector3(-5.5f, transform.position.y, 0f), 1.5f));
+			StartCoroutine(MoveObject(transform, transform.position, new Vector3(rightBorder, transform.position.y, 0f), speed));
 			StartCoroutine(speedup());
 			Destroy(gameObject, 5f);
 			isRight = false;
@@ -28,11 +35,7 @@ public class SpinAndAttack : MonoBehaviour {
 
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 
 	IEnumerator MoveObject (Transform thisTransform, Vector3 startPos, Vector3 endPos, float time) {
 		float i = 0.0f;
@@ -48,10 +51,10 @@ public class SpinAndAttack : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(2f);
 		//transform.GetComponent<Rigidbody2D>().AddForce(-Vector2.right * speed, ForceMode2D.Force);
-		if(isRight)
-		StartCoroutine(MoveObject(transform, transform.position, new Vector3(-7f, transform.position.y, 0f), movementSpeed));
+		if(isRight) // if right then set the value to 7f - previous value was -7f
+			StartCoroutine(MoveObject(transform, transform.position, new Vector3(rightBorder+2f, transform.position.y, 0f), movementSpeed));
 		else
-			StartCoroutine(MoveObject(transform, transform.position, new Vector3(7f, transform.position.y, 0f), movementSpeed));
+			StartCoroutine(MoveObject(transform, transform.position, new Vector3(leftBorder-2f, transform.position.y, 0f), movementSpeed));
 	}
 
 	void OnCollisionEnter2D(Collision2D col)
@@ -65,10 +68,13 @@ public class SpinAndAttack : MonoBehaviour {
 		}
 		
 		if (col.gameObject.tag == "Player") {
-			GameObject gcc = GameObject.FindGameObjectWithTag("GameController");
-			GameController gc = gcc.GetComponent<GameController>();
-			gc.GameOver();
-			Destroy(col.gameObject);
+			col.gameObject.GetComponentInChildren<Image> ().fillAmount -= (gameObject.GetComponent<DamageScript> ().Damage * 1f) / 100f;
+			if (col.gameObject.GetComponentInChildren<Image> ().fillAmount <= 0.2f) {
+				GameObject gcc = GameObject.FindGameObjectWithTag("GameController");
+				GameController gc = gcc.GetComponent<GameController>();
+				gc.GameOver();
+				Destroy (col.gameObject);
+			}
 		}
 		
 	}

@@ -9,9 +9,4 @@ public class DestroyByTime : MonoBehaviour {
 	void Start () {
 		Destroy (gameObject, destroyTime);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
