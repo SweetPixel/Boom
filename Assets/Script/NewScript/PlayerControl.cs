@@ -26,6 +26,8 @@ public class PlayerControl : MonoBehaviour
 	float groundRadius = 0.2f;
 
 	public float maxHeight = 5f;	
+	public GameObject[] spawners;
+	public Sprite[] sprites;
 
 	void Awake()
 	{
@@ -64,6 +66,8 @@ public class PlayerControl : MonoBehaviour
 			jump = false;
 		}
 
+
+
 	}
 
 
@@ -71,6 +75,7 @@ public class PlayerControl : MonoBehaviour
 	{
 		// Cache the horizontal input.
 		float h = Input.GetAxis("Horizontal");
+		float v = Input.GetAxis("Vertical");
 
 		// The Speed animator parameter is set to the absolute value of the horizontal input.
 		//anim.SetFloat("Speed", Mathf.Abs(h));
@@ -111,6 +116,62 @@ public class PlayerControl : MonoBehaviour
 			// Make sure the player can't jump again until the jump conditions from Update are satisfied.
 			jump = false;
 		}*/
+
+		if (Input.GetKey (KeyCode.LeftArrow) || h < 0) {
+			transform.localScale = new Vector3(-1,transform.localScale.y,transform.localScale.z);
+
+			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
+			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
+			//bulletAngle = -90f;
+			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(-90f);
+			//shootAngle = 0f;
+			gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
+			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(-Vector2.right);
+		}
+
+		if (Input.GetKey (KeyCode.RightArrow) || h>0) {
+			Debug.Log ("D is pressed");
+			//isRight = true;
+			transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
+
+			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
+			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
+			//bulletAngle = -90f;
+			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(90f);
+			//shootAngle = 0f;
+			gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
+			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.right);
+			//h = 0.7f;
+		}
+
+		if (Input.GetKey (KeyCode.UpArrow) || v>0) {
+			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[2];
+			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[2]);
+			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(0f);
+			gameObject.GetComponent<PlayerFireScript>().setShootAngle(0f);
+			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.up);
+		}
+
+		if ((Input.GetKey (KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftArrow)) || (v>0 && h<0))
+		{
+			transform.localScale = new Vector3(-1,transform.localScale.y,transform.localScale.z);
+			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[1];
+			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[1]);
+			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(-22f);
+			gameObject.GetComponent<PlayerFireScript>().setShootAngle(-45f);
+			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.up);
+		}
+
+		if ((Input.GetKey (KeyCode.UpArrow) && Input.GetKey(KeyCode.RightArrow)) || (v>0 && h>0))
+		{
+			transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
+			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[1];
+			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[1]);
+			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(22f);
+			gameObject.GetComponent<PlayerFireScript>().setShootAngle(45f);
+			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.up);
+		}
+
 	}
 	
 	

@@ -8,7 +8,7 @@ public class GunShipMovement : MonoBehaviour {
 	private float leftBorder;
 	private float rightBorder;
 	private float x1;
-	private float y1 = 3.0f;
+	public float y1 = 3.0f;
 
 	// Use this for initialization
 	IEnumerator Start () {
@@ -17,7 +17,7 @@ public class GunShipMovement : MonoBehaviour {
 		leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).x;
 		rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x;
 
-		StartCoroutine(MoveObject(transform, transform.position, new Vector2(transform.position.y, y1), speed));
+		yield return StartCoroutine(MoveObject(transform, transform.position, new Vector2(transform.position.x, y1), speed));
 
 		while (true) {
 			x1 = Random.Range(leftBorder, rightBorder);

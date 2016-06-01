@@ -39,8 +39,13 @@ public class JoystickMovement : MonoBehaviour {
 	public bool lookingUp = false;
 
 	private string button = "";
-
+	public float moveForce = 35f;
+	private bool jump=false;
+	public float jumpForce = 50f;
+	public float maxHeight = -1f;
+	public float maxSpeed = 8f;
 	CharacterController controller;
+	private bool stopJumping = false;
 
 	// Use this for initialization
 	void Start () {
@@ -78,15 +83,19 @@ public class JoystickMovement : MonoBehaviour {
 		float h = Input.GetAxis("Horizontal");
 		float v = Input.GetAxis("Vertical");
 
-		//grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+		grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
 
-		//h = CnControls.CnInputManager.GetAxis("Horizontal");
+		if (grounded) {
+			jump = true;
+		}
+
+		//h = Input.GetAxis("Horizontal");
 		//v = CnControls.CnInputManager.GetAxis("Vertical");
 
 		/*if(h > 0){
-			transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
-			isRight = true;
-		}
+			//transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
+			//isRight = true;
+		/*}
 		else if (h < 0){
 			transform.localScale = new Vector3(-1,transform.localScale.y,transform.localScale.z);
 			isRight = false;
@@ -96,7 +105,7 @@ public class JoystickMovement : MonoBehaviour {
 			if(isRight)
 			{
 				//isRight = false;
-				//transform.localScale = new Vector3(-1,transform.localScale.y,transform.localScale.z);
+				transform.localScale = new Vector3(-1,transform.localScale.y,transform.localScale.z);
 
 				GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
 				gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
@@ -114,7 +123,7 @@ public class JoystickMovement : MonoBehaviour {
 		if (Input.GetKey (KeyCode.RightArrow) || h>0) {
 			Debug.Log ("D is pressed");
 			//isRight = true;
-			//transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
+			transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
 
 			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[0];
 			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[0]);
@@ -142,7 +151,7 @@ public class JoystickMovement : MonoBehaviour {
 			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[1];
 			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[1]);
 			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(-22f);
-			gameObject.GetComponent<PlayerFireScript>().setShootAngle(-40f);
+			gameObject.GetComponent<PlayerFireScript>().setShootAngle(-45f);
 			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.up);
 			lookingUp = false;
 		}
@@ -153,43 +162,88 @@ public class JoystickMovement : MonoBehaviour {
 			GameObject.Find("UpperBody").GetComponent<SpriteRenderer>().sprite = sprites[1];
 			gameObject.GetComponent<PlayerFireScript>().setBulletSpawn(spawners[1]);
 			gameObject.GetComponent<PlayerFireScript>().setBulletAngle(22f);
-			gameObject.GetComponent<PlayerFireScript>().setShootAngle(40f);
+			gameObject.GetComponent<PlayerFireScript>().setShootAngle(45f);
 			gameObject.GetComponent<PlayerFireScript>().setBulletDirectionForce(Vector2.up);
 			lookingUp = false;
 		}
 
-		/*if(grounded)
+		if(grounded)
 		{
 			speedX = speed;
+			isJump = true;
 		}
 		if(!grounded)
 		{
 			speedX = airSpeed;
-		}*/
-
-		//if(h!=0 && grounded || h!=0 && !grounded)
-		//	motion.x = Mathf.Clamp(h * speed, leftBorder, rightBorder);
-
-		/*if(isJump || Input.GetKey(KeyCode.K) &&  grounded)
-		{
-			motion.y = jumpSpeed;
-			isJump = false;
 		}
 
-		motion.x = Mathf.Clamp(h * speedX / Time.fixedDeltaTime, leftBorder, rightBorder);
+		//if(h!=0 && grounded || h!=0 && !grounded)
+
+		/*if(isJump && Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown (KeyCode.JoystickButton1) &&  grounded)
+		{
+			//motion.y = jumpSpeed;
+			GetComponent<Rigidbody2D> ().AddForce (jumpForce * Vector2.up);
+		}
+
+		if(isJump && (Input.GetKey(KeyCode.K) || Input.GetKey (KeyCode.JoystickButton1)) &&  grounded)
+		{
+			if (gameObject.transform.position.y < maxHeight) {
+				GetComponent<Rigidbody2D> ().AddForce (jumpForce * Vector2.up);
+			}
+		}
+
+		if(Input.GetKeyUp(KeyCode.K) || Input.GetKeyUp (KeyCode.JoystickButton1))
+		{
+			isJump = false;
+		}*/
+
+		if ((Input.GetKeyDown (KeyCode.JoystickButton1) || Input.GetKeyDown (KeyCode.F)) && grounded) {
+			motion.y = jumpSpeed;
+			stopJumping = true;
+		}
+
+		if ((Input.GetKey (KeyCode.JoystickButton1) || Input.GetKey (KeyCode.F)) && GetComponent<Rigidbody2D>().velocity.y < maxSpeed && isJump && stopJumping) {
+			if (gameObject.transform.position.y < maxHeight)
+				motion.y = jumpSpeed;
+			else {
+				isJump = false;
+				stopJumping = false;
+			}
+		}
+
+		if (Input.GetKeyUp (KeyCode.JoystickButton1) || Input.GetKeyUp (KeyCode.F)) {
+			isJump = false;
+			stopJumping = true;
+		}
+
+		motion.x = h * speedX;
 
 		if(!grounded)
 		{
 			motion.y -= gravity * Time.deltaTime;
-		}*/
+		}
 
 		/*if(v >=0.8f)
 		{
 			motion.x = 0f;
 		}*/
 
-		//gameObject.GetComponent<Rigidbody2D> ().velocity = motion;
+		gameObject.GetComponent<Rigidbody2D> ().velocity = motion;
 
+		/*if ((Input.GetKeyDown (KeyCode.JoystickButton1) || Input.GetKeyDown (KeyCode.Space)) && grounded) {
+			GetComponent<Rigidbody2D>().AddForce(jumpForce * Vector2.up);
+		}
+
+		if ((Input.GetKey (KeyCode.JoystickButton1) || Input.GetKey (KeyCode.Space)) && GetComponent<Rigidbody2D>().velocity.y < maxSpeed && jump) {
+			if (gameObject.transform.position.y < maxHeight)
+				GetComponent<Rigidbody2D> ().AddForce (jumpForce * Vector2.up);
+			else
+				jump = false;
+		}
+
+		if (Input.GetKeyUp (KeyCode.JoystickButton1) || Input.GetKeyUp (KeyCode.Space)) {
+			jump = false;
+		}*/
 
 	}
 

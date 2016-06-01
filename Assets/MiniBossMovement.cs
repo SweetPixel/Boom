@@ -21,6 +21,7 @@ public class MiniBossMovement : MonoBehaviour {
 
 	public bool usePooledObjects = false;
 	public float increaseRate = 0f;
+	public GameObject[] enemies;
 
 	// Use this for initialization
 	IEnumerator Start () {
@@ -34,7 +35,8 @@ public class MiniBossMovement : MonoBehaviour {
 		y1 = Random.Range(4f, 6f);
 		
 		y2 = Random.Range(4f, 6f);
-		
+		gameObject.GetComponentInChildren<Image> ().fillAmount = 1f;
+
 		if (gameObject.transform.position.x == -4.0f) {
 			yield return StartCoroutine(MoveObject(transform, new Vector2(-4.0f, transform.position.y), new Vector2(x1, transform.position.y), speed));
 			yield return StartCoroutine(MoveObject(transform, new Vector2(x1, transform.position.y), new Vector2(x2,transform.position.y), speed));
@@ -92,6 +94,14 @@ public class MiniBossMovement : MonoBehaviour {
 		
 		if (col.gameObject.tag == "Bullet") {
 			gameObject.GetComponentInChildren<Image> ().fillAmount -=  0.1f * col.gameObject.GetComponent<DamageScript> ().Damage;
+			GameObject.Find ("Foreground").GetComponent<Image> ().fillAmount += increaseRate;
+			GameObject[] miniboss = GameObject.FindGameObjectsWithTag ("MiniBoss");
+			if (miniboss.Length == 0) {
+				GameObject enemy = (GameObject)Instantiate (enemies [0], new Vector2(8f, enemies [0].transform.position.y), Quaternion.identity);
+			} else {
+				GameObject enemy = (GameObject)Instantiate (enemies [1], new Vector2(8f, enemies [1].transform.position.y), Quaternion.identity);
+			}
+			Destroy (gameObject);
 			col.gameObject.SetActive(false);
 		}
 	}

@@ -35,6 +35,7 @@ public class MoveandDrop : MonoBehaviour {
 		y1 = Random.Range(4f, 6f);
 
 		y2 = Random.Range(4f, 6f);
+		gameObject.GetComponentInChildren<Image> ().fillAmount = 1f;
 
 		if (gameObject.transform.position.x == -4.0f) {
 			yield return StartCoroutine(MoveObject(transform, new Vector2(-4.0f, transform.position.y), new Vector2(x1, transform.position.y), speed));
@@ -85,22 +86,24 @@ public class MoveandDrop : MonoBehaviour {
 
 		if (col.gameObject.tag == "Bullet") {
 			gameObject.GetComponentInChildren<Image> ().fillAmount -=  0.1f * col.gameObject.GetComponent<DamageScript> ().Damage;
+			if (gameObject.GetComponentInChildren<Image> ().fillAmount <= 0.2f) {
+				Debug.Log ("Destroy the enemy");
+				GameObject.Find ("Foreground").GetComponent<Image> ().fillAmount += increaseRate;
+				GameObject[] miniboss = GameObject.FindGameObjectsWithTag ("MiniBoss");
+				if (miniboss.Length == 0) {
+					GameObject enemy = (GameObject)Instantiate (enemies [0], new Vector2(8f, enemies [0].transform.position.y), Quaternion.identity);
+				} else {
+					GameObject enemy = (GameObject)Instantiate (enemies [1], new Vector2(8f, enemies [1].transform.position.y), Quaternion.identity);
+				}
+				Destroy (gameObject);
+			}
 			col.gameObject.SetActive(false);
 		}
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (gameObject.GetComponentInChildren<Image> ().fillAmount <= 0.2f) {
-			GameObject.Find ("Foreground").GetComponent<Image> ().fillAmount += increaseRate;
-			GameObject[] miniboss = GameObject.FindGameObjectsWithTag ("MiniBoss");
-			if (miniboss.Length == 0) {
-				GameObject enemy = (GameObject)Instantiate (enemies [0], new Vector2(8f, enemies [0].transform.position.y), Quaternion.identity);
-			} else {
-				GameObject enemy = (GameObject)Instantiate (enemies [1], new Vector2(8f, enemies [1].transform.position.y), Quaternion.identity);
-			}
-			Destroy (gameObject);
-		}
+		
 
 	}
 
